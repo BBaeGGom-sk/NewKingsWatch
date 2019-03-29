@@ -28,4 +28,9 @@ public class GoodsServiceImpl implements GoodsService {
 		dao.goodsInsert(vo);
 	}
 
+	@Override
+	public void goodsPicDbDel(String fileName, int bno) {
+		dao.goodsPicDbDel(fileName, bno);
+	}
+
 }
