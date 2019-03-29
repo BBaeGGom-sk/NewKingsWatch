@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable{
 
-	/**
+	/**vo와 dto차이 잘 모르겠음
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
