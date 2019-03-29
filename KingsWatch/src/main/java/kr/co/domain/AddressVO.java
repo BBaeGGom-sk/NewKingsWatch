@@ -13,5 +13,12 @@ public class AddressVO implements Serializable{
 	private String a_adMain;
 	private String a_adSub;
 	
-
+//안녕하세여크리스티나에여
+	
+	//으어어어어
+	
+	
+	//꼐꼐꼐꼐꼐꼒
+	
+	//기모
 }
