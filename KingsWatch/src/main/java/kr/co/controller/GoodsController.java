@@ -53,7 +53,7 @@ public class GoodsController {
 		
 		return entity;
 	}
-	
+	   
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")
 	public String list(Model model) {
