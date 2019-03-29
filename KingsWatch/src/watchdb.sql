@@ -21,7 +21,6 @@ create table tab_goods(
 	g_price number(7),
 	g_sale number(6),
 	g_desc varchar2(1000),
-	g_picfullname varchar2(50),
 	g_category number(1),
 	g_is_selling number(1),
 	g_date varchar2(40) default sysdate,
@@ -93,10 +92,19 @@ create table tab_review(
 	u_id varchar2(30) references tab_user(u_id),
 	r_regdate varchar2(40) default sysdate,
 	r_updatedate varchar2(40),
-	r_picfullname varchar2(40),
 	r_rating number(2)
 )
 drop table tab_review
+
+
+create table tab_pic(
+p_num number(8) not null,
+p_fullName varchar2(150),
+g_id varchar2(30) references tab_goods(g_id),
+r_bno number(6) references tab_review(r_bno),
+p_regDate varchar2(40) default sysdate
+)
+drop table tab_pic
 
 
 create table tab_address(
@@ -106,3 +114,4 @@ create table tab_address(
 	a_adsub varchar2(200)
 )
 drop table tab_address
+
