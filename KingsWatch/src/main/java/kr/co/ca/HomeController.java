@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	//헤헤헤헤헤헤헤헤헤
+//브랜치가 쓰고싶다... 나는... !!!!!
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
