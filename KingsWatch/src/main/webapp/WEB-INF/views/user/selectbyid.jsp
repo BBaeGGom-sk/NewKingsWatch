@@ -9,13 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>회원 가입</h1>
-<form method="post" action="/member/insert">
-ID:<input name="id" type="number"><br>
-name:<input name="name"><br>
-age:<input name="age" tyep="number"><br>
-<input type="submit" value="등록">
-</form>
+<h1>회원 정보 자세히 보기</h1>
+ID: ${dto.id}<br>
+이름: ${dto.name}<br>
+나이: ${dto.age}<br>
+등록일: ${dto.regdate}<br>
+
+
+<a href="/member/updateui?id=${dto.id}">수정</a> 
+<a href="/member/delete?id=${dto.id}">삭제</a> 
+<a href="/member/select">목록</a>
+
 
 
 </body>

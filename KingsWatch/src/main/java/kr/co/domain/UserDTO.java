@@ -2,7 +2,7 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class UserVO implements Serializable{
+public class UserDTO implements Serializable{
 
 	/**
 	 * 
@@ -17,11 +17,11 @@ public class UserVO implements Serializable{
 	private int u_point;
 	private int u_level;
 	
-	public UserVO() {
+	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserVO(String u_id, String u_pw, String u_name, String u_phone, String u_address, String u_email,
+	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, String u_address, String u_email,
 			int u_point, int u_level) {
 		super();
 		this.u_id = u_id;
@@ -125,7 +125,7 @@ public class UserVO implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserVO other = (UserVO) obj;
+		UserDTO other = (UserDTO) obj;
 		if (u_pw == null) {
 			if (other.u_pw != null)
 				return false;
