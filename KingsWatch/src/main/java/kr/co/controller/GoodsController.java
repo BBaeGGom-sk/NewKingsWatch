@@ -29,27 +29,30 @@ public class GoodsController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/deletefile",method=RequestMethod.POST) public
-	 * ResponseEntity<String> deleteFile(String fileName, int bno){
-	 * 
-	 * service.goodsPicDel(fileName,bno); ResponseEntity<String> entity=null;
-	 * fileName.replace('/',File.separatorChar); String
-	 * formatType=fileName.substring(fileName.lastIndexOf(".")+1); MediaType
-	 * mType=MediaUtils.getMediaType(formatType);
-	 * 
-	 * if(mType!=null) { String prefix=fileName.substring(0,12); String
-	 * subfix=fileName.substring(14); File f1 = new File(uploadPath+prefix+subfix);
-	 * f1.delete(); }
-	 * 
-	 * File f2 = new File(uploadPath+fileName); f2.delete();
-	 * 
-	 * entity = new ResponseEntity<String>("성공~",HttpStatus.OK);
-	 * 
-	 * return entity; }
-	 */
+	@ResponseBody
+	@RequestMapping(value="/deletefile",method=RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(String fileName, int bno){
+		
+		service.goodsPicDbDel(fileName,bno);
+		ResponseEntity<String> entity=null;
+		fileName.replace('/',File.separatorChar);
+		String formatType=fileName.substring(fileName.lastIndexOf(".")+1);
+		MediaType mType=MediaUtils.getMediaType(formatType);
+		
+		if(mType!=null) {
+			String prefix=fileName.substring(0,12);
+			String subfix=fileName.substring(14);
+			File f1 = new File(uploadPath+prefix+subfix);
+			f1.delete();
+		}
+		
+		File f2 = new File(uploadPath+fileName);
+		f2.delete();
+		
+		entity = new ResponseEntity<String>("성공~",HttpStatus.OK);
+		
+		return entity;
+	}
 	
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")

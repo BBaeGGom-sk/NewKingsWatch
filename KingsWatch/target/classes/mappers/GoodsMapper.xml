@@ -76,6 +76,11 @@
 		 ]]>
 	</select>
 	
+<!-- 상품사진DB완전삭제 -->	
+	<delete id="attachDbDel">
+		delete from tab_pic where p_fullName=#{p_fullName} AND g_id=#{g_id}
+	</delete>
+	
 	
 
 </mapper>
