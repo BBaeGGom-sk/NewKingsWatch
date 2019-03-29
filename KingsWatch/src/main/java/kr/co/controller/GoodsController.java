@@ -55,17 +55,13 @@ public class GoodsController {
 		
 		return entity;
 	}
-<<<<<<< HEAD
-	   
-=======
 	
 	@RequestMapping("/goodsPicDbGet/{g_id}")
 	@ResponseBody
 	public List<String> getAttach(@PathVariable("g_id")String g_id){
 		return service.goodsPicDbGet(g_id);
 	}
-	
->>>>>>> refs/heads/se0e
+
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")
 	public String list(Model model) {
