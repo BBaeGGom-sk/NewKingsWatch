@@ -8,9 +8,9 @@
 <!-- 상품추가하기 -->
 	<insert id="goodsInsert">
 		insert into tab_goods 
-		(g_id, g_name, g_price, g_sale, g_desc, g_picfullname, g_category, g_is_selling, g_brand)
+		(g_id, g_name, g_price, g_sale, g_desc, g_category, g_is_selling, g_brand)
 		values
-		(#{g_id}, #{g_name}, #{g_price}, #{g_sale}, #{g_desc}, #{g_picfullname}, #{g_category}, 1, #{g_brand})
+		(#{g_id}, #{g_name}, #{g_price}, #{g_sale}, #{g_desc}, #{g_category}, #{g_is_selling}, #{g_brand})
 	</insert>	
   
 <!-- 상품업데이트하기 -->	
@@ -76,8 +76,23 @@
 		 ]]>
 	</select>
 	
+<!-- 상품사진고유번호 가지고오기(자동증가위해서) -->
+	<select id="getPnum" resultType="Integer">
+		select max(p_num) from tab_pic
+	</select>
+	
+<!-- 상품사진DB업데이트 -->
+	<insert id="goodsPicDbAdd">
+		insert into tab_pic (p_num,p_fullName,g_id) values (#{p_num},#{p_fullName},#{g_id})
+	</insert>
+
+<!-- 상품번호에따른 상품사진 불러오기 -->
+	<select id="goodsPicDbGet" resultType="String">
+		select p_fullName from tab_pic where g_id=#{g_id}
+	</select>
+	
 <!-- 상품사진DB완전삭제 -->	
-	<delete id="attachDbDel">
+	<delete id="goodsPicDbDel">
 		delete from tab_pic where p_fullName=#{p_fullName} AND g_id=#{g_id}
 	</delete>
 	

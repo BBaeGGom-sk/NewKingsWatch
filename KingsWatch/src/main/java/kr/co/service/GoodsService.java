@@ -12,6 +12,7 @@ public interface GoodsService {
 	
 	
 	// 사진파일부분
-	public void goodsPicDbDel(String fileName, int bno);
+	public void goodsPicDbDel(String fileName, int bno); // 사진DB완전삭제
+	public List<String> goodsPicDbGet(String g_id); // 상품사진불러오기
 
 }

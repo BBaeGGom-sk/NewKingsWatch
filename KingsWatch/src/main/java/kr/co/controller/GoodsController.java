@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,7 @@ public class GoodsController {
 	@Inject
 	private GoodsService service;
 	
+	// 상품이미지 업로드
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -53,7 +55,17 @@ public class GoodsController {
 		
 		return entity;
 	}
+<<<<<<< HEAD
 	   
+=======
+	
+	@RequestMapping("/goodsPicDbGet/{g_id}")
+	@ResponseBody
+	public List<String> getAttach(@PathVariable("g_id")String g_id){
+		return service.goodsPicDbGet(g_id);
+	}
+	
+>>>>>>> refs/heads/se0e
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")
 	public String list(Model model) {

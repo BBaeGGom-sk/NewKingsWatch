@@ -26,11 +26,27 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void goodsInsert(GoodsVO vo) {
 		dao.goodsInsert(vo);
+		
+		String[] arr = vo.getFiles();
+		
+		if (arr == null) {
+			return;
+		} // 첨부파일이 없으면 리턴을 시켜서 아래 코드를 실행시키지않음
+		
+		for(int i = 0; i<vo.getFiles().length; i++) {			
+			dao.goodsPicDbAdd(arr[i], vo.getG_id());
+		} // 첨부파일이 있을때 , 첨부파일 안 올리면 null이지만 이 경우는 위에서 걸러줌
 	}
 
 	@Override
 	public void goodsPicDbDel(String fileName, int bno) {
 		dao.goodsPicDbDel(fileName, bno);
+	}
+
+	@Override
+	public List<String> goodsPicDbGet(String g_id) {
+		// TODO Auto-generated method stub
+		return dao.goodsPicDbGet(g_id);
 	}
 
 }
