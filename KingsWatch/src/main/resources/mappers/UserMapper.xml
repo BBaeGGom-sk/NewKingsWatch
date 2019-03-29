@@ -15,7 +15,6 @@
   
   <select id="selectById" resultType="kr.co.domain.UserDTO">
   select * from tab_user where u_id = #{u_id}
-  
   </select>
   
   
