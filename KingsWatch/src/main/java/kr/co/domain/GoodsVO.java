@@ -14,7 +14,6 @@ public class GoodsVO implements Serializable{
 	private int g_price; // 상품원가
 	private int g_sale; // 할인율
 	private String g_desc; // 상품정보
-	private String g_picFullName; // 상품사진파일원본이름
 	private int g_category; // 상품카테고리 (여자:1,남자:2,공용:0)
 	private int g_is_selling; // 상품이 팔렸는지 여부 (팔림:1,안팔림:0)
 	private String g_date; // 상품게시일자
@@ -23,8 +22,8 @@ public class GoodsVO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public GoodsVO(String g_id, String g_name, String g_brand, int g_price, int g_sale, String g_desc,
-			String g_picFullName, int g_category, int g_is_selling, String g_date) {
+	public GoodsVO(String g_id, String g_name, String g_brand, int g_price, int g_sale, String g_desc, int g_category,
+			int g_is_selling, String g_date) {
 		super();
 		this.g_id = g_id;
 		this.g_name = g_name;
@@ -32,7 +31,6 @@ public class GoodsVO implements Serializable{
 		this.g_price = g_price;
 		this.g_sale = g_sale;
 		this.g_desc = g_desc;
-		this.g_picFullName = g_picFullName;
 		this.g_category = g_category;
 		this.g_is_selling = g_is_selling;
 		this.g_date = g_date;
@@ -86,14 +84,6 @@ public class GoodsVO implements Serializable{
 		this.g_desc = g_desc;
 	}
 
-	public String getG_picFullName() {
-		return g_picFullName;
-	}
-
-	public void setG_picFullName(String g_picFullName) {
-		this.g_picFullName = g_picFullName;
-	}
-
 	public int getG_category() {
 		return g_category;
 	}
@@ -124,9 +114,8 @@ public class GoodsVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GoodsVO [g_id=" + g_id + ", g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price
-				+ ", g_sale=" + g_sale + ", g_desc=" + g_desc + ", g_picFullName=" + g_picFullName + ", g_category="
-				+ g_category + ", g_is_selling=" + g_is_selling + ", g_date=" + g_date + "]";
+		return "GoodsVO [g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price + ", g_sale=" + g_sale
+				+ ", g_desc=" + g_desc + ", g_category=" + g_category + ", g_date=" + g_date + "]";
 	}
 
 	@Override
@@ -159,7 +148,7 @@ public class GoodsVO implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 	
 
 }
