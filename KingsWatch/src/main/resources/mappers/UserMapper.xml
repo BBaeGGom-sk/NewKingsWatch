@@ -17,7 +17,7 @@
   select * from tab_user where u_id = #{u_id}
   
   </select>
-  
+    
   
   <update id="update">
  update tab_user set u_id=#{u_id}, u_name = #{u_name} where u_pw=#{u_pw}
