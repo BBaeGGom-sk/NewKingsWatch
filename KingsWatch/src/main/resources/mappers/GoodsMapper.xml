@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
+<mapper namespace="kr.co.mapper.goods">
+
+<!-- 상품추가하기 -->
+	<insert id="goodsInsert">
+		insert into tab_goods 
+		(g_id, g_name, g_price, g_sale, g_desc, g_picfullname, g_category, g_is_selling, g_brand)
+		values
+		(#{g_id}, #{g_name}, #{g_price}, #{g_sale}, #{g_desc}, #{g_picfullname}, #{g_category}, 1, #{g_brand})
+	</insert>	
+  
+<!-- 상품업데이트하기 -->	
+	<update id="goodsUpdate">
+		update tab_goods set 
+		g_name=#{g_name}, g_price=#{g_price}, g_sale=#{g_sale}, g_desc=#{g_desc}, g_category=#{g_category}, g_is_slling=#{g_is_selling}, g_brand=#{g_brand}
+		where g_id=#{g_id}
+	</update>
+	
+<!-- g_id에 따른 상품 출력 -->
+	<select id="goodsIdSelect" resultType="GoodsVO">
+		select * from tab_goods where g_id=#{g_id}
+	</select>
+	
+<!-- 날짜 내림차순에따른 상품전체리스트출력 -->
+	<select id="goodsList" resultType="GoodsVO">
+		select * from tab_goods order by g_date desc
+	</select>
+
+<!-- 카테고리 여성(1)일때 여성상품리스트출력 -->	
+	<select id="goodsListWoman" resultType="GoodsVO">
+		select * from tab_goods where g_category=#{g_category}
+	</select>
+
+<!-- 카테고리 남성(2)일때 남성상품리스트출력  -->
+	<select id="goodsListMan" resultType="GoodsVO">
+		select * from tab_goods where g_category=#{g_category}
+	</select>
+
+<!-- 카테고리 공용(0)일때 공용상품리스트출력 -->	
+	<select id="goodsListPublic" resultType="GoodsVO">
+		select * from tab_goods where g_category=#{g_category}
+	</select>
+
+<!-- 상품갯수세기 -->
+	<select id="getAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+	</select>
+
+<!-- 상품검색키워드 SQL문-->
+	<sql id="searchIf">
+		<if test="searchType !=null">
+			<if test="searchType == 'writer'.toString()">
+				where upper(writer) like '%'||upper(#{keyword})||'%'
+			</if>
+			<if test="searchType == 'title'.toString()">
+				where lower(title) like '%'||lower(#{keyword})||'%'
+			</if>
+			<if test="searchType == 'content'.toString()">
+				where lower(content) like '%'||lower(#{keyword})||'%'
+			</if>
+		</if>
+	</sql>
+
+<!-- 상품검색하기 위의 SQL문 더해줌 -->
+	<select id="search" resultType="kr.co.domain.GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		 order by g_date desc
+		 ]]>
+	</select>
+	
+	
+
+</mapper>
