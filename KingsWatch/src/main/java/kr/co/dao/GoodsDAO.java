@@ -7,5 +7,6 @@ import kr.co.domain.GoodsVO;
 public interface GoodsDAO {
 	
 	public List<GoodsVO> goodsList();
+	public void goodsInsert(GoodsVO vo);
 
 }

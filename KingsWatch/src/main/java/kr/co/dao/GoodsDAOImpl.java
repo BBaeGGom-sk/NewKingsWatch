@@ -23,4 +23,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return session.selectList(NS+".goodsList");
 	}
 
+	@Override
+	public void goodsInsert(GoodsVO vo) {
+		session.insert(NS+".goodsInsert", vo);
+	}
+
 }

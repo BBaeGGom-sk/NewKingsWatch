@@ -17,7 +17,13 @@
 	<div class="container">
 	  <div class="row">
 	  
-	  리스트입니다.
+	  <div class="row">
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+	  </div>
+	 
+	  <div class="row">
+	  <label>리스트입니다.</label>
+	  </div>
 	  
 	  </div>
 	</div>
