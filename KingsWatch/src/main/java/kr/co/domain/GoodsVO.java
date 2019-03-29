@@ -8,16 +8,16 @@ public class GoodsVO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String g_id;
-	private String g_name;
-	private String g_brand;
-	private int g_price;
-	private int g_sale;
-	private String g_desc;
-	private String g_picFullName;
-	private int g_category;
-	private int g_is_selling;
-	private String g_date;
+	private String g_id; // 상품의아이디
+	private String g_name; // 상품명
+	private String g_brand; // 상품브랜드
+	private int g_price; // 상품원가
+	private int g_sale; // 할인율
+	private String g_desc; // 상품정보
+	private String g_picFullName; // 상품사진파일원본이름
+	private int g_category; // 상품카테고리 (여자:1,남자:2,공용:0)
+	private int g_is_selling; // 상품이 팔렸는지 여부 (팔림:1,안팔림:0)
+	private String g_date; // 상품게시일자
 	
 	public GoodsVO() {
 		// TODO Auto-generated constructor stub
