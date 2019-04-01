@@ -10,7 +10,7 @@
   </insert>
   
   
-  <select id="loginCheck" resultType="String">
+  <select id="loginCheck" resultType="kr.co.domain.UserDTO">
   	select u_name from tab_user where u_id=#{u_id} and u_pw=#{u_pw}
   </select>
   

@@ -20,9 +20,7 @@
 <body>
 
 	<div class="container">
-		<c:if test="${sessionScope.userId !=null }">
-			<h2>${sessionScope.userName} (${sessionScope.userId})님의 방문을 환영합니다.</h2>
-		</c:if>
+<%-- 		<c:if test="${login != null}">${login.u_id}님 환합니다.</c:if> --%>
 
 		<div class="row" >
 

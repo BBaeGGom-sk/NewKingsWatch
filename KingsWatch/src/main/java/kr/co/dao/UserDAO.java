@@ -8,7 +8,7 @@ public interface UserDAO {
 
 	
 	public void join(UserDTO dto);	//회원가입
-	public String loginCheck(UserDTO dto);	//로그인 체크
+	public UserDTO get(UserDTO dto) throws Exception;	//로그인 체크
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);
 	public UserDTO updateui(String id);

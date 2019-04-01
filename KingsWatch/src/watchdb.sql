@@ -17,7 +17,7 @@ drop table tab_user
 select * from tab_user
 
 
-insert into tab_user values ('ggoomter', '0070', '배성원', '01026585834', '성북구 장위동', 'ggoomter@gmail.com', 0, 1)
+insert into tab_user (u_id, u_pw, u_name) values ('test', 'test', 'test') 
 
 
 create table tab_goods(

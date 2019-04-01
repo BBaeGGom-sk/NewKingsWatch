@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.dao.UserDAO;
+import kr.co.dao.UserDAOImpl;
 import kr.co.domain.UserDTO;
 
 @Service
@@ -51,22 +52,20 @@ public class UserServiceImpl implements UserService {
 		dao.delete(id);
 	}
 
-	//로그인 체크
-	@Override
-	public String loginCheck(UserDTO dto, HttpSession session) {
-		String name=dao.loginCheck(dto);	//name을 반환하도록 했었다.
-		
-		if(name !=null) {	//맞으면.   
-			session.setAttribute("userId", dto.getU_id());
-			session.setAttribute("userName", dto.getU_name());
-		}
-		return name;
-	}
+
 
 	@Override
 	public void logout(HttpSession session) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	
+	@Override
+	public UserDTO getUser(UserDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("getUser의 dto입니다." + dto);
+		return dao.get(dto);
 	}
 
 }

@@ -13,7 +13,7 @@
 <form method="post" action="/user/join">
 ID:<input name="u_id" type="text"><br>
 PW:<input name="u_pw" type="password"><br>
-Name:<input name="u_name" tyep="text"><br>
+Name:<input name="u_name" type="text"><br>
 <input type="submit" value="등록">
 </form>
 

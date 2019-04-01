@@ -9,7 +9,7 @@ import kr.co.domain.UserDTO;
 public interface UserService {
 
 	public void join(UserDTO dto);
-	public String loginCheck(UserDTO dto, HttpSession session);
+	public UserDTO getUser(UserDTO dto) throws Exception;
 	public void logout(HttpSession session);
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);

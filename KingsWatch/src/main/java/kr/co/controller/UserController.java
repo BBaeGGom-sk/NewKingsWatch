@@ -47,17 +47,30 @@ public class UserController {
 	
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginCheck(@ModelAttribute UserDTO dto, HttpSession session) {
+	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {
 		System.out.println("로그인 처리 메서드 들어옴");
-		String name = service.loginCheck(dto, session);
-		if(name != null) {
-			System.out.println("로그인 처리 메서드 널이 아닐때");
-			return "redirect:/";	
-			
-		}else {
-			System.out.println("로그인 처리 메서드 널일때 ");
-			return "redirect:/error";
+		String returnURL = "";
+		
+		if(session.getAttribute("login")!=null) {	//기존에 login이란 세션값이 존재한다면
+			System.out.println("기존의 세션값을 제거합니다.");
+			session.removeAttribute("login");		//기존값 제거 하고봄.
 		}
+		
+		// 로그인이 성공하면 UsersVO 객체를 반환함.
+        UserDTO dto = service.getUser(userDTO);
+          System.out.println("왜 성공아니냐 이거 dto : " + dto);
+        if ( dto != null ){ // 로그인 성공
+        	System.out.println("로그인 성공");
+            session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.
+            returnURL = "redirect:/"; // 로그인 성공시 메인페이지로 이동하고
+        }else { // 로그인에 실패한 경우
+        	System.out.println("로그인 실패");
+            returnURL = "redirect:/user/login"; // 로그인 폼으로 다시 가도록 함
+        }
+          
+        return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
+		
+		
 
 	}
 	
