@@ -4,16 +4,21 @@ create table tab_user(
 	u_pw varchar2(30) not null,
 	u_name varchar2(40) not null,
 	u_phone varchar2(30),
+	u_sex number(1),
+	u_age number(2),
+	u_regdate varchar2(40) default sysdate,
 	u_address varchar2(200),
 	u_email varchar2(40) unique,
 	u_point number(7),
 	u_level number(1)
 )
 drop table tab_user
+
 select * from tab_user
-insert 
+
 
 insert into tab_user values ('ggoomter', '0070', '배성원', '01026585834', '성북구 장위동', 'ggoomter@gmail.com', 0, 1)
+
 
 create table tab_goods(
 	g_id varchar2(30) primary key,
@@ -27,6 +32,7 @@ create table tab_goods(
 	g_brand varchar2(40)
 )
 drop table tab_goods
+
 
 create table tab_basket(
 	u_id varchar2(30) references tab_user(u_id),

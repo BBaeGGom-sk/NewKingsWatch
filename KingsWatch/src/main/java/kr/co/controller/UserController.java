@@ -3,9 +3,11 @@ package kr.co.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +21,54 @@ public class UserController {
 	@Inject
 	private UserService service;
 
+	//회원가입 화면
+	@RequestMapping("/join")
+	public String joinui() {
+		return "user/join";	//  user/join.jsp로 이동.
+
+	}
+	
+	//  회원가입 처리하고 로그인 화면으로
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String join(UserDTO dto) {
+		service.join(dto);
+		return "redirect:/user/login";	
+	}
+	
+	
+	//로그인 화면
+	@RequestMapping("/login")
+	public String loginui() {
+		return "user/login";	
+
+	}
+	
+	//로그인 처리
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String loginCheck(@ModelAttribute UserDTO dto, HttpSession session) {
+		System.out.println("로그인 처리 메서드 들어옴");
+		String name = service.loginCheck(dto, session);
+		if(name != null) {
+			System.out.println("로그인 처리 메서드 널이 아닐때");
+			return "redirect:/";	
+			
+		}else {
+			System.out.println("로그인 처리 메서드 널일때 ");
+			return "redirect:/error";
+		}
+
+	}
+	
+	
+	//로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";	
+
+	}
+	
+	
 	@RequestMapping("/select")
 	public String select(Model model) {
 
@@ -28,19 +78,6 @@ public class UserController {
 		return "user/select";
 	}
 
-	@RequestMapping("/insertui")
-	public String insertui() {
-		return "user/insert";	//  user/insert.jsp로 이동.
-
-	}
-	
-	//  user/insert.jsp   에서 기입하고 등록버튼 눌렀을때
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insert(UserDTO dto) {
-		service.insert(dto);
-		return "redirect:/user/select";	// url로 user컨트롤러의 select들어왔을때 실행될것
-
-	}
 	
 	@RequestMapping(value="/selectbyid")
 	public void selectById(int id, Model model) {
@@ -74,7 +111,8 @@ public String updateui(int id, Model model) {
 		
 		return "redirect:/user/select";
 	}
-	
+
+
 
 	
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>회원 등록</h1>
-<form method="post" action="/user/insert">
+<form method="post" action="/user/join">
 ID:<input name="u_id" type="text"><br>
 PW:<input name="u_pw" type="password"><br>
 Name:<input name="u_name" tyep="text"><br>

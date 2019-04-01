@@ -2,6 +2,8 @@ package kr.co.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,8 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao;
 
 	@Override
-	public void insert(UserDTO dto) {
-		dao.insert(dto);
+	public void join(UserDTO dto) {
+		dao.join(dto);
 
 	}
 
@@ -47,6 +49,24 @@ public class UserServiceImpl implements UserService {
 	public void delete(int id) {
  
 		dao.delete(id);
+	}
+
+	//로그인 체크
+	@Override
+	public String loginCheck(UserDTO dto, HttpSession session) {
+		String name=dao.loginCheck(dto);	//name을 반환하도록 했었다.
+		
+		if(name !=null) {	//맞으면.   
+			session.setAttribute("userId", dto.getU_id());
+			session.setAttribute("userName", dto.getU_name());
+		}
+		return name;
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

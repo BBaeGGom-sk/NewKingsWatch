@@ -12,6 +12,9 @@ public class UserDTO implements Serializable{
 	private String u_pw;
 	private String u_name;
 	private String u_phone;
+	private String u_sex;
+	private String u_age;
+	private String u_regdate;
 	private String u_address;
 	private String u_email;
 	private int u_point;
@@ -21,18 +24,70 @@ public class UserDTO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, String u_address, String u_email,
-			int u_point, int u_level) {
+
+
+	public UserDTO(String u_id, String u_pw, String u_name) {
+		super();
+		this.u_id = u_id;
+		this.u_pw = u_pw;
+		this.u_name = u_name;
+	}
+
+
+
+	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, String u_sex, String u_age,
+			String u_regdate, String u_address, String u_email, int u_point, int u_level) {
 		super();
 		this.u_id = u_id;
 		this.u_pw = u_pw;
 		this.u_name = u_name;
 		this.u_phone = u_phone;
+		this.u_sex = u_sex;
+		this.u_age = u_age;
+		this.u_regdate = u_regdate;
 		this.u_address = u_address;
 		this.u_email = u_email;
 		this.u_point = u_point;
 		this.u_level = u_level;
 	}
+
+
+
+	public String getU_sex() {
+		return u_sex;
+	}
+
+
+
+	public void setU_sex(String u_sex) {
+		this.u_sex = u_sex;
+	}
+
+
+
+	public String getU_age() {
+		return u_age;
+	}
+
+
+
+	public void setU_age(String u_age) {
+		this.u_age = u_age;
+	}
+
+
+
+	public String getU_regdate() {
+		return u_regdate;
+	}
+
+
+
+	public void setU_regdate(String u_regdate) {
+		this.u_regdate = u_regdate;
+	}
+
+
 
 	public String getU_id() {
 		return u_id;
@@ -102,20 +157,24 @@ public class UserDTO implements Serializable{
 		return serialVersionUID;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "NewUserVO [u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_phone=" + u_phone
-				+ ", u_address=" + u_address + ", u_email=" + u_email + ", u_point=" + u_point + ", u_level=" + u_level
-				+ "]";
+		return "UserDTO [u_id=" + u_id + ", u_name=" + u_name + ", u_regdate=" + u_regdate + "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((u_pw == null) ? 0 : u_pw.hashCode());
+		result = prime * result + ((u_id == null) ? 0 : u_id.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -126,13 +185,16 @@ public class UserDTO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		UserDTO other = (UserDTO) obj;
-		if (u_pw == null) {
-			if (other.u_pw != null)
+		if (u_id == null) {
+			if (other.u_id != null)
 				return false;
-		} else if (!u_pw.equals(other.u_pw))
+		} else if (!u_id.equals(other.u_id))
 			return false;
 		return true;
 	}
+
+
+
 	
 	
 	

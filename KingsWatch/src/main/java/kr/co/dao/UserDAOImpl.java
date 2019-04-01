@@ -15,12 +15,12 @@ public class UserDAOImpl implements UserDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private final String NS="mapper.user";
+	private final String NS="mapper.user";	//UserMapeer.xml의 namespace
 	
 
 	@Override
-	public void insert(UserDTO dto) {
-		sqlSession.insert(NS+".insert", dto);
+	public void join(UserDTO dto) {
+		sqlSession.insert(NS+".join", dto);
 	}
 
 	@Override
@@ -48,6 +48,15 @@ public class UserDAOImpl implements UserDAO{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		sqlSession.insert(NS+".delete", id);
+	}
+
+	
+
+	@Override
+	public String loginCheck(UserDTO dto) {
+		// TODO Auto-generated method stub
+		System.out.println("logincheck메서드");
+		return sqlSession.selectOne(NS+".loginCheck", dto);
 	}
 
 	

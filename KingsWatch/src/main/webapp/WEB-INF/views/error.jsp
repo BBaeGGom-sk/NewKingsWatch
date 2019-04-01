@@ -20,16 +20,9 @@
 <body>
 
 	<div class="container">
-		<c:if test="${sessionScope.userId !=null }">
-			<h2>${sessionScope.userName} (${sessionScope.userId})님의 방문을 환영합니다.</h2>
-		</c:if>
-
-		<div class="row" >
-
-			<h2><a href="user/join">회원가입</a></h2>
-			<h2><a href="user/login">로그인</a></h2>
-			<h2><a href="user/logout">로그아웃</a></h2>
-
+		<div class="row">
+		에러 페이지
+		
 		</div>
 	</div>	
 </body>
