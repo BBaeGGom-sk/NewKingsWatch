@@ -24,6 +24,17 @@
 	.uploadedList li{
 		list-style-type: none;	
 	}
+	.fileDrop2 {
+		width: 100%;
+		height: 100px;
+		border: 1px dotted red;
+		background-color: lightslategray;
+		margin: auto;
+	}
+	
+	.uploadedList2 li{
+		list-style-type: none;	
+	}
 </style>
 <title>Insert title here</title>
 </head>
@@ -67,7 +78,7 @@
 			</form>
 			
 			<div class="form-group">
-				<label>업로드할 파일을 드랍</label>
+				<label>업로드할 썸네일 파일을 드랍</label>
 				<div class="fileDrop"></div>
 			</div>
 			
@@ -92,7 +103,7 @@
 			</div>
 		</li>
 	</script>
-	
+
 	<script type="text/javascript">	
 		var source= $("#source").html();
 		var template= Handlebars.compile(source);
@@ -109,7 +120,7 @@
 						url: "/deletefile",
 						type: "post",
 						data: {
-						fileName:$delbtn.attr("href") // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌 
+							fileName:$delbtn.attr("href") // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌 
 						},
 						dataType: "text",
 						success: function(result){
@@ -118,7 +129,7 @@
 					});
 				});
 							
-				$("button[type='submit']").click(function (evnet){
+				$("button[type='submit']").click(function (event){
 					event.preventDefault();
 					var $form=$("form");
 					var str=""; // DB에 들어갈 파일명.
@@ -158,9 +169,7 @@
 						}
 					});
 				});
-				
 			});
-
 	</script>
 </body>
 </html>

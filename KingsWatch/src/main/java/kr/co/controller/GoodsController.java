@@ -1,6 +1,9 @@
 package kr.co.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -61,13 +66,17 @@ public class GoodsController {
 	@RequestMapping("/goodsPicDbGet/{g_id}")
 	@ResponseBody
 	public Map<String, String> goodsPicDbGet(@PathVariable("g_id")String g_id){
-		System.out.print(g_id);
 		List<String> list= service.goodsPicDbGet(g_id);
-		System.out.println(list);
-		
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("fullName", list.get(0));
 		return map;
+	}
+	
+	@RequestMapping("/goodsReadPicDbGet/{g_id}")
+	@ResponseBody
+	public List<String> goodsReadPicDbGet(@PathVariable("g_id")String g_id){
+
+		return service.goodsPicDbGet(g_id);
 	}
 	
 	// 상품리스트 (임시)
@@ -85,8 +94,18 @@ public class GoodsController {
 	
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.POST)
 	public String insert(GoodsVO vo) {
+		System.out.println(vo.getFiles().length);
 		service.goodsInsert(vo);
 		return "redirect:/goods/goodsList";
+	}
+	
+	@RequestMapping(value="/goodsRead", method=RequestMethod.GET)
+	public String read(String g_id, Model model) {
+		GoodsVO vo= service.goodsRead(g_id);
+		List<String> img= service.goodsPicDbGet(g_id);
+		model.addAttribute("goodsRead", vo);
+		model.addAttribute("img", img);
+		return "goods/goodsRead";
 	}
 	
 

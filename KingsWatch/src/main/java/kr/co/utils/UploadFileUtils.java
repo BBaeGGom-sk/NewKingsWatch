@@ -17,7 +17,7 @@ public class UploadFileUtils {
 	private static String MakeThunail(String uploadPath, String path, String fileName) throws IOException {
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
 
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 100);
+		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 400);
 
 		String thumbnamiName = uploadPath + path + File.separator + "s_" + fileName;
 
@@ -50,8 +50,6 @@ public class UploadFileUtils {
 		} else {
 			return makeIcon(uploadPath, savedPath, savedName);
 		}
-
-		
 	}
 
 	private static String calPath(String uploadPath) {
@@ -64,7 +62,6 @@ public class UploadFileUtils {
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 
 		return datePath;
-
 	}
 
 	private static void makeDir(String uploadPath, String... paths) {
@@ -79,6 +76,6 @@ public class UploadFileUtils {
 				dirPath.mkdir();
 			}
 		}
-
 	}
+
 }

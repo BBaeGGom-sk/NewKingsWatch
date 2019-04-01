@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
+
 <style type="text/css">
 body {
 	font-family: '맑은 고딕', verdana;
@@ -116,6 +117,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	background: #fff;
 }
 
+
+ section#content ul li { display:inline-block; margin:10px; }
+ section#content div.goodsThumb img { width:200px; height:200px; }
+ section#content div.goodsName { padding:10px 0; text-align:center; }
+ section#content div.goodsName a { color:#000; }
+
+
 footer#footer {
 	background: #f9f9f9;
 	padding: 20px;
@@ -173,23 +181,19 @@ footer#footer ul li {
 	 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
 	 	<li>
     		<div class="thumbnail">
-        		<div class="discount_rate ico01 rate0">0<span>%</span></div>
-        		<div class="-likeButton displaynone -mov"><button type="button" class="-mov"><strong></strong></button></div>
                 <div class="form-group">
-	            	<label>첨부파일</label>
-	            		<ul id="${status.index}"  class="uploadedList clearfix">
-	            		</ul>
+	            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
         	 	</div>
     		</div>
     		<div class="description">
         		<p class="color displaynone"></p>
      			<p class="name">
-            		<a href="/goods/goodsRead=?g_id={$list.g_id}" class=" _evt_tracker0"><span class="title displaynone"> :</span> ${list.g_name }</a>
+            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
+            		<span class="title displaynone"></span> ${list.g_name}</a>
             	</p>
 			<div class="line"></div>
 				<p class="price ">${list.g_price }<span class="displaynone"></span></p>
 				<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
-					<!--<p class="simple displaynone"></p>-->
         	<div class="status">
             <div class="icon">      </div>
         	</div>
@@ -226,9 +230,6 @@ footer#footer ul li {
 			<span>
 				<img src="{{imgsrc}}">
 			</span>
-			<div>
-				<a href="{{getLink}}">{{fullName}}</a>
-			</div>
 		</li>
 	</script>
 	
@@ -243,25 +244,21 @@ footer#footer ul li {
 		</c:forEach>
 		
 		goodsPicDbGet(arr);
-		
-		
+
 			function goodsPicDbGet(arr) {
-				
 				var source= $("#source").html();
 				var template= Handlebars.compile(source);
-				
-				
+
 				arr=arr.substring(1);
 				arr=arr.split("#");
 				$.each(arr, function(index) {
-				
 					$.getJSON("/goods/goodsPicDbGet/"+this, function(result) {
 							var data= getFileInfo(result["fullName"]);
 							$("#"+index).append(template(data));
 					});		
 				});
-				
 			}
+			
 		});
 	</script>
 </body>
