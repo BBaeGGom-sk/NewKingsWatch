@@ -1,7 +1,9 @@
 package kr.co.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -58,8 +60,14 @@ public class GoodsController {
 	
 	@RequestMapping("/goodsPicDbGet/{g_id}")
 	@ResponseBody
-	public List<String> getAttach(@PathVariable("g_id")String g_id){
-		return service.goodsPicDbGet(g_id);
+	public Map<String, String> goodsPicDbGet(@PathVariable("g_id")String g_id){
+		System.out.print(g_id);
+		List<String> list= service.goodsPicDbGet(g_id);
+		System.out.println(list);
+		
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("fullName", list.get(0));
+		return map;
 	}
 
 	// 상품리스트 (임시)
