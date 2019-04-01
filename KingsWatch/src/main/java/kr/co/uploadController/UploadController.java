@@ -93,41 +93,6 @@ public class UploadController {
 		return entity;
 	}
 	
-	@RequestMapping(value="/uploadForm", method=RequestMethod.POST)
-	public void uploadForm(MultipartHttpServletRequest request,Model model) throws IOException {
-		
-		MultipartFile file=request.getFile("file");
-		
-		String id=request.getParameter("id");
-		
-		System.out.println(file.getOriginalFilename());
-		System.out.println(file.getSize());
-		System.out.println(file.getContentType());
-		System.out.println(id);
-		
-		UUID uid=UUID.randomUUID();
-		String savedName = uid.toString()+"_"+file.getOriginalFilename();
-		
-		File target = new File(uploadPath,savedName);
-		FileCopyUtils.copy(file.getBytes(), target);
-	}
-	
-	@RequestMapping(value="/uploadForm",method=RequestMethod.GET)
-	public void uploadForm() {}
-	
-	
-	@RequestMapping(value="/iuploadForm",method=RequestMethod.POST)
-	public String iuploadForm(MultipartFile file,Model model) throws IOException {
-		
-		UUID uid= UUID.randomUUID();
-		String savedName= uid.toString()+"_"+file.getOriginalFilename();
-		File target = new File(uploadPath, savedName);
-		FileCopyUtils.copy(file.getBytes(), target);
-		model.addAttribute("savedName", savedName);
-		
-		return "uploadResult";
-	}
-	
 	@RequestMapping(value="/uploadAjax",method=RequestMethod.GET)
 	public void uploadAjax() {
 		
@@ -150,4 +115,5 @@ public class UploadController {
 	}
 	
 	
+
 }

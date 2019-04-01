@@ -30,6 +30,11 @@ public class GoodsDAOImpl implements GoodsDAO {
 		// 상품등록하기
 		session.insert(NS+".goodsInsert", vo);
 	}
+	
+	@Override
+	public GoodsVO goodsRead(String g_id) {
+		return session.selectOne(NS+".goodsIdSelect", g_id);
+	}
 
 	@Override
 	public void goodsPicDbDel(String fileName, int bno) {

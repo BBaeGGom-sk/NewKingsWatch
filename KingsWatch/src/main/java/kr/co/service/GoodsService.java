@@ -9,6 +9,7 @@ public interface GoodsService {
 	// 상품부분
 	public List<GoodsVO> goodsList();
 	public void goodsInsert(GoodsVO vo);
+	public GoodsVO goodsRead(String g_id);
 	
 	
 	// 사진파일부분

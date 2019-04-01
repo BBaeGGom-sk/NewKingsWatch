@@ -29,6 +29,10 @@
 		<beans:constructor-arg value="C:\\supload"></beans:constructor-arg>
 	</beans:bean>
 	
+	<beans:bean class="java.lang.String" id="uploadPathDetail">
+		<beans:constructor-arg value="C:\\suploaddetail"></beans:constructor-arg>
+	</beans:bean>
+	
 					<!-- 인터셉터아이디 -->		   <!-- 인터셉터 패키지경로 -->
 
 	<!-- 인터셉터 실제 적용부분 -->

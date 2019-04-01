@@ -35,9 +35,15 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		for(int i = 0; i<vo.getFiles().length; i++) {			
 			dao.goodsPicDbAdd(arr[i], vo.getG_id());
-		} // 첨부파일이 있을때 , 첨부파일 안 올리면 null이지만 이 경우는 위에서 걸러줌
+		} 
+
+		// 첨부파일이 있을때 , 첨부파일 안 올리면 null이지만 이 경우는 위에서 걸러줌
 	}
 
+	@Override
+	public GoodsVO goodsRead(String g_id) {
+		return dao.goodsRead(g_id);
+	}
 	@Override
 	public void goodsPicDbDel(String fileName, int bno) {
 		dao.goodsPicDbDel(fileName, bno);
@@ -48,5 +54,6 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return dao.goodsPicDbGet(g_id);
 	}
+
 
 }
