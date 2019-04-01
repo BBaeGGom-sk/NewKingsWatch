@@ -125,9 +125,9 @@ public class GoodsVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GoodsVO [g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price + ", g_sale=" + g_sale
-				+ ", g_desc=" + g_desc + ", g_category=" + g_category + ", g_date=" + g_date + ", files="
-				+ Arrays.toString(files) + "]";
+		return "GoodsVO [g_id=" + g_id + ", g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price
+				+ ", g_sale=" + g_sale + ", g_desc=" + g_desc + ", g_category=" + g_category + ", g_is_selling="
+				+ g_is_selling + ", g_date=" + g_date + ", files=" + Arrays.toString(files) + "]";
 	}
 
 	@Override
