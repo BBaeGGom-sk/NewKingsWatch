@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.domain.UserDTO;
 import kr.co.service.UserService;
+import kr.co.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -32,7 +34,7 @@ public class UserController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserDTO dto) {
 		service.join(dto);
-		return "redirect:/user/login";	
+		return "redirect:/user/login";
 	}
 	
 	
@@ -67,26 +69,10 @@ public class UserController {
 		return "redirect:/";	
 
 	}
-	
-	
-	@RequestMapping("/select")
-	public String select(Model model) {
-
-		List<UserDTO> list = service.select();
-		model.addAttribute("list", list);
-
-		return "user/select";
-	}
 
 	
-	@RequestMapping(value="/selectbyid")
-	public void selectById(int id, Model model) {
-		UserDTO dto = service.selectById(id);
-		model.addAttribute("dto", dto);
-	}
-
 	@RequestMapping(value="/updateui")
-public String updateui(int id, Model model) {
+public String updateui(String id, Model model) {
 		
 		UserDTO dto = service.updateui(id);
 	    model.addAttribute("dto",dto);
@@ -95,19 +81,33 @@ public String updateui(int id, Model model) {
 	}	
 	
 	
+	
+	
+	//회원정보 상세보기
+	@RequestMapping("/viewDetail")
+	public String viewDetail(String userId, Model model) {
+		System.out.println("회원정보 상세보기로 가라");
+		System.out.println("userId = " + userId);
+		model.addAttribute("dto", service.viewDetail(userId));
+
+		return "user/viewDetail";	
+	}
+	
+	
+	//회원정보 수정 실행
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(UserDTO dto) {
 		
 		service.update(dto);
 		
-		return "redirect:/user/select";
+		return "redirect:/user/viewDetail";
 	}
 	
 	
 	@RequestMapping(value="delete")
-	public String delete(int num) {
+	public String delete(String id) {
 		
-		service.delete(num);
+		service.delete(id);
 		
 		return "redirect:/user/select";
 	}

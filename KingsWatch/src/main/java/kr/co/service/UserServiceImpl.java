@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO selectById(int id) {
-		return dao.selectById(id);
+	public UserDTO viewDetail(String id) {
+		return dao.viewDetail(id);
 	}
 
 	@Override
-	public UserDTO updateui(int id) {
+	public UserDTO updateui(String id) {
 		return dao.updateui(id);
 	}
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(String id) {
  
 		dao.delete(id);
 	}

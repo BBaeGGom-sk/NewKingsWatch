@@ -18,7 +18,7 @@
   select * from tab_user
   </select>
   
-  <select id="selectById" resultType="kr.co.domain.UserDTO">
+  <select id="viewDetail" resultType="kr.co.domain.UserDTO">
   select * from tab_user where u_id = #{u_id}
   </select>
     
@@ -27,9 +27,6 @@
  update tab_user set u_id=#{u_id}, u_name = #{u_name} where u_pw=#{u_pw}
   </update>
   
-  <select id="updateui" resultType="kr.co.domain.UserDTO">
-  select * from tab_user where u_id=#{u_id}
-  </select>
   
   <delete id="delete">
 delete from tab_user where u_id=#{u_id}

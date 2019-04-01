@@ -29,24 +29,29 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public UserDTO selectById(int id) {
-		return sqlSession.selectOne(NS+".selectById", id);	}
+	public UserDTO viewDetail(String id) {
+		System.out.println("DAOImple viewDetail메서드");
+		System.out.println("지금 id값은 : "+ id);
+		return sqlSession.selectOne(NS+".viewDetail", id);	}
 
 	@Override
-	public UserDTO updateui(int id) {
+	public UserDTO updateui(String id) {
 		// TODO Auto-generated method stub
+		System.out.println("DAOImple updateui메서드");
 		return sqlSession.selectOne(NS+".updateui", id);
 	}
 
 	@Override
 	public void update(UserDTO dto) {
 		// TODO Auto-generated method stub
+		System.out.println("DAOImple update메서드");
 		sqlSession.update(NS+".update", dto);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
+		System.out.println("DAOImple delete메서드");
 		sqlSession.insert(NS+".delete", id);
 	}
 

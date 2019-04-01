@@ -12,9 +12,9 @@ public interface UserService {
 	public String loginCheck(UserDTO dto, HttpSession session);
 	public void logout(HttpSession session);
 	public List<UserDTO> select();
-	public UserDTO selectById(int id);
-	public UserDTO updateui(int id);
+	public UserDTO viewDetail(String id);
+	public UserDTO updateui(String id);
 	public void update(UserDTO dto);
-	public void delete(int id);
+	public void delete(String id);
 	
 }
