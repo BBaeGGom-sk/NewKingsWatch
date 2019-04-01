@@ -11,9 +11,10 @@ create table tab_user(
 )
 drop table tab_user
 select * from tab_user
-insert 
+
 
 insert into tab_user values ('ggoomter', '0070', '배성원', '01026585834', '성북구 장위동', 'ggoomter@gmail.com', 0, 1)
+insert into tab_user values ('bbaeggom', '1026', '오승기', '01030339681',1,21,null, '서울시 은평구 북한산로2 어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com', 0, 1)
 
 create table tab_goods(
 	g_id varchar2(30) primary key,
