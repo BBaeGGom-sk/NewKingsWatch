@@ -138,6 +138,7 @@ footer#footer ul li {
 </head>
 <body>
 
+	alert("${pm.cri}");
 	<div class="container">
 	  <div class="row">
 	  
@@ -174,11 +175,11 @@ footer#footer ul li {
 	  
 
 	<section id="content">
-	  	<label for="goodsList">리스트입니다.</label>
+	  	<label for="goodsListMan">리스트입니다.</label>
 		<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 	 <hr>
 		 <ul>
-		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
+		 	<c:forEach items="${goodsListMan}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="thumbnail">
 		                <div class="form-group">
@@ -211,15 +212,15 @@ footer#footer ul li {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsList${pm.makeQuery(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsListMan${pm.makeCategory(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsList${pm.makeQuery(idx)}">${idx}</a></li>
+						href="/goods/goodsListMan${pm.makeCategory(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsList${pm.makeQuery(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsListMan${pm.makeCategory(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -245,7 +246,7 @@ footer#footer ul li {
 		
 		// 반복문사용
 		// # : 구분자
-		<c:forEach items="${goodsList}" var="pic">
+		<c:forEach items="${goodsListMan}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
 		
@@ -265,7 +266,7 @@ footer#footer ul li {
 					});		
 				});
 			}
-			
+
 		});
 	</script>
 </body>

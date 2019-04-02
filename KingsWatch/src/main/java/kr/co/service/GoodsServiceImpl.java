@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.dao.GoodsDAO;
+import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 
@@ -20,14 +21,26 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Override
 	public List<GoodsVO> goodsList(Criteria cri) {
-		// TODO Auto-generated method stub
+		// 상품리스트 페이징처리
 		return dao.goodsList(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListMan(CategoryCriteria cri) {
+		// 브랜드에 따른 남성상품리스트 페이징처리
+		return dao.goodsListMan(cri);
 	}
 	
 	@Override
 	public int getAmount() {
 		// TODO Auto-generated method stub
 		return dao.getAmount();
+	}
+	
+	@Override
+	public int getCategoryAmount(CategoryCriteria cri) {
+		// TODO Auto-generated method stub
+		return dao.getCategoryAmount(cri);
 	}
 	
 	@Override

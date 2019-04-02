@@ -32,22 +32,53 @@
 
 <!-- 카테고리 여성(1)일때 여성상품리스트출력 -->	
 	<select id="goodsListWoman" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category}
+		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
 	</select>
 
 <!-- 카테고리 남성(2)일때 남성상품리스트출력  -->
 	<select id="goodsListMan" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category}
+		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
 	</select>
 
 <!-- 카테고리 공용(0)일때 공용상품리스트출력 -->	
 	<select id="goodsListPublic" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category}
+		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
 	</select>
 
 <!-- 상품갯수세기 -->
 	<select id="getAmount" resultType="Integer">
 		select count(g_id) from tab_goods
+	</select>
+	
+	<sql id="categoryIf">
+		<if test="g_brand !=null">
+			where g_category= #{g_category} and g_brand= #{g_brand}
+		</if>
+	</sql>
+
+
+	<select id="category" resultType="kr.co.domain.GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="categoryIf"></include> 
+		
+		<![CDATA[
+		 order by g_date desc
+		 ]]>
+		 
+	</select>
+	
+	<select id="getCategoryAmount2" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="categoryIf"></include>
+		order by g_date desc
+	</select>
+
+	<select id="getCategoryAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="categoryIf"></include>
+		order by g_date desc
 	</select>
 
 <!-- 상품검색키워드 SQL문-->
