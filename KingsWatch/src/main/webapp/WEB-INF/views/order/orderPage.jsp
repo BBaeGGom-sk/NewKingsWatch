@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -26,6 +29,10 @@
 				<div class="boardWrite">
 					<table border="1" summary="">
 						<caption>주문자 정보 입력</caption>
+						<p class="required">
+							<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+								alt="필수" /> 필수입력사항
+						</p>
 						<tbody class="address_form ">
 							<tr>
 								<!-- 주문자 이름 -->
@@ -36,102 +43,61 @@
 							</tr>
 							<tr>
 								<!-- 주문자 주소 -->
-								<th>주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
-								alt="필수" />
-								</th>
-							<td>
-								<!-- 우편 번호 1 -->
-								<input id="ozipcode1" name="ozipcode1" class="inputTypeText" placeholder="" size="6" maxlength="6" readonly="1" value="" type="text" />
-								-
-								<!-- 우편 번호 2 -->
-								<input id="ozipcode2" name="ozipcode2" class="inputTypeText" placeholder="" size="6" maxlength="6"readonly="1" value="" type="text" /> 
-								<a href="#none"	id="btn_search_ozipcode">
-								<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_zipcode.gif" alt="우편번호" />
-								</a><br /> 
-								<!-- 기본 주소 -->
-								<input id="oaddr1" name="oaddr1" class="inputTypeText" placeholder="" size="40" readonly="1" value="" type="text" /> 
-								<span class="grid">기본주소</span><br /> 
-								<!-- 나머지 주소 -->
-								<input id="oaddr2" name="oaddr2" class="inputTypeText" placeholder="" size="40" value="" type="text" /> 
-								<span class="grid">나머지주소</span>
-							</td>
-							</tr>
-							<!-- <tr>
-								일반 전화
-								<th scope="row">일반전화 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수" />
+								<th>주소 <img
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+									alt="필수" />
 								</th>
 								<td>
-								<select id="ophone1_1" name="ophone1_[]">
-										<option value="02">02</option>
-										<option value="031">031</option>
-										<option value="032">032</option>
-										<option value="033">033</option>
-										<option value="041">041</option>
-										<option value="042">042</option>
-										<option value="043">043</option>
-										<option value="044">044</option>
-										<option value="051">051</option>
-										<option value="052">052</option>
-										<option value="053">053</option>
-										<option value="054">054</option>
-										<option value="055">055</option>
-										<option value="061">061</option>
-										<option value="062">062</option>
-										<option value="063">063</option>
-										<option value="064">064</option>
-										<option value="0502">0502</option>
-										<option value="0503">0503</option>
-										<option value="0504">0504</option>
-										<option value="0505">0505</option>
-										<option value="0506">0506</option>
-										<option value="0507">0507</option>
-										<option value="070">070</option>
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="016">016</option>
-										<option value="017">017</option>
-										<option value="018">018</option>
-										<option value="019">019</option>
-								</select>
-								-
-								<input id="ophone1_2" name="ophone1_[]" maxlength="4" size="4" value="" type="text" />
-								-
-								<input id="ophone1_3"
-									name="ophone1_[]" maxlength="4" size="4" value="" type="text" />
+										<!-- 우편번호 -->
+										<input id="u_postcode" name="rzipcode1" class="inputTypeText" placeholder="" size="6" maxlength="6"
+										readonly value="${dto.u_postNum }" type="text" />
+										<!-- 우편번호 버튼 -->
+										<input type="button" onclick="u_execDaumPostcode()" value="우편번호 찾기"><br>
+										<!-- 기본주소 -->
+										<input id="u_address" name="raddr1" class="inputTypeText" placeholder="기본 주소" size="40" readonly
+										value="${dto.u_adMain }" type="text" /><br />
+										<!-- 나머지주소 -->
+										<input class="inputTypeText" size="40"  id="u_detailAddress" placeholder="나머지 주소" value="${dto.u_adSub }">
+										<!-- 상세주소 -->
+										<input id="u_extraAddress" name="raddr2" class="inputTypeText" placeholder="상세 주소" size="40" value="${dto.u_adDetail }" 
+										type="text" /> 
 								</td>
-							</tr> -->
+							</tr>
+							
 							<tr>
-								<!-- 휴대 전화 -->
-								<th scope="row">휴대전화</th>
+								<!-- 주문자 휴대전화 -->
+								<th scope="row">휴대전화 <img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+										alt="필수" />
+								</th>
 								<td>
-									<!-- 휴대 전화 1 -->
-									<select id="ophone2_1" name="ophone2_[]">
+								<c:set var="phoneNum" value="${dto.u_phone }"/>
+									<!-- 주문자 휴대전화 1 --> <select id="u_phoneNumFirst" name="u_phoneNumFirst">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="017">017</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-									</select>
-									-
-									<!-- 휴대 전화 2 -->
-									<input id="ophone2_2" name="ophone2_[]" maxlength="4" size="4" value="" type="text" />
-									-
-									<!-- 휴대 전화 3 -->
-									<input id="ophone2_3" name="ophone2_[]" maxlength="4" size="4" value="" type="text" />
+								</select> - <!-- 주문자 휴대전화 2 --> 
+								<input id="u_phoneNumMid" name="u_phoneNumMid"
+									maxlength="4" size="4" value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
+									<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4" size="4"
+									value="${fn:substring(phoneNum,7,11) }" type="text" />
 								</td>
 							</tr>
 							<tr>
 								<!-- 이메일 -->
-								<th scope="row">이메일 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수" />
+								<th scope="row">이메일 <img
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+									alt="필수" />
 								</th>
 								<td>
-									<!-- 이메일 1 -->
-									<input id="oemail1" name="oemail1" class="mailId"value="" type="text" />
-									@
-									<!-- 이메일 2 -->
-									<input id="oemail2" name="oemail2" class="mailAddress" readonly="readonly" value="" type="text" />
-										<select id="oemail3">
+									<!-- 이메일 1 --> <input id="oemail1" name="oemail1"
+									class="mailId" value="" type="text" /> @ <!-- 이메일 2 --> <input
+									id="oemail2" name="oemail2" class="mailAddress"
+									readonly="readonly" value="" type="text" /> <select
+									id="oemail3">
 										<option value="" selected="selected">- 이메일 선택 -</option>
 										<option value="naver.com">naver.com</option>
 										<option value="daum.net">daum.net</option>
@@ -143,21 +109,268 @@
 										<option value="dreamwiz.com">dreamwiz.com</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="etc">직접입력</option>
-										</select>
+								</select>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<!-- 배송지 정보 -->
+				<div class="orderArea ">
+					<div class="title">
+						<h3>배송지 정보</h3>
+						<p class="required">
+							<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+								alt="필수" /> 필수입력사항
+						</p>
+					</div>
+					<div class="boardWrite">
+						<table border="1" summary="">
+							<caption>배송지 정보 입력</caption>
+							<tbody>
+								<tr>
+									<!-- 배송지 선택하기 -->
+									<th>배송지 선택</th>
+									<td>
+										<!-- 라디오 타입으로 주소지 설정 -->
+										<div class="address">
+											<input id="defaultAddress" name="orderAddress" value="T" type="radio" checked="checked"/>
+											<label for="defaultAddress">주문자 정보와 동일</label> 
+											<input id="newAddress" name="orderAddress" value="F" type="radio" />
+											<label for="newAddress">새로운배송지</label>
+											<a href="#none" id="btn_shipp_addr" class="">
+											<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_address.gif"
+												alt="주소록 보기" /></a>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<!-- 받는사람 -->
+									<th scope="row">받으시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+										alt="필수" />
+									</th>
+									<td>
+										<!-- 받는사람 이름 -->
+										<input id="o_name" name="o_name" class="inputTypeText"
+										type="text" value=${dto.u_name} size="15">
+									</td>
+								</tr>
+								<tr>
+									<!-- 받는사람 주소지 -->
+									<th scope="row">주소 <img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+										alt="필수" />
+									</th>
+									<td>
+										<!-- 우편번호 -->
+										<input id="o_postcode" name="rzipcode1" class="inputTypeText" placeholder="" size="6" maxlength="6"
+										readonly value="${dto.u_postNum }" type="text" />
+										<!-- 우편번호 버튼 -->
+										<input type="button" onclick="o_execDaumPostcode()" value="우편번호 찾기"><br>
+										<!-- 기본주소 -->
+										<input id="o_address" name="raddr1" class="inputTypeText" placeholder="기본 주소" size="40" readonly
+										value="${dto.u_adMain }" type="text" /><br />
+										<!-- 나머지주소 -->
+										<input class="inputTypeText" size="40"  id="o_detailAddress" placeholder="나머지 주소" value="${dto.u_adSub }">
+										<!-- 상세주소 -->
+										<input id="o_extraAddress" name="raddr2" class="inputTypeText" placeholder="상세 주소" size="40" value="${dto.u_adDetail }" 
+										type="text" /> 
+									</td>
+								</tr>
+								<tr>
+									<!-- 휴대전화 -->
+									<th scope="row">휴대전화 <img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+										alt="필수" /></th>
+									<td>
+										<!-- 받는사람 휴대전화 1 -->
+										<select id="o_phoneNumFirst" name="o_phoneNumFirst">
+											<option value="010">010</option>
+											<option value="011">011</option>
+											<option value="016">016</option>
+											<option value="017">017</option>
+											<option value="018">018</option>
+											<option value="019">019</option>
+										</select>
+										-
+										<!-- 받는사람 휴대전화 2 -->
+										<input id="o_phoneNumMid" name="o_phoneNumMid" maxlength="4" size="4" value="${fn:substring(phoneNum,3,7) }" type="text" />
+										-
+										<!-- 받는사람 휴대전화 2 -->
+										<input id="o_phoneNumEnd" name="o_phoneNumEnd" maxlength="4" size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
+									</td>
+								</tr>
+								<tr class="">
+									<!-- 배송메세지 -->
+									<th scope="row">배송메시지</th>
+									<td><textarea id="omessage" name="omessage" maxlength="255" cols="70"></textarea>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				
 			</form>
 		</div>
 	</div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			// 휴대전화번호 세번째자리만 분리
+			var phoneNumFirst = ${fn:substring(phoneNum,2,3)};
+			// 휴대전화번호 앞자리 판별 및 자동 선택하기
+			if (phoneNumFirst==0) {
+				$("select option[value='010']").attr("selected", true);
+			} else if (phoneNumFirst==1) {
+				$("select option[value='011']").attr("selected", true);
+			} else if (phoneNumFirst==6) {
+				$("select option[value='016']").attr("selected", true);
+			} else if (phoneNumFirst==7) {
+				$("select option[value='017']").attr("selected", true);
+			} else if (phoneNumFirst==8) {
+				$("select option[value='018']").attr("selected", true);
+			} else if (phoneNumFirst==9) {
+				$("select option[value='019']").attr("selected", true);
+			} 
 
+			
+			// 기본배송지 선택시 주문자의 이름과 주소, 휴대전화번호를 가져옴
+			$("#defaultAddress").click(function() {
+				document.getElementById('o_name').value = document.getElementById('u_name').value;
+				document.getElementById('o_phoneNumFirst').value = document.getElementById('u_phoneNumFirst').value;
+				document.getElementById('o_phoneNumMid').value = document.getElementById('u_phoneNumMid').value;
+				document.getElementById('o_phoneNumEnd').value = document.getElementById('u_phoneNumEnd').value;
+				document.getElementById('o_postcode').value = document.getElementById('u_postcode').value;
+				document.getElementById('o_address').value = document.getElementById('u_address').value;
+				document.getElementById('o_detailAddress').value = document.getElementById('u_detailAddress').value;
+				document.getElementById('o_extraAddress').value = document.getElementById('u_extraAddress').value;
+			});
+			
+			// 새로운배송지 선택시 배송지를 적을 수 있게 모두초기화
+			$("#newAddress").click(function() {
+				document.getElementById('o_name').value = "";
+				document.getElementById('o_phoneNumFirst').value = "";
+				document.getElementById('o_phoneNumMid').value = "";
+				document.getElementById('o_phoneNumEnd').value = "";
+				document.getElementById('o_postcode').value = "";
+				document.getElementById('o_address').value = "";
+				document.getElementById('o_detailAddress').value = "";
+				document.getElementById('o_extraAddress').value = "";
+			});
+			
 		});
+			
+		
+		// 주문자쪽 우편번호 찾기 기능
+		function u_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("u_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("u_extraAddress").value = '';
+	                }
+					// 인풋 초기화 해주기
+					document.getElementById('u_postcode').value = "";
+	                document.getElementById("u_address").value = "";
+	                document.getElementById("u_detailAddress").value = "";
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('u_postcode').value = data.zonecode;
+	                document.getElementById("u_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("u_detailAddress").focus();
+	            }
+	        }).open();
+	    }
+		
+		// 주문자쪽 우편번호 찾기 기능
+		function o_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("o_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("o_extraAddress").value = '';
+	                }
+					// 인풋 초기화 해주기
+					document.getElementById('o_postcode').value = "";
+	                document.getElementById("o_address").value = "";
+	                document.getElementById("o_extraAddress").value = "";
+	                document.getElementById("o_detailAddress").value = "";
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('o_postcode').value = data.zonecode;
+	                document.getElementById("o_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("o_detailAddress").focus();
+	            }
+	        }).open();
+	    }
 	</script>
+
 
 </body>
 </html>
