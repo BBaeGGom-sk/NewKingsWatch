@@ -50,13 +50,14 @@
 		select count(g_id) from tab_goods
 	</select>
 	
+<!-- 카테고리와 브랜드 동적으로 갖고오기 -->
 	<sql id="categoryIf">
 		<if test="g_brand !=null">
 			where g_category= #{g_category} and g_brand= #{g_brand}
 		</if>
 	</sql>
 
-
+<!-- 동적으로 갖고온 where문 집어넣기 -->
 	<select id="category" resultType="kr.co.domain.GoodsVO">
 		<![CDATA[
 		select * from tab_goods 
@@ -68,13 +69,8 @@
 		 ]]>
 		 
 	</select>
-	
-	<select id="getCategoryAmount2" resultType="Integer">
-		select count(g_id) from tab_goods
-		<include refid="categoryIf"></include>
-		order by g_date desc
-	</select>
 
+<!-- 동적으로 갖고온 where문으로 해당 g_id 갯수 구하기 -->
 	<select id="getCategoryAmount" resultType="Integer">
 		select count(g_id) from tab_goods
 		<include refid="categoryIf"></include>
