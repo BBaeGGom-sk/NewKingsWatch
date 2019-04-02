@@ -38,11 +38,11 @@ public class GoodsController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	// 상품이미지 DB삭제
 	@ResponseBody
 	@RequestMapping(value="/deletefile",method=RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(String fileName, int bno){
-		
-		service.goodsPicDbDel(fileName,bno);
+	public ResponseEntity<String> deleteFile(String fileName, String g_id){
+		service.goodsPicDbDel(g_id);
 		ResponseEntity<String> entity=null;
 		fileName.replace('/',File.separatorChar);
 		String formatType=fileName.substring(fileName.lastIndexOf(".")+1);
@@ -63,6 +63,7 @@ public class GoodsController {
 		return entity;
 	}
 	
+	// id에따른 상품이미지 불러오기
 	@RequestMapping("/goodsPicDbGet/{g_id}")
 	@ResponseBody
 	public Map<String, String> goodsPicDbGet(@PathVariable("g_id")String g_id){
@@ -72,6 +73,7 @@ public class GoodsController {
 		return map;
 	}
 	
+	// 상품 상세보기시 id에 따른 상품이미지 불러오기
 	@RequestMapping("/goodsReadPicDbGet/{g_id}")
 	@ResponseBody
 	public List<String> goodsReadPicDbGet(@PathVariable("g_id")String g_id){
@@ -87,26 +89,28 @@ public class GoodsController {
 		return "goods/goodsList";
 	}
 	
+	// 상품올리기 화면
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.GET)
 	public void insertui() {
 		
 	}
 	
+	// 상품올리기
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.POST)
 	public String insert(GoodsVO vo) {
 		service.goodsInsert(vo);
 		return "redirect:/goods/goodsList";
 	}
 	
+	// id에 따른 상품 상세보기
 	@RequestMapping(value="/goodsRead", method=RequestMethod.GET)
 	public String read(String g_id, Model model) {
 		GoodsVO vo= service.goodsRead(g_id);
-		List<String> img= service.goodsPicDbGet(g_id);
 		model.addAttribute("goodsRead", vo);
-		model.addAttribute("img", img);
 		return "goods/goodsRead";
 	}
 	
+	// id에 따른 상품 업데이트하기 화면
 	@RequestMapping(value="/goodsUpdate", method=RequestMethod.GET)
 	public String updateui(String g_id, Model model) {
 		GoodsVO vo= service.goodsRead(g_id);
@@ -115,6 +119,7 @@ public class GoodsController {
 		return "goods/goodsUpdate";
 	}
 	
+	// id에 따른 상품 업데이트하기
 	@RequestMapping(value="/goodsUpdate", method=RequestMethod.POST)
 	public String update(GoodsVO vo) {
 		service.goodsUpdate(vo);

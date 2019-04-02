@@ -44,14 +44,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public void goodsPicDbDel(String fileName, int bno) {
+	public void goodsPicDbDel(String g_id) {
 		// 상품사진 DB완전삭제
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("fullName",fileName);
-		map.put("bno",bno);
-		
-		session.delete(NS+".goodsPicDbDel", map);
-		
+		session.delete(NS+".goodsPicDbDel", g_id);
 	}
 
 	@Override

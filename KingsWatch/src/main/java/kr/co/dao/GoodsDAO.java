@@ -12,8 +12,9 @@ public interface GoodsDAO {
 	public void goodsUpdate(GoodsVO vo);
 	
 	// 사진들어가는부분
-	public void goodsPicDbDel(String fileName, int bno); // 사진DB완전삭제
+	public void goodsPicDbDel(String g_id); // 사진DB완전삭제
 	public List<String> goodsPicDbGet(String g_id); // 상품사진불러오기
 	public void goodsPicDbAdd(String p_fullName, String g_id);
+	
 
 }

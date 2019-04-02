@@ -93,7 +93,7 @@
 	
 <!-- 상품사진DB완전삭제 -->	
 	<delete id="goodsPicDbDel">
-		delete from tab_pic where p_fullName=#{p_fullName} AND g_id=#{g_id}
+		delete from tab_pic where g_id=#{g_id}
 	</delete>
 	
 	
