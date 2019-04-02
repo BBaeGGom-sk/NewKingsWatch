@@ -48,17 +48,16 @@ public class UserController {
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {
-		System.out.println("로그인 처리 메서드 들어옴");
 		String returnURL = "";
-		
 		if(session.getAttribute("login")!=null) {	//기존에 login이란 세션값이 존재한다면
 			System.out.println("기존의 세션값을 제거합니다.");
 			session.removeAttribute("login");		//기존값 제거 하고봄.
 		}
 		
 		// 로그인이 성공하면 UsersVO 객체를 반환함.
-        UserDTO dto = service.getUser(userDTO);
-        System.out.println("유저 컨트롤러의 dto " + dto);
+		System.out.println("<Controller> loginCheck 서비스호출전: " + userDTO);
+        UserDTO dto = service.getUser(userDTO);	//mapper id=loginCheck 한 결과 반환.
+        System.out.println("<Controller> loginCheck 서비스호출후:" + dto);
         if ( dto != null ){ // 로그인 성공
         	System.out.println("로그인 성공");
             session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.
@@ -98,10 +97,10 @@ public String updateui(String id, Model model) {
 	
 	//회원정보 상세보기
 	@RequestMapping("/viewDetail")
-	public String viewDetail(String userId, Model model) {
+	public String viewDetail(HttpSession session, Model model) {
 		System.out.println("회원정보 상세보기로 가라");
-		System.out.println("userId = " + userId);
-		model.addAttribute("dto", service.viewDetail(userId));
+		System.out.println("userId = " + session.getId());
+		model.addAttribute("dto", service.viewDetail(session.getId()));
 
 		return "user/viewDetail";	
 	}

@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO getUser(UserDTO dto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("유저서비스임플의 dto입니다." + dto);
+		System.out.println("<Service> : " + dto);
 		return dao.get(dto);
 	}
 

@@ -159,9 +159,12 @@ public class UserDTO implements Serializable{
 
 
 
+
+
+
 	@Override
 	public String toString() {
-		return "UserDTO [u_id=" + u_id + ", u_name=" + u_name + ", u_regdate=" + u_regdate + "]";
+		return "UserDTO [u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_regdate=" + u_regdate + "]";
 	}
 
 
