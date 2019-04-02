@@ -279,7 +279,6 @@ li {
 				    var selectValue = langSelect.options[langSelect.selectedIndex].value;
 				    $("#u_email2").val(selectValue);
 					$("#u_email2").prop("readonly", true);
-
 				}
 			})
 			// 주문페이지 넘어올때 이메일 셀렉트 판별 및 자동 선택하기
