@@ -113,15 +113,16 @@
 									<th scope="row">주소 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
 									<td>
 										<!-- 우편번호 -->
-										<input id="u_postcode" name="u_postnum" class="inputTypeText" placeholder="" size="6" maxlength="6"	value="${dto.u_postNum }"/>
+										<input id="u_postcode" name="u_postNum" class="inputTypeText" placeholder="" size="6" maxlength="6"	/>
 										<!-- 우편번호 버튼 -->
 										<input class="btn btn-primary" type="button" onclick="u_execDaumPostcode()" value="우편번호 찾기"><br>
 										<!-- 기본주소 -->
-										<input id="u_address" name="u_admain" class="inputTypeText" placeholder="기본 주소" size="40" value="${dto.u_adMain }"/><br>
-										<!-- 나머지주소 -->
-										<input id="u_detailAddress" name="u_addetail"  class="inputTypeText" placeholder="나머지 주소" size="40" value="${dto.u_adSub }">
+										<input id="u_address" name="u_adMain" class="inputTypeText" placeholder="기본 주소" size="40" /><br>
 										<!-- 상세주소 -->
-										<input id="u_extraAddress" name="u_adsub" class="inputTypeText" placeholder="상세 주소" size="40" type="text" value="${dto.u_adDetail }"/> 
+										<input id="u_detailAddress" name="u_adSub" class="inputTypeText" placeholder="상세 주소" size="40" type="text" />
+										<!-- 나머지주소 -->
+										<input id="u_extraAddress " name="u_adDetail"  class="inputTypeText" placeholder="나머지 주소" size="40" >
+										 
 								</td>
 								</tr>
 								
@@ -333,7 +334,7 @@
 	                        extraAddr = ' (' + extraAddr + ')';
 	                    }
 	                    // 조합된 참고항목을 해당 필드에 넣는다.
-	                    document.getElementById("u_extraAddress").value = extraAddr;
+	                    document.getElementById("u_detailAddress").value = extraAddr;
 	                
 	                } else {
 	                    document.getElementById("u_extraAddress").value = '';
@@ -342,7 +343,7 @@
 	                document.getElementById('u_postcode').value = data.zonecode;
 	                document.getElementById("u_address").value = addr;
 	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("u_detailAddress").focus();
+	                document.getElementById("u_extraAddress").focus();
 	            }
 	        }).open();
 	    }
@@ -395,7 +396,7 @@
 	                document.getElementById('o_postcode').value = data.zonecode;
 	                document.getElementById("o_address").value = addr;
 	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("o_detailAddress").focus();
+	                document.getElementById("o_extraAddress").focus();
 	            }
 	        }).open();
 	    }

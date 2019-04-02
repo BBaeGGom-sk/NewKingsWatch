@@ -7,7 +7,7 @@
 
   <insert id="join">
   <!-- insert into tab_user (u_id, u_pw, u_name, u_sex) values (#{u_id}, #{u_pw}, #{u_name}, #{u_sex} ) -->
-   insert into tab_user (u_id, u_postnum, u_admain, u_adsub, u_addetail) values (#{u_id},#{u_postnum}, #{u_admain}, #{u_adsub}, #{u_addetail}) 
+   insert into tab_user (u_id, u_pw, u_name, u_postnum, u_admain, u_adsub, u_addetail) values (#{u_id},#{u_pw},#{u_name},#{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}) 
    <!-- insert into tab_user (u_id, u_pw, u_name, u_sex, u_postNum, u_admain, u_adsub, u_adDetail) values (#{u_id}, #{u_pw}, #{u_name}, #{u_sex}, #{u_postNum}, #{u_admain}, #{u_adsub}, #{u_adDetail}) --> 
   </insert>
   
