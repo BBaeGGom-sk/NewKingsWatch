@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +16,16 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<style type="text/css">
+li {
+	list-style-type: none;
+}
+
+
+
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,19 +34,52 @@
 		<div class="row">
 			<h1>주문페이지</h1>
 		</div>
+		<!-- 혜택정보 -->
+		<div class="bankBenefit ">
+			<h3>
+				<strong><span>혜택정보</span></strong>
+			</h3>
+			<div class="info">
+				<div class="member">
+					<p>
+						<strong>${dto.u_name}</strong> 님은, [화이트] 회원이십니다.
+					</p>
+					<ul class="">
+						<li class="displaynone"><span class="displaynone">0</span> 이상
+							<span class="displaynone"></span> 구매시 <span></span>을 추가할인 받으실 수
+							있습니다. <span class="displaynone">(최대 0)</span></li>
+						<li class=""><span class="">1</span> 이상 <span
+							class="displaynone"></span> 구매시 <span>1%</span>을 추가적립 받으실 수 있습니다.
+							<span class="displaynone">(최대 )</span></li>
+					</ul>
+				</div>
+				<ul class="mileage">
+					<li><a href="/myshop/mileage/historyList.html">가용적립금 : <strong>0원</strong></a></li>
+					<li><a href="/myshop/coupon/coupon.html">쿠폰 : <strong>0개</strong></a></li>
+				</ul>
+			</div>
+		</div>
+		<ul class="controlInfo">
+			<li>상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</li>
+			<li class="displaynone">할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다.</li>
+		</ul>
 		<div class="row">
 			<form action="/order/orderpage" method="post">
 				<div class="boardWrite">
 					<table border="1" summary="">
+						<h3>주문자 정보</h3>
 						<caption>주문자 정보 입력</caption>
 						<p class="required">
-							<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							<img
+								src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 								alt="필수" /> 필수입력사항
 						</p>
 						<tbody class="address_form ">
 							<tr>
 								<!-- 주문자 이름 -->
-								<th>주문하시는 분<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
+								<th>주문하시는 분<img
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+									alt="필수">
 								</th>
 								<td><input id="u_name" name="u_name" class="inputTypeText"
 									type="text" value=${dto.u_name} ></td>
@@ -48,42 +91,41 @@
 									alt="필수" />
 								</th>
 								<td>
-										<!-- 우편번호 -->
-										<input id="u_postcode" name="rzipcode1" class="inputTypeText" placeholder="" size="6" maxlength="6"
-										readonly value="${dto.u_postNum }" type="text" />
-										<!-- 우편번호 버튼 -->
-										<input type="button" onclick="u_execDaumPostcode()" value="우편번호 찾기"><br>
-										<!-- 기본주소 -->
-										<input id="u_address" name="raddr1" class="inputTypeText" placeholder="기본 주소" size="40" readonly
-										value="${dto.u_adMain }" type="text" /><br />
-										<!-- 나머지주소 -->
-										<input class="inputTypeText" size="40"  id="u_detailAddress" placeholder="나머지 주소" value="${dto.u_adSub }">
-										<!-- 상세주소 -->
-										<input id="u_extraAddress" name="raddr2" class="inputTypeText" placeholder="상세 주소" size="40" value="${dto.u_adDetail }" 
-										type="text" /> 
+									<!-- 우편번호 --> <input id="u_postcode" name="rzipcode1"
+									class="inputTypeText" placeholder="" size="6" maxlength="6"
+									readonly value="${dto.u_postNum }" type="text" /> <!-- 우편번호 버튼 -->
+									<input type="button" onclick="u_execDaumPostcode()"
+									value="우편번호 찾기"><br> <!-- 기본주소 --> <input
+									id="u_address" name="raddr1" class="inputTypeText"
+									placeholder="기본 주소" size="40" readonly value="${dto.u_adMain }"
+									type="text" /><br /> <!-- 나머지주소 --> <input
+									class="inputTypeText" size="40" id="u_detailAddress"
+									placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+									<input id="u_extraAddress" name="raddr2" class="inputTypeText"
+									placeholder="상세 주소" size="40" value="${dto.u_adDetail }"
+									type="text" />
 								</td>
 							</tr>
-							
+
 							<tr>
 								<!-- 주문자 휴대전화 -->
 								<th scope="row">휴대전화 <img
-										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
-										alt="필수" />
+									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+									alt="필수" />
 								</th>
-								<td>
-								<c:set var="phoneNum" value="${dto.u_phone }"/>
-									<!-- 주문자 휴대전화 1 --> <select id="u_phoneNumFirst" name="u_phoneNumFirst">
+								<td><c:set var="phoneNum" value="${dto.u_phone }" /> <!-- 주문자 휴대전화 1 -->
+									<select id="u_phoneNumFirst" name="u_phoneNumFirst">
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="017">017</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-								</select> - <!-- 주문자 휴대전화 2 --> 
-								<input id="u_phoneNumMid" name="u_phoneNumMid"
-									maxlength="4" size="4" value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
-									<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4" size="4"
-									value="${fn:substring(phoneNum,7,11) }" type="text" />
+								</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phoneNumMid"
+									name="u_phoneNumMid" maxlength="4" size="4"
+									value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
+									<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4"
+									size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
 								</td>
 							</tr>
 							<tr>
@@ -94,8 +136,9 @@
 								</th>
 								<td>
 									<!-- 주문자 이메일 1 --> <input id="u_email1" name="u_email1"
-									class="mailId" value="" type="text" /> @ <!-- 주문자 이메일 2 --> 
-									<input id="u_email2" name="u_email2" class="mailAddress" onchange="etcSelect()" value="" type="text" readonly="readonly"/> 
+									class="mailId" value="" type="text" /> @ <!-- 주문자 이메일 2 --> <input
+									id="u_email2" name="u_email2" class="mailAddress"
+									value="" type="text" readonly />
 									<select id="u_emailSelect">
 										<option value="etc">직접입력</option>
 										<option value="naver.com">naver.com</option>
@@ -118,7 +161,8 @@
 					<div class="title">
 						<h3>배송지 정보</h3>
 						<p class="required">
-							<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							<img
+								src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 								alt="필수" /> 필수입력사항
 						</p>
 					</div>
@@ -132,25 +176,26 @@
 									<td>
 										<!-- 라디오 타입으로 주소지 설정 -->
 										<div class="address">
-											<input id="defaultAddress" name="orderAddress" value="T" type="radio" checked="checked"/>
-											<label for="defaultAddress">주문자 정보와 동일</label> 
-											<input id="newAddress" name="orderAddress" value="F" type="radio" />
-											<label for="newAddress">새로운배송지</label>
-											<a href="#none" id="btn_shipp_addr" class="">
-											<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_address.gif"
+											<input id="defaultAddress" name="orderAddress" value="T"
+												type="radio" checked="checked" /> <label
+												for="defaultAddress">주문자 정보와 동일</label> <input
+												id="newAddress" name="orderAddress" value="F" type="radio" />
+											<label for="newAddress">새로운배송지</label> <a href="#none"
+												id="btn_shipp_addr" class=""> <img
+												src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_address.gif"
 												alt="주소록 보기" /></a>
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<!-- 받는사람 -->
-									<th scope="row">받으시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+									<th scope="row">받으시는 분 <img
+										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 										alt="필수" />
 									</th>
 									<td>
-										<!-- 받는사람 이름 -->
-										<input id="o_name" name="o_name" class="inputTypeText"
-										type="text" value=${dto.u_name} size="15">
+										<!-- 받는사람 이름 --> <input id="o_name" name="o_name"
+										class="inputTypeText" type="text" value=${dto.u_name } size="15">
 									</td>
 								</tr>
 								<tr>
@@ -160,19 +205,19 @@
 										alt="필수" />
 									</th>
 									<td>
-										<!-- 우편번호 -->
-										<input id="o_postcode" name="rzipcode1" class="inputTypeText" placeholder="" size="6" maxlength="6"
-										readonly value="${dto.u_postNum }" type="text" />
-										<!-- 우편번호 버튼 -->
-										<input type="button" onclick="o_execDaumPostcode()" value="우편번호 찾기"><br>
-										<!-- 기본주소 -->
-										<input id="o_address" name="raddr1" class="inputTypeText" placeholder="기본 주소" size="40" readonly
-										value="${dto.u_adMain }" type="text" /><br />
-										<!-- 나머지주소 -->
-										<input class="inputTypeText" size="40"  id="o_detailAddress" placeholder="나머지 주소" value="${dto.u_adSub }">
-										<!-- 상세주소 -->
-										<input id="o_extraAddress" name="raddr2" class="inputTypeText" placeholder="상세 주소" size="40" value="${dto.u_adDetail }" 
-										type="text" /> 
+										<!-- 우편번호 --> <input id="o_postcode" name="rzipcode1"
+										class="inputTypeText" placeholder="" size="6" maxlength="6"
+										readonly value="${dto.u_postNum }" type="text" /> <!-- 우편번호 버튼 -->
+										<input type="button" onclick="o_execDaumPostcode()"
+										value="우편번호 찾기"><br> <!-- 기본주소 --> <input
+										id="o_address" name="raddr1" class="inputTypeText"
+										placeholder="기본 주소" size="40" readonly
+										value="${dto.u_adMain }" type="text" /><br /> <!-- 나머지주소 -->
+										<input class="inputTypeText" size="40" id="o_detailAddress"
+										placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+										<input id="o_extraAddress" name="raddr2" class="inputTypeText"
+										placeholder="상세 주소" size="40" value="${dto.u_adDetail }"
+										type="text" />
 									</td>
 								</tr>
 								<tr>
@@ -181,36 +226,34 @@
 										src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 										alt="필수" /></th>
 									<td>
-										<!-- 받는사람 휴대전화 1 -->
-										<select id="o_phoneNumFirst" name="o_phoneNumFirst">
+										<!-- 받는사람 휴대전화 1 --> <select id="o_phoneNumFirst"
+										name="o_phoneNumFirst">
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
 											<option value="017">017</option>
 											<option value="018">018</option>
 											<option value="019">019</option>
-										</select>
-										-
-										<!-- 받는사람 휴대전화 2 -->
-										<input id="o_phoneNumMid" name="o_phoneNumMid" maxlength="4" size="4" value="${fn:substring(phoneNum,3,7) }" type="text" />
-										-
-										<!-- 받는사람 휴대전화 2 -->
-										<input id="o_phoneNumEnd" name="o_phoneNumEnd" maxlength="4" size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
+									</select> - <!-- 받는사람 휴대전화 2 --> <input id="o_phoneNumMid"
+										name="o_phoneNumMid" maxlength="4" size="4"
+										value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 받는사람 휴대전화 2 -->
+										<input id="o_phoneNumEnd" name="o_phoneNumEnd" maxlength="4"
+										size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
 									</td>
 								</tr>
 								<tr class="">
 									<!-- 배송메세지 -->
 									<th scope="row">배송메시지</th>
-									<td><textarea id="omessage" name="omessage" maxlength="255" cols="70"></textarea>
-									</td>
+									<td><textarea id="omessage" name="omessage"
+											maxlength="255" cols="70"></textarea></td>
 								</tr>
-								
+
 							</tbody>
 						</table>
 					</div>
 				</div>
-				
-				
+
+
 			</form>
 		</div>
 	</div>
@@ -225,50 +268,58 @@
 			// @ 기준으로 나눈 값을 넣어주기
 			document.getElementById("u_email1").value = emailArr[0];
 			document.getElementById("u_email2").value = emailArr[1];
-			// 직접입력 선택시 u_email2 초기화 및 readonly 속성 해제
-			function etcSelect() {
-				if (document.getElementById("u_emailSelect").value = "etc") {
-				$("#u_email2").val="";
-				$("#u_email2").removeAttr("readonly");
+			// 이메일 셀렉트 변경시 값 바로 적용 및 직접입력 선택시 초기화 및 readonly 해제
+			$("#u_emailSelect").on("change",function() {
+				if (this.value == "etc") {
+				    $("#u_email2").val(" ");
+					$("#u_email2").removeAttr("readonly");
+				} else {
+					var langSelect = document.getElementById("u_emailSelect");
+				    // select element에서 선택된 option의 value가 저장된다.
+				    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+				    $("#u_email2").val(selectValue);
+					$("#u_email2").prop("readonly", true);
+
 				}
-			}
-			// 이메일 셀렉트 판별 및 자동 선택하기
+				/* if (this.value == "etc") {
+					alert(this.value);
+					$("#u_email2").val() = "";
+					$("#u_email2").removeAttr("readonly");
+				} else {
+					alert(this.value);
+					alert($("#u_email2").val();
+					$("#u_email2").val() = $("#u_eamilSelect option:selected").val();
+					$("#u_email2").attr("readonly");	
+				} */
+			})
+			// 주문페이지 넘어올때 이메일 셀렉트 판별 및 자동 선택하기
 			if (emailArr[1] == "naver.com") {
 				document.getElementById("u_emailSelect").value = "naver.com";
 				$("#u_emailSelect option:eq(1)").prop("selected", true);
-				$("#u_email2").attr("readonly",true); // 직접입력 후 재선택시 readonly가 없어지는것을 고려해 다시 걸어줌
 			} else if (emailArr[1] == "daum.net") {
 				document.getElementById("u_emailSelect").value = "daum.net";
 				$("#u_emailSelect option:eq(2)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "nate.com") {
 				document.getElementById("u_emailSelect").value = "nate.com";
 				$("#u_emailSelect option:eq(3)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "hotmail.com") {
 				document.getElementById("u_emailSelect").value = "hotmail.com";
 				$("#u_emailSelect option:eq(4)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "yahoo.com") {
 				document.getElementById("u_emailSelect").value = "yahoo.com";
 				$("#u_emailSelect option:eq(5)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "empas.com") {
 				document.getElementById("u_emailSelect").value = "empas.com";
 				$("#u_emailSelect option:eq(6)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "korea.com") {
 				document.getElementById("u_emailSelect").value = "korea.com";
 				$("#u_emailSelect option:eq(7)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "dreamwiz.com") {
 				document.getElementById("u_emailSelect").value = "dreamwiz.com";
 				$("#u_emailSelect option:eq(8)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else if (emailArr[1] == "gmail.com") {
 				document.getElementById("u_emailSelect").value = "gmail.com";
 				$("#u_emailSelect option:eq(9)").prop("selected", true);
-				$("#u_email2").attr("readonly",true);
 			} else { // 해당하는게 없으면 직접입력이 선택되고 readonly 속성이 해제됨
 				document.getElementById("u_emailSelect").value = "etc";
 				$("#u_email2").removeAttr("readonly");
