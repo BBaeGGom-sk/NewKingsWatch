@@ -26,7 +26,7 @@ public class UserController {
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
-		return "user/join";	//  user/join.jsp로 이동.
+		return "user/join2";	//  user/join.jsp로 이동.
 
 	}
 	
