@@ -16,7 +16,7 @@
 <!-- 상품업데이트하기 -->	
 	<update id="goodsUpdate">
 		update tab_goods set 
-		g_name=#{g_name}, g_price=#{g_price}, g_sale=#{g_sale}, g_desc=#{g_desc}, g_category=#{g_category}, g_is_slling=#{g_is_selling}, g_brand=#{g_brand}
+		g_name=#{g_name}, g_price=#{g_price}, g_sale=#{g_sale}, g_desc=#{g_desc}, g_category=#{g_category}, g_is_selling=#{g_is_selling}, g_brand=#{g_brand}
 		where g_id=#{g_id}
 	</update>
 	

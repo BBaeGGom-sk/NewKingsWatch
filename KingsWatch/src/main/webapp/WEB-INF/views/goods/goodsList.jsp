@@ -200,24 +200,6 @@ footer#footer ul li {
     	</div>
 	</li>
 	</c:forEach>
-	 
-	 
- 		<c:forEach items="${goodsList}" var="list" >
-			 <li>
-			<span>
-				${list.g_id}
-				${list.g_name}
-				${list.g_price}
-				${list.g_sale}
-				${list.g_desc}
-			</span>
-	  			<a href="{{getLink}}">{{fileName}}</a>
-	 		</li>
- 		</c:forEach>
-	</ul>
-	이미지파일?
-
-	
 	</section>
 	
 	  

@@ -66,15 +66,19 @@ public class GoodsController {
 	@RequestMapping("/goodsPicDbGet/{g_id}")
 	@ResponseBody
 	public Map<String, String> goodsPicDbGet(@PathVariable("g_id")String g_id){
-		System.out.print(g_id);
 		List<String> list= service.goodsPicDbGet(g_id);
-		System.out.println(list);
-		
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("fullName", list.get(0));
 		return map;
 	}
+	
+	@RequestMapping("/goodsReadPicDbGet/{g_id}")
+	@ResponseBody
+	public List<String> goodsReadPicDbGet(@PathVariable("g_id")String g_id){
 
+		return service.goodsPicDbGet(g_id);
+	}
+	
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")
 	public String list(Model model) {
@@ -91,6 +95,29 @@ public class GoodsController {
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.POST)
 	public String insert(GoodsVO vo) {
 		service.goodsInsert(vo);
+		return "redirect:/goods/goodsList";
+	}
+	
+	@RequestMapping(value="/goodsRead", method=RequestMethod.GET)
+	public String read(String g_id, Model model) {
+		GoodsVO vo= service.goodsRead(g_id);
+		List<String> img= service.goodsPicDbGet(g_id);
+		model.addAttribute("goodsRead", vo);
+		model.addAttribute("img", img);
+		return "goods/goodsRead";
+	}
+	
+	@RequestMapping(value="/goodsUpdate", method=RequestMethod.GET)
+	public String updateui(String g_id, Model model) {
+		GoodsVO vo= service.goodsRead(g_id);
+		service.goodsPicDbGet(g_id);
+		model.addAttribute("goodsRead", vo);
+		return "goods/goodsUpdate";
+	}
+	
+	@RequestMapping(value="/goodsUpdate", method=RequestMethod.POST)
+	public String update(GoodsVO vo) {
+		service.goodsUpdate(vo);
 		return "redirect:/goods/goodsList";
 	}
 	

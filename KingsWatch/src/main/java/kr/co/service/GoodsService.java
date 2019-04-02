@@ -10,6 +10,7 @@ public interface GoodsService {
 	public List<GoodsVO> goodsList();
 	public void goodsInsert(GoodsVO vo);
 	public GoodsVO goodsRead(String g_id);
+	public void goodsUpdate(GoodsVO vo);
 	
 	
 	// 사진파일부분
