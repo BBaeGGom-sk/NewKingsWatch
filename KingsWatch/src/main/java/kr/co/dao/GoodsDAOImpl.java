@@ -10,6 +10,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 
@@ -29,9 +30,23 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	@Override
+	public List<GoodsVO> goodsListMan(CategoryCriteria cri) {
+		// 브랜드에 따른 남성상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		
+		return session.selectList(NS+".goodsListMan", cri, rb);
+	}
+	
+	@Override
 	public int getAmount() {
 		// 페이지수구하기
 		return session.selectOne(NS+".getAmount");
+	}
+	
+	@Override
+	public int getCategoryAmount(CategoryCriteria cri) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS+".getCategoryAmount", cri);
 	}
 
 	@Override

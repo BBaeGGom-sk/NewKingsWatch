@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.PageMaker;
@@ -83,7 +84,7 @@ public class GoodsController {
 		return service.goodsPicDbGet(g_id);
 	}
 	
-	// 상품리스트 (임시)
+	// 상품리스트
 	@RequestMapping("/goodsList")
 	public String list(Criteria cri, Model model) {
 		List<GoodsVO> goodsList= service.goodsList(cri);
@@ -93,6 +94,21 @@ public class GoodsController {
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
 		return "goods/goodsList";
+	}
+	
+	// 브랜드에 따른 남성 상품리스트
+	@RequestMapping("/goodsListMan")
+	public String listMan(CategoryCriteria cri, Model model) {
+		System.out.println(cri);
+		List<GoodsVO> goodsListMan= service.goodsListMan(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		System.out.println(amount);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("goodsListMan", goodsListMan);
+		return "goods/goodsListMan";
 	}
 	
 	// 상품올리기 화면

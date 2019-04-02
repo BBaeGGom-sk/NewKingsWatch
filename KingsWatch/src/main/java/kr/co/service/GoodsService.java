@@ -2,6 +2,7 @@ package kr.co.service;
 
 import java.util.List;
 
+import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 
@@ -20,5 +21,7 @@ public interface GoodsService {
 	// 페이징
 	public List<GoodsVO> goodsList(Criteria cri);
 	public int getAmount();
+	public List<GoodsVO> goodsListMan(CategoryCriteria cri);
+	public int getCategoryAmount(CategoryCriteria cri);
 
 }
