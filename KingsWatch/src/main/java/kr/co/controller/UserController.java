@@ -58,7 +58,7 @@ public class UserController {
 		
 		// 로그인이 성공하면 UsersVO 객체를 반환함.
         UserDTO dto = service.getUser(userDTO);
-          System.out.println("왜 성공아니냐 이거 dto : " + dto);
+        System.out.println("유저 컨트롤러의 dto " + dto);
         if ( dto != null ){ // 로그인 성공
         	System.out.println("로그인 성공");
             session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.

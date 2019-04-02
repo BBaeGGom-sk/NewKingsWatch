@@ -62,7 +62,7 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserDTO get(UserDTO dto) {
 		// TODO Auto-generated method stub
-		System.out.println("get메서드");
+		System.out.println("DAO임플의 dto입니다."+dto);
 		return sqlSession.selectOne(NS+".loginCheck", dto);
 	}
 

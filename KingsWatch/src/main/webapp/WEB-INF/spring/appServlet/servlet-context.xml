@@ -29,9 +29,19 @@
 		<beans:constructor-arg value="C:\\supload"></beans:constructor-arg>
 	</beans:bean>
 	
-					<!-- 인터셉터아이디 -->		   <!-- 인터셉터 패키지경로 -->
+<!-- 인터셉터 객체 생성 -->
+<beans:bean id="AuthLoginInterceptor" class="kr.co.interceptor.AuthLoginInterceptor">
+</beans:bean>
+<!-- Interceptor 설정 -->
+<interceptors>
+    <interceptor>
+        <mapping path="/**"/>         
+        <exclude-mapping path="/resources/**"/>
+        <exclude-mapping path="/user/login"/>
+        <beans:ref bean="AuthLoginInterceptor"/>
+    </interceptor>
+</interceptors>
 
-	<!-- 인터셉터 실제 적용부분 -->
 
 	
 
