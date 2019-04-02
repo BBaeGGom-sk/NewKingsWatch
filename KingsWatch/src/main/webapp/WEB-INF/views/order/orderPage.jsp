@@ -87,18 +87,17 @@
 								</td>
 							</tr>
 							<tr>
-								<!-- 이메일 -->
+								<!-- 주문자 이메일 -->
 								<th scope="row">이메일 <img
 									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 									alt="필수" />
 								</th>
 								<td>
-									<!-- 이메일 1 --> <input id="oemail1" name="oemail1"
-									class="mailId" value="" type="text" /> @ <!-- 이메일 2 --> <input
-									id="oemail2" name="oemail2" class="mailAddress"
-									readonly="readonly" value="" type="text" /> <select
-									id="oemail3">
-										<option value="" selected="selected">- 이메일 선택 -</option>
+									<!-- 주문자 이메일 1 --> <input id="u_email1" name="u_email1"
+									class="mailId" value="" type="text" /> @ <!-- 주문자 이메일 2 --> 
+									<input id="u_email2" name="u_email2" class="mailAddress" onchange="etcSelect()" value="" type="text" readonly="readonly"/> 
+									<select id="u_emailSelect">
+										<option value="etc">직접입력</option>
 										<option value="naver.com">naver.com</option>
 										<option value="daum.net">daum.net</option>
 										<option value="nate.com">nate.com</option>
@@ -108,7 +107,6 @@
 										<option value="korea.com">korea.com</option>
 										<option value="dreamwiz.com">dreamwiz.com</option>
 										<option value="gmail.com">gmail.com</option>
-										<option value="etc">직접입력</option>
 								</select>
 								</td>
 							</tr>
@@ -220,9 +218,66 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			// 유저 이메일 받아오기
+			var email = "${dto.u_email}";
+			// 유저 이메일을 @ 기준으로 나누기
+			var emailArr = email.split("@");
+			// @ 기준으로 나눈 값을 넣어주기
+			document.getElementById("u_email1").value = emailArr[0];
+			document.getElementById("u_email2").value = emailArr[1];
+			// 직접입력 선택시 u_email2 초기화 및 readonly 속성 해제
+			function etcSelect() {
+				if (document.getElementById("u_emailSelect").value = "etc") {
+				$("#u_email2").val="";
+				$("#u_email2").removeAttr("readonly");
+				}
+			}
+			// 이메일 셀렉트 판별 및 자동 선택하기
+			if (emailArr[1] == "naver.com") {
+				document.getElementById("u_emailSelect").value = "naver.com";
+				$("#u_emailSelect option:eq(1)").prop("selected", true);
+				$("#u_email2").attr("readonly",true); // 직접입력 후 재선택시 readonly가 없어지는것을 고려해 다시 걸어줌
+			} else if (emailArr[1] == "daum.net") {
+				document.getElementById("u_emailSelect").value = "daum.net";
+				$("#u_emailSelect option:eq(2)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "nate.com") {
+				document.getElementById("u_emailSelect").value = "nate.com";
+				$("#u_emailSelect option:eq(3)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "hotmail.com") {
+				document.getElementById("u_emailSelect").value = "hotmail.com";
+				$("#u_emailSelect option:eq(4)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "yahoo.com") {
+				document.getElementById("u_emailSelect").value = "yahoo.com";
+				$("#u_emailSelect option:eq(5)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "empas.com") {
+				document.getElementById("u_emailSelect").value = "empas.com";
+				$("#u_emailSelect option:eq(6)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "korea.com") {
+				document.getElementById("u_emailSelect").value = "korea.com";
+				$("#u_emailSelect option:eq(7)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "dreamwiz.com") {
+				document.getElementById("u_emailSelect").value = "dreamwiz.com";
+				$("#u_emailSelect option:eq(8)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else if (emailArr[1] == "gmail.com") {
+				document.getElementById("u_emailSelect").value = "gmail.com";
+				$("#u_emailSelect option:eq(9)").prop("selected", true);
+				$("#u_email2").attr("readonly",true);
+			} else { // 해당하는게 없으면 직접입력이 선택되고 readonly 속성이 해제됨
+				document.getElementById("u_emailSelect").value = "etc";
+				$("#u_email2").removeAttr("readonly");
+				$("#u_emailSelect option:eq(9)").prop("selected", true);
+			}
+			
 			// 휴대전화번호 세번째자리만 분리
 			var phoneNumFirst = ${fn:substring(phoneNum,2,3)};
-			// 휴대전화번호 앞자리 판별 및 자동 선택하기
+			// 휴대전화번호 앞자리 판별 및 자동 선택하기 (주문쪽,받는쪽 동시 선택)
 			if (phoneNumFirst==0) {
 				$("select option[value='010']").attr("selected", true);
 			} else if (phoneNumFirst==1) {
