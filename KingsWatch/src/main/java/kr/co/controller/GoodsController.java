@@ -99,16 +99,40 @@ public class GoodsController {
 	// 브랜드에 따른 남성 상품리스트
 	@RequestMapping("/goodsListMan")
 	public String listMan(CategoryCriteria cri, Model model) {
-		System.out.println(cri);
 		List<GoodsVO> goodsListMan= service.goodsListMan(cri);
 		int amount = service.getCategoryAmount(cri);
 		PageMaker pm= new PageMaker(amount, cri);
 		pm.setCri(cri);
-		System.out.println(amount);
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListMan", goodsListMan);
 		return "goods/goodsListMan";
+	}
+	
+	// 브랜드에 따른 여성 상품리스트
+	@RequestMapping("/goodsListWoman")
+	public String listWoman(CategoryCriteria cri, Model model) {
+		List<GoodsVO> goodsListWoman= service.goodsListWoman(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("goodsListWoman", goodsListWoman);
+		return "goods/goodsListWoman";
+	}
+	
+	// 브랜드에 따른 공용 상품리스트
+	@RequestMapping("/goodsListPublic")
+	public String listPublic(CategoryCriteria cri, Model model) {
+		List<GoodsVO> goodsListPublic= service.goodsListPublic(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("pm", pm);
+		model.addAttribute("goodsListPublic", goodsListPublic);
+		return "goods/goodsListPublic";
 	}
 	
 	// 상품올리기 화면
