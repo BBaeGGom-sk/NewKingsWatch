@@ -20,7 +20,8 @@
 <body>
 
 	<div class="container">
-<%-- 		<c:if test="${login != null}">${login.u_id}님 환합니다.</c:if> --%>
+ 		<c:if test="${login != null}">${login.u_name}님 환영 합니다.</c:if> 
+		<!-- 왜 login안에 regdate랑 u_id는 null이지? -->
 
 		<div class="row" >
 
