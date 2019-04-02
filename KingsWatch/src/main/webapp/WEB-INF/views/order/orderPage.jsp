@@ -281,16 +281,6 @@ li {
 					$("#u_email2").prop("readonly", true);
 
 				}
-				/* if (this.value == "etc") {
-					alert(this.value);
-					$("#u_email2").val() = "";
-					$("#u_email2").removeAttr("readonly");
-				} else {
-					alert(this.value);
-					alert($("#u_email2").val();
-					$("#u_email2").val() = $("#u_eamilSelect option:selected").val();
-					$("#u_email2").attr("readonly");	
-				} */
 			})
 			// 주문페이지 넘어올때 이메일 셀렉트 판별 및 자동 선택하기
 			if (emailArr[1] == "naver.com") {
