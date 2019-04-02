@@ -104,12 +104,13 @@
 	</script>
 
 	<script type="text/javascript">	
-		$(document).ready(function() {
-			
+			var source= $("#source").html();
+			var template= Handlebars.compile(source);
 			var g_id = "${goodsRead.g_id}";
 			
-			alert(g_id);
-				
+		$(document).ready(function() {
+			
+
 			// 이벤트, 이벤트실행할id or class, function(event)
 				$(".uploadedList").on("click", ".delbtn", function(event) {
 					event.preventDefault();
@@ -118,18 +119,20 @@
 				
 					var delOk= confirm("수정버튼과 상관 없이 파일이 즉시 삭제됩니다.\n 삭제하시겠습니까");
 					
-					$.ajax({
-						url: "/goods/deletefile",
-						type: "post",
-						data: {
-							fileName:$delbtn.attr("href"), // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌
-							g_id:g_id
-						},
-						dataType: "text",
-						success: function(result){
-						$delList.remove(); // 삭제하고 썸네일에서 지우기. 위에 만들어놓은 delList의 값들 remove
-						}
-					});
+					if(delOk){		
+						$.ajax({
+							url: "/goods/deletefile",
+							type: "post",
+							data: {
+								fileName:$delbtn.attr("href"), // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌 
+								g_id:g_id
+							},
+							dataType: "text",
+							success: function(result){
+								$delList.remove(); // 삭제하고 썸네일에서 지우기. 위에 만들어놓은 delList의 값들 remove
+							}
+						});
+					};
 				});
 							
 				$("button[type='submit']").click(function (event){
@@ -178,8 +181,6 @@
 		
 		function goodsReadPicDbGet(g_id) {
 			$.getJSON("/goods/goodsReadPicDbGet/"+g_id, function(result) {
-				var source= $("#source").html();
-				var template= Handlebars.compile(source);
 				$(result).each(function() {
 					var data= getFileInfo(this);
 					$(".uploadedList").append(template(data));

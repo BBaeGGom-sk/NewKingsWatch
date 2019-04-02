@@ -48,11 +48,22 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void goodsUpdate(GoodsVO vo) {
 		dao.goodsUpdate(vo);
+		dao.goodsPicDbDel(vo.getG_id());
+		
+		String[] arr = vo.getFiles();
+		
+		if (arr == null) {
+			return;
+		} // 첨부파일이 없으면 리턴을 시켜서 아래 코드를 실행시키지않음
+		
+		for(int i = 0; i<vo.getFiles().length; i++) {			
+			dao.goodsPicDbAdd(arr[i], vo.getG_id());
+		} 
 	}
 
 	@Override
-	public void goodsPicDbDel(String fileName, int bno) {
-		dao.goodsPicDbDel(fileName, bno);
+	public void goodsPicDbDel(String g_id) {
+		dao.goodsPicDbDel(g_id);
 	}
 
 	@Override
