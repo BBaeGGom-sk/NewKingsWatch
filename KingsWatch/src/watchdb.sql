@@ -4,16 +4,25 @@ create table tab_user(
 	u_pw varchar2(30) not null,
 	u_name varchar2(40) not null,
 	u_phone varchar2(30),
-	u_address varchar2(200),
+	u_sex number(1),
+	u_age number(3),
+	u_postnum varchar2(5),
+	u_admain varchar2(200),
+	u_adsub varchar2(200),
 	u_email varchar2(40) unique,
+	u_regDate varchar2(40) default sysdate,
 	u_point number(7),
-	u_level number(1)
+	u_level number(1),
+	u_adDetail varchar2(200)
 )
 drop table tab_user
 select * from tab_user
-insert 
+alter table tab_user add (u_addetail varchar2(200)) 
+update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
 
-insert into tab_user values ('ggoomter', '0070', '배성원', '01026585834', '성북구 장위동', 'ggoomter@gmail.com', 0, 1)
+
+insert into tab_user values ('bbaeggom', '1026', '오승기', '01130339681',1,25,'03300', '서울시 은평구 북한산로2' ,'어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com',null, 0, 1,'(진관동, 은평뉴타운구파발)')
+delete from tab_user where u_id = 'bbaeggom'
 
 create table tab_goods(
 	g_id varchar2(30) primary key,
@@ -64,7 +73,7 @@ create table tab_notice(
 	n_title varchar2(40),
 	n_content varchar2(1000),
 	u_id varchar2(30) references tab_user(u_id),
-	u_regdate varchar2(40) default sysdate,
+	n_regdate varchar2(40) default sysdate,
 	n_updatedate varchar2(40),
 	n_topmost number(1)
 )
