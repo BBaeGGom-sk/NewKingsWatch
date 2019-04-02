@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 
 @Repository
@@ -20,9 +22,16 @@ public class GoodsDAOImpl implements GoodsDAO {
 	private final String NS="kr.co.mapper.goods";
 	
 	@Override
-	public List<GoodsVO> goodsList() {
+	public List<GoodsVO> goodsList(Criteria cri) {
 		// 상품전체리스트불러오기
-		return session.selectList(NS+".goodsList");
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".goodsList", 0, rb);
+	}
+	
+	@Override
+	public int getAmount() {
+		// 페이지수구하기
+		return session.selectOne(NS+".getAmount");
 	}
 
 	@Override
