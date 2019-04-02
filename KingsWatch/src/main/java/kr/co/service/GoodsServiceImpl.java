@@ -32,6 +32,18 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<GoodsVO> goodsListWoman(CategoryCriteria cri) {
+		// 브랜드에 따른 여성상품리스트 페이징처리
+		return dao.goodsListWoman(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListPublic(CategoryCriteria cri) {
+		// 브랜드에 따른 공용상품리스트 페이징처리
+		return dao.goodsListPublic(cri);
+	}
+	
+	@Override
 	public int getAmount() {
 		// TODO Auto-generated method stub
 		return dao.getAmount();

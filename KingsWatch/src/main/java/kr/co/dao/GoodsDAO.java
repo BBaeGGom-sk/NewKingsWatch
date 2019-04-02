@@ -21,6 +21,8 @@ public interface GoodsDAO {
 	public List<GoodsVO> goodsList(Criteria cri);
 	public int getAmount();
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri);
+	public List<GoodsVO> goodsListWoman(CategoryCriteria cri);
+	public List<GoodsVO> goodsListPublic(CategoryCriteria cri);
 	public int getCategoryAmount(CategoryCriteria cri);
 	
 

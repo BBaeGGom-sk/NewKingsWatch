@@ -33,8 +33,21 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri) {
 		// 브랜드에 따른 남성상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		
 		return session.selectList(NS+".goodsListMan", cri, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListWoman(CategoryCriteria cri) {
+		// 브랜드에 따른 여성상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".goodsListWoman", cri, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListPublic(CategoryCriteria cri) {
+		// 브랜드에 따른 공용상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".goodsListPublic", cri, rb);
 	}
 	
 	@Override
