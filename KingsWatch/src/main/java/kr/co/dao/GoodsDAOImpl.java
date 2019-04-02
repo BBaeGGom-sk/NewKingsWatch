@@ -33,7 +33,14 @@ public class GoodsDAOImpl implements GoodsDAO {
 	
 	@Override
 	public GoodsVO goodsRead(String g_id) {
+		// 아이디에따른 상품읽어오기
 		return session.selectOne(NS+".goodsIdSelect", g_id);
+	}
+
+	@Override
+	public void goodsUpdate(GoodsVO vo) {
+		// 상품업데이트하기
+		session.update(NS+".goodsUpdate", vo);
 	}
 
 	@Override
@@ -76,5 +83,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return ++p_num;
 	}
+
 
 }

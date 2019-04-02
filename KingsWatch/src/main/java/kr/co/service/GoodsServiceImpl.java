@@ -44,6 +44,12 @@ public class GoodsServiceImpl implements GoodsService {
 	public GoodsVO goodsRead(String g_id) {
 		return dao.goodsRead(g_id);
 	}
+	
+	@Override
+	public void goodsUpdate(GoodsVO vo) {
+		dao.goodsUpdate(vo);
+	}
+
 	@Override
 	public void goodsPicDbDel(String fileName, int bno) {
 		dao.goodsPicDbDel(fileName, bno);

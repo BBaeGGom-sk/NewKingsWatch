@@ -108,6 +108,20 @@ public class GoodsController {
 		return "goods/goodsRead";
 	}
 	
+	@RequestMapping(value="/goodsUpdate", method=RequestMethod.GET)
+	public String updateui(String g_id, Model model) {
+		GoodsVO vo= service.goodsRead(g_id);
+		service.goodsPicDbGet(g_id);
+		model.addAttribute("goodsRead", vo);
+		return "goods/goodsUpdate";
+	}
+	
+	@RequestMapping(value="/goodsUpdate", method=RequestMethod.POST)
+	public String update(GoodsVO vo) {
+		service.goodsUpdate(vo);
+		return "redirect:/goods/goodsList";
+	}
+	
 
 	
 

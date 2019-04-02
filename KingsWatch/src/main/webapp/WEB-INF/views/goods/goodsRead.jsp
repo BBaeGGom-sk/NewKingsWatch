@@ -13,78 +13,124 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="../../resources/js/upload.js"></script>
 <style type="text/css">
-	.uploadedList{
-		list-style: none;	
-		margin-bottom: 50px;
-	}
+.uploadedList {
+	list-style: none;
+	margin-bottom: 50px;
+}
+
+body {
+	font-family: '맑은 고딕', verdana;
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+div#root {
+	width: 90%;
+	margin: 0 auto;
+}
+
+header#header {
+	font-size: 60px;
+	padding: 20px 0;
+}
+
+header#header h1 a {
+	color: #000;
+	font-weight: bold;
+}
+
+nav#nav {
+	padding: 10px;
+	text-align: right;
+}
+
+nav#nav ul li {
+	display: inline-block; /* margin-left:10px;  */
+}
+
+div#container_box {
+	float: right;
+	width: calc(100% - 200px - 20px);
+}
+
+img {
+	align-items: center;
+}
+
+table{
+	align-content: center;
+}
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 
 	<div class="container">
-	  <div class="row">
+		<div class="row">
 
-			<table border="1">
-				<tbody>
-					<tr>
-						<td rowspan="8">
-	            			<ul class="uploadedList clearfix">
+			<div class="row">
+				<nav id="nav">
+					<button name="goodsUpdate" id="goodsUpdate" class="btn btn-primary">수정</button>
+				</nav>
+			</div>
 
-	            			</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td>${goodsRead.g_name}</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td>${goodsRead.g_price }</td>
-					</tr>
-					<tr>
-						<td>할인율</td>
-						<td>${goodsRead.g_sale}</td>
-					</tr>
-					<tr>
-						<td>수량</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>이미지</td>
-					</tr>
-					<tr>
-						<td colspan="2">구매하기</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="2">카트담기</td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>	  
-	  
-	  </div>
+			<div id="container_box" class="form-group">
+				<div style="float: left;">
+					<ul class="uploadedList clearfix">
+							<!-- 상품이미지업로드 -->
+					</ul>
+				</div>
+				<div style="float: left; padding-top: 5%;" class="form-group">
+					<label for="g_name">이름</label>
+					<p>${goodsRead.g_name}</p>
+					<label for="g_price">가격</label>
+					<p>${goodsRead.g_price}</p>
+					<label for="count">수량</label>
+					<p></p>
+					<label for="g_desc">설명</label>
+					<p>${goodsRead.g_desc}</p>
+					<button class="form-control">구매하기</button>
+					<button class="form-control">카트담기</button>
+				</div>
+
+			</div>
+		</div>
 	</div>
 	
-	
+	<form>
+		<input id="g_id" name="g_id"  value="${goodsRead.g_id}" type="hidden">
+	</form>
+
+
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
 				<img src="{{imgsrc}}">
 			</span>
-			</li>
+		</li>
 	</script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-		
+
 			var g_id = "${goodsRead.g_id}";
-		
-			alert(g_id);
 			
+			$("#goodsUpdate").click(function() {
+				$("form").attr("action","goodsUpdate");
+				$("form").attr("method","get");
+				$("form").submit();
+			});
+
 			goodsReadPicDbGet(g_id);
+			
 			
 		});
 		
