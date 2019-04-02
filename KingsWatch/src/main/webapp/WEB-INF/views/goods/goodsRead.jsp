@@ -89,13 +89,17 @@ table{
 				</div>
 				<div style="float: left; padding-top: 5%;" class="form-group">
 					<label for="g_name">이름</label>
-					<p>${goodsRead.g_name}</p>
+						<p>${goodsRead.g_name}</p>
 					<label for="g_price">가격</label>
-					<p>${goodsRead.g_price}</p>
+						<p>${goodsRead.g_price}</p>
 					<label for="count">수량</label>
-					<p></p>
+					<p>
+						<button type="button" class="plus">+</button>
+							<input type="number" class="numBox" min="1" value="1" readonly="readonly" style="align-items: center; display: compact;">
+	 					<button type="button" class="minus">-</button>
+	 				</p>
 					<label for="g_desc">설명</label>
-					<p>${goodsRead.g_desc}</p>
+						<p>${goodsRead.g_desc}</p>
 					<button class="form-control">구매하기</button>
 					<button class="form-control">카트담기</button>
 				</div>
@@ -128,10 +132,24 @@ table{
 				$("form").attr("method","get");
 				$("form").submit();
 			});
+		
+			$(".plus").click(function() {
+				var num = $(".numBox").val();
+				alert(num);
+				var plusNum = Number(num) + 1;
+				$(".numBox").val(plusNum);
+				alert(plusNum);
+			});
+			  
+			$(".minus").click(function() {
+				var num = $(".numBox").val();
+				alert(num);
+				var minusNum = Number(num) - 1;
+				$(".numBox").val(minusNum);
+				alert(minusNum);
+			});
 
 			goodsReadPicDbGet(g_id);
-			
-			
 		});
 		
 		function goodsReadPicDbGet(g_id) {
