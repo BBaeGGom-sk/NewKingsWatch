@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.dao.GoodsDAO;
+import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 
 @Service
@@ -18,11 +19,17 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsDAO dao;
 	
 	@Override
-	public List<GoodsVO> goodsList() {
+	public List<GoodsVO> goodsList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return dao.goodsList();
+		return dao.goodsList(cri);
 	}
-
+	
+	@Override
+	public int getAmount() {
+		// TODO Auto-generated method stub
+		return dao.getAmount();
+	}
+	
 	@Override
 	public void goodsInsert(GoodsVO vo) {
 		dao.goodsInsert(vo);
@@ -71,6 +78,5 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return dao.goodsPicDbGet(g_id);
 	}
-
 
 }

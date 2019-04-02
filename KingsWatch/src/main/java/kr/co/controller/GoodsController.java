@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.PageMaker;
 import kr.co.service.GoodsService;
 import kr.co.utils.MediaUtils;
 
@@ -83,8 +85,12 @@ public class GoodsController {
 	
 	// 상품리스트 (임시)
 	@RequestMapping("/goodsList")
-	public String list(Model model) {
-		List<GoodsVO> goodsList= service.goodsList();
+	public String list(Criteria cri, Model model) {
+		List<GoodsVO> goodsList= service.goodsList(cri);
+		int amount = service.getAmount();
+		PageMaker pm= new PageMaker(amount, cri);
+		
+		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
 		return "goods/goodsList";
 	}
