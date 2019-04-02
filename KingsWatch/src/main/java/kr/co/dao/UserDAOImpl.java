@@ -30,7 +30,8 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public UserDTO selectById(int id) {
-		return sqlSession.selectOne(NS+".selectById", id);	}
+		return sqlSession.selectOne(NS+".selectById", id);	
+	}
 
 	@Override
 	public UserDTO updateui(int id) {

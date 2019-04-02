@@ -2,9 +2,10 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable{
+public class UserDTO implements Serializable {
 
-	/**vo와 dto차이 잘 모르겠음
+	/**
+	 * vo와 dto차이 잘 모르겠음
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -12,24 +13,37 @@ public class UserDTO implements Serializable{
 	private String u_pw;
 	private String u_name;
 	private String u_phone;
-	private String u_address;
+	private int u_sex;
+	private int u_age;
+	private String u_postNum;
+	private String u_adMain;
+	private String u_adSub;
+	private String u_adDetail;
 	private String u_email;
+	private String regDate;
 	private int u_point;
 	private int u_level;
-	
+
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, String u_address, String u_email,
-			int u_point, int u_level) {
+	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, int u_sex, int u_age, String u_postNum,
+			String u_adMain, String u_adSub, String u_adDetail, String u_email, String regDate, int u_point,
+			int u_level) {
 		super();
 		this.u_id = u_id;
 		this.u_pw = u_pw;
 		this.u_name = u_name;
 		this.u_phone = u_phone;
-		this.u_address = u_address;
+		this.u_sex = u_sex;
+		this.u_age = u_age;
+		this.u_postNum = u_postNum;
+		this.u_adMain = u_adMain;
+		this.u_adSub = u_adSub;
+		this.u_adDetail = u_adDetail;
 		this.u_email = u_email;
+		this.regDate = regDate;
 		this.u_point = u_point;
 		this.u_level = u_level;
 	}
@@ -66,12 +80,52 @@ public class UserDTO implements Serializable{
 		this.u_phone = u_phone;
 	}
 
-	public String getU_address() {
-		return u_address;
+	public int getU_sex() {
+		return u_sex;
 	}
 
-	public void setU_address(String u_address) {
-		this.u_address = u_address;
+	public void setU_sex(int u_sex) {
+		this.u_sex = u_sex;
+	}
+
+	public int getU_age() {
+		return u_age;
+	}
+
+	public void setU_age(int u_age) {
+		this.u_age = u_age;
+	}
+
+	public String getU_postNum() {
+		return u_postNum;
+	}
+
+	public void setU_postNum(String u_postNum) {
+		this.u_postNum = u_postNum;
+	}
+
+	public String getU_adMain() {
+		return u_adMain;
+	}
+
+	public void setU_adMain(String u_adMain) {
+		this.u_adMain = u_adMain;
+	}
+
+	public String getU_adSub() {
+		return u_adSub;
+	}
+
+	public void setU_adSub(String u_adSub) {
+		this.u_adSub = u_adSub;
+	}
+
+	public String getU_adDetail() {
+		return u_adDetail;
+	}
+
+	public void setU_adDetail(String u_adDetail) {
+		this.u_adDetail = u_adDetail;
 	}
 
 	public String getU_email() {
@@ -80,6 +134,14 @@ public class UserDTO implements Serializable{
 
 	public void setU_email(String u_email) {
 		this.u_email = u_email;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	public int getU_point() {
@@ -104,15 +166,17 @@ public class UserDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "NewUserVO [u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_phone=" + u_phone
-				+ ", u_address=" + u_address + ", u_email=" + u_email + ", u_point=" + u_point + ", u_level=" + u_level
-				+ "]";
+		return "UserDTO [u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_phone=" + u_phone + ", u_sex="
+				+ u_sex + ", u_age=" + u_age + ", u_postNum=" + u_postNum + ", u_adMain=" + u_adMain + ", u_adSub="
+				+ u_adSub + ", u_adDetail=" + u_adDetail + ", u_email=" + u_email + ", regDate=" + regDate
+				+ ", u_point=" + u_point + ", u_level=" + u_level + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((u_id == null) ? 0 : u_id.hashCode());
 		result = prime * result + ((u_pw == null) ? 0 : u_pw.hashCode());
 		return result;
 	}
@@ -126,6 +190,11 @@ public class UserDTO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		UserDTO other = (UserDTO) obj;
+		if (u_id == null) {
+			if (other.u_id != null)
+				return false;
+		} else if (!u_id.equals(other.u_id))
+			return false;
 		if (u_pw == null) {
 			if (other.u_pw != null)
 				return false;
@@ -135,7 +204,4 @@ public class UserDTO implements Serializable{
 	}
 	
 	
-	
-	
-
 }
