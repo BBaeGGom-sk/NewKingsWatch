@@ -126,8 +126,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
  section#content div.goodsThumb img { width:200px; height:200px; }
  section#content div.goodsName { padding:10px 0; text-align:center; }
  section#content div.goodsName a { color:#000; }
-
-
+ 
+ .fadding-photo:hover { 
+ 
+ opacity:0.4;
+ 
+ }
+ 
 footer#footer {
 	background: #f9f9f9;
 	padding: 20px;
@@ -256,7 +261,7 @@ footer#footer ul li {
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
-				<img src="{{imgsrc}}">
+				<img src="{{imgsrc}}" class="fadding-photo">
 			</span>
 		</li>
 	</script>
