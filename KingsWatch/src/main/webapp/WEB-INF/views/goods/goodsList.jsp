@@ -33,6 +33,10 @@ div#root {
 	margin: 0 auto;
 }
 
+div.description {
+	text-align: center;
+}
+
 header#header {
 	font-size: 60px;
 	padding: 20px 0;
@@ -49,7 +53,7 @@ nav#nav {
 }
 
 nav#nav ul li {
-	display: inline-block; /* margin-left:10px;  */
+	display: inline-block;
 }
 
 section#container {
@@ -174,12 +178,15 @@ footer#footer ul li {
 	  
 
 	<section id="content">
+
 	  	<label for="goodsList">리스트입니다.</label>
-		<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		<div class="row">
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>		
 	 <hr>
-		 <ul>
+	 <div class=" xans-element- xans-product xans-product-listnormal">
+		 <ul class="prdList column4">
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
-			 	<li>
+			 	<li class="item xans-record-">
 		    		<div class="thumbnail">
 		                <div class="form-group">
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
@@ -188,12 +195,12 @@ footer#footer ul li {
 		    		</div>
 		    		<div class="description">
 		        		<p class="color displaynone"></p>
-		     			<p class="name">
+		     			<p class="g_name">
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span class="title displaynone"></span> ${list.g_name}</a>
+		            		<span class="title displaynone">${list.g_name}</span></a>
 		            	</p>
 					<div class="line"></div>
-						<p class="price ">${list.g_price }<span class="displaynone"></span></p>
+						<p class="price"><span class="displaynone">${list.g_price }</span></p>
 						<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
 		        	<div class="status">
 		            <div class="icon">      </div>
@@ -202,9 +209,10 @@ footer#footer ul li {
 				</li>
 			</c:forEach>
 		</ul>
+	</div>
+	</div>
 	</section>
-	
-	  
+
 	 </div> <!-- row 끝 -->
 	 
 	 <!-- 페이징!! -->
@@ -225,6 +233,24 @@ footer#footer ul li {
 		</div>
 	 
 	</div> <!-- container 끝!! -->
+	
+	<div class="form-group" style="display: inline-block; position: absolute;" >
+		 <form target="_blank" method="get" action="/goods/goodsSearch">
+			<div class="col-xs-3 col-sm-2" >
+				<select class="form-control" id="ssel" name="searchType">
+					<option disabled>검색 기준</option>
+					<option value="g_name">상품명</option>
+				</select>
+			</div>
+			<div class="input-group col-xs-1 col-sm-1">
+				<input class="form-control" id="keyword" name="keyword" size="20px" style="text-align:center; width:200px;"> 
+				<span class="input-group-btn">
+					<button class="btn btn-success">검색</button>
+				</span>
+			</div>
+		</form>
+	</div>
+
 	
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
