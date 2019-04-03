@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.domain.BrandCriteria;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
@@ -95,6 +96,19 @@ public class GoodsController {
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
 		return "goods/goodsList";
+	}
+	
+	// 브랜드에 따른 전체 상품리스트
+	@RequestMapping("/goodsListBrand")
+	public String listBrand(BrandCriteria cri, Model model) {
+		List<GoodsVO> goodsListBrand= service.goodsListBrand(cri);
+		int amount = service.getBrandAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("pm", pm);
+		model.addAttribute("goodsListBrand", goodsListBrand);
+		return "goods/goodsListBrand";
 	}
 	
 	// 브랜드에 따른 남성 상품리스트

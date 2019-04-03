@@ -143,6 +143,18 @@ private Criteria cri;
 		
 	}
 	
+	public String makeBrand(int page) {
+		UriComponents uc = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPage", cri.getPerPage())
+				.queryParam("g_brand", ((BrandCriteria)cri).getG_brand())
+				.build();
+		
+		return uc.toUriString();
+		//이거 스프링에서만 지원되는거임ㅇㅇ uc
+		
+	}
+	
 
 	
 	

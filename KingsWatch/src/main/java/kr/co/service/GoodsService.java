@@ -2,6 +2,7 @@ package kr.co.service;
 
 import java.util.List;
 
+import kr.co.domain.BrandCriteria;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
@@ -23,6 +24,9 @@ public interface GoodsService {
 	// 전체리스트 페이징
 	public List<GoodsVO> goodsList(Criteria cri);
 	public int getAmount();
+	// 브랜드별 전체상품 페이징
+	public List<GoodsVO> goodsListBrand(BrandCriteria cri);
+	public int getBrandAmount(BrandCriteria cri);
 	// 카테고리분류(여성,남성,공용)에 따른 페이징
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri);
 	public List<GoodsVO> goodsListWoman(CategoryCriteria cri);

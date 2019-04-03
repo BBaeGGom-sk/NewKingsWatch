@@ -151,20 +151,20 @@ footer#footer ul li {
 	  <ul class="goodsMenu">
 	  	<li class="menu0"><a href="/goods/goodsList">메인으로</a>
 	  	</li>
-	  	<li class="menu1"><a href="">로즈몽</a>
+	  	<li class="menu1"><a href="/goods/goodsListBrand?g_brand=로즈몽">로즈몽</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=로즈몽">여성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=로즈몽">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu2"><a href="">세이코</a>
+	  	<li class="menu2"><a href="/goods/goodsListBrand?g_brand=세이코">세이코</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=세이코">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=세이코">남성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=세이코">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu3"><a href="">아르마니</a>
+	  	<li class="menu3"><a href="/goods/goodsListBrand?g_brand=아르마니">아르마니</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=아르마니">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=아르마니">남성</a></li>

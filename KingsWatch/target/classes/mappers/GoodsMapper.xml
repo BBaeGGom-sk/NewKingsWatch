@@ -30,26 +30,36 @@
 		select * from tab_goods order by g_date desc
 	</select>
 
-<!-- 카테고리 여성(1)일때 여성상품리스트출력 -->	
-	<select id="goodsListWoman" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
-	</select>
-
-<!-- 카테고리 남성(2)일때 남성상품리스트출력  -->
-	<select id="goodsListMan" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
-	</select>
-
-<!-- 카테고리 공용(0)일때 공용상품리스트출력 -->	
-	<select id="goodsListPublic" resultType="GoodsVO">
-		select * from tab_goods where g_category=#{g_category} and g_brand=#{g_brand} order by g_date desc
-	</select>
-
 <!-- 상품갯수세기 -->
 	<select id="getAmount" resultType="Integer">
 		select count(g_id) from tab_goods
 	</select>
-	
+
+<!-- 브랜드 동적으로 갖고오기 -->
+	<sql id="brandIf">
+		<if test="g_brand !=null">
+			where g_brand= #{g_brand}
+		</if>
+	</sql>
+
+<!-- 동적으로 갖고온 where문 집어넣어서 리스트 구하기 -->
+	<select id="brand" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="brandIf"></include> 
+		<![CDATA[
+		 order by g_date desc
+		 ]]>
+	</select>
+
+<!-- 동적으로 갖고온(브랜드별) where문으로 해당 g_id 갯수 구하기 -->
+	<select id="getBrandAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="brandIf"></include>
+		order by g_date desc
+	</select>
+
 <!-- 카테고리와 브랜드 동적으로 갖고오기 -->
 	<sql id="categoryIf">
 		<if test="g_brand !=null">
@@ -57,7 +67,7 @@
 		</if>
 	</sql>
 
-<!-- 동적으로 갖고온 where문 집어넣기 -->
+<!-- 동적으로 갖고온 where문 집어넣어서 리스트 구하기 -->
 	<select id="category" resultType="GoodsVO">
 		<![CDATA[
 		select * from tab_goods 
@@ -85,7 +95,7 @@
 		</if>
 	</sql>
 
-<!-- 상품검색하기 위의 SQL문 더해줌 -->
+<!-- 동적으로 갖고온 키워드를 집어넣어서 해당 리스트 구하기 -->
 	<select id="search" resultType="GoodsVO">
 		<![CDATA[
 		select * from tab_goods 
@@ -102,7 +112,7 @@
 		<include refid="searchIf"></include>
 		order by g_date desc
 	</select>
-	
+
 <!-- 상품사진고유번호 가지고오기(자동증가위해서) -->
 	<select id="getPnum" resultType="Integer">
 		select max(p_num) from tab_pic
