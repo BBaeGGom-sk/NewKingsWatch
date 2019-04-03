@@ -6,9 +6,8 @@
 <mapper namespace="mapper.user">	<!-- UserDAOImpl의 NS -->
 
   <insert id="join">
-  <!-- insert into tab_user (u_id, u_pw, u_name, u_sex) values (#{u_id}, #{u_pw}, #{u_name}, #{u_sex} ) -->
-   insert into tab_user (u_id, u_pw, u_name, u_postnum, u_admain, u_adsub, u_addetail) values (#{u_id},#{u_pw},#{u_name},#{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}) 
-   <!-- insert into tab_user (u_id, u_pw, u_name, u_sex, u_postNum, u_admain, u_adsub, u_adDetail) values (#{u_id}, #{u_pw}, #{u_name}, #{u_sex}, #{u_postNum}, #{u_admain}, #{u_adsub}, #{u_adDetail}) --> 
+   insert into tab_user (u_id, u_pw, u_name, u_phone, u_postnum, u_admain, u_adsub, u_addetail, u_sex, u_age ,u_email) values (#{u_id},#{u_pw},#{u_name}, #{u_phone}, #{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}, #{u_sex}, #{u_age}, #{u_email})
+   <!-- insert into tab_user (u_id, u_pw, u_name, u_phone, u_sex, u_postNum, u_admain, u_adsub, u_adDetail, u_email) values (#{u_id}, #{u_pw}, #{u_name}, #{u_phone}, #{u_sex}, #{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}, #{u_email}) --> 
   </insert>
   
   

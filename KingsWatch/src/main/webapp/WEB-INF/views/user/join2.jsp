@@ -79,8 +79,7 @@
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 답변 &nbsp;</th>
-									<td><input id="hint_answer" name="hint_answer"
-										fw-filter="isFill" fw-label="비밀번호 확인시 답변" type="text" /></td>
+									<td><input id="hint_answer" name="hint_answer" type="text" autocomplete="off"/></td>
 								</tr>
 								<tr>
 									<th scope="row" id="nameTitle">이름 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
@@ -89,17 +88,19 @@
 								</tr>
 								
 								<tr>
-									<th scope="row">휴대전화 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
-									<td><select id="mobile1" name="mobile[]">
+									<th scope="row">휴대폰 번호 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
+									<td> 
+										<input id="u_phone"name="u_phone" type="text" autocomplete="off" hidden=""/>
+										<select id="u_phone1" name="u_phone1">
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
 											<option value="017">017</option>
 											<option value="018">018</option>
 											<option value="019">019</option>
-										</select>
-										-<input id="mobile2" name="mobile[]" maxlength="4" type="tel" autocomplete="off" />
-										-<input id="mobile3" name="mobile[]" maxlength="4" type="tel" autocomplete="off" />
+										</select> - <!-- 주문자 휴대전화 2 -->
+										<input id="u_phone2"name="u_phone2" maxlength="4" size="4"	type="tel" autocomplete="off"/>
+										<input id="u_phone3" name="u_phone3" maxlength="4"	size="4" type="tel" autocomplete="off"/>
 									</td>
 								</tr>
 								
@@ -139,38 +140,28 @@
 									<label for="u_sex">여자</label></td>
 								</tr>
 								<tr class="">
-									<th scope="row">생년월일 <img
-										src=/resources/img/ico_required.gif
-										id="icon_is_birthday" alt="필수" /></th>
-									<td><input id="birth_year" name="birth_year"  maxlength="4" value=""/> 년
+									<th scope="row">생년월일 <img	src=/resources/img/ico_required.gif 	id="icon_is_birthday" alt="필수" /></th>
+									<td>
+										<input id="u_age" name="u_age" type="text" autocomplete="off" hidden=""/>
+										<input id="birth_year" name="birth_year"  maxlength="4" value=""/> 년
 										<input id="birth_month" name="birth_month" maxlength="2" value=""/> 월
 										<input id="birth_day" name="birth_day"	maxlength="2" value=""  /> 일
-										<span class="birth displaynone">
-											<input	id="is_solar_calendar0" name="is_solar_calendar" value="T"
-											type="radio" checked="checked" />
-											<label	for="is_solar_calendar0">양력</label>
-											<input	id="is_solar_calendar1" name="is_solar_calendar" value="F"
-											type="radio" />
-											<label for="is_solar_calendar1">음력</label>
-										</span>
 									</td>
 								</tr>
 								
 								<tr>
 									<th scope="row">이메일 <img	src="/resources/img/ico_required.gif"	alt="필수" /></th>
-									<td><input id="email1" name="email1" class="mailId" value="" type="text" />
-									@<input id="email2" name="email2"	class="mailAddress" readonly="readonly" value="" type="text" />
-									<select	id="email3" >
+									<td>
+									<input id="u_email"name="u_email" type="text" autocomplete="off" hidden=""/>
+									<input id="u_email1" name="u_email1" class="mailId" value="" type="text" />
+									@<input id="u_email2" name="u_email2"	class="mailAddress" readonly="readonly" value="" type="text" />
+									<select	id="u_emailSelect" >
 											<option value="" selected="selected">- 이메일 선택 -</option>
+											<option value="gmail.com">gmail.com</option>
 											<option value="naver.com">naver.com</option>
 											<option value="daum.net">daum.net</option>
 											<option value="nate.com">nate.com</option>
-											<option value="hotmail.com">hotmail.com</option>
 											<option value="yahoo.com">yahoo.com</option>
-											<option value="empas.com">empas.com</option>
-											<option value="korea.com">korea.com</option>
-											<option value="dreamwiz.com">dreamwiz.com</option>
-											<option value="gmail.com">gmail.com</option>
 											<option value="etc">직접입력</option>
 									</select></td>
 								</tr>
@@ -210,8 +201,7 @@
 								
 								<tr class="">
 									<th scope="row">추천인 아이디&nbsp;</th>
-									<td><input id="reco_id" name="reco_id" fw-filter=""
-										fw-label="추천인 ID" fw-msg="" class="inputTypeText"
+									<td><input id="reco_id" name="reco_id"  class="inputTypeText"
 										placeholder="" value="" type="text" /></td>
 								</tr>
 								<tr class="">
@@ -404,8 +394,10 @@
 		
 
         $(document).ready(function() {
-            //[1] 기본값 설정
-            $("#extraInfo").hide(); //추가정보 숨기기
+          
+        	//추가정보 숨기기
+        	//[1] 기본값 설정
+            $("#extraInfo").hide(); 
 
             //[2] more...클릭시 보이기 및 숨기기
             $("#more").click(function() {
@@ -413,6 +405,48 @@
                 $("#extraInfo").show('fast'); //천천히 보이기
                 $(this).hide('fast');//more버튼 숨기기
             });
+            
+            //폰번호 3개 인풋에서 받은거 합치기
+            $("#u_phone3").blur(function mergePhone() {
+				var phone1 = document.getElementById("u_phone1").value;
+				var phone2 = document.getElementById("u_phone2").value;
+				var phone3 = document.getElementById("u_phone3").value;
+				var phone = phone1 + phone2 + phone3;
+				document.getElementById("u_phone").value = phone;
+			})
+            
+
+			// 이메일 관련
+			//셀렉트 변경시 값 바로 적용 및 직접입력 선택시 초기화 및 readonly 해제
+			$("#u_emailSelect").on("change",function() {
+				if (this.value == "etc") {
+				    $("#u_email2").val(" ");
+					$("#u_email2").removeAttr("readonly");
+				} else {
+					var langSelect = document.getElementById("u_emailSelect");
+				    // select element에서 선택된 option의 value가 저장된다.
+				    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+				    $("#u_email2").val(selectValue);
+					$("#u_email2").prop("readonly", true);
+				}
+				
+				//이메일 3개 인풋에서 받은거 합치기
+				var email1 =  document.getElementById("u_email1").value;
+				var email2 =  document.getElementById("u_email2").value;
+				var email =  email1 + "@" + email2;
+				document.getElementById("u_email").value = email;
+			})
+            
+			
+			//나이 계산
+			$("#birth_year").blur(function calAge() {
+				var birth_year = parseInt( document.getElementById("birth_year").value);
+				var now_year = new Date().getFullYear();
+				var age = now_year - birth_year +1;
+				document.getElementById("u_age").value = age;
+				
+			})
+
         });
 	</script>
 
