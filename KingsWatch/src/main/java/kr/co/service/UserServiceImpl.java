@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.dao.UserDAO;
-import kr.co.dao.UserDAOImpl;
 import kr.co.domain.UserDTO;
 
 @Service
@@ -41,9 +40,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(UserDTO dto) {
-
 		dao.update(dto);
-
 	}
 
 	@Override

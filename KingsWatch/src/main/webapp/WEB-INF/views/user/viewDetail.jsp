@@ -17,23 +17,26 @@
 	ID : <input name="u_id" readonly value="${login.u_id}"><br>
 	성별 : <input name="u_sex" readonly value="${login.u_sex}"><br>
 	나이 : <input name="u_age" readonly value="${login.u_age}"><br>
-	회원가입일 : <input name="u_regdate" readonly value="${login.u_regdate}"><br>
 	포인트 : <input name="u_point" readonly value="${login.u_point}"><br>
 	<hr>
 	PW : <input name="u_pw"  type="password" value="${login.u_pw}"><br>
 	이름 : <input name="u_name" value="${login.u_name}"><br>
 	폰번호 : <input name="u_phone" value="${login.u_phone}"><br>
-	나이 : <input name="u_age" value="${login.u_age}"><br>
-	주소 : <input name="u_address" value="${login.u_address}"><br>
-	E-Mail : <input name="u_email" value="${login.u_email}"><br>
-<input type="submit" value="수정">
+	E-Mail : <input name="u_email" value="${login.u_email}"><br> 
+	<%-- 주소 : <input name="u_address" value="${login.u_address}"><br> --%>
+	<%-- 회원가입일 : <input name="u_regdate" readonly value="${login.u_regdate}"><br> --%>
+<input type="submit" value="수정" id="revise">
 <a href="#">삭제</a> 
 
 </form>
 
 
 
-
+<script type="text/javascript">
+$("#revise").on(function() {
+		alert("회원정보를 수정했습니다.");
+	}
+</script>
 
 
 </body>

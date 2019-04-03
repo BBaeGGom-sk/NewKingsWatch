@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public void update(UserDTO dto) {
 		// TODO Auto-generated method stub
-		System.out.println("DAOImple update메서드");
+		System.out.println("DAOImple update메서드 현재 dto는 "+dto);
 		sqlSession.update(NS+".update", dto);
 	}
 

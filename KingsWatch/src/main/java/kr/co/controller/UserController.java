@@ -95,12 +95,10 @@ public String updateui(String id, Model model) {
 	
 	
 	
-	//회원정보 상세보기
+	//회원이 자기 정보 상세보기.  보안을 위해 로그인 되어있을때만 접근가능하게 session사용.
+	//회원정보를 수정할때는 다시한번 비밀번호 요구 필요. 아, 할필요없이 수정페이지에서 확인하도록 하면 되겠다.
 	@RequestMapping("/viewDetail")
-	public String viewDetail(HttpSession session, Model model) {
-		System.out.println("회원정보 상세보기로 가라");
-		System.out.println("userId = " + session.getId());
-		model.addAttribute("dto", service.viewDetail(session.getId()));
+	public String viewDetail() {
 
 		return "user/viewDetail";	
 	}
@@ -109,10 +107,10 @@ public String updateui(String id, Model model) {
 	//회원정보 수정 실행
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(UserDTO dto) {
-		
+		System.out.println("회원정보 수정 dto : "+dto);
 		service.update(dto);
 		
-		return "redirect:/user/viewDetail";
+		return "redirect:/";
 	}
 	
 	
