@@ -153,7 +153,7 @@ table{
 			});
 			
 			$("#order").click(function() {
-				$("form").attr("action","/order/orderPage2");
+				$("form").attr("action","/order/orderPage");
 				$("form").attr("method","get");
 				$("form").submit();
 			});
