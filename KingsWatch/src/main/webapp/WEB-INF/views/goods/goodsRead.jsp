@@ -92,10 +92,10 @@ table{
 						<p>${goodsRead.g_name}</p>
 					<label for="g_price">가격</label>
 						<p>${goodsRead.g_price}</p>
-					<label for="count">수량</label>
+					<label for="o_quantity">수량</label>
 					<p>
 						<button type="button" class="plus">+</button>
-							<input type="number" class="numBox" min="1" value="1" readonly="readonly" style="align-items: center; display: compact;">
+							<input name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly" style="align-items: center; ">
 	 					<button type="button" class="minus">-</button>
 	 				</p>
 					<label for="g_desc">설명</label>
@@ -103,7 +103,6 @@ table{
 					<button class="form-control">구매하기</button>
 					<button class="form-control">카트담기</button>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -135,20 +134,21 @@ table{
 		
 			$(".plus").click(function() {
 				var num = $(".numBox").val();
-				alert(num);
 				var plusNum = Number(num) + 1;
 				$(".numBox").val(plusNum);
-				alert(plusNum);
 			});
 			  
 			$(".minus").click(function() {
 				var num = $(".numBox").val();
-				alert(num);
 				var minusNum = Number(num) - 1;
-				$(".numBox").val(minusNum);
-				alert(minusNum);
-			});
 
+				if(minusNum <= 0 ) {
+				    $(".numBox").val(num);
+				 } else {
+				    $(".numBox").val(minusNum);          
+				 }
+			});
+			
 			goodsReadPicDbGet(g_id);
 		});
 		
