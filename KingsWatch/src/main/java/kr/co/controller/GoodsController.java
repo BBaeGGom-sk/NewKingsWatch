@@ -27,6 +27,7 @@ import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.PageMaker;
+import kr.co.domain.SearchCriteria;
 import kr.co.service.GoodsService;
 import kr.co.utils.MediaUtils;
 
@@ -170,6 +171,20 @@ public class GoodsController {
 	public String update(GoodsVO vo) {
 		service.goodsUpdate(vo);
 		return "redirect:/goods/goodsList";
+	}
+	
+	@RequestMapping("/goodsSearch") // 검색 기능
+	public String goodsSearch(SearchCriteria cri, Model model) {
+		// 페이징처리 시작
+		List<GoodsVO> searchGoodsList = service.search(cri);
+		int amount = service.getSearchAmount(cri);
+		PageMaker pm = new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("searchGoodsList", searchGoodsList);
+		model.addAttribute("pm", pm);
+		// 페이징처리 끝
+		return "goods/goodsSearch";
 	}
 	
 

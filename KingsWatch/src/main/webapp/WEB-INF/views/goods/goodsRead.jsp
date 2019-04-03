@@ -100,8 +100,8 @@ table{
 	 				</p>
 					<label for="g_desc">설명</label>
 						<p>${goodsRead.g_desc}</p>
-					<button class="form-control">구매하기</button>
-					<button class="form-control">카트담기</button>
+					<button class="form-control" id="order" name="order'">구매하기</button>
+					<button class="form-control" id="cart" name="cart">카트담기</button>
 				</div>
 			</div>
 		</div>
@@ -126,27 +126,36 @@ table{
 
 			var g_id = "${goodsRead.g_id}";
 			
+			// 상품수정버튼
 			$("#goodsUpdate").click(function() {
 				$("form").attr("action","goodsUpdate");
 				$("form").attr("method","get");
 				$("form").submit();
 			});
 		
+			// 수량증가버튼
 			$(".plus").click(function() {
 				var num = $(".numBox").val();
 				var plusNum = Number(num) + 1;
 				$(".numBox").val(plusNum);
 			});
-			  
+			 
+			// 수량감소버튼
 			$(".minus").click(function() {
 				var num = $(".numBox").val();
 				var minusNum = Number(num) - 1;
 
 				if(minusNum <= 0 ) {
 				    $(".numBox").val(num);
-				 } else {
+				} else {
 				    $(".numBox").val(minusNum);          
-				 }
+				}
+			});
+			
+			$("#order").click(function() {
+				$("form").attr("action","/order/orderPage2");
+				$("form").attr("method","get");
+				$("form").submit();
 			});
 			
 			goodsReadPicDbGet(g_id);

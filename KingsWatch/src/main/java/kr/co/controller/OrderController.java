@@ -23,8 +23,14 @@ public class OrderController {
 	public void selectById(String u_id,Model model) {
 		UserDTO dto = service.selectById(u_id);
 		// u_id 파라미터 꼭 다시 돌려놓기
-		model.addAttribute("dto",dto);
-		
+		model.addAttribute("dto",dto);	
+	}
+
+	@RequestMapping(value="/orderPage2",method=RequestMethod.GET)
+	public void orderInfo(String u_id,Model model) {
+		UserDTO dto = service.selectById(u_id);
+		// u_id 파라미터 꼭 다시 돌려놓기
+		model.addAttribute("dto",dto);	
 	}
 }
 

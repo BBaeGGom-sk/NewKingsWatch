@@ -11,6 +11,7 @@ import kr.co.dao.GoodsDAO;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.SearchCriteria;
 
 @Service
 @Transactional
@@ -41,6 +42,18 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsVO> goodsListPublic(CategoryCriteria cri) {
 		// 브랜드에 따른 공용상품리스트 페이징처리
 		return dao.goodsListPublic(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> search(SearchCriteria cri) {
+		// 검색에 따른 페이징
+		return dao.search(cri);
+	}
+	
+	@Override
+	public int getSearchAmount(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return dao.getSearchAmount(cri);
 	}
 	
 	@Override

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.SearchCriteria;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -48,6 +49,19 @@ public class GoodsDAOImpl implements GoodsDAO {
 		// 브랜드에 따른 공용상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
 		return session.selectList(NS+".goodsListPublic", cri, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> search(SearchCriteria cri) {
+		// 검색에 따른 페이징
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".search", cri, rb);
+	}
+	
+	@Override
+	public int getSearchAmount(SearchCriteria cri) {
+		// 검색에 따른 상품갯수 구하기
+		return session.selectOne(NS+".getSearchAmount", cri);
 	}
 	
 	@Override

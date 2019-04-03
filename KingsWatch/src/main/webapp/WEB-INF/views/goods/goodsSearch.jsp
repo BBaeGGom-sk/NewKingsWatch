@@ -185,7 +185,7 @@ footer#footer ul li {
 	 <hr>
 	 <div class=" xans-element- xans-product xans-product-listnormal">
 		 <ul class="prdList column4">
-		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
+		 	<c:forEach items="${searchGoodsList}" var="list"  varStatus="status">
 			 	<li class="item xans-record-">
 		    		<div class="thumbnail">
 		                <div class="form-group">
@@ -219,15 +219,15 @@ footer#footer ul li {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsList${pm.makeQuery(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsList${pm.makeQuery(idx)}">${idx}</a></li>
+						href="/goods/goodsSearch${pm.makeSearch(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsList${pm.makeQuery(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -235,7 +235,7 @@ footer#footer ul li {
 	</div> <!-- container 끝!! -->
 	
 	<div class="form-group" style="display: inline-block; position: absolute;" >
-		 <form method="get" action="/goods/goodsSearch">
+		 <form target="_blank" method="get" action="/goods/goodsSearch">
 			<div class="col-xs-3 col-sm-2" >
 				<select class="form-control" id="ssel" name="searchType">
 					<option disabled>검색 기준</option>
@@ -271,7 +271,7 @@ footer#footer ul li {
 		
 		// 반복문사용
 		// # : 구분자
-		<c:forEach items="${goodsList}" var="pic">
+		<c:forEach items="${searchGoodsList}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
 		

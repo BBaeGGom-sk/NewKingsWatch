@@ -128,7 +128,6 @@ private Criteria cri;
 		
 			return uc.toUriString();
 			//이거 스프링에서만 지원되는거임ㅇㅇ uc
-			
 		}
 	
 	public String makeCategory(int page) {
