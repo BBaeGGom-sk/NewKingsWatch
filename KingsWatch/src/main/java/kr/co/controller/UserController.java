@@ -47,7 +47,7 @@ public class UserController {
 	
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {
+	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {	//요파라미터들이 어디서 온거지?
 		String returnURL = "";
 		if(session.getAttribute("login")!=null) {	//기존에 login이란 세션값이 존재한다면
 			System.out.println("기존의 세션값을 제거합니다.");
@@ -99,17 +99,19 @@ public String updateui(String id, Model model) {
 	//회원정보를 수정할때는 다시한번 비밀번호 요구 필요. 아, 할필요없이 수정페이지에서 확인하도록 하면 되겠다.
 	@RequestMapping("/viewDetail")
 	public String viewDetail() {
-
 		return "user/viewDetail";	
 	}
 	
 	
 	//회원정보 수정 실행
 	@RequestMapping(value="update", method=RequestMethod.POST)
-	public String update(UserDTO dto) {
-		System.out.println("회원정보 수정 dto : "+dto);
-		service.update(dto);
-		
+	public String update(UserDTO userDTO, HttpSession session) {
+		System.out.println("<<컨트롤러 userDTO>> : "+userDTO);
+		System.out.println("<<컨트롤러 session>> : "+session.getAttribute("login"));
+		UserDTO dto = service.update(userDTO, session);
+		System.out.println("<<컨트롤러의 service.update실행후 userDTO>> : "+userDTO);
+		System.out.println("<<컨트롤러의 service.update 실행후 session>> : "+session.getAttribute("login"));
+		session.setAttribute("login", dto);
 		return "redirect:/";
 	}
 	

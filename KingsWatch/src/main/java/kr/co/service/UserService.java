@@ -14,7 +14,7 @@ public interface UserService {
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);
 	public UserDTO updateui(String id);
-	public void update(UserDTO dto);
+	public UserDTO update(UserDTO userDTO, HttpSession session);
 	public void delete(String id);
 	
 }

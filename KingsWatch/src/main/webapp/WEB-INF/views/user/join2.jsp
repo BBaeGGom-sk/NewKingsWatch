@@ -152,7 +152,7 @@
 								<tr>
 									<th scope="row">이메일 <img	src="/resources/img/ico_required.gif"	alt="필수" /></th>
 									<td>
-									<input id="u_email"name="u_email" type="text" autocomplete="off" hidden=""/>
+									<input id="u_email" name="u_email" type="text" autocomplete="off" hidden=""/>
 									<input id="u_email1" name="u_email1" class="mailId" value="" type="text" />
 									@<input id="u_email2" name="u_email2"	class="mailAddress" readonly="readonly" value="" type="text" />
 									<select	id="u_emailSelect" >

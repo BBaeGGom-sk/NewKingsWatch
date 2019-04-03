@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO viewDetail(String id) {
+		
 		return dao.viewDetail(id);
 	}
 
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(UserDTO dto) {
-		dao.update(dto);
+	public UserDTO update(UserDTO userDTO, HttpSession session) {
+		return dao.update(userDTO, session);
 	}
 
 	@Override

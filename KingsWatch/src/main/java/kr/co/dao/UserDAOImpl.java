@@ -3,6 +3,7 @@ package kr.co.dao;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -44,10 +45,12 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public void update(UserDTO dto) {
+	public UserDTO update(UserDTO dto, HttpSession session) {
 		// TODO Auto-generated method stub
-		System.out.println("DAOImple update메서드 현재 dto는 "+dto);
-		sqlSession.update(NS+".update", dto);
+		System.out.println("=====DAOImple update메서드===== 세션 :  "+ session.getAttribute("login"));	//안바뀜
+		System.out.println("=====DAOImple update메서드===== dto :  "+ dto);		//바뀜
+		sqlSession.update(NS+".update", session.getAttribute("login"));
+		return dto;	//바뀐 dto를 리턴.   이거하기전에 dto를 session에 넣고 session을 리턴하면 될듯.
 	}
 
 	@Override

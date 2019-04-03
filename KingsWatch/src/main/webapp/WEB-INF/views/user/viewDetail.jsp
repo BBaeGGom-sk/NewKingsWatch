@@ -29,7 +29,7 @@
 <a href="#">삭제</a> 
 
 </form>
-
+		
 
 
 <script type="text/javascript">
