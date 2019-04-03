@@ -92,6 +92,8 @@ table{
 						<p>${goodsRead.g_name}</p>
 					<label for="g_price">가격</label>
 						<p>${goodsRead.g_price}</p>
+					<label for="g_price">할인가격</label>
+						<p id="priceSale"></p>
 					<label for="o_quantity">수량</label>
 					<p>
 						<button type="button" class="plus">+</button>
@@ -125,6 +127,18 @@ table{
 		$(document).ready(function() {
 
 			var g_id = "${goodsRead.g_id}";
+			
+			var g_price= ${goodsRead.g_price};
+			var g_sale= ${goodsRead.g_sale};
+			
+			// 할인가격구하기
+			function salePrice() {
+				var g_persent = g_sale/100;
+				var g_salePrice= g_price-(g_price*g_persent);
+				$("#priceSale").text(g_salePrice);
+			}
+
+			salePrice();
 			
 			// 상품수정버튼
 			$("#goodsUpdate").click(function() {

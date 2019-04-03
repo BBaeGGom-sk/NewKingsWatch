@@ -189,9 +189,11 @@ footer#footer ul li {
 			 	<li class="item xans-record-">
 		    		<div class="thumbnail">
 		                <div class="form-group">
+		                <a href="/goods/goodsRead?g_id=${list.g_id}" >
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
-		        	 	</div>
+		                </a>
+		                </div>
 		    		</div>
 		    		<div class="description">
 		        		<p class="color displaynone"></p>
@@ -201,7 +203,7 @@ footer#footer ul li {
 		            	</p>
 					<div class="line"></div>
 						<p class="price"><span class="displaynone">${list.g_price }</span></p>
-						<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
+						<p class="price sale displaynone">할인율 : ${list.g_sale}%</p>
 		        	<div class="status">
 		            <div class="icon">      </div>
 		        	</div>

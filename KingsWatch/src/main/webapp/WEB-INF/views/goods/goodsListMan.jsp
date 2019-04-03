@@ -22,25 +22,8 @@ body {
 	margin: 0;
 }
 
-ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-
-div#root {
-	width: 90%;
-	margin: 0 auto;
-}
-
-header#header {
-	font-size: 60px;
-	padding: 20px 0;
-}
-
-header#header h1 a {
-	color: #000;
-	font-weight: bold;
+div.description {
+	text-align: center;
 }
 
 nav#nav {
@@ -49,34 +32,13 @@ nav#nav {
 }
 
 nav#nav ul li {
-	display: inline-block; /* margin-left:10px;  */
-}
-
-section#container {
-	padding: 20px 0;
-	border-top: 2px solid #eee;
-	border-bottom: 2px solid #eee;
-}
-
-section#container::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-div#container_box {
-	float: right;
-	width: calc(100% - 200px - 20px);
+	display: inline-block;
 }
 
 ul, ol, li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-ul.goodsMenu {
-	
 }
 
 ul.goodsMenu>li {
@@ -117,22 +79,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	background: #fff;
 }
 
-
- section#content ul li { display:inline-block; margin:10px; }
- section#content div.goodsThumb img { width:200px; height:200px; }
- section#content div.goodsName { padding:10px 0; text-align:center; }
- section#content div.goodsName a { color:#000; }
-
-
-footer#footer {
-	background: #f9f9f9;
-	padding: 20px;
-}
-
-footer#footer ul li {
-	display: inline-block;
-	margin-right: 10px;
-}
+ section#content ul li { display:inline-block; }
+ 
+ .fadding-photo:hover { 
+ 	opacity:0.4;
+ }
 </style>
 <title>Insert title here</title>
 </head>
@@ -176,33 +127,38 @@ footer#footer ul li {
 
 	<section id="content">
 	  	<label for="goodsListMan">리스트입니다.</label>
-		<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		<div class="row">
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		</div>
 	 <hr>
+	 <div id="container_box">
 		 <ul>
 		 	<c:forEach items="${goodsListMan}" var="list"  varStatus="status">
 			 	<li>
-		    		<div class="thumbnail">
+		    		<div class="goodsThumb">
 		                <div class="form-group">
+		                <a href="/goods/goodsRead?g_id=${list.g_id}" >
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
-		        	 	</div>
+		                </a>
+		                </div>
 		    		</div>
 		    		<div class="description">
-		        		<p class="color displaynone"></p>
-		     			<p class="name">
+		     			<p>
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span class="title displaynone"></span> ${list.g_name}</a>
+		            		<span>${list.g_name}</span></a>
 		            	</p>
-					<div class="line"></div>
-						<p class="price ">${list.g_price }<span class="displaynone"></span></p>
-						<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
-		        	<div class="status">
-		            <div class="icon">      </div>
+					<div></div>
+						<p class="price"><span>${list.g_price }</span></p>
+						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
+		        	<div>
+		            <div></div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
+		</div>
 	</section>
 	
 	  
@@ -231,7 +187,7 @@ footer#footer ul li {
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
-				<img src="{{imgsrc}}">
+				<img src="{{imgsrc}}" class="fadding-photo">
 			</span>
 		</li>
 	</script>
