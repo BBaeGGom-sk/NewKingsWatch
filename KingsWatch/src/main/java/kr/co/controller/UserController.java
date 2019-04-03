@@ -55,12 +55,10 @@ public class UserController {
 		}
 		
 		// 로그인이 성공하면 UsersVO 객체를 반환함.
-		System.out.println("<Controller> loginCheck 서비스호출전: " + userDTO);
         UserDTO dto = service.getUser(userDTO);	//mapper id=loginCheck 한 결과 반환.
-        System.out.println("<Controller> loginCheck 서비스호출후:" + dto);
         if ( dto != null ){ // 로그인 성공
-        	System.out.println("로그인 성공");
             session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.
+        	System.out.println("<컨트롤러> 로그인 성공 세션값 = "+session.getAttribute("login"));
             returnURL = "redirect:/"; // 로그인 성공시 메인페이지로 이동하고
         }else { // 로그인에 실패한 경우
         	System.out.println("로그인 실패");
@@ -106,12 +104,10 @@ public String updateui(String id, Model model) {
 	//회원정보 수정 실행
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public String update(UserDTO userDTO, HttpSession session) {
-		System.out.println("<<컨트롤러 userDTO>> : "+userDTO);
-		System.out.println("<<컨트롤러 session>> : "+session.getAttribute("login"));
+		
 		UserDTO dto = service.update(userDTO, session);
-		System.out.println("<<컨트롤러의 service.update실행후 userDTO>> : "+userDTO);
-		System.out.println("<<컨트롤러의 service.update 실행후 session>> : "+session.getAttribute("login"));
 		session.setAttribute("login", dto);
+		System.out.println("세션값 성공적 변경 : "+session.getAttribute("login"));
 		return "redirect:/";
 	}
 	

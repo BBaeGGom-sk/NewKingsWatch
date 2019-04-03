@@ -47,10 +47,8 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserDTO update(UserDTO dto, HttpSession session) {
 		// TODO Auto-generated method stub
-		System.out.println("=====DAOImple update메서드===== 세션 :  "+ session.getAttribute("login"));	//안바뀜
-		System.out.println("=====DAOImple update메서드===== dto :  "+ dto);		//바뀜
-		sqlSession.update(NS+".update", session.getAttribute("login"));
-		return dto;	//바뀐 dto를 리턴.   이거하기전에 dto를 session에 넣고 session을 리턴하면 될듯.
+		sqlSession.update(NS+".update", dto);
+		return dto;	//바뀐 dto를 리턴. 
 	}
 
 	@Override
