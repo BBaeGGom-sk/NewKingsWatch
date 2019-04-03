@@ -183,7 +183,7 @@
 					
 					<div class="boardWrite typeAddinfo"  align="center" id="extraInfo">
 						<table border="1" summary="">
-							<caption>회원 추가정보</caption>
+							<caption>회원 추가정보</caption> 
 							<tbody>
 								
 								
