@@ -28,13 +28,13 @@ public class OrderController {
 	@RequestMapping(value="/orderPage",method=RequestMethod.GET)
 	public void orderPage(String u_id,Model model) {
 		UserDTO dto = service.selectById(u_id);
-		model.addAttribute("dto",dto);
-		
+		// u_id 파라미터 꼭 다시 돌려놓기
+		model.addAttribute("dto",dto);	
 	}
 	
 	@RequestMapping(value="/cartPage",method=RequestMethod.GET)
 	public void cartPage(HttpSession session,Model model) {
-		/*
+
 		// 로그인세션으로 userDTO 받아서 
 		UserDTO dto = (UserDTO) session.getAttribute("login");
 		String u_id = dto.getU_id();
@@ -50,7 +50,7 @@ public class OrderController {
 		}
 		// 화면에 뿌려주기
 		model.addAttribute("goodsList", goodsList);
-		*/
+
 	}
 }
 

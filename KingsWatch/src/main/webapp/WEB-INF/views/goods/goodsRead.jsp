@@ -92,6 +92,8 @@ table{
 						<p>${goodsRead.g_name}</p>
 					<label for="g_price">가격</label>
 						<p>${goodsRead.g_price}</p>
+					<label for="g_price">할인가격</label>
+						<p id="priceSale"></p>
 					<label for="o_quantity">수량</label>
 					<p>
 						<button type="button" class="plus">+</button>
@@ -100,8 +102,8 @@ table{
 	 				</p>
 					<label for="g_desc">설명</label>
 						<p>${goodsRead.g_desc}</p>
-					<button class="form-control">구매하기</button>
-					<button class="form-control">카트담기</button>
+					<button class="form-control" id="order" name="order'">구매하기</button>
+					<button class="form-control" id="cart" name="cart">카트담기</button>
 				</div>
 			</div>
 		</div>
@@ -126,27 +128,48 @@ table{
 
 			var g_id = "${goodsRead.g_id}";
 			
+			var g_price= ${goodsRead.g_price};
+			var g_sale= ${goodsRead.g_sale};
+			
+			// 할인가격구하기
+			function salePrice() {
+				var g_persent = g_sale/100;
+				var g_salePrice= g_price-(g_price*g_persent);
+				$("#priceSale").text(g_salePrice);
+			}
+
+			salePrice();
+			
+			// 상품수정버튼
 			$("#goodsUpdate").click(function() {
 				$("form").attr("action","goodsUpdate");
 				$("form").attr("method","get");
 				$("form").submit();
 			});
 		
+			// 수량증가버튼
 			$(".plus").click(function() {
 				var num = $(".numBox").val();
 				var plusNum = Number(num) + 1;
 				$(".numBox").val(plusNum);
 			});
-			  
+			 
+			// 수량감소버튼
 			$(".minus").click(function() {
 				var num = $(".numBox").val();
 				var minusNum = Number(num) - 1;
 
 				if(minusNum <= 0 ) {
 				    $(".numBox").val(num);
-				 } else {
+				} else {
 				    $(".numBox").val(minusNum);          
-				 }
+				}
+			});
+			
+			$("#order").click(function() {
+				$("form").attr("action","/order/orderPage");
+				$("form").attr("method","get");
+				$("form").submit();
 			});
 			
 			goodsReadPicDbGet(g_id);

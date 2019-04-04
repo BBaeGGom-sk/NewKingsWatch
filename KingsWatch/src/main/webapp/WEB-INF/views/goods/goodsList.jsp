@@ -22,29 +22,8 @@ body {
 	margin: 0;
 }
 
-ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-
-div#root {
-	width: 90%;
-	margin: 0 auto;
-}
-
 div.description {
 	text-align: center;
-}
-
-header#header {
-	font-size: 60px;
-	padding: 20px 0;
-}
-
-header#header h1 a {
-	color: #000;
-	font-weight: bold;
 }
 
 nav#nav {
@@ -56,31 +35,10 @@ nav#nav ul li {
 	display: inline-block;
 }
 
-section#container {
-	padding: 20px 0;
-	border-top: 2px solid #eee;
-	border-bottom: 2px solid #eee;
-}
-
-section#container::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-div#container_box {
-	float: right;
-	width: calc(100% - 200px - 20px);
-}
-
 ul, ol, li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-ul.goodsMenu {
-	
 }
 
 ul.goodsMenu>li {
@@ -121,22 +79,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	background: #fff;
 }
 
-
- section#content ul li { display:inline-block; margin:10px; }
- section#content div.goodsThumb img { width:200px; height:200px; }
- section#content div.goodsName { padding:10px 0; text-align:center; }
- section#content div.goodsName a { color:#000; }
-
-
-footer#footer {
-	background: #f9f9f9;
-	padding: 20px;
-}
-
-footer#footer ul li {
-	display: inline-block;
-	margin-right: 10px;
-}
+ section#content ul li { display:inline-block; }
+ 
+ .fadding-photo:hover { 
+ 	opacity:0.4;
+ }
 </style>
 <title>Insert title here</title>
 </head>
@@ -153,20 +100,20 @@ footer#footer ul li {
 	  <ul class="goodsMenu">
 	  	<li class="menu0"><a href="/goods/goodsList">메인으로</a>
 	  	</li>
-	  	<li class="menu1"><a href="">로즈몽</a>
+	  	<li class="menu1"><a href="/goods/goodsListBrand?g_brand=로즈몽">로즈몽</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=로즈몽">여성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=로즈몽">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu2"><a href="">세이코</a>
+	  	<li class="menu2"><a href="/goods/goodsListBrand?g_brand=세이코">세이코</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=세이코">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=세이코">남성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=세이코">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu3"><a href="">아르마니</a>
+	  	<li class="menu3"><a href="/goods/goodsListBrand?g_brand=아르마니">아르마니</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=아르마니">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=아르마니">남성</a></li>
@@ -181,35 +128,36 @@ footer#footer ul li {
 
 	  	<label for="goodsList">리스트입니다.</label>
 		<div class="row">
-			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>		
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		</div>		
 	 <hr>
-	 <div class=" xans-element- xans-product xans-product-listnormal">
-		 <ul class="prdList column4">
+	 <div id="container_box">
+		 <ul>
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
-			 	<li class="item xans-record-">
-		    		<div class="thumbnail">
+			 	<li>
+		    		<div class="goodsThumb">
 		                <div class="form-group">
+		                <a href="/goods/goodsRead?g_id=${list.g_id}" >
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
+		                </a>
 		        	 	</div>
 		    		</div>
 		    		<div class="description">
-		        		<p class="color displaynone"></p>
-		     			<p class="g_name">
+		     			<p>
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span class="title displaynone">${list.g_name}</span></a>
+		            		<span>${list.g_name}</span></a>
 		            	</p>
-					<div class="line"></div>
-						<p class="price"><span class="displaynone">${list.g_price }</span></p>
-						<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
-		        	<div class="status">
-		            <div class="icon">      </div>
+					<div></div>
+						<p class="price"><span>${list.g_price}</span></p>
+						<p class="priceSale">할인율 : ${list.g_sale}%</p>
+		        	<div>
+		            	<div></div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
-	</div>
 	</div>
 	</section>
 
@@ -235,7 +183,7 @@ footer#footer ul li {
 	</div> <!-- container 끝!! -->
 	
 	<div class="form-group" style="display: inline-block; position: absolute;" >
-		 <form target="_blank" method="get" action="/goods/goodsSearch">
+		 <form method="get" action="/goods/goodsSearch">
 			<div class="col-xs-3 col-sm-2" >
 				<select class="form-control" id="ssel" name="searchType">
 					<option disabled>검색 기준</option>
@@ -256,7 +204,7 @@ footer#footer ul li {
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
-				<img src="{{imgsrc}}">
+				<img src="{{imgsrc}}" class="fadding-photo">
 			</span>
 		</li>
 	</script>

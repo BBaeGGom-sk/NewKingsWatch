@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.dao.GoodsDAO;
+import kr.co.domain.BrandCriteria;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.SearchCriteria;
 
 @Service
 @Transactional
@@ -23,6 +25,24 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsVO> goodsList(Criteria cri) {
 		// 상품리스트 페이징처리
 		return dao.goodsList(cri);
+	}
+	
+	@Override
+	public int getAmount() {
+		// 전체상품갯수구하기
+		return dao.getAmount();
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrand(BrandCriteria cri) {
+		// 브랜드별 상품 전체리스트 페이징
+		return dao.goodsListBrand(cri);
+	}
+	
+	@Override
+	public int getBrandAmount(BrandCriteria cri) {
+		// 브랜드별 상품 갯수구하기
+		return dao.getBrandAmount(cri);
 	}
 	
 	@Override
@@ -44,15 +64,21 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public int getAmount() {
-		// TODO Auto-generated method stub
-		return dao.getAmount();
+	public int getCategoryAmount(CategoryCriteria cri) {
+		// 브랜드+카테고리별 상품 갯수구하기
+		return dao.getCategoryAmount(cri);
 	}
 	
 	@Override
-	public int getCategoryAmount(CategoryCriteria cri) {
-		// TODO Auto-generated method stub
-		return dao.getCategoryAmount(cri);
+	public List<GoodsVO> search(SearchCriteria cri) {
+		// 검색에 따른 페이징
+		return dao.search(cri);
+	}
+	
+	@Override
+	public int getSearchAmount(SearchCriteria cri) {
+		// 검색목록 상품 갯수구하기
+		return dao.getSearchAmount(cri);
 	}
 	
 	@Override

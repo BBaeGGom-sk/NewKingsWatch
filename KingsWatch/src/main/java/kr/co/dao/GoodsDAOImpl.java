@@ -10,9 +10,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.BrandCriteria;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.SearchCriteria;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -30,36 +32,62 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	@Override
+	public int getAmount() {
+		// 전체페이지수구하기
+		return session.selectOne(NS+".getAmount");
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrand(BrandCriteria cri) {
+		// 브랜드별 상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".brand", cri, rb);
+	}
+	
+	@Override
+	public int getBrandAmount(BrandCriteria cri) {
+		// 브랜드별 상품 전체갯수구하기
+		return session.selectOne(NS+".getBrandAmount", cri);
+	}
+	
+	@Override
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri) {
 		// 브랜드에 따른 남성상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListMan", cri, rb);
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public List<GoodsVO> goodsListWoman(CategoryCriteria cri) {
 		// 브랜드에 따른 여성상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListWoman", cri, rb);
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public List<GoodsVO> goodsListPublic(CategoryCriteria cri) {
 		// 브랜드에 따른 공용상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListPublic", cri, rb);
-	}
-	
-	@Override
-	public int getAmount() {
-		// 페이지수구하기
-		return session.selectOne(NS+".getAmount");
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public int getCategoryAmount(CategoryCriteria cri) {
-		// TODO Auto-generated method stub
+		// 카테고리+브랜드별 상품 전체갯수 구하기
 		return session.selectOne(NS+".getCategoryAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> search(SearchCriteria cri) {
+		// 검색에 따른 페이징
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".search", cri, rb);
+	}
+	
+	@Override
+	public int getSearchAmount(SearchCriteria cri) {
+		// 검색에 따른 상품갯수 구하기
+		return session.selectOne(NS+".getSearchAmount", cri);
 	}
 
 	@Override

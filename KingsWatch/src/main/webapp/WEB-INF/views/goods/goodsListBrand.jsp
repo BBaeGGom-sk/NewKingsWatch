@@ -22,8 +22,29 @@ body {
 	margin: 0;
 }
 
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+div#root {
+	width: 90%;
+	margin: 0 auto;
+}
+
 div.description {
 	text-align: center;
+}
+
+header#header {
+	font-size: 60px;
+	padding: 20px 0;
+}
+
+header#header h1 a {
+	color: #000;
+	font-weight: bold;
 }
 
 nav#nav {
@@ -35,10 +56,31 @@ nav#nav ul li {
 	display: inline-block;
 }
 
+section#container {
+	padding: 20px 0;
+	border-top: 2px solid #eee;
+	border-bottom: 2px solid #eee;
+}
+
+section#container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+div#container_box {
+	float: right;
+	width: calc(100% - 200px - 20px);
+}
+
 ul, ol, li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+
+ul.goodsMenu {
+	
 }
 
 ul.goodsMenu>li {
@@ -79,17 +121,27 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	background: #fff;
 }
 
- section#content ul li { display:inline-block; }
- 
- .fadding-photo:hover { 
- 	opacity:0.4;
- }
+
+ section#content ul li { display:inline-block; margin:10px; }
+ section#content div.goodsThumb img { width:200px; height:200px; }
+ section#content div.goodsName { padding:10px 0; text-align:center; }
+ section#content div.goodsName a { color:#000; }
+
+
+footer#footer {
+	background: #f9f9f9;
+	padding: 20px;
+}
+
+footer#footer ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-
-	alert("${pm.cri}");
+  
 	<div class="container">
 	  <div class="row">
 	  
@@ -126,16 +178,16 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  
 
 	<section id="content">
-	  	<label for="goodsListMan">리스트입니다.</label>
+
+	  	<label for="goodsList">리스트입니다.</label>
 		<div class="row">
-			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
-		</div>	
-	<hr>
-	<div id="container_box">
-		 <ul>
-		 	<c:forEach items="${goodsListWoman}" var="list"  varStatus="status">
-			 	<li>
-		    		<div class="goodsThumb">
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>		
+	 <hr>
+	 <div class=" xans-element- xans-product xans-product-listnormal">
+		 <ul class="prdList column4">
+		 	<c:forEach items="${goodsListBrand}" var="list"  varStatus="status">
+			 	<li class="item xans-record-">
+		    		<div class="thumbnail">
 		                <div class="form-group">
 		                <a href="/goods/goodsRead?g_id=${list.g_id}" >
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
@@ -144,50 +196,69 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		                </div>
 		    		</div>
 		    		<div class="description">
-		     			<p>
+		        		<p class="color displaynone"></p>
+		     			<p class="g_name">
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span>${list.g_name}</span></a>
+		            		<span class="title displaynone">${list.g_name}</span></a>
 		            	</p>
-					<div></div>
-						<p class="price"><span>${list.g_price }</span></p>
-						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
-		        	<div>
-		            <div></div>
+					<div class="line"></div>
+						<p class="price"><span class="displaynone">${list.g_price }</span></p>
+						<p class="price sale displaynone">할인율 : ${list.g_sale}%</p>
+		        	<div class="status">
+		            <div class="icon">      </div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
 	</div>
+	</div>
 	</section>
-	
-	  
+
 	 </div> <!-- row 끝 -->
 	 
 	 <!-- 페이징!! -->
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsListWoman${pm.makeCategory(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsListWoman${pm.makeCategory(idx)}">${idx}</a></li>
+						href="/goods/goodsListBrand${pm.makeBrand(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsListWoman${pm.makeCategory(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
 	 
 	</div> <!-- container 끝!! -->
 	
+	<div class="form-group" style="display: inline-block; position: absolute;" >
+		 <form method="get" action="/goods/goodsSearch">
+			<div class="col-xs-3 col-sm-2" >
+				<select class="form-control" id="ssel" name="searchType">
+					<option disabled>검색 기준</option>
+					<option value="g_name">상품명</option>
+				</select>
+			</div>
+			<div class="input-group col-xs-1 col-sm-1">
+				<input class="form-control" id="keyword" name="keyword" size="20px" style="text-align:center; width:200px;"> 
+				<span class="input-group-btn">
+					<button class="btn btn-success">검색</button>
+				</span>
+			</div>
+		</form>
+	</div>
+
+	
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
-				<img src="{{imgsrc}}" class="fadding-photo">
+				<img src="{{imgsrc}}">
 			</span>
 		</li>
 	</script>
@@ -202,7 +273,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		
 		// 반복문사용
 		// # : 구분자
-		<c:forEach items="${goodsListWoman}" var="pic">
+		<c:forEach items="${goodsListBrand}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
 		
@@ -222,7 +293,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
-
+			
 		});
 	</script>
 </body>
