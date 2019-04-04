@@ -89,7 +89,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 </head>
 <body>
 
-	alert("${pm.cri}");
 	<div class="container">
 	  <div class="row">
 	  
@@ -119,6 +118,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=아르마니">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=아르마니">남성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
+	  		</ul>
+	  	</li>
+	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+	  		<ul class="row submenu">
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
 	  		</ul>
 	  	</li>
 	  </ul>

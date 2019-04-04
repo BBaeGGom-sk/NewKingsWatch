@@ -24,9 +24,15 @@ public interface GoodsDAO {
 	// 전체리스트 페이징
 	public List<GoodsVO> goodsList(Criteria cri);
 	public int getAmount();
+	// 판매종료상품리스트 페이징
+	public List<GoodsVO> goodsNoSellingList(Criteria cri);
+	public int getNoSellingAmount();
 	// 브랜드별 상품 전체리스트 페이징
 	public List<GoodsVO> goodsListBrand(BrandCriteria cri);
 	public int getBrandAmount(BrandCriteria cri);
+	// 브랜드별 판매종료된 상품 전체리스트 페이징
+	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri);
+	public int getBrandoNoSellingAmount(BrandCriteria cri);
 	// 카테고리분류(여성,남성,공용)에 따른 페이징
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri);
 	public List<GoodsVO> goodsListWoman(CategoryCriteria cri);

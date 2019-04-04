@@ -61,17 +61,17 @@
 					<label for="g_category">카테고리</label>
 						<select required class="form-control" id="g_category" name="g_category" >
 						<option disabled>카테고리선택</option>
-						<option value="0">공용</option>
-						<option value="1">여성</option>
-						<option value="2">남성</option>
+						<option id="public" value="0">공용</option>
+						<option id="woman" value="1">여성</option>
+						<option id="man" value="2">남성</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="g_is_selling">판매여부</label>
-						<select required class="form-control" id="g_category" name="g_category" >
+						<select required class="form-control" id="g_is_selling" name="g_is_selling" >
 							<option disabled>판매여부선택</option>
-							<option value="0">미판매</option>
-							<option value="1">판매종료</option>
+							<option id="yes_selling" value="0">판매</option>
+							<option id="no_selling" value="1">판매종료</option>
 						</select>
 				</div>
 			</form>
@@ -108,8 +108,29 @@
 			var template= Handlebars.compile(source);
 			var g_id = "${goodsRead.g_id}";
 			
+			var g_is_selling= ${goodsRead.g_is_selling};
+			var g_category= ${goodsRead.g_category};
+			
+			alert(g_category);
+
+			
 		$(document).ready(function() {
 			
+			// 판매중인지 아닌지 확인해서 셀렉트박스 초기선택주기
+			if(g_is_selling==1){
+				$("#no_selling").prop("selected", true);
+			} else if(g_is_selling==0) {
+				$("#yes_selling").prop("selected", true);
+			}
+			
+			// 판매제품이 공용/여성/남성 중에 어떤것인지 확인해서 셀렉트박스 초기선택주기
+			if(g_category==0){
+				$("#public").prop("selected", true);
+			} else if(g_category==1) {
+				$("#woman").prop("selected", true);
+			} else if(g_category==2) {
+				$("#man").prop("selected", true);
+			}
 
 			// 이벤트, 이벤트실행할id or class, function(event)
 				$(".uploadedList").on("click", ".delbtn", function(event) {

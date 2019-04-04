@@ -34,6 +34,18 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<GoodsVO> goodsNoSellingList(Criteria cri) {
+		// 판매종료상품리스트 페이징처리
+		return dao.goodsNoSellingList(cri);
+	}
+	
+	@Override
+	public int getNoSellingAmount() {
+		// 판매종료상품갯수구하기
+		return dao.getNoSellingAmount();
+	}
+	
+	@Override
 	public List<GoodsVO> goodsListBrand(BrandCriteria cri) {
 		// 브랜드별 상품 전체리스트 페이징
 		return dao.goodsListBrand(cri);
@@ -43,6 +55,18 @@ public class GoodsServiceImpl implements GoodsService {
 	public int getBrandAmount(BrandCriteria cri) {
 		// 브랜드별 상품 갯수구하기
 		return dao.getBrandAmount(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri) {
+		// 브랜드별 판매종료 상품 전체리스트 페이징
+		return dao.goodsListBrandNoSelling(cri);
+	}
+	
+	@Override
+	public int getBrandNoSellingAmount(BrandCriteria cri) {
+		// TODO Auto-generated method stub
+		return dao.getBrandoNoSellingAmount(cri);
 	}
 	
 	@Override

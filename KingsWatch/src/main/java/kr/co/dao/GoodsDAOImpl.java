@@ -38,16 +38,44 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	@Override
+	public List<GoodsVO> goodsNoSellingList(Criteria cri) {
+		// 판매종료상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".goodsNoSellingList", 0, rb);
+	}
+	
+	@Override
+	public int getNoSellingAmount() {
+		// 판매종료상품 페이지수구하기
+		return session.selectOne(NS+".getNoSellingAmount");
+	}
+	
+	@Override
 	public List<GoodsVO> goodsListBrand(BrandCriteria cri) {
 		// 브랜드별 상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".brand", cri, rb);
+		return session.selectList(NS+".brandSelling", cri, rb);
 	}
 	
 	@Override
 	public int getBrandAmount(BrandCriteria cri) {
 		// 브랜드별 상품 전체갯수구하기
-		return session.selectOne(NS+".getBrandAmount", cri);
+		return session.selectOne(NS+".getBrandSellingAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri) {
+		// 브랜드별 판매종료 상품 리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		System.out.println(cri);
+		return session.selectList(NS+".brandNoSelling", cri, rb);
+	}
+	
+	@Override
+	public int getBrandoNoSellingAmount(BrandCriteria cri) {
+		// 브랜드별 판매종료 상품 전체 갯수 구하기
+		System.out.println(cri+"갯수");
+		return session.selectOne(NS+".getBrandoNoSellingAmount",cri);
 	}
 	
 	@Override

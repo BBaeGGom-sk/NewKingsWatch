@@ -98,6 +98,18 @@ public class GoodsController {
 		return "goods/goodsList";
 	}
 	
+	// 판매종료된 전체 상품리스트
+	@RequestMapping("/goodsNoSelling")
+	public String noSelling(Criteria cri, Model model) {
+		List<GoodsVO> goodsNoSellingList= service.goodsNoSellingList(cri);
+		int amount = service.getNoSellingAmount();
+		PageMaker pm= new PageMaker(amount, cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("goodsNoSellingList", goodsNoSellingList);
+		return "goods/goodsNoSelling";
+	}
+	
 	// 브랜드에 따른 전체 상품리스트
 	@RequestMapping("/goodsListBrand")
 	public String listBrand(BrandCriteria cri, Model model) {
@@ -109,6 +121,19 @@ public class GoodsController {
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListBrand", goodsListBrand);
 		return "goods/goodsListBrand";
+	}
+	
+	@RequestMapping("/goodsListBrandNoSelling")
+	public String listBrandNoSelling(BrandCriteria cri, Model model) {
+		System.out.println(cri);
+		List<GoodsVO> goodsListBrandNoSelling= service.goodsListBrandNoSelling(cri);
+		int amount= service.getBrandNoSellingAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("NoSelling", goodsListBrandNoSelling);
+		return "goods/goodsListBrandNoSelling";
 	}
 	
 	// 브랜드에 따른 남성 상품리스트

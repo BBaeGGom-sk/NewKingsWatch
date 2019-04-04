@@ -25,5 +25,13 @@ public class BrandCriteria extends Criteria{
 		this.g_brand = g_brand;
 	}
 
+
+	@Override
+	public String toString() {
+		return "BrandCriteria [g_brand=" + g_brand + "]";
+	}
+	
+	
+
 	
 }

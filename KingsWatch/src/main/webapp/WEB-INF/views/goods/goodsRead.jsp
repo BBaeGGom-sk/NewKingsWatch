@@ -165,6 +165,7 @@ table{
 				    $(".numBox").val(minusNum);          
 				}
 			});
+				
 			
 			$("#order").click(function() {
 				$("form").attr("action","/order/orderPage");

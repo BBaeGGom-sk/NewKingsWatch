@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
+
 <style type="text/css">
 body {
 	font-family: '맑은 고딕', verdana;
@@ -87,9 +88,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 <title>Insert title here</title>
 </head>
 <body>
-
-	alert("${pm.cri}");
-	
+  
 	<div class="container">
 	  <div class="row">
 	  
@@ -133,14 +132,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  
 
 	<section id="content">
-	  	<label for="goodsListPublic">리스트입니다.</label>
+
+	  	<label for="goodsList">리스트입니다.</label>
 		<div class="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
-		</div>
+		</div>		
 	 <hr>
 	 <div id="container_box">
 		 <ul>
-		 	<c:forEach items="${goodsListPublic}" var="list"  varStatus="status">
+		 	<c:forEach items="${NoSelling}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -148,7 +148,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
 		                </a>
-		                </div>
+		        	 	</div>
 		    		</div>
 		    		<div class="description">
 		     			<p>
@@ -156,10 +156,10 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		            		<span>${list.g_name}</span></a>
 		            	</p>
 					<div></div>
-						<p class="price"><span>${list.g_price }</span></p>
-						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
+						<p class="price"><span>${list.g_price}</span></p>
+						<p class="priceSale">할인율 : ${list.g_sale}%</p>
 		        	<div>
-		            <div></div>
+		            	<div></div>
 		        	</div>
 		    	</div>
 				</li>
@@ -167,28 +167,45 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</ul>
 	</div>
 	</section>
-	
-	  
+
 	 </div> <!-- row 끝 -->
 	 
 	 <!-- 페이징!! -->
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsListPublic${pm.makeCategory(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsListBrandNoSelling${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsListPublic${pm.makeCategory(idx)}">${idx}</a></li>
+						href="/goods/goodsListBrandNoSelling${pm.makeBrand(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsListPublic${pm.makeCategory(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsNoSelling${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
 	 
 	</div> <!-- container 끝!! -->
+	
+	<div class="form-group" style="display: inline-block; position: absolute;" >
+		 <form method="get" action="/goods/goodsSearch">
+			<div class="col-xs-3 col-sm-2" >
+				<select class="form-control" id="ssel" name="searchType">
+					<option disabled>검색 기준</option>
+					<option value="g_name">상품명</option>
+				</select>
+			</div>
+			<div class="input-group col-xs-1 col-sm-1">
+				<input class="form-control" id="keyword" name="keyword" size="20px" style="text-align:center; width:200px;"> 
+				<span class="input-group-btn">
+					<button class="btn btn-success">검색</button>
+				</span>
+			</div>
+		</form>
+	</div>
+
 	
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
@@ -209,7 +226,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		
 		// 반복문사용
 		// # : 구분자
-		<c:forEach items="${goodsListPublic}" var="pic">
+		<c:forEach items="${NoSelling}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
 		
@@ -229,7 +246,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
-
+			
 		});
 	</script>
 </body>
