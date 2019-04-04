@@ -81,20 +81,23 @@
 							</tr>
 
 							<tr>
-								<th scope="row">휴대폰 번호</th>
-								<td><input id="u_phone" name="u_phone" type="text"	autocomplete="off" hidden="" />
-									<select id="u_phone1"	name="u_phone1">
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="016">016</option>
-										<option value="017">017</option>
-										<option value="018">018</option>
-										<option value="019">019</option>
-								</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phone2" name="u_phone2"
-									maxlength="4" size="4" type="tel" autocomplete="off" /> <input
-									id="u_phone3" name="u_phone3" maxlength="4" size="4" type="tel"
-									autocomplete="off" /></td>
-							</tr>
+									<!-- 주문자 휴대전화 -->
+									<th scope="row">휴대전화</th>
+									<td><c:set var="phoneNum" value="${login.u_phone}" /> <!-- 주문자 휴대전화 1 -->
+										<select id="u_phoneNumFirst" name="u_phoneNumFirst">
+											<option value="010">010</option>
+											<option value="011">011</option>
+											<option value="016">016</option>
+											<option value="017">017</option>
+											<option value="018">018</option>
+											<option value="019">019</option>
+									</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phoneNumMid"
+										name="u_phoneNumMid" maxlength="4" size="4"
+										value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
+										<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4"
+										size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
+									</td>
+								</tr>
 
 							<tr class="displaynone">
 								<th scope="row">&nbsp;&nbsp;SMS 수신여부</th>
@@ -107,15 +110,15 @@
 								<th scope="row">주소</th>
 								<td>
 									<!-- 우편번호 --> <input id="u_postcode" name="u_postNum"
-									class="inputTypeText" placeholder="" size="6" maxlength="6" />
+									class="inputTypeText" placeholder="" size="6" maxlength="6" value="${login.u_postNum}"/>
 									<!-- 우편번호 버튼 --> <input class="btn btn-primary" type="button"
 									onclick="u_execDaumPostcode()" value="우편번호 찾기"><br>
 									<!-- 기본주소 --> <input id="u_address" name="u_adMain"
-									class="inputTypeText" placeholder="기본 주소" size="40" /><br>
+									class="inputTypeText" placeholder="기본 주소" size="40" value="${login.u_adMain}"/><br>
 									<!-- 상세주소 --> <input id="u_detailAddress" name="u_adSub"
-									class="inputTypeText" placeholder="상세 주소" size="40" type="text" />
+									class="inputTypeText" placeholder="상세 주소" size="40" type="text" value="${login.u_adSub}"/>
 									<!-- 나머지주소 --> <input id="u_extraAddress" name="u_adDetail"
-									class="inputTypeText" placeholder="나머지 주소" size="40">
+									class="inputTypeText" placeholder="나머지 주소" size="40" value="${login.u_adDetail}">
 
 								</td>
 							</tr>
@@ -265,9 +268,67 @@
 
 
 	<script type="text/javascript">
-	$("#revise").on(function() {
-			alert("회원정보를 수정했습니다.");
+
+	// 유저 이메일 받아오기
+	var email = "${login.u_email}";
+	// 유저 이메일을 @ 기준으로 나누기
+	var emailArr = email.split("@");
+	// @ 기준으로 나눈 값을 넣어주기
+	document.getElementById("u_email1").value = emailArr[0];
+	document.getElementById("u_email2").value = emailArr[1];
+	// 이메일 셀렉트 변경시 값 바로 적용 및 직접입력 선택시 초기화 및 readonly 해제
+	$("#u_emailSelect").on("change",function() {
+		if (this.value == "etc") {
+		    $("#u_email2").val(" ");
+			$("#u_email2").removeAttr("readonly");
+		} else {
+			var langSelect = document.getElementById("u_emailSelect");
+		    // select element에서 선택된 option의 value가 저장된다.
+		    var selectValue = langSelect.options[langSelect.selectedIndex].value;
+		    $("#u_email2").val(selectValue);
+			$("#u_email2").prop("readonly", true);
 		}
+	})
+
+	// 이메일 셀렉트 판별 및 자동 선택하기
+	if (emailArr[1] == "naver.com") {
+		document.getElementById("u_emailSelect").value = "naver.com";
+		$("#u_emailSelect option:eq(1)").prop("selected", true);
+	} else if (emailArr[1] == "daum.net") {
+		document.getElementById("u_emailSelect").value = "daum.net";
+		$("#u_emailSelect option:eq(2)").prop("selected", true);
+	} else if (emailArr[1] == "nate.com") {
+		document.getElementById("u_emailSelect").value = "nate.com";
+		$("#u_emailSelect option:eq(3)").prop("selected", true);
+	} else if (emailArr[1] == "yahoo.com") {
+		document.getElementById("u_emailSelect").value = "yahoo.com";
+		$("#u_emailSelect option:eq(5)").prop("selected", true);
+	} else { // 해당하는게 없으면 직접입력이 선택되고 readonly 속성이 해제됨
+		document.getElementById("u_emailSelect").value = "etc";
+		$("#u_email2").removeAttr("readonly");
+		$("#u_emailSelect option:eq(9)").prop("selected", true);
+	}
+	
+	
+	// 휴대전화번호 세번째자리만 분리
+	var phoneNumFirst = ${fn:substring(phoneNum,2,3)};
+	// 휴대전화번호 앞자리 판별 및 자동 선택하기 (주문쪽,받는쪽 동시 선택)
+	if (phoneNumFirst==0) {
+		$("select option[value='010']").attr("selected", true);
+	} else if (phoneNumFirst==1) {
+		$("select option[value='011']").attr("selected", true);
+	} else if (phoneNumFirst==6) {
+		$("select option[value='016']").attr("selected", true);
+	} else if (phoneNumFirst==7) {
+		$("select option[value='017']").attr("selected", true);
+	} else if (phoneNumFirst==8) {
+		$("select option[value='018']").attr("selected", true);
+	} else if (phoneNumFirst==9) {
+		$("select option[value='019']").attr("selected", true);
+	} 
+	
+	
+	
 	</script>
 
 
