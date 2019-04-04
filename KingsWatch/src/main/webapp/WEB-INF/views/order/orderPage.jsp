@@ -137,11 +137,11 @@ li {
 						<table border="1" summary="">
 							<h3>주문자 정보</h3>
 							<caption>주문자 정보 입력</caption>
-							<p class="required">
+							<p>
 								<img
 									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 									alt="필수" /> 필수입력사항
-							</p>
+							</p>>
 							<tbody class="address_form ">
 								<tr>
 									<!-- 주문자 이름 -->
