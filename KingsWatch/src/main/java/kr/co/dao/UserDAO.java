@@ -10,7 +10,7 @@ public interface UserDAO {
 
 	
 	public void join(UserDTO dto);	//회원가입
-	public UserDTO get(UserDTO dto) throws Exception;	//로그인 체크
+	public UserDTO getUser(UserDTO dto) throws Exception;	//로그인. 유저정보 가져옴
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);
 	public UserDTO updateui(String id);

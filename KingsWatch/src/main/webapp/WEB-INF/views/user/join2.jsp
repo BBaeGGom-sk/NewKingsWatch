@@ -38,12 +38,8 @@
 							<tbody>
 								<tr>
 									<th scope="row">아이디 <img	src="/resources/img/ico_required.gif" alt="필수" /></th>
-									<td><input id="u_id" name="u_id"
-										fw-label="아이디" fw-msg="" class="inputTypeText" placeholder=""
-										value="" type="text" /> <a href="#none" title="새창 열기"
-										onclick="checkIdLayer('/member/check_id.html')"><img
-											src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_overlap_id.gif"
-											alt="아이디 중복확인" /></a> (영문소문자/숫자, 4~16자)</td>
+									<td><input id="u_id" name="u_id" class="inputTypeText" placeholder=""
+										value="" type="text" /> (영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 <img
@@ -122,7 +118,7 @@
 										<!-- 상세주소 -->
 										<input id="u_detailAddress" name="u_adSub" class="inputTypeText" placeholder="상세 주소" size="40" type="text" />
 										<!-- 나머지주소 -->
-										<input id="u_extraAddress " name="u_adDetail"  class="inputTypeText" placeholder="나머지 주소" size="40" >
+										<input id="u_extraAddress" name="u_adDetail"  class="inputTypeText" placeholder="나머지 주소" size="40" >
 										 
 								</td>
 								</tr>
@@ -136,7 +132,7 @@
 									<td>
 									<input id="u_sex" name="u_sex" value="1" type="radio" />
 									<label	for="u_sex">남자</label>
-									<input id="u_sex" name="u_sex" value="0"	type="radio" />
+									<input id="u_sex" name="u_sex" value="2"	type="radio" />
 									<label for="u_sex">여자</label></td>
 								</tr>
 								<tr class="">
@@ -327,7 +323,7 @@
 	                    document.getElementById("u_detailAddress").value = extraAddr;
 	                
 	                } else {
-	                    document.getElementById("u_extraAddress").value = '';
+	                    document.getElementById("u_detailAddress").value = '';
 	                }
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById('u_postcode').value = data.zonecode;

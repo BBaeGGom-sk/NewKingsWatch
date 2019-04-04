@@ -6,23 +6,32 @@ create table tab_user(
 	u_phone varchar2(30),
 	u_sex number(1),
 	u_age number(3),
-	u_postnum varchar2(5),
-	u_admain varchar2(200),
-	u_adsub varchar2(200),
+	u_postNum varchar2(5),
+	u_adMain varchar2(200),
+	u_adSub varchar2(200),
+	u_adDetail varchar2(200) default ' ',
 	u_email varchar2(40) unique,
-	u_regDate varchar2(40) default sysdate,
-	u_point number(7),
-	u_level number(1),
-	u_adDetail varchar2(200)
+	u_regDate DATE default sysdate,
+	u_point number(7) default 0,
+	u_level number(1) default 0
 )
-drop table tab_user
+
 select * from tab_user
-alter table tab_user add (u_addetail varchar2(200)) 
+drop table tab_user
+
 update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
-
-
-insert into tab_user values ('bbaeggom', '1026', '오승기', '01130339681',1,25,'03300', '서울시 은평구 북한산로2' ,'어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com',null, 0, 1,'(진관동, 은평뉴타운구파발)')
+insert into tab_user (u_id, u_pw, u_name,u_adDetail)values ('babo123123','babo','바보', ' ')
 delete from tab_user where u_id = 'bbaeggom'
+
+create table tab_address(
+	u_id varchar2(30) references tab_user(u_id),
+	a_postnum number(5),
+	a_admain varchar2(200),
+	a_adsub varchar2(200)
+)
+select * from tab_address
+drop table tab_address
+
 
 create table tab_goods(
 	g_id varchar2(30) primary key,
@@ -35,6 +44,7 @@ create table tab_goods(
 	g_date varchar2(40) default sysdate,
 	g_brand varchar2(40)
 )
+select * from tab_goods
 drop table tab_goods
 
 create table tab_basket(
@@ -53,6 +63,7 @@ create table tab_order(
 	g_id varchar2(30) references tab_goods(g_id),
 	o_quantity number(5)
 )
+select * from tab_order
 drop table tab_order
 
 
@@ -116,11 +127,5 @@ p_regDate varchar2(40) default sysdate
 drop table tab_pic
 
 
-create table tab_address(
-	u_id varchar2(30) references tab_user(u_id),
-	a_postnum number(5),
-	a_admain varchar2(200),
-	a_adsub varchar2(200)
-)
-drop table tab_address
 
+commit

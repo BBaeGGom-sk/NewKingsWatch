@@ -21,9 +21,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public void join(UserDTO dto) {
-		System.out.println("sql insert하기 전");
 		sqlSession.insert(NS+".join", dto);
-		System.out.println("sql insert한 후");
 	}
 
 	@Override
@@ -61,7 +59,7 @@ public class UserDAOImpl implements UserDAO{
 	
 
 	@Override
-	public UserDTO get(UserDTO dto) {
+	public UserDTO getUser(UserDTO dto) {
 		// TODO Auto-generated method stub
 		System.out.println("DAO임플의 dto입니다."+dto);
 		return sqlSession.selectOne(NS+".loginCheck", dto);

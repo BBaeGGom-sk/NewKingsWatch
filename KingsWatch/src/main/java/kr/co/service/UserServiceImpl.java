@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void join(UserDTO dto) {
 		dao.join(dto);
-
 	}
 
 	@Override
@@ -30,7 +29,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO viewDetail(String id) {
-		
 		return dao.viewDetail(id);
 	}
 
@@ -63,7 +61,7 @@ public class UserServiceImpl implements UserService {
 	public UserDTO getUser(UserDTO dto) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("<Service> : " + dto);
-		return dao.get(dto);
+		return dao.getUser(dto);
 	}
 
 }

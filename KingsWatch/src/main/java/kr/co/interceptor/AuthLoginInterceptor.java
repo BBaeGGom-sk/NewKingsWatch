@@ -18,7 +18,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
      HttpSession session = request.getSession();
      // login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
      Object obj = session.getAttribute("login");
-     System.out.println("인터셉터 pre핸들러 안입니다.");
+     System.out.println("인터셉터 pre핸들러 안.");
        
      if ( obj == null ){
          // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
@@ -28,7 +28,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
        
      // preHandle의 return은 컨트롤러 요청 uri로 가도 되냐 안되냐를 허가하는 의미임
      // 따라서 true로하면 컨트롤러 uri로 가게 됨.
-     System.out.println("인터셉터 pre핸들러 빠져나옵니다.");
+     System.out.println("인터셉터 pre핸들러 빠져나옵니다. 세션값 : " + obj.toString());
      return true;
  }
 
@@ -37,8 +37,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
  public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
          ModelAndView modelAndView) throws Exception {
      // TODO Auto-generated method stub
-	 System.out.println("인터셉터 post핸들러 안입니다.");
      super.postHandle(request, response, handler, modelAndView);
-     System.out.println("인터셉터 post핸들러 빠져나옵니다.");
  }     
 }
