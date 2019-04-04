@@ -146,7 +146,7 @@ table{
 				$("form").attr("method","get");
 				$("form").submit();
 			});
-		
+		 
 			// 수량증가버튼
 			$(".plus").click(function() {
 				var num = $(".numBox").val();
