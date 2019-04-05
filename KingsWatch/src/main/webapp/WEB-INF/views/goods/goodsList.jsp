@@ -139,6 +139,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</div>		
 	 <hr>
 	 <div id="container_box">
+		 <div>
+		 	<a href="/goods/goodsList">최신순</a>
+		 	<a href="/goods/rowPriceGoods">낮은가격순</a>
+		 	<a href="/goods/highPriceGoods">높은가격순</a>
+		 </div>
 		 <ul>
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
 			 	<li>

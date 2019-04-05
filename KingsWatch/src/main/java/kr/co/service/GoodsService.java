@@ -23,7 +23,7 @@ public interface GoodsService {
 	// 페이징
 	// 전체리스트 페이징
 	public List<GoodsVO> goodsList(Criteria cri);
-	public int getAmount();
+	public int getAmount(Criteria cri);
 	// 판매종료상품 페이징
 	public List<GoodsVO> goodsNoSellingList(Criteria cri);
 	public int getNoSellingAmount();
@@ -41,5 +41,19 @@ public interface GoodsService {
 	// 검색에따른 페이징
 	public List<GoodsVO> search(SearchCriteria cri);
 	public int getSearchAmount(SearchCriteria cri);
+	// 전체상품 낮은가격순 페이징
+	public List<GoodsVO> rowPriceGoodsList(Criteria cri);
+	// 전체상품 높은가격순 페이징
+	public List<GoodsVO> highPriceGoodsList(Criteria cri);
+	// 브랜드별 낮은가격/높은가격순 페이징
+	public List<GoodsVO> rowPriceGoodsListBrand(BrandCriteria cri);
+	public List<GoodsVO> highPriceGoodsListBrand(BrandCriteria cri);
+	// 카테고리분류(여성,남성,공용) 낮은가격/높은가격순 페이징
+	public List<GoodsVO> rowPriceGoodsMan(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsMan(CategoryCriteria cri);
+	public List<GoodsVO> rowPriceGoodsWoman(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsWoman(CategoryCriteria cri);
+	public List<GoodsVO> rowPriceGoodsPublic(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsPublic(CategoryCriteria cri);
 
 }

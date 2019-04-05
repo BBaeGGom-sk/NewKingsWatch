@@ -64,7 +64,6 @@ public class GoodsController {
 		f2.delete();
 		
 		entity = new ResponseEntity<String>("성공~",HttpStatus.OK);
-		
 		return entity;
 	}
 	
@@ -90,8 +89,11 @@ public class GoodsController {
 	@RequestMapping("/goodsList")
 	public String list(Criteria cri, Model model) {
 		List<GoodsVO> goodsList= service.goodsList(cri);
-		int amount = service.getAmount();
+		int amount = service.getAmount(cri);
 		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		System.out.println(amount);
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
@@ -104,6 +106,7 @@ public class GoodsController {
 		List<GoodsVO> goodsNoSellingList= service.goodsNoSellingList(cri);
 		int amount = service.getNoSellingAmount();
 		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsNoSellingList", goodsNoSellingList);
@@ -120,9 +123,11 @@ public class GoodsController {
 
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListBrand", goodsListBrand);
+		model.addAttribute("g_brand", cri.getG_brand());
 		return "goods/goodsListBrand";
 	}
 	
+	// 브랜드별 판매중지 상품리스트
 	@RequestMapping("/goodsListBrandNoSelling")
 	public String listBrandNoSelling(BrandCriteria cri, Model model) {
 		System.out.println(cri);
@@ -133,10 +138,11 @@ public class GoodsController {
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("NoSelling", goodsListBrandNoSelling);
+		model.addAttribute("g_brand", cri.getG_brand());
 		return "goods/goodsListBrandNoSelling";
 	}
 	
-	// 브랜드에 따른 남성 상품리스트
+	// 브랜드별 남성 상품리스트
 	@RequestMapping("/goodsListMan")
 	public String listMan(CategoryCriteria cri, Model model) {
 		List<GoodsVO> goodsListMan= service.goodsListMan(cri);
@@ -146,10 +152,12 @@ public class GoodsController {
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListMan", goodsListMan);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
 		return "goods/goodsListMan";
 	}
 	
-	// 브랜드에 따른 여성 상품리스트
+	// 브랜드별 여성 상품리스트
 	@RequestMapping("/goodsListWoman")
 	public String listWoman(CategoryCriteria cri, Model model) {
 		List<GoodsVO> goodsListWoman= service.goodsListWoman(cri);
@@ -159,10 +167,12 @@ public class GoodsController {
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListWoman", goodsListWoman);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
 		return "goods/goodsListWoman";
 	}
 	
-	// 브랜드에 따른 공용 상품리스트
+	// 브랜드별 공용 상품리스트
 	@RequestMapping("/goodsListPublic")
 	public String listPublic(CategoryCriteria cri, Model model) {
 		List<GoodsVO> goodsListPublic= service.goodsListPublic(cri);
@@ -172,9 +182,158 @@ public class GoodsController {
 
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsListPublic", goodsListPublic);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
 		return "goods/goodsListPublic";
 	}
+
+	// 전체상품 낮은가격순 리스트
+	@RequestMapping("/rowPriceGoods")
+	public String rowPriceGoodsList(Criteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsList= service.rowPriceGoodsList(cri);
+		int amount= service.getAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("rowPriceGoods", rowPriceGoodsList);
+		model.addAttribute("pm", pm);
+		return "goods/rowPriceGoods";
+	}
+
+	 // 높은가격순 리스트
+	@RequestMapping("/highPriceGoods") 
+	public String newGoodsList(Criteria cri, Model model) { 
+		List<GoodsVO> highPriceGoods= service.highPriceGoodsList(cri);
+		int amount= service.getAmount(cri); 
+		PageMaker pm= new PageMaker(amount, cri);
+		  
+		pm.setCri(cri);
+	  
+		model.addAttribute("highPriceGoods", highPriceGoods);
+		model.addAttribute("pm", pm);
+		return "goods/highPriceGoods";
+	}
+
+	// 브랜드에 따른 전체상품 낮은가격리스트
+	@RequestMapping("/rowPriceGoodsBrand")
+	public String rowPriceBrand(BrandCriteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsListBrand= service.rowPriceGoodsListBrand(cri);
+		int amount = service.getBrandAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceGoodsListBrand", rowPriceGoodsListBrand);
+		model.addAttribute("g_brand", cri.getG_brand());
+		return "goods/rowPriceGoodsBrand";
+	}
 	
+	// 브랜드에 따른 전체상품 높은가격리스트
+	@RequestMapping("/highPriceGoodsBrand")
+	public String highPriceBrand(BrandCriteria cri, Model model) {
+		List<GoodsVO> highPriceGoodsListBrand= service.highPriceGoodsListBrand(cri);
+		int amount = service.getBrandAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceGoodsListBrand", highPriceGoodsListBrand);
+		model.addAttribute("g_brand", cri.getG_brand());
+		return "goods/highPriceGoodsBrand";
+	}
+
+	// 브랜드별 남성 낮은가격 상품리스트
+	@RequestMapping("/rowPriceGoodsMan")
+	public String rowPriceMan(CategoryCriteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsMan= service.rowPriceGoodsMan(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceGoodsMan", rowPriceGoodsMan);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/rowPriceGoodsMan";
+	}
+	
+	// 브랜드별 남성 높은가격 상품리스트
+	@RequestMapping("/highPriceGoodsMan")
+	public String highPriceMan(CategoryCriteria cri, Model model) {
+		List<GoodsVO> highPriceGoodsMan= service.highPriceGoodsMan(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceGoodsMan", highPriceGoodsMan);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/highPriceGoodsMan";
+	}
+	
+	// 브랜드별 여성 낮은가격 상품리스트
+	@RequestMapping("/rowPriceGoodsWoman")
+	public String rowPriceWoman(CategoryCriteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsWoman= service.rowPriceGoodsWoman(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceGoodsWoman", rowPriceGoodsWoman);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/rowPriceGoodsWoman";
+	}
+	
+	// 브랜드별 여성 높은가격 상품리스트
+	@RequestMapping("/highPriceGoodsWoman")
+	public String highPriceWoman(CategoryCriteria cri, Model model) {
+		List<GoodsVO> highPriceGoodsWoman= service.highPriceGoodsWoman(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceGoodsWoman", highPriceGoodsWoman);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/highPriceGoodsWoman";
+	}
+	
+	// 브랜드별 공용 낮은가격 상품리스트
+	@RequestMapping("/rowPriceGoodsPublic")
+	public String rowPricePublic(CategoryCriteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsPublic= service.rowPriceGoodsPublic(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceGoodsPublic", rowPriceGoodsPublic);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/rowPriceGoodsPublic";
+	}
+	
+	// 브랜드별 공용 높은가격 상품리스트
+	@RequestMapping("/highPriceGoodsPublic")
+	public String highPricePublic(CategoryCriteria cri, Model model) {
+		List<GoodsVO> highPriceGoodsPublic= service.highPriceGoodsPublic(cri);
+		int amount = service.getCategoryAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceGoodsPublic", highPriceGoodsPublic);
+		model.addAttribute("g_brand", cri.getG_brand());
+		model.addAttribute("g_category", cri.getG_category());
+		return "goods/highPriceGoodsPublic";
+	}
+	
+	
+
 	// 상품올리기 화면
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.GET)
 	public void insertui() {
