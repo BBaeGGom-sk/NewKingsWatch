@@ -203,63 +203,12 @@ table{
 
 					});
 
-<<<<<<< HEAD
-			salePrice();
-			
-			// 상품수정버튼
-			$("#goodsUpdate").click(function() {
-				$("form").attr("action","goodsUpdate");
-				$("form").attr("method","get");
-				$("form").submit();
-			});
-		 
-			// 수량증가버튼
-			$(".plus").click(function() {
-				var num = $(".numBox").val();
-				var plusNum = Number(num) + 1;
-				$(".numBox").val(plusNum);
-			});
-			 
-			// 수량감소버튼
-			$(".minus").click(function() {
-				var num = $(".numBox").val();
-				var minusNum = Number(num) - 1;
-
-				if(minusNum <= 0 ) {
-				    $(".numBox").val(num);
-				} else {
-				    $(".numBox").val(minusNum);          
-				}
-			});
-				
-			
-			$("#order").click(function() {
-				$("form").attr("action","/order/orderPage");
-				$("form").attr("method","get");
-				$("form").submit();
-			});
-			
-			goodsReadPicDbGet(g_id);
-		});
-		
-		function goodsReadPicDbGet(g_id) {
-			$.getJSON("/goods/goodsReadPicDbGet/"+g_id, function(result) {
-				var source= $("#source").html();
-				var template= Handlebars.compile(source);
-				$(result).each(function() {
-					var data= getFileInfo(this);
-					$(".uploadedList").append(template(data));
-				});
-			});		
-		}
-	</script>
-=======
          goodsReadPicDbGet(g_id);
       });
       
       function goodsReadPicDbGet(g_id) {
          $.getJSON("/goods/goodsReadPicDbGet/"+g_id, function(result) {
-            var source= $("#source").html();
+            var source= $("#source").html(); 
             var template= Handlebars.compile(source);
             $(result).each(function() {
                var data= getFileInfo(this);
@@ -268,6 +217,5 @@ table{
          });      
       }
    </script>
->>>>>>> refs/heads/se0e
 </body>
 </html>
