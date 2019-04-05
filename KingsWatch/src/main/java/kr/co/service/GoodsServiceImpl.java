@@ -28,9 +28,9 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public int getAmount() {
+	public int getAmount(Criteria cri) {
 		// 전체상품갯수구하기
-		return dao.getAmount();
+		return dao.getAmount(cri);
 	}
 	
 	@Override
@@ -103,6 +103,74 @@ public class GoodsServiceImpl implements GoodsService {
 	public int getSearchAmount(SearchCriteria cri) {
 		// 검색목록 상품 갯수구하기
 		return dao.getSearchAmount(cri);
+	}
+	
+	/*
+	 * @Override public List<GoodsVO> newGoodsList(Criteria cri) { // 최신가격순리스트페이징
+	 * return dao.newGoods(cri); }
+	 * 
+	 * @Override public int newGoodsGetAmount() { // 최신가격순 상품갯수구하기 return
+	 * dao.newGoodsGetAmount(); }
+	 */
+	
+	@Override
+	public List<GoodsVO> rowPriceGoodsList(Criteria cri) {
+		// 낮은가격 전체상품리스트구하기
+		return dao.rowPriceGoodsList(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsList(Criteria cri) {
+		// 높은가격 전체상품리스트구하기
+		return dao.highPriceGoodsList(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> rowPriceGoodsListBrand(BrandCriteria cri) {
+		// 브랜드별 낮은가격리스트
+		return dao.rowPriceGoodsListBrand(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsListBrand(BrandCriteria cri) {
+		// 브랜드별 높은가격리스트
+		return dao.highPriceGoodsListBrand(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> rowPriceGoodsMan(CategoryCriteria cri) {
+		// 남성상품 낮은가격리스트
+		return dao.rowPriceGoodsMan(cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsMan(CategoryCriteria cri) {
+		// 남성상품 높은가격리스트
+		return dao.highPriceGoodsMan(cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsWoman(CategoryCriteria cri) {
+		// 여성상품 낮은가격리스트
+		return dao.rowPriceGoodsWoman(cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsWoman(CategoryCriteria cri) {
+		// 여성상품 높은가격리스트
+		return dao.highPriceGoodsWoman(cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsPublic(CategoryCriteria cri) {
+		// 공용상품 낮은가격리스트
+		return dao.rowPriceGoodsPublic(cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsPublic(CategoryCriteria cri) {
+		// 공용상품 높은가격리스트
+		return dao.highPriceGoodsPublic(cri);
 	}
 	
 	@Override

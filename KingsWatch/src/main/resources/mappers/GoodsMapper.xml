@@ -32,7 +32,7 @@
 
 <!-- 상품갯수세기 -->
 	<select id="getAmount" resultType="Integer">
-		select count(g_id) from tab_goods
+		select count(g_id) from tab_goods where g_is_selling=0
 	</select>
 	
 <!-- 날짜 내림차순에따른 판매종료상품전체리스트출력 -->
@@ -142,12 +142,74 @@
 		<include refid="searchIf"></include>
 		order by g_date desc
 	</select>
+
+<!-- 낮은가격순 전체상품리스트(판매중) -->
+	<select id="rowPriceGoodsList" resultType="GoodsVO">
+		select * from tab_goods where g_is_selling=0 order by g_price asc
+	</select>
+
+<!-- 높은가격순 전체상품리스트(판매중) -->
+	<select id="highPriceGoodsList" resultType="GoodsVO">
+		select * from tab_goods where g_is_selling=0 order by g_price desc
+	</select>
+	
+<!-- 동적으로 갖고온 where문 집어넣어서 판매중인 브랜드별 낮은가격순 리스트 구하기 -->
+	<select id="rowPriceGoodsListBrand" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods
+		]]>
+		<include refid="brandIf"></include>
+		<![CDATA[
+		 and g_is_selling=0
+		 order by g_price asc
+		]]>
+	</select>
+	
+<!-- 동적으로 갖고온 where문 집어넣어서 판매중인 브랜드별 높은가격순 리스트 구하기 -->
+	<select id="highPriceGoodsListBrand" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods
+		]]>
+		<include refid="brandIf"></include>
+		<![CDATA[
+		 and g_is_selling=0
+		 order by g_price desc
+		]]>
+	</select>
+
+<!-- 동적으로 갖고온 where문 집어넣어서 카테고리별 낮은가격순 리스트 구하기 -->
+	<select id="rowPriceGoodsCategory" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="categoryIf"></include> 
+		
+		<![CDATA[
+		 order by g_price asc
+		 ]]>
+	</select>
+
+<!-- 동적으로 갖고온 where문 집어넣어서 카테고리별 높은가격순 리스트 구하기 -->
+	<select id="highPriceGoodsCategory" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="categoryIf"></include> 
+		
+		<![CDATA[
+		 order by g_price desc
+		 ]]>
+	</select>
+	
+	<select id="newGoodsGetAmount" resultType="Integer">
+		select count(g_id) from tab_goods where g_is_selling=0
+	</select>
 	
 <!-- 상품사진고유번호 가지고오기(자동증가위해서) -->
 	<select id="getPnum" resultType="Integer">
 		select max(p_num) from tab_pic
 	</select>
-	
+
 <!-- 상품사진DB업데이트 -->
 	<insert id="goodsPicDbAdd">
 		insert into tab_pic (p_num,p_fullName,g_id) values (#{p_num},#{p_fullName},#{g_id})
