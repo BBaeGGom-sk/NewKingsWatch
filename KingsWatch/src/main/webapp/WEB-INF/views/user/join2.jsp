@@ -86,7 +86,7 @@
 								<tr>
 									<th scope="row">휴대폰 번호 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
 									<td> 
-										<input id="u_phone"name="u_phone" type="text" autocomplete="off" hidden=""/>
+										<input id="u_phone" name="u_phone" type="text" autocomplete="off" hidden=""/>
 										<select id="u_phone1" name="u_phone1">
 											<option value="010">010</option>
 											<option value="011">011</option>
@@ -442,6 +442,7 @@
 				document.getElementById("u_age").value = age;
 				
 			})
+			
 
         });
 	</script>

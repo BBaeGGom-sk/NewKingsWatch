@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.domain.UserDTO;
 import kr.co.service.UserService;
@@ -113,11 +114,13 @@ public String updateui(String id, Model model) {
 	
 	
 	@RequestMapping(value="delete")
-	public String delete(String id) {
-		
+	public String delete(HttpSession session) {
+		UserDTO dto = (UserDTO) session.getAttribute("login");
+		String id = dto.getU_id();
 		service.delete(id);
+		session.invalidate();
 		
-		return "redirect:/user/select";
+		return "redirect:/";
 	}
 
 

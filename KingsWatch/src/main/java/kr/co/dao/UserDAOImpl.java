@@ -53,7 +53,7 @@ public class UserDAOImpl implements UserDAO{
 	public void delete(String id) {
 		// TODO Auto-generated method stub
 		System.out.println("DAOImple delete메서드");
-		sqlSession.insert(NS+".delete", id);
+		sqlSession.delete(NS+".delete", id);
 	}
 
 	

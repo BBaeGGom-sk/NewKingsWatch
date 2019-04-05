@@ -25,7 +25,7 @@
     
   
   <update id="update">
- update tab_user set u_pw=#{u_pw}, u_name=#{u_name}, u_phone=#{u_phone}, u_email=#{u_email} where u_id=#{u_id}
+ update tab_user set u_name=#{u_name} where u_id=#{u_id}
    </update>
   
   

@@ -31,7 +31,6 @@
 			<h2><a href="user/login">로그인</a></h2>
 			<h2><a href="user/logout">로그아웃</a></h2>
 			<h2><a href="user/viewDetail?id=${login.u_id}">회원정보 상세보기</a></h2>
-			<h2><a href="user/updateUser">회원정보수정</a></h2>
 
 		</div>
 	</div>	
