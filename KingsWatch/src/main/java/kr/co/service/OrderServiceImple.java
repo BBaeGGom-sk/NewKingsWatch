@@ -21,4 +21,10 @@ public class OrderServiceImple implements OrderService{
 		return dao.selectById(u_id);
 	}
 
+	@Override
+	public void addCart(String u_id, String g_id) {
+		// 장바구니 담기
+		dao.addCart(u_id,g_id);
+	}
+
 }
