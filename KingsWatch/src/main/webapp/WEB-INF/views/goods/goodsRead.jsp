@@ -178,7 +178,7 @@ table{
          // 장바구니 담기
          $("#cart").click(function(event) {
 			event.preventDefault();
-			var u_id = "a"; // 후에변경하기
+			var u_id = "bbaeggom"; // 후에변경하기
 						
 				$.ajax({
 					type : 'post',
