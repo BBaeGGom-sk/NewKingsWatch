@@ -71,6 +71,7 @@ table{
 <title>Insert title here</title>
 </head>
 <body>
+
    <div class="container">
       <div class="row">
 
@@ -79,6 +80,7 @@ table{
                <button name="goodsUpdate" id="goodsUpdate" class="btn btn-primary">수정</button>
             </nav>
          </div>
+
 
 	   <form>
          <div id="container_box" class="form-group">
@@ -124,6 +126,7 @@ table{
 
    <script type="text/javascript">
       $(document).ready(function() {
+
 
          var g_id = "${goodsRead.g_id}";
          

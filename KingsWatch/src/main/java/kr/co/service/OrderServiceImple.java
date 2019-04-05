@@ -1,11 +1,14 @@
 package kr.co.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.dao.OrderDAO;
+import kr.co.domain.GoodsVO;
 import kr.co.domain.UserDTO;
 
 @Service
@@ -22,9 +25,29 @@ public class OrderServiceImple implements OrderService{
 	}
 
 	@Override
+
 	public void addCart(String u_id, String g_id) {
 		// 장바구니 담기
 		dao.addCart(u_id,g_id);
 	}
+
+	public List<String> selectCartList(String u_id) {
+		// b_id 불러오기
+		return dao.selectCartList(u_id);
+	}
+
+	@Override
+	public GoodsVO getGoods(String g_id) {
+		// b_id로 상품정보 불러오기
+		return dao.getGoods(g_id);
+	}
+
+
+	 @Override 
+	 public List<GoodsVO> selectGoodsList(String g_id) { 
+		// g_id로 상품정보 불러오기 
+		 return dao.selectGoodsList(g_id); 
+	}
+
 
 }
