@@ -136,12 +136,11 @@
 									<label for="u_sex">여자</label></td>
 								</tr>
 								<tr class="">
-									<th scope="row">생년월일 <img	src=/resources/img/ico_required.gif 	id="icon_is_birthday" alt="필수" /></th>
+									<th scope="row">태어난 년도 <img	src=/resources/img/ico_required.gif 	id="icon_is_birthday" alt="필수" /></th>
 									<td>
 										<input id="u_age" name="u_age" type="text" autocomplete="off" hidden=""/>
 										<input id="birth_year" name="birth_year"  maxlength="4" value=""/> 년
-										<input id="birth_month" name="birth_month" maxlength="2" value=""/> 월
-										<input id="birth_day" name="birth_day"	maxlength="2" value=""  /> 일
+
 									</td>
 								</tr>
 								
