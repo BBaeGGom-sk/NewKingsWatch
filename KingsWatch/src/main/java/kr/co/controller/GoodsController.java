@@ -38,11 +38,11 @@ public class GoodsController {
 
 	@Inject
 	private GoodsService service;
-	
+	 
 	// 상품이미지 업로드
 	@Resource(name="uploadPath")
 	private String uploadPath;
-	
+	 
 	// 상품이미지 DB삭제
 	@ResponseBody
 	@RequestMapping(value="/deletefile",method=RequestMethod.POST)
