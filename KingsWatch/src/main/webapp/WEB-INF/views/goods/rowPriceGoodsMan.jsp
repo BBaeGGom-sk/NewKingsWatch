@@ -133,19 +133,19 @@ ul.goodsMenu>li ul.submenu>li:hover {
 
 	<section id="content">
 
-	  	<label for="goodsListBrand">리스트입니다.</label>
+	  	<label for="highPriceGoodsMan">리스트입니다.</label>
 		<div class="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>
 	 <hr>
 	  <div id="container_box">
 	  	 <div>
-		 	<a href="/goods/goodsListBrand" class="href_tag">최신순</a>
-		 	<a href="/goods/rowPriceGoodsBrand"	class="href_tag">낮은가격순</a>
-		 	<a href="/goods/highPriceGoodsBrand"	class="href_tag">높은가격순</a>
+		 	<a href="/goods/goodsListMan" class="href_tag">최신순</a>
+		 	<a href="/goods/rowPriceGoodsMan"	class="href_tag">낮은가격순</a>
+		 	<a href="/goods/highPriceGoodsMan"	class="href_tag">높은가격순</a>
 		 </div>
 		 <ul>
-		 	<c:forEach items="${goodsListBrand}" var="list"  varStatus="status">
+		 	<c:forEach items="${rowPriceGoodsMan}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -179,15 +179,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/rowPriceGoodsMan${pm.makeCategory(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsListBrand${pm.makeBrand(idx)}">${idx}</a></li>
+						href="/goods/rowPriceGoodsMan${pm.makeCategory(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/rowPriceGoodsMan${pm.makeCategory(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -231,7 +231,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 			
 			// 반복문사용
 			// # : 구분자
-			<c:forEach items="${goodsListBrand}" var="pic">
+			<c:forEach items="${rowPriceGoodsMan}" var="pic">
 				arr=arr+"#"+"${pic.g_id}";			
 			</c:forEach>
 			
@@ -252,13 +252,16 @@ ul.goodsMenu>li ul.submenu>li:hover {
 				});
 			}
 			
+			// 브랜드+카테고리 동적으로으로 붙이기
 			$(".href_tag").on("click", function(event){
 				event.preventDefault();
 				
 				var a_href = $(this).attr("href");
-				var send_href = a_href+"?g_brand="+"${g_brand}";
+				var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
 				location.href=send_href;
 			});
+			
+
 		});
 	</script>
 </body>

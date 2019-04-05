@@ -23,10 +23,16 @@ public interface GoodsDAO {
 	// 페이징
 	// 전체리스트 페이징
 	public List<GoodsVO> goodsList(Criteria cri);
-	public int getAmount();
+	public int getAmount(Criteria cri);
+	// 판매종료상품리스트 페이징
+	public List<GoodsVO> goodsNoSellingList(Criteria cri);
+	public int getNoSellingAmount();
 	// 브랜드별 상품 전체리스트 페이징
 	public List<GoodsVO> goodsListBrand(BrandCriteria cri);
 	public int getBrandAmount(BrandCriteria cri);
+	// 브랜드별 판매종료된 상품 전체리스트 페이징
+	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri);
+	public int getBrandoNoSellingAmount(BrandCriteria cri);
 	// 카테고리분류(여성,남성,공용)에 따른 페이징
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri);
 	public List<GoodsVO> goodsListWoman(CategoryCriteria cri);
@@ -35,6 +41,20 @@ public interface GoodsDAO {
 	// 검색에따른 페이징
 	public List<GoodsVO> search(SearchCriteria cri);
 	public int getSearchAmount(SearchCriteria cri);
+	// 낮은가격/높은가격순 전체상품리스트 페이징
+	public List<GoodsVO> rowPriceGoodsList(Criteria cri);
+	public List<GoodsVO> highPriceGoodsList(Criteria cri);
+	// 브랜드별 낮은가격/높은가격순 리스트 페이징
+	public List<GoodsVO> rowPriceGoodsListBrand(BrandCriteria cri);
+	public List<GoodsVO> highPriceGoodsListBrand(BrandCriteria cri);
+	// 카테고리분류(여성,남성,공용)별 낮은가격/높은가격순에 따른 페이징
+	public List<GoodsVO> rowPriceGoodsMan(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsMan(CategoryCriteria cri);
+	public List<GoodsVO> rowPriceGoodsWoman(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsWoman(CategoryCriteria cri);
+	public List<GoodsVO> rowPriceGoodsPublic(CategoryCriteria cri);
+	public List<GoodsVO> highPriceGoodsPublic(CategoryCriteria cri);
+
 	
 
 }

@@ -1,13 +1,15 @@
 package kr.co.dao;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kr.co.domain.BasketVO;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.UserDTO;
 
@@ -26,6 +28,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
+
 	public List<String> selectCartList(String u_id) {
 		// TODO Auto-generated method stub
 		return session.selectList(NS+".selectCartList", u_id);
@@ -41,6 +44,15 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override public List<GoodsVO> selectGoodsList(String g_id) { 
 		// TODO Auto-generated method stub 
 		return session.selectList(NS+".selectGoodsList",g_id); 
+	}
+
+	public void addCart(String u_id, String g_id) {
+		// 장바구니 담기
+		Map<String, String> map= new HashMap<String, String>();
+		map.put("u_id", u_id);
+		map.put("b_id", g_id);
+		session.insert(NS+".addCart", map);
+
 	}
 
 }

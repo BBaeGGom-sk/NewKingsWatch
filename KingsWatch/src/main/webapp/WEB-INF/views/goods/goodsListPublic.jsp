@@ -121,6 +121,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
+	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+	  		<ul class="row submenu">
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
+	  		</ul>
+	  	</li>
 	  </ul>
 	  </nav>
 	  
@@ -132,6 +139,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</div>
 	 <hr>
 	 <div id="container_box">
+		<div>
+		 	<a href="/goods/goodsListPublic" class="href_tag">최신순</a>
+		 	<a href="/goods/rowPriceGoodsWoman"	class="href_tag">낮은가격순</a>
+		 	<a href="/goods/highPriceGoodsWoman"	class="href_tag">높은가격순</a>
+		 </div>
 		 <ul>
 		 	<c:forEach items="${goodsListPublic}" var="list"  varStatus="status">
 			 	<li>
@@ -222,6 +234,16 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
+			
+			// 브랜드+카테고리 동적으로으로 붙이기
+			$(".href_tag").on("click", function(event){
+				event.preventDefault();
+				
+				var a_href = $(this).attr("href");
+				var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
+				location.href=send_href;
+			});
+			
 
 		});
 	</script>

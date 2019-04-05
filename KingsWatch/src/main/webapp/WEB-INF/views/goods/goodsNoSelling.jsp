@@ -133,19 +133,14 @@ ul.goodsMenu>li ul.submenu>li:hover {
 
 	<section id="content">
 
-	  	<label for="goodsListBrand">리스트입니다.</label>
+	  	<label for="goodsList">리스트입니다.</label>
 		<div class="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
-		</div>
+		</div>		
 	 <hr>
-	  <div id="container_box">
-	  	 <div>
-		 	<a href="/goods/goodsListBrand" class="href_tag">최신순</a>
-		 	<a href="/goods/rowPriceGoodsBrand"	class="href_tag">낮은가격순</a>
-		 	<a href="/goods/highPriceGoodsBrand"	class="href_tag">높은가격순</a>
-		 </div>
+	 <div id="container_box">
 		 <ul>
-		 	<c:forEach items="${goodsListBrand}" var="list"  varStatus="status">
+		 	<c:forEach items="${goodsNoSellingList}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -153,24 +148,24 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
 		                </a>
-		                </div>
+		        	 	</div>
 		    		</div>
 		    		<div class="description">
 		     			<p>
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span class="title displaynone">${list.g_name}</span></a>
+		            		<span>${list.g_name}</span></a>
 		            	</p>
 					<div></div>
-						<p class="price"><span class="displaynone">${list.g_price }</span></p>
-						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
+						<p class="price"><span>${list.g_price}</span></p>
+						<p class="priceSale">할인율 : ${list.g_sale}%</p>
 		        	<div>
-		            <div></div>
+		            	<div></div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
-		</div>
+	</div>
 	</section>
 
 	 </div> <!-- row 끝 -->
@@ -179,15 +174,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsNoSelling${pm.makeQuery(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsListBrand${pm.makeBrand(idx)}">${idx}</a></li>
+						href="/goods/goodsNoSelling${pm.makeQuery(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsNoSelling${pm.makeQuery(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -224,18 +219,18 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			var page = 1;
-			
-			// 불러온 g_id값 저장변수
-			var arr="";
-			
-			// 반복문사용
-			// # : 구분자
-			<c:forEach items="${goodsListBrand}" var="pic">
-				arr=arr+"#"+"${pic.g_id}";			
-			</c:forEach>
-			
-			goodsPicDbGet(arr);
+		var page = 1;
+		
+		// 불러온 g_id값 저장변수
+		var arr="";
+		
+		// 반복문사용
+		// # : 구분자
+		<c:forEach items="${goodsNoSellingList}" var="pic">
+			arr=arr+"#"+"${pic.g_id}";			
+		</c:forEach>
+		
+		goodsPicDbGet(arr);
 
 			function goodsPicDbGet(arr) {
 				var source= $("#source").html();
@@ -252,13 +247,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 				});
 			}
 			
-			$(".href_tag").on("click", function(event){
-				event.preventDefault();
-				
-				var a_href = $(this).attr("href");
-				var send_href = a_href+"?g_brand="+"${g_brand}";
-				location.href=send_href;
-			});
 		});
 	</script>
 </body>

@@ -120,6 +120,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
+	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+	  		<ul class="row submenu">
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
+	  		</ul>
+	  	</li>
 	  </ul>
 	  </nav>
 	  
@@ -132,6 +139,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</div>		
 	 <hr>
 	 <div id="container_box">
+		 <div>
+		 	<a href="/goods/goodsList">최신순</a>
+		 	<a href="/goods/rowPriceGoods">낮은가격순</a>
+		 	<a href="/goods/highPriceGoods">높은가격순</a>
+		 </div>
 		 <ul>
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
 			 	<li>

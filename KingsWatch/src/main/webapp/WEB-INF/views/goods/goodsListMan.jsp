@@ -89,7 +89,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 </head>
 <body>
 
-	alert("${pm.cri}");
 	<div class="container">
 	  <div class="row">
 	  
@@ -121,17 +120,29 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
+	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+	  		<ul class="row submenu">
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
+	  		</ul>
+	  	</li>
 	  </ul>
 	  </nav>
 	  
 
 	<section id="content">
-	  	<label for="goodsListMan">리스트입니다.</label>
+	  	<label for="goodsListMan">남성상품 리스트입니다.</label>
 		<div class="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>
 	 <hr>
 	 <div id="container_box">
+	 	<div>
+		 	<a href="/goods/goodsListMan" class="href_tag">최신순</a>
+		 	<a href="/goods/rowPriceGoodsMan"	class="href_tag">낮은가격순</a>
+		 	<a href="/goods/highPriceGoodsMan"	class="href_tag">높은가격순</a>
+		</div>
 		 <ul>
 		 	<c:forEach items="${goodsListMan}" var="list"  varStatus="status">
 			 	<li>
@@ -222,6 +233,16 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
+			
+			// 브랜드 자동으로 붙이기
+			$(".href_tag").on("click", function(event){
+				event.preventDefault();
+				
+				var a_href = $(this).attr("href");
+				var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
+				location.href=send_href;
+			});
+
 
 		});
 	</script>

@@ -145,7 +145,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		 	<a href="/goods/highPriceGoodsBrand"	class="href_tag">높은가격순</a>
 		 </div>
 		 <ul>
-		 	<c:forEach items="${goodsListBrand}" var="list"  varStatus="status">
+		 	<c:forEach items="${rowPriceGoodsListBrand}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -179,15 +179,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/rowPriceGoodsListBrand${pm.makeBrand(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsListBrand${pm.makeBrand(idx)}">${idx}</a></li>
+						href="/goods/rowPriceGoodsListBrand${pm.makeBrand(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsListBrand${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/rowPriceGoodsListBrand${pm.makeBrand(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -231,7 +231,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 			
 			// 반복문사용
 			// # : 구분자
-			<c:forEach items="${goodsListBrand}" var="pic">
+			<c:forEach items="${rowPriceGoodsListBrand}" var="pic">
 				arr=arr+"#"+"${pic.g_id}";			
 			</c:forEach>
 			
@@ -252,6 +252,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 				});
 			}
 			
+			// 브랜드 자동으로 붙이기
 			$(".href_tag").on("click", function(event){
 				event.preventDefault();
 				

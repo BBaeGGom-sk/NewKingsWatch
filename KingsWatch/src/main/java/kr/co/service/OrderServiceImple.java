@@ -26,6 +26,7 @@ public class OrderServiceImple implements OrderService{
 	}
 
 	@Override
+
 	public List<String> selectCartList(String u_id) {
 		// b_id 불러오기
 		return dao.selectCartList(u_id);
@@ -42,6 +43,12 @@ public class OrderServiceImple implements OrderService{
 	 public List<GoodsVO> selectGoodsList(String g_id) { 
 		// g_id로 상품정보 불러오기 
 		 return dao.selectGoodsList(g_id); 
+	}
+
+
+	public void addCart(String u_id, String g_id) {
+		// 장바구니 담기
+		dao.addCart(u_id,g_id);
 	}
 
 

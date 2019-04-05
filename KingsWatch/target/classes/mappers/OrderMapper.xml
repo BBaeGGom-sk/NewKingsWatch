@@ -6,9 +6,19 @@
 <mapper namespace="kr.co.mapper.order">
 
 	<!-- 회원정보 불러오기 -->
+
   	<select id="selectById" resultType="kr.co.domain.UserDTO">
   	select * from tab_user where u_id = 'bbaeggom'
  	 </select>
+
+  <select id="selectById" resultType="kr.co.domain.UserDTO">
+  select * from tab_user where u_id = 'bbaeggom'
+  </select>
+  
+  <insert id="addCart">
+  	insert into tab_basket(u_id,b_id) values(#{u_id}, #{b_id})
+  </insert>
+	
 
 	<select id="selectCartList" resultType="String">
 	select b_id from tab_basket where u_id = #{u_id}
