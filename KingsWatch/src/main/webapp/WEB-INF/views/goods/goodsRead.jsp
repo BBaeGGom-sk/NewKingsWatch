@@ -172,38 +172,34 @@ table{
             $("form").submit();
          });
          
-         
-			$("#cart").click(function(event) {
-					event.preventDefault();
-					var u_id = "a";
+         // 장바구니 담기
+         $("#cart").click(function(event) {
+			event.preventDefault();
+			var u_id = "a"; // 후에변경하기
 						
-						$.ajax({
-							type : 'post',
-							url : '/order/addCart',
-							data: JSON.stringify({
-								g_id : g_id,
-								u_id : u_id
-							}),
-							headers : {
-								"Content-Type" : "application/json",
-								"X-HTTP-Method-Override" : "POST"
-							},
-							dataType : "text",
-							success : function(result) {
-								if(result=="INSERT_SUCCESS"){
-									alert("장바구니에 추가되었습니다^^!");									
-								} else {
-									alert("장바구니에 추가되지 않았습니다ㅠㅜ");
-								}
-							},
-							error : function(request, status, error) {
+				$.ajax({
+					type : 'post',
+					url : '/order/addCart',
+					data: {
+						g_id : g_id,
+						u_id : u_id
+					},
+					dataType : "text",
+					success : function(result) {
+						if(result=="INSERT_SUCCESS"){
+							alert("장바구니에 추가되었습니다^^!");									
+						} else {
+							alert("장바구니에 추가되지 않았습니다ㅠㅜ");
+						}
+					},
+					error : function(request, status, error) {
 								
-							}
-						});
-
-					});
+					}
+				});
+			});
 
          goodsReadPicDbGet(g_id);
+         
       });
       
       function goodsReadPicDbGet(g_id) {
