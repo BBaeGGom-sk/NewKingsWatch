@@ -71,7 +71,7 @@ table{
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form>
 	<div class="container">
 		<div class="row">
 
@@ -109,7 +109,7 @@ table{
 		</div>
 	</div>
 	
-	<form>
+
 		<input id="g_id" name="g_id"  value="${goodsRead.g_id}" type="hidden">
 	</form>
 

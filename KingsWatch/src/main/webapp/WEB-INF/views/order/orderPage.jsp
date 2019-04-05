@@ -39,7 +39,7 @@ li {
 			<div class="info">
 				<div class="member">
 					<p>
-						<strong>${dto.u_name}</strong> 님은, [화이트] 회원이십니다.
+						<strong>${dto.u_name}</strong> 님은, ${dto.u_level} 회원이십니다.
 					</p>
 					<ul class="">
 						<li class="displaynone"><span class="displaynone">0</span> 이상
@@ -75,7 +75,7 @@ li {
 						<tr>
 							<!-- 온클릭시 모든 제품 체크되는 기능 만들기 -->
 							<th scope="col" class="chk "><input type="checkbox"
-								onclick="EC_SHOP_FRONT_ORDERFORM_PRODUCT.proc.setCheckOrderList('chk_order_cancel_list_basic', this);" /></th>
+								onclick="" /></th>
 							<th scope="col" class="thumb">이미지</th>
 							<th scope="col" class="product">상품정보</th>
 							<th scope="col" class="price">판매가</th>
@@ -86,6 +86,26 @@ li {
 							<th scope="col" class="total">합계</th>
 						</tr>
 					</thead>
+					<tbody class="xans-element- xans-order xans-order-normallist">
+						<c:forEach items="${goodsList}" var="goods">
+						<tr class="xans-record-">
+							<td class="chk "><input id="chk_order_cancel_list0" value=""
+								type="checkbox" /></td>
+							<td class="thumb"><a
+								href="/product/detail.html?product_no=7735&cate_no=191"> <img
+									src="" alt="여기로 썸네일 불러오기" /></a></td>
+							<td class="product"><a href=""> <strong> ${goods.g_name}</strong></a>
+							<td class="price"><strong>${goods.g_price}</strong></td>
+							<td class="quantity">${o_quantity}</td>
+							<td class="mileage"><img
+								src="//img.echosting.cafe24.com/design/common/icon_cash.gif" />
+								여기에 적립금 넣어주기</td>
+							<td class="delivery">배송 방법 넣어주기</td>
+							<td class="charge">무료</td>
+							<td class="total"><strong>합계 넣어주기</strong></td>
+						</tr>
+						</c:forEach>
+					</tbody>
 					<tfoot>
 						<tr>
 							<td colspan="9"><strong class="type">[기본배송]</strong> 상품구매금액
@@ -94,26 +114,6 @@ li {
 									id="domestic_ship_fee_sum">(여기에 총합 받아오기)</span></strong></td>
 						</tr>
 					</tfoot>
-					<tbody class="xans-element- xans-order xans-order-normallist">
-						<tr class="xans-record-">
-							<td class="chk "><input id="chk_order_cancel_list0" value=""
-								type="checkbox" /></td>
-							<td class="thumb"><a
-								href="/product/detail.html?product_no=7735&cate_no=191"> <img
-									src="" alt="여기로 썸네일 불러오기" /></a></td>
-							<td class="product"><a href=""> <strong> 여기에
-										상품명 넣기</strong></a>
-								<div class="option ">여기에 상품 옵션 넣기</div>
-							<td class="price"><strong>여기에 상품가격 넣기</strong></td>
-							<td class="quantity">여기에 상품수량 넣기</td>
-							<td class="mileage"><img
-								src="//img.echosting.cafe24.com/design/common/icon_cash.gif" />
-								여기에 적립금 넣어주기</td>
-							<td class="delivery">배송 방법 넣어주기</td>
-							<td class="charge">배송비 넣어주기</td>
-							<td class="total"><strong>합계 넣어주기</strong></td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 			<ul class="controlInfo typeBtm">
@@ -141,7 +141,7 @@ li {
 								<img
 									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 									alt="필수" /> 필수입력사항
-							</p>>
+							</p>
 							<tbody class="address_form ">
 								<tr>
 									<!-- 주문자 이름 -->
@@ -168,9 +168,9 @@ li {
 										placeholder="기본 주소" size="40" readonly
 										value="${dto.u_adMain }" type="text" /><br /> <!-- 나머지주소 -->
 										<input class="inputTypeText" size="40" id="u_detailAddress"
-										placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+										placeholder="나머지 주소" value="${dto.u_adDetail }"> <!-- 상세주소 -->
 										<input id="u_extraAddress" name="raddr2" class="inputTypeText"
-										placeholder="상세 주소" size="40" value="${dto.u_adDetail }"
+										placeholder="상세 주소" size="40" value="${dto.u_adSub }"
 										type="text" />
 									</td>
 								</tr>
@@ -282,10 +282,10 @@ li {
 											placeholder="기본 주소" size="40" readonly
 											value="${dto.u_adMain }" type="text" /><br /> <!-- 나머지주소 -->
 											<input class="inputTypeText" size="40" id="o_detailAddress"
-											placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+											placeholder="나머지 주소" value="${dto.u_adDetail }"> <!-- 상세주소 -->
 											<input id="o_extraAddress" name="raddr2"
 											class="inputTypeText" placeholder="상세 주소" size="40"
-											value="${dto.u_adDetail }" type="text" />
+											value="${dto.u_adSub }" type="text" />
 										</td>
 									</tr>
 									<tr>
@@ -468,6 +468,7 @@ li {
 						</div>
 					</div>
 				</form>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript">

@@ -40,14 +40,9 @@
 						<th scope="col" class="button">선택</th>
 					</tr>
 				</thead>
-				<tfoot>
-					<tr>
-						<td colspan="10"><strong class="type">[기본배송]</strong> 상품구매금액
-							<strong>(여기에 장바구니 금액총합)</strong> + 배송비 (여기에 배송비 넣기) = 합계 : <strong
-							class="total"><span>(여기에 상품 총 금액 넣기)</span></strong></td>
-					</tr>
-				</tfoot>
 				<tbody class="xans-element- xans-order xans-order-list">
+					<c:forEach items="${goodsList}" var="goods">
+					<input type="hidden" value="${goods.g_id }" name="g_idArr">
 					<tr class="xans-record-">
 						<!-- 체크박스 부분 -->
 						<td><input type="checkbox" id="basket_chk_id_0"
@@ -55,16 +50,14 @@
 						<!-- 썸네일 부분 -->
 						<td class="thumb"><a href=""><img src="" alt="여기에 썸네일 넣기" /></a></td>
 						<!-- 상품 정보 부분 -->
-						<td class="product"><a href=""><strong>(여기에 상품명
-									넣기)</strong> </a>
+						<td class="product"><a href=""><strong>${goods.g_name}</strong> </a>
 							<ul class="xans-element- xans-order xans-order-optionall option">
-								<li class="xans-record-"><strong>(여기에 상품명 넣기)</strong> (옵션
-									넣어주기) <br /></li>
+								<li class="xans-record-"><strong>${goods.g_name}</strong></li>
 							</ul></td>
 						<!-- 판매가 부분 -->
 						<td class="price">
 							<div class="">
-								<strong>(상품 가격 넣어주기)</strong>
+								<strong>${goods.g_price}</strong>
 							</div>
 						</td>
 						<!-- 상품 수량 부분 -->
@@ -87,9 +80,9 @@
 							src="//img.echosting.cafe24.com/design/common/icon_cash.gif" />
 							(여기에 적립금x수량 넣기)</td>
 						<!--  배송 구분 부분 -->
-						<td class="delivery">(배송구분 넣기)(ex:기본배송)</td>
+						<td class="delivery">기본배송</td>
 						<!-- 배송비 부분 -->
-						<td>(배송비 넣어주기)</td>
+						<td>무료</td>
 						<!-- 합계 부분 -->
 						<td class="total"><strong>(가격x수량 넣어주기)</strong></td>
 						<!-- 주문 선택 부분 -->
@@ -105,7 +98,15 @@
 							</a>
 						</td>
 					</tr>
+					</c:forEach>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="10"><strong class="type">[기본배송]</strong> 상품구매금액
+							<strong>(여기에 장바구니 금액총합)</strong> + 배송비 (여기에 배송비 넣기) = 합계 : <strong
+							class="total"><span>(여기에 상품 총 금액 넣기)</span></strong></td>
+					</tr>
+				</tfoot>
 			</table>
 			<!-- 선택상품 제어 버튼 -->
 			<div class="xans-element- xans-order xans-order-selectorder ">
@@ -147,6 +148,7 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
 		</div>
 
 		<script type="text/javascript">

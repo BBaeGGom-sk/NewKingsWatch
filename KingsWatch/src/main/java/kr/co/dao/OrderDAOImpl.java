@@ -32,9 +32,15 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public GoodsVO getGoods(String b_id) {
+	public GoodsVO getGoods(String g_id) {
 		// TODO Auto-generated method stub
-		return session.selectOne(NS+".getGoods", b_id);
+		return session.selectOne(NS+".getGoods", g_id);
+	}
+
+
+	@Override public List<GoodsVO> selectGoodsList(String g_id) { 
+		// TODO Auto-generated method stub 
+		return session.selectList(NS+".selectGoodsList",g_id); 
 	}
 
 }

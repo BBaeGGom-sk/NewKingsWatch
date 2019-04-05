@@ -10,12 +10,15 @@
   	select * from tab_user where u_id = 'bbaeggom'
  	 </select>
 
-	<select id="selectCartList" resultType="kr.co.domain.BasketVO">
+	<select id="selectCartList" resultType="String">
 	select b_id from tab_basket where u_id = #{u_id}
 	</select>
 	
 	<select id="getGoods" resultType="kr.co.domain.GoodsVO">
-	select * from tab_goods where b_id = #{b_id}
+	select * from tab_goods where g_id = #{g_id}
 	</select>
 
+	<select id="selectGoodsList" resultType="kr.co.domain.GoodsVO">
+	select * from tab_goods where g_id = #{g_id}
+	</select>
 </mapper>

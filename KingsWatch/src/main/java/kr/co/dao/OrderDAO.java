@@ -13,6 +13,8 @@ public interface OrderDAO {
 
 	List<String> selectCartList(String u_id);
 
-	GoodsVO getGoods(String b_id);
+	GoodsVO getGoods(String g_id);
+
+	List<GoodsVO> selectGoodsList(String g_id); 
 	
 }

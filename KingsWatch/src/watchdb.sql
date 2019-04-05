@@ -36,6 +36,7 @@ create table tab_goods(
 	g_brand varchar2(40)
 )
 drop table tab_goods
+select * from tab_goods
 
 create table tab_basket(
 	u_id varchar2(30) references tab_user(u_id),
@@ -43,7 +44,8 @@ create table tab_basket(
 	b_cartedtime varchar2(40) default sysdate
 )
 drop table tab_basket
-
+insert into TAB_BASKET (u_id,b_id) values ('bbaeggom','3');
+select * from tab_basket
 
 create table tab_order(
 	o_num number(8) primary key,

@@ -32,9 +32,17 @@ public class OrderServiceImple implements OrderService{
 	}
 
 	@Override
-	public GoodsVO getGoods(String b_id) {
+	public GoodsVO getGoods(String g_id) {
 		// b_id로 상품정보 불러오기
-		return dao.getGoods(b_id);
+		return dao.getGoods(g_id);
 	}
+
+
+	 @Override 
+	 public List<GoodsVO> selectGoodsList(String g_id) { 
+		// g_id로 상품정보 불러오기 
+		 return dao.selectGoodsList(g_id); 
+	}
+
 
 }
