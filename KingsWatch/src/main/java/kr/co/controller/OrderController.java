@@ -42,12 +42,13 @@ public class OrderController {
 	
 	@ResponseBody
 	@RequestMapping(value="/addCart", method=RequestMethod.POST)
-	public ResponseEntity<String> addCart(@RequestBody Map<String, String> map) {
+	public ResponseEntity<String> addCart(UserDTO dto, GoodsVO vo) {
 		
-		// 변수 두개 맵으로 받아서 집어넣기
-		String u_id=map.get("u_id");
-		String g_id=map.get("g_id");
-		
+		// 변수가 두개여서 파라미터 domain클래스로 받아서 get해줌.
+		// 하나면 @requestBody사용해도 되지만 두개부턴 인식XXX
+		String u_id=dto.getU_id();
+		String g_id=vo.getG_id();
+
 		ResponseEntity<String> entity = null;
 		try {
 			service.addCart(u_id,g_id);
