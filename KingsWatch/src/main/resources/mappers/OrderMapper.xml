@@ -9,6 +9,10 @@
   <select id="selectById" resultType="kr.co.domain.UserDTO">
   select * from tab_user where u_id = 'bbaeggom'
   </select>
+  
+  <insert id="addCart">
+  	insert into tab_basket(u_id,b_id) values(#{u_id}, #{b_id})
+  </insert>
 	
 
 </mapper>
