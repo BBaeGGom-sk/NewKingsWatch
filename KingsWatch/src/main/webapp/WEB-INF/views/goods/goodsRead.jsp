@@ -12,6 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="../../resources/js/upload.js"></script>
+<script src="../../resources/js/uploaddetail.js"></script>
 <style type="text/css">
 .uploadedList {
    list-style: none;
@@ -126,8 +127,12 @@ table{
 
    <script type="text/javascript">
       $(document).ready(function() {
+<<<<<<< HEAD
 
 
+=======
+    	  
+>>>>>>> refs/heads/se0e
          var g_id = "${goodsRead.g_id}";
          
          var g_price= ${goodsRead.g_price};
@@ -210,7 +215,8 @@ table{
             var source= $("#source").html();
             var template= Handlebars.compile(source);
             $(result).each(function() {
-               var data= getFileInfo(this);
+            	alert(this);
+               var data= getFileDetail(this);
                $(".uploadedList").append(template(data));
             });
          });      
