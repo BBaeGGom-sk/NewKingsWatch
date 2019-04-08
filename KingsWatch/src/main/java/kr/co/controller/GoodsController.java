@@ -93,8 +93,6 @@ public class GoodsController {
 		PageMaker pm= new PageMaker(amount, cri);
 		pm.setCri(cri);
 		
-		System.out.println(amount);
-		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
 		return "goods/goodsList";
@@ -130,7 +128,6 @@ public class GoodsController {
 	// 브랜드별 판매중지 상품리스트
 	@RequestMapping("/goodsListBrandNoSelling")
 	public String listBrandNoSelling(BrandCriteria cri, Model model) {
-		System.out.println(cri);
 		List<GoodsVO> goodsListBrandNoSelling= service.goodsListBrandNoSelling(cri);
 		int amount= service.getBrandNoSellingAmount(cri);
 		PageMaker pm= new PageMaker(amount, cri);
@@ -206,7 +203,6 @@ public class GoodsController {
 		List<GoodsVO> highPriceGoods= service.highPriceGoodsList(cri);
 		int amount= service.getAmount(cri); 
 		PageMaker pm= new PageMaker(amount, cri);
-		  
 		pm.setCri(cri);
 	  
 		model.addAttribute("highPriceGoods", highPriceGoods);
@@ -331,8 +327,6 @@ public class GoodsController {
 		model.addAttribute("g_category", cri.getG_category());
 		return "goods/highPriceGoodsPublic";
 	}
-	
-	
 
 	// 상품올리기 화면
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.GET)
