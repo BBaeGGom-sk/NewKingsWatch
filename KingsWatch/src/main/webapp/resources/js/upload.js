@@ -13,7 +13,7 @@ function getFileInfo(data) { // data= 썸네일에 대한 주소
 	fullName= data;
 	
 	if(checkImageType(data)){ // 이미지파일이면
-		imgsrc="/displayfile?fileName="+data;
+		imgsrc="/displayfile?fileName="+data; // 썸네일 이미지파일 주소!
 
 		// 원본파일+파일명 얻어오기
 		var prefix=data.substring(0,12);
@@ -31,4 +31,8 @@ function getFileInfo(data) { // data= 썸네일에 대한 주소
 	}
 			// ex) imgsrc:imgsrc = handlebars : var의 변수
 	return {imgsrc:imgsrc, getLink:getLink, fullName:fullName, fileName:fileName}; // JSON형태로 handlebars에 넘겨줌
+}
+
+function hello(){
+	alert("하이");
 }
