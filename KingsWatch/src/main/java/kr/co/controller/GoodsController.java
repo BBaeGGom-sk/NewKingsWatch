@@ -1,9 +1,6 @@
 package kr.co.controller;
  
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -93,8 +88,6 @@ public class GoodsController {
 		PageMaker pm= new PageMaker(amount, cri);
 		pm.setCri(cri);
 		
-		System.out.println(amount);
-		
 		model.addAttribute("pm", pm);
 		model.addAttribute("goodsList", goodsList);
 		return "goods/goodsList";
@@ -130,7 +123,6 @@ public class GoodsController {
 	// 브랜드별 판매중지 상품리스트
 	@RequestMapping("/goodsListBrandNoSelling")
 	public String listBrandNoSelling(BrandCriteria cri, Model model) {
-		System.out.println(cri);
 		List<GoodsVO> goodsListBrandNoSelling= service.goodsListBrandNoSelling(cri);
 		int amount= service.getBrandNoSellingAmount(cri);
 		PageMaker pm= new PageMaker(amount, cri);
@@ -206,7 +198,6 @@ public class GoodsController {
 		List<GoodsVO> highPriceGoods= service.highPriceGoodsList(cri);
 		int amount= service.getAmount(cri); 
 		PageMaker pm= new PageMaker(amount, cri);
-		  
 		pm.setCri(cri);
 	  
 		model.addAttribute("highPriceGoods", highPriceGoods);
@@ -331,8 +322,6 @@ public class GoodsController {
 		model.addAttribute("g_category", cri.getG_category());
 		return "goods/highPriceGoodsPublic";
 	}
-	
-	
 
 	// 상품올리기 화면
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.GET)

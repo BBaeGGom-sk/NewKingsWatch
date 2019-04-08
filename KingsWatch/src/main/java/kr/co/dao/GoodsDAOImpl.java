@@ -67,14 +67,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri) {
 		// 브랜드별 판매종료 상품 리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		System.out.println(cri);
 		return session.selectList(NS+".brandNoSelling", cri, rb);
 	}
 	
 	@Override
 	public int getBrandoNoSellingAmount(BrandCriteria cri) {
 		// 브랜드별 판매종료 상품 전체 갯수 구하기
-		System.out.println(cri+"갯수");
 		return session.selectOne(NS+".getBrandoNoSellingAmount",cri);
 	}
 	

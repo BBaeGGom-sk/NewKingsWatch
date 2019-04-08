@@ -94,7 +94,7 @@ table{
                <label for="g_name">이름</label>
                   <p>${goodsRead.g_name}</p>
                <label for="g_price">가격</label>
-                  <p>${goodsRead.g_price}</p>
+                  <p>&#8361;<fmt:formatNumber value="${goodsRead.g_price}" type="number" /></p>
                <label for="g_price">할인가격</label>
                   <p id="priceSale"></p>
                <label for="o_quantity">수량</label>
@@ -141,9 +141,10 @@ table{
          function salePrice() {
             var g_persent = g_sale/100;
             var g_salePrice= g_price-(g_price*g_persent);
-            $("#priceSale").text(g_salePrice);
+            $("#priceSale").text("₩"+g_salePrice.toLocaleString());
+            
+            
          }
-
          salePrice();
          
          // 상품수정버튼
@@ -214,7 +215,6 @@ table{
             var source= $("#source").html();
             var template= Handlebars.compile(source);
             $(result).each(function() {
-            	alert(this);
                var data= getFileDetail(this);
                $(".uploadedList").append(template(data));
             });
