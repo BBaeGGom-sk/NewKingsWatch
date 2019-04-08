@@ -34,6 +34,7 @@
 					<h2 id="title">회원정보 상세보기</h2>
 				</div>
 
+이름 : ${login.u_name}, 이메일 : ${login.u_email}, 폰번호 : ${login.u_phone}, 성별 : ${login.u_sex}
 				<div align="center">
 					<table border="1" summary="">
 						<caption>바꿀 수 없는 영역</caption>
@@ -66,16 +67,10 @@
 							<tr>
 								<th scope="row">비밀번호</th>
 								<td><input id="u_pw" name="u_pw" autocomplete="off"
-									type="password" value="${login.u_pw}" class="changeInput"
-									readonly="readonly" /> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
+									type="password" value="" class="changeInput"
+									readonly="readonly" /> 비밀번호 변경화면은 별도입니다.</td>
 							</tr>
-							<tr>
-								<th scope="row">비밀번호 확인 <img
-									src="/resources/img/ico_required.gif" alt="필수" /></th>
-								<td><input id="user_passwd_confirm"
-									name="user_passwd_confirm" autocomplete="off" type="password"
-									class="changeInput" /></td>
-							</tr>
+
 
 							<tr>
 								<th scope="row" id="nameTitle">이름</th>
@@ -87,22 +82,25 @@
 							<tr>
 								<!-- 주문자 휴대전화 -->
 								<th scope="row">휴대폰 번호</th>
-								<td><c:set var="phoneNum" value="${login.u_phone}" /> <!-- 주문자 휴대전화 1 -->
-									<select id="u_phoneNumFirst" name="u_phoneNumFirst"
-									class="changeInput">
+								<td>
+									<input id="u_phone" name="u_phone" type="text" value="${login.u_phone}"	autocomplete="off" hidden="" />
+									<c:set var="phoneNum" value="${login.u_phone}" /> <!-- 주문자 휴대전화 1 -->
+									<select id="u_phoneNumFirst" name="u_phoneNumFirst"	class="changeInput" >
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
 										<option value="017">017</option>
 										<option value="018">018</option>
 										<option value="019">019</option>
-								</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phoneNumMid"
+									</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phoneNumMid"
 									name="u_phoneNumMid" maxlength="4" size="4" class="changeInput"
-									value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
+									value="${fn:substring(phoneNum,3,7)}" type="text" readonly="readonly"/> - <!-- 휴대 전화 3 -->
 									<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4"
 									class="changeInput" size="4"
-									value="${fn:substring(phoneNum,7,11) }" type="text" /></td>
+									value="${fn:substring(phoneNum,7,11)}" type="text" readonly="readonly"/></td>
 							</tr>
+
+
 
 							<tr class="displaynone">
 								<th scope="row">&nbsp;&nbsp;SMS 수신여부</th>
@@ -116,37 +114,44 @@
 								<td>
 									<!-- 우편번호 --> <input id="u_postcode" name="u_postNum"
 									class="changeInput" placeholder="" size="6" maxlength="6"
-									value="${login.u_postNum}" /> <!-- 우편번호 버튼 --> <input
-									class="btn btn-primary" type="button"
+									value="${login.u_postNum}" readonly="readonly"/> 
+									<!-- 우편번호 버튼 -->
+									<input
+									class="btn btn-primary" type="button" id="btn_postNum"
 									onclick="u_execDaumPostcode()" value="우편번호 찾기"><br>
 									<!-- 기본주소 --> <input id="u_address" name="u_adMain"
 									class="changeInput" placeholder="기본 주소" size="40"
-									value="${login.u_adMain}" /><br> <!-- 상세주소 --> <input
+									value="${login.u_adMain}" readonly="readonly"/><br> 
+									<!-- 상세주소 -->
+									<input
 									id="u_detailAddress" name="u_adSub" class="changeInput"
 									placeholder="상세 주소" size="40" type="text"
-									value="${login.u_adSub}" /> <!-- 나머지주소 --> <input
+									value="${login.u_adSub}" readonly="readonly"/>
+									<!-- 나머지주소 -->
+									<input
 									id="u_extraAddress" name="u_adDetail" class="changeInput"
-									placeholder="나머지 주소" size="40" value="${login.u_adDetail}">
+									placeholder="나머지 주소" size="40" value="${login.u_adDetail}" readonly="readonly"/>
 
 								</td>
 							</tr>
 
 							<tr class="">
 								<th scope="row">성별</th>
-								<td><input id="u_sex" name="u_sex" value="1" type="radio"
-									class="changeInput" /> <label for="u_sex">남자</label> <input
-									id="u_sex" name="u_sex" value="2" type="radio"
-									class="changeInput" /> <label for="u_sex">여자</label></td>
+								<td>
+									<input id="sex_man" name="u_sex" value="1" type="radio"	class="changeInput" />
+									<label for="u_sex" class="changeInput" >남자</label>&nbsp;&nbsp;
+									<input id="sex_woman" name="u_sex" value="2" type="radio"	class="changeInput" />
+									<label for="u_sex" class="changeInput" >여자</label>
+								</td>
 							</tr>
 
 							<tr>
 								<th scope="row">이메일</th>
-								<td><input id="u_email" name="u_email" type="text"
-									autocomplete="off" hidden="" /> <input id="u_email1"
-									name="u_email1" class="changeInput" value="" type="text" /> @<input
-									id="u_email2" name="u_email2" class="changeInput"
-									readonly="readonly" value="" type="text" /> <select
-									id="u_emailSelect" class="changeInput">
+								<td><input id="u_email" name="u_email" type="text" value="${login.u_email}"	autocomplete="off" hidden="" />
+									<input id="u_email1" name="u_email1" class="changeInput" value="" type="text" readonly="readonly"/>
+									@
+									<input	id="u_email2" name="u_email2" class="changeInput" readonly="readonly" value="" type="text" />
+									<select	id="u_emailSelect" class="changeInput">
 										<option value="" selected="selected">- 이메일 선택 -</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="naver.com">naver.com</option>
@@ -154,7 +159,8 @@
 										<option value="nate.com">nate.com</option>
 										<option value="yahoo.com">yahoo.com</option>
 										<option value="etc">직접입력</option>
-								</select></td>
+								</select>
+								</td>
 							</tr>
 
 							<tr class="displaynone">
@@ -281,22 +287,42 @@
 	<script type="text/javascript">
 	
 
-		//처음에는 변경완료 버튼 안보이게
+		//처음에는 변경완료 버튼, 우편번호 찾기버튼, 이메일 셀렉터 안보이게
 		$("#revise_complete").hide();
+		$("#btn_postNum").hide();
+		$("#u_emailSelect").hide();
 		
-		//변경하기 버튼 클릭
+		
+		
+		//변경하기 버튼 클릭-> readonly속성 풀어주고, 변경할수 있는 버튼들 보이게, 
         $("#revise").click(function() {
         	$("#title").value = "회원정보 변경하기";
         	 $(".changeInput").css("background-color", "#cddc39");
         	 $(".changeInput").attr("readonly", false);
         	 $("#revise").hide();
         	 $("#revise_complete").show();
+        	 
+     		$("#revise_complete").show();
+    		$("#btn_postNum").show();
+    		$("#u_emailSelect").show();
 		});
         
-        //변경완료 버튼 클릭
+        //===========변경완료 버튼 클릭=============
         $("#revise_complete").click(function() {
+    		//이제 다시 합쳐서 form 으로 보내기
+    		var email = $("#u_email1").val() + '@'+ $("#u_email2").val();
+    		$("#u_email").attr("value", email);
+    		var phone = $("#u_phoneNumFirst").val()+ $("#u_phoneNumMid").val()+$("#u_phoneNumEnd").val();
+    		alert(phone);
+    		$("#u_phone").attr("value", phone);
+    		
+    		//폼의 정보들 컨트롤러로 전달
         	$("#userform").submit();
+    		
+    		//ux를 위한 완료 메시지
+        	alert("회원정보가 변경되었습니다.");
 		});
+        
         
         //회원 탈퇴 버튼 클릭
         $("#cancle_membership").click(function() {
@@ -306,6 +332,13 @@
 		});
 
 	
+        //비밀번호 수정하려면 비밀번호변경 페이지로 넘김
+        $("#u_pw").click(function() {
+        	window.location.href = 'update_pw';
+		})
+        
+        
+        
 		// 유저 이메일 받아오기
 		var email = "${login.u_email}";
 		// 유저 이메일을 @ 기준으로 나누기
@@ -325,7 +358,10 @@
 			    $("#u_email2").val(selectValue);
 				$("#u_email2").prop("readonly", true);
 			}
+			
 		});
+		
+		
 
 		// 이메일 셀렉트 판별 및 자동 선택하기
 		if (emailArr[1] == "naver.com") {
@@ -362,7 +398,20 @@
 			$("select option[value='018']").attr("selected", true);
 		} else if (phoneNumFirst==9) {
 			$("select option[value='019']").attr("selected", true);
-		} 
+		}
+		
+		
+		//성별 데이터 체크박스에 표현
+		var checkSex = "${login.u_sex}";
+		if(checkSex == 1){
+			$("#sex_man").prop("checked", true);
+		}
+		else if(checkSex == 2){
+			$("#sex_woman").prop("checked", true);
+		}
+		
+			
+		
 		
 		// 주문자쪽 우편번호 찾기 기능
 		function u_execDaumPostcode() {

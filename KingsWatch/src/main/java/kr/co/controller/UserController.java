@@ -112,6 +112,13 @@ public String updateui(String id, Model model) {
 		return "redirect:/";
 	}
 	
+	//비밀번호 변경 화면으로
+	@RequestMapping("/update_pw")
+	public String update_pw() {
+		return "user/update_pw";	
+	}
+	
+	
 	
 	@RequestMapping(value="delete")
 	public String delete(HttpSession session) {
