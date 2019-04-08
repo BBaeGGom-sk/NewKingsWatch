@@ -120,13 +120,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
-	  		<ul class="row submenu">
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
-	  		</ul>
-	  	</li>
 	  </ul>
 	  </nav>
 	  
@@ -135,12 +128,17 @@ ul.goodsMenu>li ul.submenu>li:hover {
 
 	  	<label for="goodsList">리스트입니다.</label>
 		<div class="row">
-			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
-		</div>		
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>		
+		</div>
 	 <hr>
 	 <div id="container_box">
+	 	<div>
+		 	<a href="/goods/goodsList">최신순</a>
+		 	<a href="/goods/rowPriceGoods">낮은가격순</a>
+		 	<a href="/goods/highPriceGoods">높은가격순</a>
+		</div>
 		 <ul>
-		 	<c:forEach items="${goodsNoSellingList}" var="list"  varStatus="status">
+		 	<c:forEach items="${searchNoSellGoodsList}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -156,8 +154,8 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		            		<span>${list.g_name}</span></a>
 		            	</p>
 					<div></div>
-						<p class="price"><span>${list.g_price}</span></p>
-						<p class="priceSale">할인율 : ${list.g_sale}%</p>
+						<p class="price"><span>${list.g_price }</span></p>
+						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
 		        	<div>
 		            	<div></div>
 		        	</div>
@@ -174,15 +172,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsNoSelling${pm.makeQuery(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsNoSelling${pm.makeQuery(idx)}">${idx}</a></li>
+						href="/goods/goodsSearch${pm.makeSearch(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsNoSelling${pm.makeQuery(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -226,7 +224,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		
 		// 반복문사용
 		// # : 구분자
-		<c:forEach items="${goodsNoSellingList}" var="pic">
+		<c:forEach items="${searchNoSellGoodsList}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
 		

@@ -100,14 +100,13 @@ table{
                <label for="o_quantity">수량</label>
                <p>
                   <button type="button" class="plus">+</button>
-                     <input name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly" style="align-items: center; ">
+                     <input name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly">
                    <button type="button" class="minus">-</button>
                 </p>
                <label for="g_desc">설명</label>
                   <p>${goodsRead.g_desc}</p>
               <button class="form-control" id="order" name="order'">구매하기</button>
               <button class="form-control" id="cart" name="cart">카트담기</button>
-              
             </div>
          </div>
 	      <input id="g_id" name="g_id"  value="${goodsRead.g_id}" type="hidden">

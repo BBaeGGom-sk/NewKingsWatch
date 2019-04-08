@@ -190,7 +190,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	</div> <!-- container 끝!! -->
 	
 	<div class="form-group" style="display: inline-block; position: absolute;" >
-		 <form method="get" action="/goods/goodsSearch">
+		 <form method="get" action="/goods/goodsSearchNoSelling">
 			<div class="col-xs-3 col-sm-2" >
 				<select class="form-control" id="ssel" name="searchType">
 					<option disabled>검색 기준</option>
@@ -246,6 +246,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
+
 			
 		});
 	</script>

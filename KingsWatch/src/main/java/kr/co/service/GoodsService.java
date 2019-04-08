@@ -41,6 +41,8 @@ public interface GoodsService {
 	// 검색에따른 페이징
 	public List<GoodsVO> search(SearchCriteria cri);
 	public int getSearchAmount(SearchCriteria cri);
+	public List<GoodsVO> searchNoSelling(SearchCriteria cri);
+	public int getSearchNoSellAmount(SearchCriteria cri);
 	// 전체상품 낮은가격순 페이징
 	public List<GoodsVO> rowPriceGoodsList(Criteria cri);
 	// 전체상품 높은가격순 페이징

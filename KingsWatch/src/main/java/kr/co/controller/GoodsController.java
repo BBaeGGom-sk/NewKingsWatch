@@ -371,7 +371,8 @@ public class GoodsController {
 		return "redirect:/goods/goodsList";
 	}
 	
-	@RequestMapping("/goodsSearch") // 검색 기능
+	// 판매중인 상품 검색 기능
+	@RequestMapping("/goodsSearch")
 	public String goodsSearch(SearchCriteria cri, Model model) {
 		// 페이징처리 시작
 		List<GoodsVO> searchGoodsList = service.search(cri);
@@ -383,6 +384,21 @@ public class GoodsController {
 		model.addAttribute("pm", pm);
 		// 페이징처리 끝
 		return "goods/goodsSearch";
+	}
+	
+	// 판매중이지 않은 상품 검색 기능
+	@RequestMapping("/goodsSearchNoSelling")
+	public String goodsSearchNoSelling(SearchCriteria cri, Model model) {
+		// 페이징처리 시작
+		List<GoodsVO> searchNoSellGoodsList = service.searchNoSelling(cri);
+		int amount = service.getSearchNoSellAmount(cri);
+		PageMaker pm = new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("searchNoSellGoodsList", searchNoSellGoodsList);
+		model.addAttribute("pm", pm);
+		// 페이징처리 끝
+		return "goods/goodsSearchNoSelling";
 	}
 	
 

@@ -93,7 +93,7 @@
 <!-- 카테고리와 브랜드 동적으로 갖고오기 -->
 	<sql id="categoryIf">
 		<if test="g_brand !=null">
-			where g_category= #{g_category} and g_brand= #{g_brand} and g_is_selling=0
+			where g_category= #{g_category} and g_brand= #{g_brand}
 		</if>
 	</sql>
 
@@ -105,22 +105,23 @@
 		<include refid="categoryIf"></include> 
 		
 		<![CDATA[
-		 order by g_date desc
-		 ]]>
+		and g_is_selling=0
+		order by g_date desc
+		]]>
 	</select>
 
 <!-- 동적으로 갖고온(카테고리별) where문으로 해당 g_id 갯수 구하기 -->
 	<select id="getCategoryAmount" resultType="Integer">
 		select count(g_id) from tab_goods
 		<include refid="categoryIf"></include>
-		order by g_date desc
+		and g_is_selling=0 order by g_date desc
 	</select>
 
 <!-- 상품검색키워드 SQL문-->
 	<sql id="searchIf">
 		<if test="searchType !=null">
 			<if test="searchType != null">
-				where g_is_selling=0 and upper(g_name) like '%'||upper(#{keyword})||'%'
+				where upper(g_name) like '%'||upper(#{keyword})||'%'
 			</if>
 		</if>
 	</sql>
@@ -132,14 +133,36 @@
 		]]>
 		<include refid="searchIf"></include> 
 		<![CDATA[
+		  and g_is_selling=0 
 		 order by g_date desc
 		 ]]>
 	</select>
 
-<!-- 동적으로 갖고온(검색) where문으로 해당 g_id 갯수 구하기 -->
+<!-- 동적으로 갖고온 키워드를 집어넣어서 판매중지 리스트 구하기 -->
+	<select id="searchNoSelling" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		  and g_is_selling=1
+		 order by g_date desc
+		 ]]>
+	</select>
+
+<!-- 동적으로 갖고온(검색) where문으로 판매중 g_id 갯수 구하기 -->
 	<select id="getSearchAmount" resultType="Integer">
 		select count(g_id) from tab_goods
 		<include refid="searchIf"></include>
+		and g_is_selling=0
+		order by g_date desc
+	</select>
+
+<!-- 동적으로 갖고온(검색) where문으로 판매중지 g_id 갯수 구하기 -->
+	<select id="getSearchNoSellAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="searchIf"></include>
+		and g_is_selling=1
 		order by g_date desc
 	</select>
 

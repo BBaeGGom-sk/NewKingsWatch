@@ -95,7 +95,7 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Override
 	public List<GoodsVO> search(SearchCriteria cri) {
-		// 검색에 따른 페이징
+		// 판매중인 상품 검색에 따른 페이징
 		return dao.search(cri);
 	}
 	
@@ -105,13 +105,17 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.getSearchAmount(cri);
 	}
 	
-	/*
-	 * @Override public List<GoodsVO> newGoodsList(Criteria cri) { // 최신가격순리스트페이징
-	 * return dao.newGoods(cri); }
-	 * 
-	 * @Override public int newGoodsGetAmount() { // 최신가격순 상품갯수구하기 return
-	 * dao.newGoodsGetAmount(); }
-	 */
+	@Override
+	public List<GoodsVO> searchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색에따른 페이징
+		return dao.searchNoSelling(cri);
+	}
+
+	@Override
+	public int getSearchNoSellAmount(SearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return dao.searchNoSellAmount(cri);
+	}
 	
 	@Override
 	public List<GoodsVO> rowPriceGoodsList(Criteria cri) {
@@ -222,5 +226,6 @@ public class GoodsServiceImpl implements GoodsService {
 		// DB에서 g_id에 따른 사진 읽어오기
 		return dao.goodsPicDbGet(g_id);
 	}
+
 
 }
