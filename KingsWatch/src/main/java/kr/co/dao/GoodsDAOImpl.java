@@ -107,7 +107,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	
 	@Override
 	public List<GoodsVO> search(SearchCriteria cri) {
-		// 검색에 따른 페이징
+		// 판매중인 상품 검색에 따른 페이징
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
 		return session.selectList(NS+".search", cri, rb);
 	}
@@ -116,6 +116,19 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public int getSearchAmount(SearchCriteria cri) {
 		// 검색에 따른 상품갯수 구하기
 		return session.selectOne(NS+".getSearchAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> searchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색에 따른 페이징
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".searchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int searchNoSellAmount(SearchCriteria cri) {
+		// 검색에 따른 판매중이지 않은 상품갯수 구하기
+		return session.selectOne(NS+".getSearchNoSellAmount", cri);
 	}
 
 	@Override
@@ -241,6 +254,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return ++p_num;
 	}
+
 
 
 

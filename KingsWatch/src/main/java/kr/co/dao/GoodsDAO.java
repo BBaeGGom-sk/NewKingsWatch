@@ -41,6 +41,8 @@ public interface GoodsDAO {
 	// 검색에따른 페이징
 	public List<GoodsVO> search(SearchCriteria cri);
 	public int getSearchAmount(SearchCriteria cri);
+	public List<GoodsVO> searchNoSelling(SearchCriteria cri);
+	public int searchNoSellAmount(SearchCriteria cri);
 	// 낮은가격/높은가격순 전체상품리스트 페이징
 	public List<GoodsVO> rowPriceGoodsList(Criteria cri);
 	public List<GoodsVO> highPriceGoodsList(Criteria cri);
