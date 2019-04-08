@@ -161,7 +161,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		            		<span>${list.g_name}</span></a>
 		            	</p>
 					<div></div>
-						<p class="price"><span>${list.g_price}</span></p>
+						<p class="price"><span>&#8361;<fmt:formatNumber value="${list.g_price}" type="number" /></span></p>
 						<p class="priceSale">할인율 : ${list.g_sale}%</p>
 		        	<div>
 		            	<div></div>
@@ -210,6 +210,10 @@ ul.goodsMenu>li ul.submenu>li:hover {
 			</div>
 		</form>
 	</div>
+	
+	<div id="goto_top" class="bordered" style="visibility: visible; top: 613px; right: 170px;">
+	<i class="glyphicon glyphicon-eject"></i>
+	</div>
 
 	
 	<!-- 이미지 불러오기위한 handlebars -->
@@ -234,25 +238,42 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		<c:forEach items="${goodsList}" var="pic">
 			arr=arr+"#"+"${pic.g_id}";			
 		</c:forEach>
-		
+	
 		goodsPicDbGet(arr);
+		
+		goto_top_left = $('.next_a').length>0?prev_left+50:prev_left;
+		$('#goto_top').css({visibility: 'hidden'}).css( 'top', window_height -50 ).css( 'right', goto_top_left );
 
-			function goodsPicDbGet(arr) {
-				var source= $("#source").html();
-				var template= Handlebars.compile(source);
-
-				// #을 자른다
-				arr=arr.substring(1);
-				arr=arr.split("#");
-				$.each(arr, function(index) {
-					$.getJSON("/goods/goodsPicDbGet/"+this, function(result) {
-							var data= getFileInfo(result["fullName"]);
-							$("#"+index).append(template(data));
-					});		
-				});
-			}
-			
+		$('#goto_top').click(function(){
+			$("html, body").animate({scrollTop: 0}, 100);
 		});
+
+		$(window).scroll(function(){
+			if(body_height > window_height)
+			{
+				var scroll_top = $(document).scrollTop() + window_height;
+				if(scroll_top > window_height) 	$('#goto_top').css({visibility: 'visible'});
+				else $('#goto_top').css({visibility: 'hidden'});
+			}
+		});
+		
+		
+		});
+
+		function goodsPicDbGet(arr) {
+			var source= $("#source").html();
+			var template= Handlebars.compile(source);
+
+			// #을 자른다
+			arr=arr.substring(1);
+			arr=arr.split("#");
+			$.each(arr, function(index) {
+				$.getJSON("/goods/goodsPicDbGet/"+this, function(result) {
+						var data= getFileInfo(result["fullName"]);
+						$("#"+index).append(template(data));
+				});		
+			});
+		}
 	</script>
 </body>
 </html>

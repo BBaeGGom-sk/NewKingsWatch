@@ -97,7 +97,8 @@
 			</div>
 	  </div>
 	</div>
-	
+
+	<!-- 기존업로드핸들바스 -->	
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3"> 
 			<span>
@@ -133,6 +134,7 @@
 						$delList.remove(); // 삭제하고 썸네일에서 지우기. 위에 만들어놓은 delList의 값들 remove
 						}
 					});
+				
 				});
 							
 				$("button[type='submit']").click(function (event){
@@ -175,6 +177,7 @@
 						}
 					});
 				});
+				
 			});
 	</script>
 </body>

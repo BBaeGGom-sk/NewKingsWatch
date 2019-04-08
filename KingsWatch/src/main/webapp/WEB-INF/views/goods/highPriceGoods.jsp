@@ -161,7 +161,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		            		<span>${list.g_name}</span></a>
 		            	</p>
 					<div></div>
-						<p class="price"><span>${list.g_price}</span></p>
+						<p class="price"><span>&#8361;<fmt:formatNumber value="${list.g_price}" type="number" /></span></p>
 						<p class="priceSale">할인율 : ${list.g_sale}%</p>
 		        	<div>
 		            	<div></div>
