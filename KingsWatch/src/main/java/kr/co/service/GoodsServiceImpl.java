@@ -213,12 +213,13 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public void goodsPicDbDel(String g_id) {
+		// DB에서 g_id에 따른 사진 삭제하기
 		dao.goodsPicDbDel(g_id);
 	}
 
 	@Override
 	public List<String> goodsPicDbGet(String g_id) {
-		// TODO Auto-generated method stub
+		// DB에서 g_id에 따른 사진 읽어오기
 		return dao.goodsPicDbGet(g_id);
 	}
 
