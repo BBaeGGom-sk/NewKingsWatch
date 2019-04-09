@@ -198,6 +198,58 @@ public class GoodsDAOImpl implements GoodsDAO {
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
 		return session.selectList(NS+".highPriceGoodsCategory", cri, rb);
 	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsSearch", cri, rb);
+	}
+
+	@Override
+	public int getCategoryHighPriceAmount(SearchCriteria cri) {
+		// 검색시 높은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryHighPriceAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsSearch", cri, rb);
+	}
+
+	@Override
+	public int getCategoryRowPriceAmount(SearchCriteria cri) {
+		// 검색시 낮은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryRowPriceAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceSearchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int getCategoryHighPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryHighPriceNoSellingAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceSearchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int getCategoryRowPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryRowPriceNoSellingAmount", cri);
+	}
 
 	@Override
 	public void goodsInsert(GoodsVO vo) {
@@ -252,7 +304,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return ++p_num;
 	}
-
 
 
 

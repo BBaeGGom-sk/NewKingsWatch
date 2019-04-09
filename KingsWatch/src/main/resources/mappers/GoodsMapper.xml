@@ -223,10 +223,87 @@
 		 order by g_price desc
 		 ]]>
 	</select>
-	
-	<select id="newGoodsGetAmount" resultType="Integer">
-		select count(g_id) from tab_goods where g_is_selling=0
+
+	<!-- 동적으로 갖고온 키워드를 집어넣어서 높은가격순 해당 리스트 구하기 -->
+	<select id="highPriceGoodsSearch" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		 and g_is_selling=0 
+		 order by g_price desc
+		 ]]>
 	</select>
+
+<!-- 동적으로 갖고온(검색) where문으로 판매중 높은가격순 g_id 갯수 구하기 -->
+	<select id="getCategoryHighPriceAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="searchIf"></include>
+		and g_is_selling=0
+		order by g_price desc
+	</select>
+
+	<!-- 동적으로 갖고온 키워드를 집어넣어서 낮은가격순 해당 리스트 구하기 -->
+	<select id="rowPriceGoodsSearch" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		 and g_is_selling=0 
+		 order by g_price asc
+		 ]]>
+	</select>
+
+<!-- 동적으로 갖고온(검색) where문으로 낮은가격순 g_id 갯수 구하기 -->
+	<select id="getCategoryRowPriceAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="searchIf"></include>
+		and g_is_selling=0
+		order by g_price asc
+	</select>
+	
+<!-- 동적으로 갖고온 키워드를 집어넣어서 판매중지 높은가격순 리스트 구하기 -->
+	<select id="highPriceSearchNoSelling" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		  and g_is_selling=1
+		 order by g_price desc
+		 ]]>
+	</select>
+	
+	<!-- 동적으로 갖고온(검색) where문으로 판매중지 높은가격순 g_id 갯수 구하기 -->
+	<select id="getCategoryHighPriceNoSellingAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="searchIf"></include>
+		and g_is_selling=1
+		order by g_price desc
+	</select>
+	
+<!-- 동적으로 갖고온 키워드를 집어넣어서 판매중지 낮은가격순 리스트 구하기 -->
+	<select id="rowPriceSearchNoSelling" resultType="GoodsVO">
+		<![CDATA[
+		select * from tab_goods 
+		]]>
+		<include refid="searchIf"></include> 
+		<![CDATA[
+		  and g_is_selling=1
+		 order by g_price asc
+		 ]]>
+	</select>
+	 
+	<!-- 동적으로 갖고온(검색) where문으로 판매중지 낮은가격순 g_id 갯수 구하기 -->
+	<select id="getCategoryRowPriceNoSellingAmount" resultType="Integer">
+		select count(g_id) from tab_goods
+		<include refid="searchIf"></include>
+		and g_is_selling=1
+		order by g_price asc
+	</select>
+
 	
 <!-- 상품사진고유번호 가지고오기(자동증가위해서) -->
 	<select id="getPnum" resultType="Integer">
@@ -249,5 +326,4 @@
 	</delete>
 	
 	
-
 </mapper>

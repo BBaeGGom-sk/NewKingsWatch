@@ -57,5 +57,15 @@ public interface GoodsService {
 	public List<GoodsVO> highPriceGoodsWoman(CategoryCriteria cri);
 	public List<GoodsVO> rowPriceGoodsPublic(CategoryCriteria cri);
 	public List<GoodsVO> highPriceGoodsPublic(CategoryCriteria cri);
+	// 판매중 상품 검색시 높은가격/낮은가격순 페이징
+	public List<GoodsVO> highPriceGoodsSearch(SearchCriteria cri);
+	public int getCategoryHighPriceAmount(SearchCriteria cri);
+	public List<GoodsVO> rowPriceGoodsSearch(SearchCriteria cri);
+	public int getCategoryRowPriceAmount(SearchCriteria cri);
+	// 판매중이지 않은 상품검색시 높은가격/낮은가격순 페이징
+	public List<GoodsVO> highPriceSearchNoSelling(SearchCriteria cri);
+	public int getCategoryHighPriceNoSellingAmount(SearchCriteria cri);
+	public List<GoodsVO> rowPriceSearchNoSelling(SearchCriteria cri);
+	public int getCategoryRowPriceNoSellingAmount(SearchCriteria cri);
 
 }

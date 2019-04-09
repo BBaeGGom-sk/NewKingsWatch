@@ -178,6 +178,54 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<GoodsVO> highPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 높은가격리스트
+		return dao.highPriceGoodsSearch(cri);
+	}
+
+	@Override
+	public int getCategoryHighPriceAmount(SearchCriteria cri) {
+		// 검색시 높은가격 상품의 아이디 갯수 갖고오기
+		return dao.getCategoryHighPriceAmount(cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 낮은가격리스트
+		return dao.rowPriceGoodsSearch(cri);
+	}
+
+	@Override
+	public int getCategoryRowPriceAmount(SearchCriteria cri) {
+		// 검색시 낮은가격 상품의 아이디 갯수 갖고오기
+		return dao.getCategoryRowPriceAmount(cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격 리스트
+		return dao.highPriceSearchNoSelling(cri);
+	}
+
+	@Override
+	public int getCategoryHighPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격 상품의 아이디 갯수 갖고오기
+		return dao.getCategoryHighPriceNoSellingAmount(cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격리스트
+		return dao.rowPriceSearchNoSelling(cri);
+	}
+
+	@Override
+	public int getCategoryRowPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격 상품의 아이디 갯수 갖고오기
+		return dao.getCategoryRowPriceNoSellingAmount(cri);
+	}
+	
+	@Override
 	public void goodsInsert(GoodsVO vo) {
 		dao.goodsInsert(vo);
 		
