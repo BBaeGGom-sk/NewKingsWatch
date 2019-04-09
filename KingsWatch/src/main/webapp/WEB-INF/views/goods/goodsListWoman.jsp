@@ -221,6 +221,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		goodsPicDbGet(arr);
 
 			function goodsPicDbGet(arr) {
+				
 				var source= $("#source").html();
 				var template= Handlebars.compile(source);
 

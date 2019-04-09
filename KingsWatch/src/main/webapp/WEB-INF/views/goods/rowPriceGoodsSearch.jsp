@@ -133,19 +133,19 @@ ul.goodsMenu>li ul.submenu>li:hover {
 
 	<section id="content">
 
-	  	<label for="goodsList">리스트입니다.</label>
+	  	<label for="goodsListBrand">리스트입니다.</label>
 		<div class="row">
-			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>		
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>
 	 <hr>
-	 <div id="container_box">
+	  <div id="container_box">
 	  	 <div>
-		 	<a href="/goods/goodsSearchNoSelling" class="href_tag">최신순</a>
-		 	<a href="/goods/rowPriceSearchNoSelling"	class="href_tag">낮은가격순</a>
-		 	<a href="/goods/highPriceSearchNoSelling"	class="href_tag">높은가격순</a>
+		 	<a href="/goods/goodsSearch" class="href_tag">최신순</a>
+		 	<a href="/goods/rowPriceGoodsSearch"	class="href_tag">낮은가격순</a>
+		 	<a href="/goods/highPriceGoodsSearch"	class="href_tag">높은가격순</a>
 		 </div>
 		 <ul>
-		 	<c:forEach items="${searchNoSellGoodsList}" var="list"  varStatus="status">
+		 	<c:forEach items="${rowPriceGoodsSearch}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">
 		                <div class="form-group">
@@ -153,7 +153,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
 		                </a>
-		        	 	</div>
+		                </div>
 		    		</div>
 		    		<div class="description">
 		     			<p>
@@ -164,13 +164,13 @@ ul.goodsMenu>li ul.submenu>li:hover {
 						<p class="price"><span>&#8361;<fmt:formatNumber value="${list.g_price}" type="number" /></span></p>
 						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
 		        	<div>
-		            	<div></div>
+		            <div></div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
-	</div>
+		</div>
 	</section>
 
 	 </div> <!-- row 끝 -->
@@ -179,15 +179,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 <div class="row text-center">
 		<ul class="pagination">
 			<c:if test="${pm.cri.page>1}">
-				<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page-1)}">&laquo;</a></li>
+				<li><a href="/goods/rowPriceGoodsSearch${pm.makeSearch(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
 				<c:forEach var="idx" begin="${pm.beginPageNum}"
 					end="${pm.stopPageNum}">
 					<li class="${pm.cri.page==idx?'active':''}"><a
-						href="/goods/goodsSearch${pm.makeSearch(idx)}">${idx}</a></li>
+						href="/goods/rowPriceGoodsSearch${pm.makeSearch(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pm.cri.page<pm.totalPage}">
-					<li><a href="/goods/goodsSearch${pm.makeSearch(pm.cri.page+1)}">&raquo;</a></li>
+					<li><a href="/goods/rowPriceGoodsSearch${pm.makeSearch(pm.cri.page+1)}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -195,7 +195,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	</div> <!-- container 끝!! -->
 	
 	<div class="form-group" style="display: inline-block; position: absolute;" >
-		 <form method="get" action="/goods/goodsSearchNoSelling">
+		 <form method="get" action="/goods/goodsSearch">
 			<div class="col-xs-3 col-sm-2" >
 				<select class="form-control" id="ssel" name="searchType">
 					<option disabled>검색 기준</option>
@@ -224,18 +224,18 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-		var page = 1;
-		
-		// 불러온 g_id값 저장변수
-		var arr="";
-		
-		// 반복문사용
-		// # : 구분자
-		<c:forEach items="${searchNoSellGoodsList}" var="pic">
-			arr=arr+"#"+"${pic.g_id}";			
-		</c:forEach>
-		
-		goodsPicDbGet(arr);
+			var page = 1;
+			
+			// 불러온 g_id값 저장변수
+			var arr="";
+			
+			// 반복문사용
+			// # : 구분자
+			<c:forEach items="${rowPriceGoodsSearch}" var="pic">
+				arr=arr+"#"+"${pic.g_id}";			
+			</c:forEach>
+			
+			goodsPicDbGet(arr);
 
 			function goodsPicDbGet(arr) {
 				var source= $("#source").html();
@@ -251,7 +251,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 					});		
 				});
 			}
-			
+		
 			// 키워드+서치타입 자동으로 붙이기
 			$(".href_tag").on("click", function(event){
 				event.preventDefault();
@@ -260,7 +260,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 				var send_href = a_href+"?searchType="+"${searchType}"+"&"+"keyword="+"${keyword}";
 				location.href=send_href;
 			});
-			
 		});
 	</script>
 </body>

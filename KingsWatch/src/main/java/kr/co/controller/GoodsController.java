@@ -371,8 +371,40 @@ public class GoodsController {
 
 		model.addAttribute("searchGoodsList", searchGoodsList);
 		model.addAttribute("pm", pm);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
 		// 페이징처리 끝
 		return "goods/goodsSearch";
+	}
+
+	// 검색별 높은가격 상품리스트
+	@RequestMapping("/highPriceGoodsSearch")
+	public String highPriceGoodsSearch(SearchCriteria cri, Model model) {
+		List<GoodsVO> highPriceGoodsSearch= service.highPriceGoodsSearch(cri);
+		int amount = service.getCategoryHighPriceAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceGoodsSearch", highPriceGoodsSearch);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
+		return "goods/highPriceGoodsSearch";
+	}
+	
+	// 검색별 낮은가격 상품리스트
+	@RequestMapping("/rowPriceGoodsSearch")
+	public String rowPriceGoodsSearch(SearchCriteria cri, Model model) {
+		List<GoodsVO> rowPriceGoodsSearch= service.rowPriceGoodsSearch(cri);
+		int amount = service.getCategoryRowPriceAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceGoodsSearch", rowPriceGoodsSearch);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
+		return "goods/rowPriceGoodsSearch";
 	}
 	
 	// 판매중이지 않은 상품 검색 기능
@@ -384,10 +416,52 @@ public class GoodsController {
 		PageMaker pm = new PageMaker(amount, cri);
 		pm.setCri(cri);
 		
+		System.out.print(cri.getSearchType());
+		System.out.print(cri.getKeyword());
+		
 		model.addAttribute("searchNoSellGoodsList", searchNoSellGoodsList);
 		model.addAttribute("pm", pm);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
 		// 페이징처리 끝
 		return "goods/goodsSearchNoSelling";
+	}
+	
+	// 판매중이지 않은 상품 검색별 높은가격 상품리스트
+	@RequestMapping("/highPriceSearchNoSelling")
+	public String highPriceSearchNoSelling(SearchCriteria cri, Model model) {
+		List<GoodsVO> highPriceSearchNoSelling= service.highPriceSearchNoSelling(cri);
+		int amount = service.getCategoryHighPriceNoSellingAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		System.out.println(amount);
+		System.out.println(cri.getSearchType());
+		System.out.println(cri.getKeyword());
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("highPriceSearchNoSelling", highPriceSearchNoSelling);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
+		return "goods/highPriceSearchNoSelling";
+	}
+	
+	// 판매중이지 않은 상품 검색별 낮은가격 상품리스트
+	@RequestMapping("/rowPriceSearchNoSelling")
+	public String rowPriceSearchNoSelling(SearchCriteria cri, Model model) {
+		List<GoodsVO> rowPriceSearchNoSelling= service.rowPriceSearchNoSelling(cri);
+		int amount = service.getCategoryRowPriceNoSellingAmount(cri);
+		PageMaker pm= new PageMaker(amount, cri);
+		pm.setCri(cri);
+		
+		System.out.print(cri.getSearchType());
+		System.out.print(cri.getKeyword());
+		
+		model.addAttribute("pm", pm);
+		model.addAttribute("rowPriceSearchNoSelling", rowPriceSearchNoSelling);
+		model.addAttribute("keyword", cri.getKeyword());
+		model.addAttribute("searchType", cri.getSearchType());
+		return "goods/rowPriceSearchNoSelling";
 	}
 	
 
