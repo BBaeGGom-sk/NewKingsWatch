@@ -415,10 +415,7 @@ public class GoodsController {
 		int amount = service.getSearchNoSellAmount(cri);
 		PageMaker pm = new PageMaker(amount, cri);
 		pm.setCri(cri);
-		
-		System.out.print(cri.getSearchType());
-		System.out.print(cri.getKeyword());
-		
+
 		model.addAttribute("searchNoSellGoodsList", searchNoSellGoodsList);
 		model.addAttribute("pm", pm);
 		model.addAttribute("keyword", cri.getKeyword());
@@ -435,10 +432,6 @@ public class GoodsController {
 		PageMaker pm= new PageMaker(amount, cri);
 		pm.setCri(cri);
 		
-		System.out.println(amount);
-		System.out.println(cri.getSearchType());
-		System.out.println(cri.getKeyword());
-		
 		model.addAttribute("pm", pm);
 		model.addAttribute("highPriceSearchNoSelling", highPriceSearchNoSelling);
 		model.addAttribute("keyword", cri.getKeyword());
@@ -453,10 +446,7 @@ public class GoodsController {
 		int amount = service.getCategoryRowPriceNoSellingAmount(cri);
 		PageMaker pm= new PageMaker(amount, cri);
 		pm.setCri(cri);
-		
-		System.out.print(cri.getSearchType());
-		System.out.print(cri.getKeyword());
-		
+
 		model.addAttribute("pm", pm);
 		model.addAttribute("rowPriceSearchNoSelling", rowPriceSearchNoSelling);
 		model.addAttribute("keyword", cri.getKeyword());
