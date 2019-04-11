@@ -19,7 +19,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
      // login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
      Object obj = session.getAttribute("login");
      
-     
      if ( obj == null ){
          // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
          response.sendRedirect("/user/login");
