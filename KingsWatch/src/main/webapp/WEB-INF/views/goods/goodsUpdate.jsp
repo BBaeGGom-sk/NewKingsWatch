@@ -61,17 +61,17 @@
 					<label for="g_category">카테고리</label>
 						<select required class="form-control" id="g_category" name="g_category" >
 						<option disabled>카테고리선택</option>
-						<option value="0">공용</option>
-						<option value="1">여성</option>
-						<option value="2">남성</option>
+						<option id="public" value="0">공용</option>
+						<option id="woman" value="1">여성</option>
+						<option id="man" value="2">남성</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="g_is_selling">판매여부</label>
-						<select required class="form-control" id="g_category" name="g_category" >
+						<select required class="form-control" id="g_is_selling" name="g_is_selling" >
 							<option disabled>판매여부선택</option>
-							<option value="0">미판매</option>
-							<option value="1">판매종료</option>
+							<option id="yes_selling" value="0">판매</option>
+							<option id="no_selling" value="1">판매종료</option>
 						</select>
 				</div>
 			</form>
@@ -104,12 +104,31 @@
 	</script>
 
 	<script type="text/javascript">	
+	
 			var source= $("#source").html();
 			var template= Handlebars.compile(source);
 			var g_id = "${goodsRead.g_id}";
 			
+			var g_is_selling= ${goodsRead.g_is_selling};
+			var g_category= ${goodsRead.g_category};
+
 		$(document).ready(function() {
 			
+			// 판매중인지 아닌지 확인해서 셀렉트박스 초기선택주기
+			if(g_is_selling==1){
+				$("#no_selling").prop("selected", true);
+			} else if(g_is_selling==0) {
+				$("#yes_selling").prop("selected", true);
+			}
+			
+			// 판매제품이 공용/여성/남성 중에 어떤것인지 확인해서 셀렉트박스 초기선택주기
+			if(g_category==0){
+				$("#public").prop("selected", true);
+			} else if(g_category==1) {
+				$("#woman").prop("selected", true);
+			} else if(g_category==2) {
+				$("#man").prop("selected", true);
+			}
 
 			// 이벤트, 이벤트실행할id or class, function(event)
 				$(".uploadedList").on("click", ".delbtn", function(event) {
@@ -140,11 +159,55 @@
 					var $form=$("form");
 					var str=""; // DB에 들어갈 파일명.
 				
+					// 빈칸감지
+		            var g_id = $("#g_id").val();
+		            var g_brand = $("#g_brand").val();
+		            var g_name = $("#g_name").val();
+		            var g_price = $("#g_price").val();
+		            var g_sale = $("#g_sale").val();
+		            var g_desc = $("#g_desc").val();
+					
 				$(".delbtn").each(function(index) { //파일이 여러개일경우 delbtn이 여러개=배열형태로 값 가져와야하니까 index값으로 불러옴
 					// value: 자기자신의(=delbtn) href에있는 속성값(attr)=fullName 갖고오기
 					// name: files는 배열이기때문에 index를 넣어줌. 변수를 넣어야하니까 + 로 묶어줌.
 					str+="<input type='hidden' value='"+$(this).attr("href")+"' name='files["+index+"]'/>"; 
 					});
+				
+		         if(g_id.length == 0){
+		              alert("상품아이디를 입력해 주세요"); 
+		              $("#g_id").focus();
+		              return false;
+		         }
+			
+		         if(g_brand.length == 0){
+		              alert("브랜드를 입력해 주세요"); 
+		              $("#g_brand").focus();
+		              return false;
+		         }
+			
+		         if(g_name.length == 0){
+		              alert("상품명을 입력해 주세요"); 
+		              $("#g_name").focus();
+		              return false;
+		         }
+			
+		         if(g_price.length == 0){
+		              alert("상품 가격을 입력해 주세요"); 
+		              $("#g_price").focus();
+		              return false;
+		         }
+			
+		         if(g_sale.length == 0){
+		              alert("할인율을 입력해 주세요"); 
+		              $("#g_sale").focus();
+		              return false;
+		         }
+			
+		         if(g_desc.length == 0){
+		              alert("상품 상세설명을 입력해 주세요"); 
+		              $("#g_desc").focus();
+		              return false;
+		         }
 					
 					$form.append(str); // form태그 안에 input 태그 추가. 오로지 파일명만 있음.
 					$form.get(0).submit();

@@ -16,10 +16,17 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../resources/js/upload.js"></script>
 
 <style type="text/css">
 li {
 	list-style-type: none;
+}
+
+img {
+	size: 10%;
 }
 </style>
 
@@ -39,7 +46,7 @@ li {
 			<div class="info">
 				<div class="member">
 					<p>
-						<strong>${dto.u_name}</strong> 님은, [화이트] 회원이십니다.
+						<strong>${dto.u_name}</strong> 님은, ${dto.u_level} 회원이십니다.
 					</p>
 					<ul class="">
 						<li class="displaynone"><span class="displaynone">0</span> 이상
@@ -61,21 +68,19 @@ li {
 			<div class="title">
 				<h3>국내배송상품 주문내역</h3>
 				<p class="button">
-					<a href="javascript:window.history.back();"><img
-						src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_prev.gif"
-						alt="이전페이지" /></a>
+					<a href="javascript:window.history.back();">
+					<img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_prev.gif" alt="이전페이지" /></a>
 				</p>
 			</div>
 
 			<!-- 기본배송 -->
 			<div class="boardList ">
-				<table border="1" summary="">
+				<table id="orderList" border="1" summary="">
 					<caption>기본배송</caption>
 					<thead>
 						<tr>
 							<!-- 온클릭시 모든 제품 체크되는 기능 만들기 -->
-							<th scope="col" class="chk "><input type="checkbox"
-								onclick="EC_SHOP_FRONT_ORDERFORM_PRODUCT.proc.setCheckOrderList('chk_order_cancel_list_basic', this);" /></th>
+							<th scope="col" class="chk "><input type="checkbox" id="allClick"/></th>
 							<th scope="col" class="thumb">이미지</th>
 							<th scope="col" class="product">상품정보</th>
 							<th scope="col" class="price">판매가</th>
@@ -86,34 +91,37 @@ li {
 							<th scope="col" class="total">합계</th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<td colspan="9"><strong class="type">[기본배송]</strong> 상품구매금액
-								<strong>(여기에 금액받아오기)</strong> + 배송비 <span id="domestic_ship_fee">(여기에
-									배송비 받아오기)</span> = 합계 : <strong class="total"><span
-									id="domestic_ship_fee_sum">(여기에 총합 받아오기)</span></strong></td>
-						</tr>
-					</tfoot>
 					<tbody class="xans-element- xans-order xans-order-normallist">
-						<tr class="xans-record-">
-							<td class="chk "><input id="chk_order_cancel_list0" value=""
-								type="checkbox" /></td>
-							<td class="thumb"><a
-								href="/product/detail.html?product_no=7735&cate_no=191"> <img
-									src="" alt="여기로 썸네일 불러오기" /></a></td>
-							<td class="product"><a href=""> <strong> 여기에
-										상품명 넣기</strong></a>
-								<div class="option ">여기에 상품 옵션 넣기</div>
-							<td class="price"><strong>여기에 상품가격 넣기</strong></td>
-							<td class="quantity">여기에 상품수량 넣기</td>
+						<c:forEach items="${goodsList}" var="goods" varStatus="status">
+						<tr class="" id="tr_${status.index }">
+							<td class="chk "><input type="checkbox" id="chk_${status.index }" value="${goods.g_id }"
+									name="chk" class="chk" /></td>
+							<td class="thumb"><ul id="${status.index}"  class="uploadedList clearfix"></ul></td>
+							<td class="product"><a href=""> <strong> ${goods.g_name}</strong></a>
+							<td class="price">
+								<fmt:parseNumber var="price" value="${goods.g_price-goods.g_price*(goods.g_sale/100) }"
+								integerOnly="true" />
+									<strong>&#8361;${price}</strong>
+							</td>
+							<td class="quantity"><input id="quantity_${status.index }" name="o_quantity" size="2"
+									value="${o_quantity[status.index]}" type="number" /></td>
 							<td class="mileage"><img
 								src="//img.echosting.cafe24.com/design/common/icon_cash.gif" />
 								여기에 적립금 넣어주기</td>
-							<td class="delivery">배송 방법 넣어주기</td>
-							<td class="charge">배송비 넣어주기</td>
-							<td class="total"><strong>합계 넣어주기</strong></td>
-						</tr>
+							<td class="delivery">기본 배송</td>
+							<td class="charge">무료</td>
+							<td class="total"><strong>&#8361;<span
+										class="total_${status.index }">${price*o_quantity[status.index]}</span></strong></td>
+						</tr>					
+						</c:forEach>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="9"><strong class="type">[기본배송]</strong> 상품구매금액
+								<strong>&#8361;<span id="cartTotal"></span></strong> + 배송비 (무료)
+								= 합계 : <strong class="total">&#8361;<span id="allTotal"></span></strong></td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 			<ul class="controlInfo typeBtm">
@@ -123,7 +131,7 @@ li {
 			<!-- 선택상품 제어 버튼 -->
 			<div class="btnArea">
 				<span class="left "> <strong class="ctrlTxt">선택상품을</strong> <a
-					href="#none" id="btn_product_delete"><img
+					href="#none" id="selectDelete"><img
 						src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_delete2.gif"
 						alt="삭제하기" /></a><br>
 
@@ -141,7 +149,7 @@ li {
 								<img
 									src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
 									alt="필수" /> 필수입력사항
-							</p>>
+							</p>
 							<tbody class="address_form ">
 								<tr>
 									<!-- 주문자 이름 -->
@@ -150,7 +158,7 @@ li {
 										alt="필수">
 									</th>
 									<td><input id="u_name" name="u_name" class="inputTypeText"
-										type="text" value=${dto.u_name} ></td>
+										type="text" value="${dto.u_name}" required="required" /></td>
 								</tr>
 								<tr>
 									<!-- 주문자 주소 -->
@@ -161,17 +169,18 @@ li {
 									<td>
 										<!-- 우편번호 --> <input id="u_postcode" name="rzipcode1"
 										class="inputTypeText" placeholder="" size="6" maxlength="6"
-										readonly value="${dto.u_postNum }" type="text" /> <!-- 우편번호 버튼 -->
+										readonly value="${dto.u_postNum }" type="text" required="required"/> <!-- 우편번호 버튼 -->
 										<input type="button" onclick="u_execDaumPostcode()"
-										value="우편번호 찾기"><br> <!-- 기본주소 --> <input
+										value="우편번호 찾기" required="required" /><br> 
+										<!-- 기본주소 --> <input
 										id="u_address" name="raddr1" class="inputTypeText"
 										placeholder="기본 주소" size="40" readonly
-										value="${dto.u_adMain }" type="text" /><br /> <!-- 나머지주소 -->
+										value="${dto.u_adMain }" type="text" required="required"/><br /> <!-- 나머지주소 -->
 										<input class="inputTypeText" size="40" id="u_detailAddress"
-										placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+										placeholder="나머지 주소" value="${dto.u_adDetail }" required="required"> <!-- 상세주소 -->
 										<input id="u_extraAddress" name="raddr2" class="inputTypeText"
-										placeholder="상세 주소" size="40" value="${dto.u_adDetail }"
-										type="text" />
+										placeholder="상세 주소" size="40" value="${dto.u_adSub }"
+										type="text" required="required"/>
 									</td>
 								</tr>
 
@@ -182,7 +191,7 @@ li {
 										alt="필수" />
 									</th>
 									<td><c:set var="phoneNum" value="${dto.u_phone }" /> <!-- 주문자 휴대전화 1 -->
-										<select id="u_phoneNumFirst" name="u_phoneNumFirst">
+										<select id="u_phoneNumFirst" name="u_phoneNumFirst" required="required">
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -191,9 +200,9 @@ li {
 											<option value="019">019</option>
 									</select> - <!-- 주문자 휴대전화 2 --> <input id="u_phoneNumMid"
 										name="u_phoneNumMid" maxlength="4" size="4"
-										value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 휴대 전화 3 -->
+										value="${fn:substring(phoneNum,3,7) }" type="text" required="required"/> - <!-- 휴대 전화 3 -->
 										<input id="u_phoneNumEnd" name="u_phoneNumEnd" maxlength="4"
-										size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
+										size="4" value="${fn:substring(phoneNum,7,11) }" type="text" required="required"/>
 									</td>
 								</tr>
 								<tr>
@@ -204,9 +213,9 @@ li {
 									</th>
 									<td>
 										<!-- 주문자 이메일 1 --> <input id="u_email1" name="u_email1"
-										class="mailId" value="" type="text" /> @ <!-- 주문자 이메일 2 --> <input
+										class="mailId" value="" type="text" required="required"/> @ <!-- 주문자 이메일 2 --> <input
 										id="u_email2" name="u_email2" class="mailAddress" value=""
-										type="text" readonly /> <select id="u_emailSelect">
+										type="text" readonly="readonly" required="required"/> <select id="u_emailSelect" required="required">
 											<option value="etc">직접입력</option>
 											<option value="naver.com">naver.com</option>
 											<option value="daum.net">daum.net</option>
@@ -263,7 +272,7 @@ li {
 										<td>
 											<!-- 받는사람 이름 --> <input id="o_name" name="o_name"
 											class="inputTypeText" type="text" value=${dto.u_name }
-											size="15">
+											size="15" required="required">
 										</td>
 									</tr>
 									<tr>
@@ -275,17 +284,17 @@ li {
 										<td>
 											<!-- 우편번호 --> <input id="o_postcode" name="rzipcode1"
 											class="inputTypeText" placeholder="" size="6" maxlength="6"
-											readonly value="${dto.u_postNum }" type="text" /> <!-- 우편번호 버튼 -->
+											readonly value="${dto.u_postNum }" type="text" required="required"/> <!-- 우편번호 버튼 -->
 											<input type="button" onclick="o_execDaumPostcode()"
-											value="우편번호 찾기"><br> <!-- 기본주소 --> <input
+											value="우편번호 찾기" required="required"><br> <!-- 기본주소 --> <input
 											id="o_address" name="raddr1" class="inputTypeText"
 											placeholder="기본 주소" size="40" readonly
-											value="${dto.u_adMain }" type="text" /><br /> <!-- 나머지주소 -->
+											value="${dto.u_adMain }" type="text" required="required"/><br /> <!-- 나머지주소 -->
 											<input class="inputTypeText" size="40" id="o_detailAddress"
-											placeholder="나머지 주소" value="${dto.u_adSub }"> <!-- 상세주소 -->
+											placeholder="나머지 주소" value="${dto.u_adDetail }" required="required"> <!-- 상세주소 -->
 											<input id="o_extraAddress" name="raddr2"
 											class="inputTypeText" placeholder="상세 주소" size="40"
-											value="${dto.u_adDetail }" type="text" />
+											value="${dto.u_adSub }" type="text" required="required"/>
 										</td>
 									</tr>
 									<tr>
@@ -295,7 +304,7 @@ li {
 											alt="필수" /></th>
 										<td>
 											<!-- 받는사람 휴대전화 1 --> <select id="o_phoneNumFirst"
-											name="o_phoneNumFirst">
+											name="o_phoneNumFirst" required="required">
 												<option value="010">010</option>
 												<option value="011">011</option>
 												<option value="016">016</option>
@@ -304,9 +313,9 @@ li {
 												<option value="019">019</option>
 										</select> - <!-- 받는사람 휴대전화 2 --> <input id="o_phoneNumMid"
 											name="o_phoneNumMid" maxlength="4" size="4"
-											value="${fn:substring(phoneNum,3,7) }" type="text" /> - <!-- 받는사람 휴대전화 2 -->
+											value="${fn:substring(phoneNum,3,7) }" type="text" required="required"/> - <!-- 받는사람 휴대전화 2 -->
 											<input id="o_phoneNumEnd" name="o_phoneNumEnd" maxlength="4"
-											size="4" value="${fn:substring(phoneNum,7,11) }" type="text" />
+											size="4" value="${fn:substring(phoneNum,7,11) }" type="text" required="required"/>
 										</td>
 									</tr>
 									<tr class="">
@@ -330,36 +339,26 @@ li {
 								<caption>결제 예정 금액</caption>
 								<thead>
 									<tr>
-										<th scope="col"><span>총 주문 금액</span><a href="#none">
-												<img
-												src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/btn_list.gif"
-												alt="내역보기" />
-										</a></th>
-										<th scope="col" class=""><span>총 </span> <span
-											id="total_addsale_text" class="">할인</span> <span
-											id="plus_mark" class=""> + </span> <span
-											id="total_addpay_text" class="">부가결제</span> <span> 금액</span>
-										</th>
-										<th scope="col">총 결제예정 금액</th>
+										<th scope="col"><span>총 주문 금액</span></th>
+										<th scope="col" class="">총 배송비</th>
+										<th scope="col">결제예정 금액</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td class="price">
 											<div class="box">
-												<strong id="total_order_price_view">(총 주문금액 넣기)</strong>
+												<strong><span id="pageTotal"></span></strong>
 											</div>
 										</td>
 										<td class="option ">
 											<div class="box">
-												<strong id="total_sale_price_view">(총 할인 + 부가결제금
-													넣기)</strong>
+												<strong>+</strong><strong>0</strong>
 											</div>
 										</td>
 										<td class="total">
 											<div class="box">
-												<strong>=</strong> <strong id="total_order_sale_price_view">(총
-													결제 예정 금액 넣기)</strong>
+												<strong>=</strong><strong><span id="payment"></span></strong>
 											</div>
 										</td>
 									</tr>
@@ -367,7 +366,7 @@ li {
 							</table>
 						</div>
 
-						<div class="detail">
+						<!-- <div class="detail">
 							<div class="">
 								<table border="1" summary="">
 									<tbody>
@@ -390,7 +389,7 @@ li {
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<!-- 결제수단 -->
 					<div class="title">
@@ -468,10 +467,62 @@ li {
 						</div>
 					</div>
 				</form>
+				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
+		
+			<!-- 이미지 불러오기위한 handlebars -->
+	<script id="source" type="text/x-handlebars-template">
+		<li class="col-xs-3 pull-left" >
+			<span>
+				<img src="{{imgsrc}}" class="fadding-photo">
+			</span>
+		</li>
+	</script>
+	
+<script type="text/javascript">
 		$(document).ready(function() {
+			
+			// 불러온 g_id값 저장변수
+			var arr="";
+			
+			// 반복문사용
+			// # : 구분자
+			<c:forEach items="${goodsList}" var="pic">
+				arr=arr+"#"+"${pic.g_id}";			
+			</c:forEach>
+			
+			goodsPicDbGet(arr);
+
+				function goodsPicDbGet(arr) {
+					var source= $("#source").html();
+					var template= Handlebars.compile(source);
+
+					// #을 자른다
+					arr=arr.substring(1);
+					arr=arr.split("#");
+					$.each(arr, function(index) {
+						$.getJSON("/order/goodsPicDbGet/"+this, function(result) {
+								var data= getFileInfo(result["fullName"]);
+								$("#"+index).append(template(data));
+						});		
+					});
+				}
+			
+			// 장바구니에 담긴 상품 갯수
+			var endNum = ${goodsList.size()};
+			// total 초기화
+			var total = 0;
+			// 각 상품x수량 한 값의 합을 total에 넣어줌 
+			for (var i = 0; i < endNum; i++) {
+				var sum = parseInt($('.total_' + i).html());
+				total = total + sum;
+			};
+			// 총 합계가 들어가야할 공간에 넣어줌
+			document.getElementById("allTotal").innerHTML = total;
+			document.getElementById("cartTotal").innerHTML = total;
+			document.getElementById("pageTotal").innerHTML = total;
+			document.getElementById("payment").innerHTML = total;
 			
 			// 유저 이메일 받아오기
 			var email = "${dto.u_email}";
@@ -492,7 +543,7 @@ li {
 				    $("#u_email2").val(selectValue);
 					$("#u_email2").prop("readonly", true);
 				}
-			})
+			});
 			// 주문페이지 넘어올때 이메일 셀렉트 판별 및 자동 선택하기
 			if (emailArr[1] == "naver.com") {
 				document.getElementById("u_emailSelect").value = "naver.com";
@@ -571,6 +622,50 @@ li {
 			
 		});
 			
+		// 최상단 체크박스 클릭시 모든 체크박스 체크/해제
+		$("#allClick").on("click",function() {
+			//클릭되었으면
+			if ($("#allClick").prop("checked")) {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+				$("input[class=chk]").prop("checked", true);
+			//클릭이 안되있으면
+			} else {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+				$("input[class=chk]").prop("checked", false);
+			};
+			
+		});
+		
+		// 장바구니에서 체크된 상품 장바구니에서 삭제하기
+		$("#selectDelete").on("click",function() {
+			var chk = $("input:checkbox[name=chk]");
+			var checked = $("input:checkbox[name=chk]:checked");
+			var endNum = ${goodsList.size()};
+			// total 초기화
+			var total = 0;
+			// 현재남은 상품x수량 한 값의 합을 total에 넣어줌
+			$("input:checkbox[name=chk]").each(function(idx) {
+				if($(this).is(":checked") == false) {
+					alert(idx);
+					var sum = parseInt($('.total_' + idx).html());
+					total = total + sum;
+					alert(total);
+			    };
+			});
+				
+			// 체크된 체크박스에 해당하는 tr 삭제하기
+			$("input:checkbox[name=chk]").each(function(idx) {
+				if ($(this).is(":checked")) {
+				$("#tr_"+idx).remove(); 
+				};
+			});
+			
+			// 총 합계가 들어가야할 공간에 넣어줌
+			document.getElementById("allTotal").innerHTML = total;
+			document.getElementById("cartTotal").innerHTML = total;
+			document.getElementById("pageTotal").innerHTML = total;
+			document.getElementById("payment").innerHTML = total;
+		});
 		
 		// 주문자쪽 우편번호 찾기 기능
 		function u_execDaumPostcode() {
@@ -622,7 +717,7 @@ li {
 	                document.getElementById("u_detailAddress").focus();
 	            }
 	        }).open();
-	    }
+	    };
 		
 		// 주문자쪽 우편번호 찾기 기능
 		function o_execDaumPostcode() {
@@ -675,7 +770,8 @@ li {
 	                document.getElementById("o_detailAddress").focus();
 	            }
 	        }).open();
-	    }
-	</script>
+	    };
+	    
+</script>
 </body>
 </html>

@@ -2,7 +2,7 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class BasketVO implements Serializable{
+public class BasketVO implements Serializable {
 
 	/**
 	 * 
@@ -11,7 +11,7 @@ public class BasketVO implements Serializable{
 	private String u_id;
 	private String b_id;
 	private String b_cartedTime;
-	
+
 	public BasketVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -92,8 +92,5 @@ public class BasketVO implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

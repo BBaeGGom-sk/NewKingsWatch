@@ -14,7 +14,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
-
 <style type="text/css">
 body {
 	font-family: '맑은 고딕', verdana;
@@ -22,25 +21,8 @@ body {
 	margin: 0;
 }
 
-ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-
-div#root {
-	width: 90%;
-	margin: 0 auto;
-}
-
-header#header {
-	font-size: 60px;
-	padding: 20px 0;
-}
-
-header#header h1 a {
-	color: #000;
-	font-weight: bold;
+div.description {
+	text-align: center;
 }
 
 nav#nav {
@@ -49,34 +31,13 @@ nav#nav {
 }
 
 nav#nav ul li {
-	display: inline-block; /* margin-left:10px;  */
-}
-
-section#container {
-	padding: 20px 0;
-	border-top: 2px solid #eee;
-	border-bottom: 2px solid #eee;
-}
-
-section#container::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-div#container_box {
-	float: right;
-	width: calc(100% - 200px - 20px);
+	display: inline-block;
 }
 
 ul, ol, li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-ul.goodsMenu {
-	
 }
 
 ul.goodsMenu>li {
@@ -117,22 +78,11 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	background: #fff;
 }
 
-
- section#content ul li { display:inline-block; margin:10px; }
- section#content div.goodsThumb img { width:200px; height:200px; }
- section#content div.goodsName { padding:10px 0; text-align:center; }
- section#content div.goodsName a { color:#000; }
-
-
-footer#footer {
-	background: #f9f9f9;
-	padding: 20px;
-}
-
-footer#footer ul li {
-	display: inline-block;
-	margin-right: 10px;
-}
+ section#content ul li { display:inline-block; }
+ 
+ .fadding-photo:hover { 
+ 	opacity:0.4;
+ }
 </style>
 <title>Insert title here</title>
 </head>
@@ -151,24 +101,31 @@ footer#footer ul li {
 	  <ul class="goodsMenu">
 	  	<li class="menu0"><a href="/goods/goodsList">메인으로</a>
 	  	</li>
-	  	<li class="menu1"><a href="">로즈몽</a>
+	  	<li class="menu1"><a href="/goods/goodsListBrand?g_brand=로즈몽">로즈몽</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=로즈몽">여성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=로즈몽">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu2"><a href="">세이코</a>
+	  	<li class="menu2"><a href="/goods/goodsListBrand?g_brand=세이코">세이코</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=세이코">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=세이코">남성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=세이코">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu3"><a href="">아르마니</a>
+	  	<li class="menu3"><a href="/goods/goodsListBrand?g_brand=아르마니">아르마니</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=아르마니">여성</a></li>
 	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=아르마니">남성</a></li>
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
+	  		</ul>
+	  	</li>
+	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+	  		<ul class="row submenu">
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
 	  		</ul>
 	  	</li>
 	  </ul>
@@ -177,33 +134,43 @@ footer#footer ul li {
 
 	<section id="content">
 	  	<label for="goodsListPublic">리스트입니다.</label>
-		<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		<div class="row">
+			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
+		</div>
 	 <hr>
+	 <div id="container_box">
+		<div>
+		 	<a href="/goods/goodsListPublic" class="href_tag">최신순</a>
+		 	<a href="/goods/rowPriceGoodsWoman"	class="href_tag">낮은가격순</a>
+		 	<a href="/goods/highPriceGoodsWoman"	class="href_tag">높은가격순</a>
+		 </div>
 		 <ul>
 		 	<c:forEach items="${goodsListPublic}" var="list"  varStatus="status">
 			 	<li>
-		    		<div class="thumbnail">
+		    		<div class="goodsThumb">
 		                <div class="form-group">
+		                <a href="/goods/goodsRead?g_id=${list.g_id}" >
 		                <!-- 비동기이기때문에 index값을 지정해서 맞는 값만 넣기 -->
 			            	<ul id="${status.index}"  class="uploadedList clearfix"></ul>
-		        	 	</div>
+		                </a>
+		                </div>
 		    		</div>
 		    		<div class="description">
-		        		<p class="color displaynone"></p>
-		     			<p class="name">
+		     			<p>
 		            		<a href="/goods/goodsRead?g_id=${list.g_id}" >
-		            		<span class="title displaynone"></span> ${list.g_name}</a>
+		            		<span>${list.g_name}</span></a>
 		            	</p>
-					<div class="line"></div>
-						<p class="price ">${list.g_price }<span class="displaynone"></span></p>
-						<p class="price sale displaynone">할인율 : ${list.g_sale}</p>
-		        	<div class="status">
-		            <div class="icon">      </div>
+					<div></div>
+						<p class="price"><span>&#8361;<fmt:formatNumber value="${list.g_price}" type="number" /></span></p>
+						<p class="priceSale"><span>할인율 : ${list.g_sale}%</span></p>
+		        	<div>
+		            <div></div>
 		        	</div>
 		    	</div>
 				</li>
 			</c:forEach>
 		</ul>
+	</div>
 	</section>
 	
 	  
@@ -232,7 +199,7 @@ footer#footer ul li {
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
 			<span>
-				<img src="{{imgsrc}}">
+				<img src="{{imgsrc}}" class="fadding-photo">
 			</span>
 		</li>
 	</script>
@@ -267,6 +234,16 @@ footer#footer ul li {
 					});		
 				});
 			}
+			
+			// 브랜드+카테고리 동적으로으로 붙이기
+			$(".href_tag").on("click", function(event){
+				event.preventDefault();
+				
+				var a_href = $(this).attr("href");
+				var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
+				location.href=send_href;
+			});
+			
 
 		});
 	</script>

@@ -6,16 +6,41 @@
 <mapper namespace="kr.co.mapper.order">
 
 	<!-- 회원정보 불러오기 -->
-  	<select id="selectById" resultType="kr.co.domain.UserDTO">
+ 	<select id="selectById" resultType="kr.co.domain.UserDTO">
   	select * from tab_user where u_id = 'bbaeggom'
- 	 </select>
-
-	<select id="selectCartList" resultType="kr.co.domain.BasketVO">
+  	</select>
+  
+  	<insert id="addCart">
+  	insert into tab_basket(u_id,b_id,b_quantity) values(#{u_id}, #{b_id}, #{o_quantity})
+  	</insert>
+	
+	<select id="selectCartList" resultType="String">
 	select b_id from tab_basket where u_id = #{u_id}
 	</select>
 	
 	<select id="getGoods" resultType="kr.co.domain.GoodsVO">
-	select * from tab_goods where b_id = #{b_id}
+	select * from tab_goods where g_id = #{g_id}
 	</select>
 
+	<select id="selectGoodsList" resultType="kr.co.domain.GoodsVO">
+	select * from tab_goods where g_id = #{g_id}
+	</select>
+	
+	<select id="getQuantity" resultType="integer">
+	select b_quantity from tab_basket where b_id = #{g_id}
+	</select>
+	
+	<update id="changeQuantity">
+	update tab_basket set b_quantity = #{b_quantity}
+	where u_id = #{u_id} and b_id = #{g_id}
+	</update>
+	
+	<delete id="deleteCart">
+	delete from tab_basket where u_id = #{u_id} and b_id = #{g_id}
+	</delete>
+	
+	<delete id="cartAllDelete">
+	delete from tab_basket where u_id = #{u_id}
+	</delete>
+	
 </mapper>

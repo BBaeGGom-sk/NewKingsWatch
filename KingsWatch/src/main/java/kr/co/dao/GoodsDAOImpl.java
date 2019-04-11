@@ -10,9 +10,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.BrandCriteria;
 import kr.co.domain.CategoryCriteria;
 import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
+import kr.co.domain.SearchCriteria;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -30,36 +32,223 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	@Override
+	public int getAmount(Criteria cri) {
+		// 전체페이지수구하기
+		return session.selectOne(NS+".getAmount",cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsNoSellingList(Criteria cri) {
+		// 판매종료상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".goodsNoSellingList", 0, rb);
+	}
+	
+	@Override
+	public int getNoSellingAmount() {
+		// 판매종료상품 페이지수구하기
+		return session.selectOne(NS+".getNoSellingAmount");
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrand(BrandCriteria cri) {
+		// 브랜드별 판매중 상품리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".brandSelling", cri, rb);
+	}
+	
+	@Override
+	public int getBrandAmount(BrandCriteria cri) {
+		// 브랜드별 판매중 상품 전체갯수구하기
+		return session.selectOne(NS+".getBrandSellingAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> goodsListBrandNoSelling(BrandCriteria cri) {
+		// 브랜드별 판매종료 상품 리스트 불러오기
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".brandNoSelling", cri, rb);
+	}
+	
+	@Override
+	public int getBrandoNoSellingAmount(BrandCriteria cri) {
+		// 브랜드별 판매종료 상품 전체 갯수 구하기
+		return session.selectOne(NS+".getBrandoNoSellingAmount",cri);
+	}
+	
+	@Override
 	public List<GoodsVO> goodsListMan(CategoryCriteria cri) {
 		// 브랜드에 따른 남성상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListMan", cri, rb);
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public List<GoodsVO> goodsListWoman(CategoryCriteria cri) {
 		// 브랜드에 따른 여성상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListWoman", cri, rb);
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public List<GoodsVO> goodsListPublic(CategoryCriteria cri) {
 		// 브랜드에 따른 공용상품리스트 불러오기
 		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
-		return session.selectList(NS+".goodsListPublic", cri, rb);
-	}
-	
-	@Override
-	public int getAmount() {
-		// 페이지수구하기
-		return session.selectOne(NS+".getAmount");
+		return session.selectList(NS+".category", cri, rb);
 	}
 	
 	@Override
 	public int getCategoryAmount(CategoryCriteria cri) {
-		// TODO Auto-generated method stub
+		// 카테고리+브랜드별 상품 전체갯수 구하기
 		return session.selectOne(NS+".getCategoryAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> search(SearchCriteria cri) {
+		// 판매중인 상품 검색에 따른 페이징
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".search", cri, rb);
+	}
+	
+	@Override
+	public int getSearchAmount(SearchCriteria cri) {
+		// 검색에 따른 상품갯수 구하기
+		return session.selectOne(NS+".getSearchAmount", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> searchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색에 따른 페이징
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".searchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int searchNoSellAmount(SearchCriteria cri) {
+		// 검색에 따른 판매중이지 않은 상품갯수 구하기
+		return session.selectOne(NS+".getSearchNoSellAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsList(Criteria cri) {
+		// 낮은가격순 전체상품리스트 
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsList", 0, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsList(Criteria cri) {
+		// 높은가격순 전체상품리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsList", 0, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> rowPriceGoodsListBrand(BrandCriteria cri) {
+		// 브랜드별 낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsListBrand", cri, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsListBrand(BrandCriteria cri) {
+		// 브랜드별 높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsListBrand", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsMan(CategoryCriteria cri) {
+		// 남성상품낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsCategory", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsMan(CategoryCriteria cri) {
+		// 남성상품높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsCategory", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsWoman(CategoryCriteria cri) {
+		// 여성상품낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsCategory", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsWoman(CategoryCriteria cri) {
+		// 여성상품높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsCategory", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsPublic(CategoryCriteria cri) {
+		// 공용상품낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsCategory", cri, rb);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceGoodsPublic(CategoryCriteria cri) {
+		// 공용상품높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsCategory", cri, rb);
+	}
+	
+	@Override
+	public List<GoodsVO> highPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceGoodsSearch", cri, rb);
+	}
+
+	@Override
+	public int getCategoryHighPriceAmount(SearchCriteria cri) {
+		// 검색시 높은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryHighPriceAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceGoodsSearch(SearchCriteria cri) {
+		// 검색시 낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceGoodsSearch", cri, rb);
+	}
+
+	@Override
+	public int getCategoryRowPriceAmount(SearchCriteria cri) {
+		// 검색시 낮은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryRowPriceAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> highPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".highPriceSearchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int getCategoryHighPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 높은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryHighPriceNoSellingAmount", cri);
+	}
+
+	@Override
+	public List<GoodsVO> rowPriceSearchNoSelling(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격순 리스트
+		RowBounds rb= new RowBounds(cri.getStartNum()-1, cri.getPerPage());
+		return session.selectList(NS+".rowPriceSearchNoSelling", cri, rb);
+	}
+
+	@Override
+	public int getCategoryRowPriceNoSellingAmount(SearchCriteria cri) {
+		// 판매중이지 않은 상품 검색시 낮은가격순 상품 갯수구하기
+		return session.selectOne(NS+".getCategoryRowPriceNoSellingAmount", cri);
 	}
 
 	@Override
@@ -115,6 +304,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return ++p_num;
 	}
+
 
 
 }
