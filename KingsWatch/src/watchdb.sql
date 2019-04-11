@@ -92,6 +92,7 @@ create table tab_coupon(
 drop table tab_coupon
 
 
+
 create table tab_notice(
 	n_bno number(6) primary key,
 	n_title varchar2(40),
