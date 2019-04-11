@@ -50,7 +50,7 @@
 						<c:forEach items="${map.goodsList}" var="goods" varStatus="goodsNum">
 							<input type="hidden" value="${goodsNum.end }" class="endNum">
 							<input type="hidden" value="${goods.g_id }" name="g_id">
-							<tr class="xans-record-">
+							<tr>
 								<!-- 체크박스 부분 -->
 								<td><input type="checkbox" id="chk_${goodsNum.index }" value="${goods.g_id }"
 									name="chk" class="chk" /></td>
@@ -114,8 +114,8 @@
 				<div class="xans-element- xans-order xans-order-selectorder ">
 					<span class="left"> <span class="ctrlTxt"
 						style="color: #757575;">선택상품을</span> 
-						<a href="#none" id="cartSelectDelete" style="color: #757575;">DELETE</a> / 
-						<a href="#none" id="cartAllDelete" style="color: #757575;">EMPTY SHOPPING CART !</a>
+						<a href="#" id="cartSelectDelete" style="color: #757575;">DELETE</a> / 
+						<a href="#" id="cartAllDelete" style="color: #757575;">EMPTY SHOPPING CART !</a>
 					</span>
 				</div>
 				<!-- 총 주문금액 : 국내배송상품 -->
@@ -162,6 +162,7 @@
 				</a>
 			</div>
 		</div>
+	</div>
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
@@ -385,7 +386,6 @@ function cartDelete(index) {
 		error : function(request, status, error) {
 		}
 	});
-	
 };
 
 // 장바구니에서 체크된 상품 장바구니에서 삭제하기
@@ -398,6 +398,7 @@ $("#cartSelectDelete").on("click",function() {
 	
 	$("input:checkbox[name=chk]:checked").each(function() {
 		g_idArr.push($(this).val());
+		$(this).parent().parent().addClass("deltr");	
 	});
 	
 	$.ajax({
@@ -410,20 +411,20 @@ $("#cartSelectDelete").on("click",function() {
 		},
 		dataType : "text",
 		success : function(result) {
+			$(".deltr").remove();
 			alert("선택한 상품이 장바구니에서 삭제되었습니다.");
 		},
 		error : function(request, status, error) {
 		}
 	});
-	
-	$(".container").load("/order/cartOrder");
-	
+
 });
 
 // 장바구니에 모든 상품 삭제하기
 $("#cartAllDelete").on("click",function() {
 	
 	var u_id = "bbaeggom"; // 후에 변경하기
+	$("tbody tr").addClass("cartList");
 	
 	$.ajax({
 		type : 'post',
@@ -433,13 +434,13 @@ $("#cartAllDelete").on("click",function() {
 		},
 		dataType : "text",
 		success : function(result) {
+			$(".cartList").remove();
 			alert("모든 상품이 장바구니에서 삭제되었습니다.");
 		},
 		error : function(request, status, error) {
 		}
 	});
 	
-	$(".cartList").remove();
 	
 });
 

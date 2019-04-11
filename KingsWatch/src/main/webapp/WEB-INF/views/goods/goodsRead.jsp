@@ -126,13 +126,8 @@ table{
    </script>
 
    <script type="text/javascript">
-      $(document).ready(function() {
-<<<<<<< HEAD
-
-
-=======
+      $(document).ready(function() { 
     	  
->>>>>>> refs/heads/se0e
          var g_id = "${goodsRead.g_id}";
          
          var g_price= ${goodsRead.g_price};
