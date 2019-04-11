@@ -84,6 +84,22 @@ ul.goodsMenu>li ul.submenu>li:hover {
  .fadding-photo:hover { 
  	opacity:0.4;
  }
+ 
+.ScrollButton {
+  position: fixed;   /* 버튼의 위치 고정 */
+  right: 10px;       /* x 위치 입력 */
+  cursor: pointer;   /* 호버링 했을 때 커서 모양 변경 */
+  z-index: 10;       /* 다른 태그에 가려지지 않게 우선순위 변경 */
+  display: none;     /* 스크롤 위치에 상관없이 보이게 하려면 생략 */
+}
+/* 두 태그에 각각 y 위치 입력 */
+#TopButton {
+  bottom: 108px;        
+}
+#BottomButton {
+  bottom: 75px;
+}
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -211,10 +227,10 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</form>
 	</div>
 	
-	<div id="goto_top" class="bordered" style="visibility: visible; top: 613px; right: 170px;">
-	<i class="glyphicon glyphicon-eject"></i>
-	</div>
-
+	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
+	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
+	
+	<a id="footer"></a>
 	
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
@@ -241,22 +257,25 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	
 		goodsPicDbGet(arr);
 		
-		goto_top_left = $('.next_a').length>0?prev_left+50:prev_left;
-		$('#goto_top').css({visibility: 'hidden'}).css( 'top', window_height -50 ).css( 'right', goto_top_left );
-
-		$('#goto_top').click(function(){
-			$("html, body").animate({scrollTop: 0}, 100);
+		$(function() {
+		    $(window).scroll(function() {
+		        if ($(this).scrollTop() > 100) {
+		            $('.ScrollButton').fadeIn();
+		        } else {
+		            $('.ScrollButton').fadeOut();
+		        }
+		    });
+		        
+		    $("#TopButton").click(function() {
+		        $('html, body').animate({scrollTop : 0}, 800);
+		        return false;
+		    });
+		 
+		    $("#BottomButton").click(function() {
+		        $('html, body').animate({scrollTop : ($('#footer').offset().top)}, 800);
+		        return false;
+		    });
 		});
-
-		$(window).scroll(function(){
-			if(body_height > window_height)
-			{
-				var scroll_top = $(document).scrollTop() + window_height;
-				if(scroll_top > window_height) 	$('#goto_top').css({visibility: 'visible'});
-				else $('#goto_top').css({visibility: 'hidden'});
-			}
-		});
-		
 		
 		});
 
