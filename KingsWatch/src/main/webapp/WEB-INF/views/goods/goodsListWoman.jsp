@@ -84,6 +84,24 @@ ul.goodsMenu>li ul.submenu>li:hover {
  .fadding-photo:hover { 
  	opacity:0.4;
  }
+  
+/* 스크롤버튼  */
+  .ScrollButton {
+  position: fixed;   /* 버튼의 위치 고정 */
+  right: 10px;       /* x 위치 입력 */
+  cursor: pointer;   /* 호버링 했을 때 커서 모양 변경 */
+  z-index: 10;       /* 다른 태그에 가려지지 않게 우선순위 변경 */
+  display: none;     /* 스크롤 위치에 상관없이 보이게 하려면 생략 */
+}
+
+/* 두 태그에 각각 y 위치 입력 */
+#TopButton {
+  bottom: 108px;        
+}
+
+#BottomButton {
+  bottom: 75px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -195,6 +213,12 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	 
 	</div> <!-- container 끝!! -->
 	
+	<!-- 스크롤버튼 -->
+	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
+	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
+	
+	<a id="footer"></a>
+	
 	<!-- 이미지 불러오기위한 handlebars -->
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3 pull-left" >
@@ -219,34 +243,55 @@ ul.goodsMenu>li ul.submenu>li:hover {
 		</c:forEach>
 		
 		goodsPicDbGet(arr);
-
-			function goodsPicDbGet(arr) {
-				
-				var source= $("#source").html();
-				var template= Handlebars.compile(source);
-
-				// #을 자른다
-				arr=arr.substring(1);
-				arr=arr.split("#");
-				$.each(arr, function(index) {
-					$.getJSON("/goods/goodsPicDbGet/"+this, function(result) {
-							var data= getFileInfo(result["fullName"]);
-							$("#"+index).append(template(data));
-					});		
-				});
-			}
+		
+		// 스크롤버튼
+		$(function() {
+		    $(window).scroll(function() {
+		        if ($(this).scrollTop() > 100) {
+		            $('.ScrollButton').fadeIn();
+		        } else {
+		            $('.ScrollButton').fadeOut();
+		        }
+		    });
+		        
+		    $("#TopButton").click(function() {
+		        $('html, body').animate({scrollTop : 0}, 800);
+		        return false;
+		    });
+		 
+		    $("#BottomButton").click(function() {
+		        $('html, body').animate({scrollTop : ($('#footer').offset().top)}, 800);
+		        return false;
+		    });
+		});
 			
-			// 브랜드+카테고리 동적으로으로 붙이기
-			$(".href_tag").on("click", function(event){
-				event.preventDefault();
+		// 브랜드+카테고리 동적으로으로 붙이기
+		$(".href_tag").on("click", function(event){
+			event.preventDefault();
 				
-				var a_href = $(this).attr("href");
-				var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
-				location.href=send_href;
-			});
+			var a_href = $(this).attr("href");
+			var send_href = a_href+"?g_brand="+"${g_brand}"+"&"+"g_category="+"${g_category}";
+			location.href=send_href;
+		});
 			
 
 		});
+
+		function goodsPicDbGet(arr) {
+				
+			var source= $("#source").html();
+			var template= Handlebars.compile(source);
+
+			// #을 자른다
+			arr=arr.substring(1);
+			arr=arr.split("#");
+			$.each(arr, function(index) {
+				$.getJSON("/goods/goodsPicDbGet/"+this, function(result) {
+						var data= getFileInfo(result["fullName"]);
+						$("#"+index).append(template(data));
+					});		
+				});
+		}
 	</script>
 </body>
 </html>

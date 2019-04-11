@@ -68,7 +68,24 @@ img {
 table{
    align-content: center;
 }
+  
+/* 스크롤버튼  */
+  .ScrollButton {
+  position: fixed;   /* 버튼의 위치 고정 */
+  right: 10px;       /* x 위치 입력 */
+  cursor: pointer;   /* 호버링 했을 때 커서 모양 변경 */
+  z-index: 10;       /* 다른 태그에 가려지지 않게 우선순위 변경 */
+  display: none;     /* 스크롤 위치에 상관없이 보이게 하려면 생략 */
+}
 
+/* 두 태그에 각각 y 위치 입력 */
+#TopButton {
+  bottom: 108px;        
+}
+
+#BottomButton {
+  bottom: 75px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -113,7 +130,13 @@ table{
    </form>
       </div>
    </div>
- 
+   
+ 	<!-- 스크롤버튼 -->
+	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
+	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
+	
+	<a id="footer"></a>
+	
    <!-- 이미지 불러오기위한 handlebars -->
    <script id="source" type="text/x-handlebars-template">
       <li class="col-xs-3 pull-left" >
@@ -130,16 +153,36 @@ table{
          
          var g_price= ${goodsRead.g_price};
          var g_sale= ${goodsRead.g_sale};
-         
-         // 할인가격구하기
-         function salePrice() {
-            var g_persent = g_sale/100;
-            var g_salePrice= g_price-(g_price*g_persent);
-            $("#priceSale").text("₩"+g_salePrice.toLocaleString());
-            
-            
-         }
+
          salePrice();
+
+         // 할인가격구하기
+	     function salePrice() {
+	         var g_persent = g_sale/100;
+	         var g_salePrice= g_price-(g_price*g_persent);
+	         $("#priceSale").text("₩"+g_salePrice.toLocaleString());
+	     }
+
+ 		// 스크롤버튼
+ 		$(function() {
+ 		    $(window).scroll(function() {
+ 		        if ($(this).scrollTop() > 100) {
+ 		            $('.ScrollButton').fadeIn();
+ 		        } else {
+ 		            $('.ScrollButton').fadeOut();
+ 		        }
+ 		    });
+ 		        
+ 		    $("#TopButton").click(function() {
+ 		        $('html, body').animate({scrollTop : 0}, 800);
+ 		        return false;
+ 		    });
+ 		 
+ 		    $("#BottomButton").click(function() {
+ 		        $('html, body').animate({scrollTop : ($('#footer').offset().top)}, 800);
+ 		        return false;
+ 		    });
+ 		});
          
          // 상품수정버튼
          $("#goodsUpdate").click(function() {
@@ -204,7 +247,8 @@ table{
          
       });
       
-      function goodsReadPicDbGet(g_id) {
+
+     function goodsReadPicDbGet(g_id) {
          $.getJSON("/goods/goodsReadPicDbGet/"+g_id, function(result) {
             var source= $("#source").html();
             var template= Handlebars.compile(source);
