@@ -1,6 +1,7 @@
 package kr.co.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -66,10 +67,10 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public UserDTO updatePw(String newPw, UserDTO dto, HttpSession session) {
+	public UserDTO updatePw(Map map, HttpSession session) {
 		// TODO Auto-generated method stub
-		sqlSession.update(NS+".updatePw", newPw);
-		return dto;
+		sqlSession.update(NS+".updatePw", map);
+		return null;
 	}
 
 

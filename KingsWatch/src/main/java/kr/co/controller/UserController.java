@@ -1,6 +1,8 @@
 package kr.co.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -104,7 +106,7 @@ public String updateui(String id, Model model) {
 	
 	//회원정보 수정 실행
 	@RequestMapping(value="update", method=RequestMethod.POST)
-	public String update(UserDTO userDTO, HttpSession session) {
+	public String update(UserDTO userDTO, HttpSession session) throws Exception{
 		
 		UserDTO dto = service.update(userDTO, session);
 		session.setAttribute("login", dto);
@@ -120,9 +122,18 @@ public String updateui(String id, Model model) {
 	
 	//비밀번호 수정 실행
 	@RequestMapping(value="updatePw", method=RequestMethod.POST)
-	public String updatePw(String newPw, UserDTO userDTO, HttpSession session) {
+	public String updatePw(String oldPw, String newPw, UserDTO userDTO, HttpSession session) throws Exception{
+		System.out.println(oldPw);
 		System.out.println(newPw);
-		UserDTO dto = service.updatePw(newPw, userDTO, session);
+		UserDTO newdto = (UserDTO) session.getAttribute("login");
+		newdto.setU_pw(newPw);
+		Map map = new HashMap();
+		map.put("oldPw", oldPw);
+		map.put("newPw", newPw);
+		map.put("u_id", newdto.getU_id());
+		System.out.println("map : "+ map);
+		
+		UserDTO dto = service.updatePw(map, session);
 		session.setAttribute("login", dto);
 		return "redirect:/user/viewDetail";
 	}

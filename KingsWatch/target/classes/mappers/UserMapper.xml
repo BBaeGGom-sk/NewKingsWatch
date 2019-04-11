@@ -31,7 +31,7 @@
    
    <update id="updatePw">
 <!--  update tab_user set u_name=#{u_name} where u_id=#{u_id} -->
-  update tab_user set u_pw=#{newPw} where u_id=#{u_id} and u_pw={u_pw}
+  update tab_user set u_pw=#{newPw} where u_id=#{u_id} and u_pw=#{oldPw}
    </update>
   
   

@@ -28,7 +28,7 @@
 					<tbody>
 						<tr>
 							<th scope="row">기존 비밀번호</th>
-							<td><input id="u_pw" name="u_pw" autocomplete="off"
+							<td><input id="u_pw" name="oldPw" autocomplete="off"
 								type="password" value="" class="changeInput" > (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
 						</tr>
 						<tr>

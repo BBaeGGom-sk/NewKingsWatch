@@ -1,6 +1,7 @@
 package kr.co.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -65,9 +66,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO updatePw(String newPw, UserDTO userDTO, HttpSession session) {
+	public UserDTO updatePw(Map map, HttpSession session) {
 		// TODO Auto-generated method stub
-		return dao.updatePw(newPw, userDTO, session);
+		return dao.updatePw(map, session);
 	}
 
 
