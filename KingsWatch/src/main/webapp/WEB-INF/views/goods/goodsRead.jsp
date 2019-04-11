@@ -163,7 +163,7 @@ table{
 	         var g_persent = g_sale/100;
 	         var g_salePrice= g_price-(g_price*g_persent);
 	         $("#priceSale").text("₩"+g_salePrice.toLocaleString());
-	     }
+	     } 
 
  		// 스크롤버튼
  		$(function() {
