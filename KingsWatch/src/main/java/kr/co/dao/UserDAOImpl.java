@@ -73,6 +73,11 @@ public class UserDAOImpl implements UserDAO{
 		return null;
 	}
 
+	@Override
+	public int idCheck(String userid) {
+		return sqlSession.update(NS+".idcheck", userid);
+	}
+
 
 
 		

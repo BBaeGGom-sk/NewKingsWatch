@@ -71,5 +71,11 @@ public class UserServiceImpl implements UserService {
 		return dao.updatePw(map, session);
 	}
 
+	@Override
+	public int idCheck(String userid) {
+		// TODO Auto-generated method stub
+		return dao.idCheck(userid);
+	}
+
 
 }

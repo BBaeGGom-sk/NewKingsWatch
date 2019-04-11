@@ -18,5 +18,6 @@ public interface UserService {
 	public UserDTO update(UserDTO userDTO, HttpSession session);
 	public void delete(String id);
 	public UserDTO updatePw(Map map, HttpSession session);
+	public int idCheck(String userid);
 	
 }

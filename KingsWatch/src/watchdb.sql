@@ -16,6 +16,7 @@ create table tab_user(
 	u_level number(1) default 0
 )
 
+
 select * from tab_user
 update tab_user set u_pw=('1234') where u_id=('faker') and u_pw=('0070')
 drop table tab_user

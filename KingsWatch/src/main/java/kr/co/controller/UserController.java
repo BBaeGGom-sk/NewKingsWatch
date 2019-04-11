@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.domain.UserDTO;
@@ -123,15 +125,12 @@ public String updateui(String id, Model model) {
 	//비밀번호 수정 실행
 	@RequestMapping(value="updatePw", method=RequestMethod.POST)
 	public String updatePw(String oldPw, String newPw, UserDTO userDTO, HttpSession session) throws Exception{
-		System.out.println(oldPw);
-		System.out.println(newPw);
 		UserDTO newdto = (UserDTO) session.getAttribute("login");
 		newdto.setU_pw(newPw);
 		Map map = new HashMap();
 		map.put("oldPw", oldPw);
 		map.put("newPw", newPw);
 		map.put("u_id", newdto.getU_id());
-		System.out.println("map : "+ map);
 		
 		UserDTO dto = service.updatePw(map, session);
 		session.setAttribute("login", dto);
@@ -150,6 +149,27 @@ public String updateui(String id, Model model) {
 		return "redirect:/";
 	}
 
+	
+	/*
+	 * @RequestMapping("/idcheck.do")
+	 * 
+	 * @ResponseBody public Map<Object, Object> idcheck(@RequestBody String userid)
+	 * { System.out.println("userid : " +userid); int count = 0; Map<Object, Object>
+	 * map = new HashMap<Object, Object>();
+	 * 
+	 * count = service.idcheck(userid); map.put("cnt", count);
+	 * 
+	 * return map; }
+	 */
+	
+	@ResponseBody
+	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	   public int idCheck(@RequestBody UserDTO dto, Model model) throws Exception{
+	    int count=0;  
+	    System.out.println(count);
+		count = service.idCheck(dto.getU_id());
+	    return count;
+	   }
 
 
 	

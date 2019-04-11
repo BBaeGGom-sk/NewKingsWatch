@@ -39,7 +39,9 @@
 								<tr>
 									<th scope="row">아이디 <img	src="/resources/img/ico_required.gif" alt="필수" /></th>
 									<td><input id="u_id" name="u_id" class="inputTypeText" placeholder=""
-										value="" type="text" /> (영문소문자/숫자, 4~16자)</td>
+										value="" type="text" /> 
+										<button id="idCheckBtn" class="btn btn-primary">중복확인</button>
+										(영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 <img
@@ -278,7 +280,7 @@
 					</div> <!-- end of 추가정보 -->
 			</div> <!-- end of contents -->
 			<br>
-			<button class="btn btn-primary" type="submit">가입완료</button>
+			<button class="btn btn-primary" type="submit" id="join_submit_btn">가입완료</button>
 	</form> 	<!-- end of container -->
 </div> <!-- end of wrap -->
 
@@ -444,6 +446,55 @@
 			
 
         });
+        
+        
+        
+        //아이디 중복체크
+        var idck = 0;	//아이디 체크를 안했다면 회원가입 불가능하도록 처리하기 위한 변수. 체크하면 1.
+		$(function() {
+		    //idck 버튼을 클릭했을 때 
+		    $("#idCheckBtn").click(function() {
+		        
+		        //userid 를 param.
+		        var userid =  $("#u_id").val(); 
+		        alert(userid);
+		      
+
+		        
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data :  JSON.stringify({
+		                  mb_Id : mb_Id 
+		                  //  컨트롤러에넘어가는애    var mb_Id 임
+		                        }),
+		            url : "/user/idCheck",
+		            dataType : "text",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		                if (data.cnt > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
+		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		                	$("#join_submit_btn").prop("disabled", true);
+		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
+
+		                    $("#u_id").focus();
+
+		                } else {
+		                    alert("사용가능한 아이디입니다.");
+		                    $("#u_pw").focus();
+		                    //아이디가 중복하지 않으면  idck = 1
+		                    $("#join_submit_btn").prop("disabled", false);
+		                    idck = 1;
+		                    
+		                }
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });
+		});
 	</script>
 
 

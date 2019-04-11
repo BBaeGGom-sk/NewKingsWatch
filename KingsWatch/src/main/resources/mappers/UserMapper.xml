@@ -41,4 +41,8 @@ delete from tab_user where u_id=#{u_id}
   </delete>
   
  
+	<select id="idcheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM tab_user WHERE u_id = #{userid}
+	</select>
+ 
 </mapper>
