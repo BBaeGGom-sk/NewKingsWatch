@@ -140,7 +140,7 @@
 								<tr class="">
 									<th scope="row">태어난 년도 <img	src=/resources/img/ico_required.gif 	id="icon_is_birthday" alt="필수" /></th>
 									<td>
-										<input id="u_age" name="u_age" type="text" autocomplete="off" hidden=""/>
+										<input id="u_age" name="u_age" type="number" autocomplete="off" hidden=""/>
 										<input id="birth_year" name="birth_year"  maxlength="4" value=""/> 년
 
 									</td>
