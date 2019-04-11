@@ -25,9 +25,6 @@ update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은�
 
 insert into tab_user values ('bbaeggom', '1026', '오승기', '01130339681',1,25,'03300', '서울시 은평구 북한산로2' ,'어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com',null, 0, 1,'(진관동, 은평뉴타운구파발)')
 delete from tab_user where u_id = 'bbaeggom'
-
-select * from tab_user
-update tab_user set u_pw=('1234') where u_id=('faker') and u_pw=('0070')
 drop table tab_user
 
 update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
