@@ -20,7 +20,7 @@ public class UserDTO implements Serializable {
 	private String u_adSub;
 	private String u_adDetail;
 	private String u_email;
-	private String regDate;
+	private String u_regDate;
 	private int u_point;
 	private int u_level;
 
@@ -29,8 +29,7 @@ public class UserDTO implements Serializable {
 	}
 
 	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, int u_sex, int u_age, String u_postNum,
-			String u_adMain, String u_adSub, String u_adDetail, String u_email, String regDate, int u_point,
-			int u_level) {
+			String u_adMain, String u_adSub, String u_adDetail, String u_email, String u_regDate, int u_point,	int u_level) {
 		super();
 		this.u_id = u_id;
 		this.u_pw = u_pw;
@@ -43,7 +42,7 @@ public class UserDTO implements Serializable {
 		this.u_adSub = u_adSub;
 		this.u_adDetail = u_adDetail;
 		this.u_email = u_email;
-		this.regDate = regDate;
+		this.u_regDate = u_regDate;
 		this.u_point = u_point;
 		this.u_level = u_level;
 	}
@@ -136,12 +135,13 @@ public class UserDTO implements Serializable {
 		this.u_email = u_email;
 	}
 
-	public String getRegDate() {
-		return regDate;
+
+	public String getU_regDate() {
+		return u_regDate;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setU_regDate(String u_regDate) {
+		this.u_regDate = u_regDate;
 	}
 
 	public int getU_point() {
@@ -168,7 +168,7 @@ public class UserDTO implements Serializable {
 	public String toString() {
 		return "UserDTO [u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_phone=" + u_phone + ", u_sex="
 				+ u_sex + ", u_age=" + u_age + ", u_postNum=" + u_postNum + ", u_adMain=" + u_adMain + ", u_adSub="
-				+ u_adSub + ", u_adDetail=" + u_adDetail + ", u_email=" + u_email + ", regDate=" + regDate
+				+ u_adSub + ", u_adDetail=" + u_adDetail + ", u_email=" + u_email + ", u_regDate=" + u_regDate
 				+ ", u_point=" + u_point + ", u_level=" + u_level + "]";
 	}
 
@@ -202,6 +202,5 @@ public class UserDTO implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }
