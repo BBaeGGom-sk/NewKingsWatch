@@ -64,4 +64,11 @@ public class UserServiceImpl implements UserService {
 		return dao.getUser(dto);
 	}
 
+	@Override
+	public UserDTO updatePw(String newPw, UserDTO userDTO, HttpSession session) {
+		// TODO Auto-generated method stub
+		return dao.updatePw(newPw, userDTO, session);
+	}
+
+
 }

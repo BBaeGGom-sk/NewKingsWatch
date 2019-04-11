@@ -113,9 +113,18 @@ public String updateui(String id, Model model) {
 	}
 	
 	//비밀번호 변경 화면으로
-	@RequestMapping("/update_pw")
+	@RequestMapping("/updatePw")
 	public String update_pw() {
-		return "user/update_pw";	
+		return "user/updatePw";	
+	}
+	
+	//비밀번호 수정 실행
+	@RequestMapping(value="updatePw", method=RequestMethod.POST)
+	public String updatePw(String newPw, UserDTO userDTO, HttpSession session) {
+		System.out.println(newPw);
+		UserDTO dto = service.updatePw(newPw, userDTO, session);
+		session.setAttribute("login", dto);
+		return "redirect:/user/viewDetail";
 	}
 	
 	

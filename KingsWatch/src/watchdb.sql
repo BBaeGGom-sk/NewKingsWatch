@@ -17,6 +17,7 @@ create table tab_user(
 )
 
 select * from tab_user
+update tab_user set u_pw=('1234') where u_id=('faker') and u_pw=('0070')
 drop table tab_user
 
 update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'

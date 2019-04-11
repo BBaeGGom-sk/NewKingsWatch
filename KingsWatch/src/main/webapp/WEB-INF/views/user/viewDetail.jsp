@@ -34,7 +34,6 @@
 					<h2 id="title">회원정보 상세보기</h2>
 				</div>
 
-이름 : ${login.u_name}, 이메일 : ${login.u_email}, 폰번호 : ${login.u_phone}, 성별 : ${login.u_sex}
 				<div align="center">
 					<table border="1" summary="">
 						<caption>바꿀 수 없는 영역</caption>
@@ -313,7 +312,6 @@
     		var email = $("#u_email1").val() + '@'+ $("#u_email2").val();
     		$("#u_email").attr("value", email);
     		var phone = $("#u_phoneNumFirst").val()+ $("#u_phoneNumMid").val()+$("#u_phoneNumEnd").val();
-    		alert(phone);
     		$("#u_phone").attr("value", phone);
     		
     		//폼의 정보들 컨트롤러로 전달
@@ -334,7 +332,7 @@
 	
         //비밀번호 수정하려면 비밀번호변경 페이지로 넘김
         $("#u_pw").click(function() {
-        	window.location.href = 'update_pw';
+        	window.location.href = 'updatePw';
 		})
         
         

@@ -15,7 +15,9 @@ public interface UserDAO {
 	public UserDTO viewDetail(String id);
 	public UserDTO updateui(String id);
 	public UserDTO update(UserDTO dto, HttpSession session);
+	public UserDTO updatePw(String newPw, UserDTO userDTO, HttpSession session);
 	public void delete(String id);
+
 
 	
 	

@@ -65,6 +65,15 @@ public class UserDAOImpl implements UserDAO{
 		return sqlSession.selectOne(NS+".loginCheck", dto);
 	}
 
+	@Override
+	public UserDTO updatePw(String newPw, UserDTO dto, HttpSession session) {
+		// TODO Auto-generated method stub
+		sqlSession.update(NS+".updatePw", newPw);
+		return dto;
+	}
+
+
+
 		
 
 }
