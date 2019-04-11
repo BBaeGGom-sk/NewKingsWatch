@@ -41,10 +41,13 @@ select * from tab_goods
 create table tab_basket(
 	u_id varchar2(30) references tab_user(u_id),
 	b_id varchar2(30) references tab_goods(g_id),
+	b_quantity number(5),
 	b_cartedtime varchar2(40) default sysdate
 )
+alter table tab_basket add (b_quantity number(5))
 drop table tab_basket
 insert into TAB_BASKET (u_id,b_id) values ('bbaeggom','3');
+delete from tab_basket
 select * from tab_basket
 
 create table tab_order(

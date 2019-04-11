@@ -179,13 +179,15 @@ table{
          $("#cart").click(function(event) {
 			event.preventDefault();
 			var u_id = "bbaeggom"; // 후에변경하기
+			var o_quantity = $("#o_quantity").val();
 						
 				$.ajax({
 					type : 'post',
 					url : '/order/addCart',
 					data: {
 						g_id : g_id,
-						u_id : u_id
+						u_id : u_id,
+						o_quantity : o_quantity
 					},
 					dataType : "text",
 					success : function(result) {
