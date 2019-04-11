@@ -435,7 +435,7 @@ $("#cartAllDelete").on("click",function() {
 		dataType : "text",
 		success : function(result) {
 			$(".cartList").remove();
-			alert("모든 상품이 장바구니에서 삭제되었습니다."); 
+			alert("모든 상품이 장바구니에서 삭제되었습니다.");
 		},
 		error : function(request, status, error) {
 		}
