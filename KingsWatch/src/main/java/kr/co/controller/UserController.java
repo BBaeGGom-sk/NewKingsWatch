@@ -31,15 +31,13 @@ public class UserController {
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
-		return "user/join";
+		return "user/join2";
 
 	}
 	
 	//  회원가입 처리하고 로그인 화면으로
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserDTO dto) {
-		
-		System.out.println("회워가입 처리");
 		service.join(dto);
 		return "redirect:/user/login";
 	}
@@ -152,28 +150,17 @@ public String updateui(String id, Model model) {
 	}
 
 	
-	/*
-	 * @RequestMapping("/idcheck.do")
-	 * 
-	 * @ResponseBody public Map<Object, Object> idcheck(@RequestBody String userid)
-	 * { System.out.println("userid : " +userid); int count = 0; Map<Object, Object>
-	 * map = new HashMap<Object, Object>();
-	 * 
-	 * count = service.idcheck(userid); map.put("cnt", count);
-	 * 
-	 * return map; }
-	 */
-	
 	
 	//Controller는 view를 리턴, ResponseBody는 데이터를 리턴
-
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	   @ResponseBody
-	   public int idCheck(@RequestBody String userid) throws Exception{
-	    System.out.println("아 왜~~~~~~~~~~~~");
+	   public int idCheck(@RequestBody String ID) throws Exception{
 		int count=0;
-	    System.out.println(userid);
-		count = service.idCheck(userid);
+		System.out.println("컨트롤러로 받아온 userid값 : "+ID);
+		System.out.println("원래 count값 : "+count);
+	    System.out.println(ID);
+		count = service.idCheck(ID);
+		System.out.println("count : "+count);
 		System.out.println("서비스 실행하고 count값 : " +count);
 	    return count;
 	   }

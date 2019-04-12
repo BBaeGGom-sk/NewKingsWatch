@@ -75,6 +75,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public int idCheck(String userid) {
+		System.out.println("여긴 dao imp. userid값은 : "+userid);
 		return sqlSession.update(NS+".idcheck", userid);
 	}
 

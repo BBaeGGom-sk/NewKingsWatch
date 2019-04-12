@@ -458,15 +458,13 @@
 
 			//아이디 중복 체크
 			$("#idCheckBtn").click(function() {
-		        var userid=  $("#u_id").val(); 
+		        var ID=  $("#u_id").val(); 
 		       
 		        
 		        $.ajax({
 		            url : "/user/idCheck",
 		            type : 'POST',
-		            data : {
-		            	'userid':userid,
-		            },
+		            data : ID,
 		            contentType : "application/json; charset=utf-8",
 		            dataType : 'text',
 		            async:false,
