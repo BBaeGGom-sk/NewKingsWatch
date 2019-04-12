@@ -134,7 +134,7 @@ table{
       </div>
    </div>
    
-   
+     
    <div class="container">
    		<div class="row">
           <button id="reply" class="btn btn-primary">댓글</button>
