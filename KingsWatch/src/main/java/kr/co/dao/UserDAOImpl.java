@@ -1,5 +1,6 @@
 package kr.co.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,9 +75,9 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public int idCheck(String userid) {
-		System.out.println("여긴 dao imp. userid값은 : "+userid);
-		return sqlSession.update(NS+".idcheck", userid);
+	public int idCheck(String u_id) {
+		System.out.println("여긴 dao imp. userid값은 : "+u_id);
+		return sqlSession.selectOne(NS+".idcheck", u_id);
 	}
 
 

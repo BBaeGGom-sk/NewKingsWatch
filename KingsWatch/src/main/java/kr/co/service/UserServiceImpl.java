@@ -72,9 +72,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int idCheck(String userid) {
+	public int idCheck(String u_id) {
 		// TODO Auto-generated method stub
-		return dao.idCheck(userid);
+		return dao.idCheck(u_id);
 	}
 
 

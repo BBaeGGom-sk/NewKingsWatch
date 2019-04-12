@@ -154,14 +154,10 @@ public String updateui(String id, Model model) {
 	//Controller는 view를 리턴, ResponseBody는 데이터를 리턴
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	   @ResponseBody
-	   public int idCheck(@RequestBody String ID) throws Exception{
-		int count=0;
-		System.out.println("컨트롤러로 받아온 userid값 : "+ID);
-		System.out.println("원래 count값 : "+count);
-	    System.out.println(ID);
-		count = service.idCheck(ID);
-		System.out.println("count : "+count);
-		System.out.println("서비스 실행하고 count값 : " +count);
+	   public int idCheck(@RequestBody String u_id) throws Exception{
+		
+		System.out.println("컨트롤러로 받아온 userid값 : "+u_id);
+		int count = service.idCheck(u_id);
 	    return count;
 	   }
 

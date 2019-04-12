@@ -36,13 +36,13 @@
   
   
   <delete id="delete">
-delete from tab_user where u_id=#{u_id}
+	delete from tab_user where u_id=#{u_id}
   
   </delete>
-  
+
  
 	<select id="idcheck" resultType="Integer">
-      SELECT COUNT(*) FROM tab_user WHERE u_id = #{userid}
+      SELECT COUNT(*) FROM tab_user WHERE u_id = #{u_id}
 	</select>
  
 </mapper>

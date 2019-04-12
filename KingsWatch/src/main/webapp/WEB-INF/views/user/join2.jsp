@@ -458,19 +458,18 @@
 
 			//아이디 중복 체크
 			$("#idCheckBtn").click(function() {
-		        var ID=  $("#u_id").val(); 
+		        var u_id=  $("#u_id").val(); 
 		       
 		        
 		        $.ajax({
 		            url : "/user/idCheck",
 		            type : 'POST',
-		            data : ID,
+		            data : u_id,
 		            contentType : "application/json; charset=utf-8",
 		            dataType : 'text',
 		            async:false,
 		            success : function(data) {
-		            	alert(data);
-		               if (data.cnt > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
+		               if (data > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 		                	$("#join_submit_btn").prop("disabled", true);
 		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
