@@ -22,7 +22,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<title>회원가입</title>
+<title> 회원가입 </title>
 </head>
 
 <body>
