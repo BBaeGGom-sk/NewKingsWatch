@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
+<mapper namespace="kr.co.mapper.qna">
+
+<update id="updateViewCnt">
+		update tab_qna set q_viewcnt = q_viewcnt+1 where q_bno=#{q_bno}</update>
+ 
+ <update id ="replyCnt">
+ update tab_qna set q_replycnt = (select count(q_rno) from tab_qna_reply where q_bno = #{q_bno} ) where q_bno = #{q_bno}
+ </update>
+ 
+<!--  댓글개수를 센 후에 대입하는 쿼리 
+ q_replycnt 값에다가 해당 게시글의 게시글을 select 쿼리로 조회한 후 그 값을 update를 통해 대입하여 수정해줌 -->
+ 
+
+
+<select id ="getAttach" resultType="String">
+select p_fullName from tab_pic where q_bno = #{q_bno}
+</select>
+
+<select id="getId" resultType="Integer">
+select max(p_num) from tab_pic
+</select>
+
+<insert id="addAttach">
+insert into tab_pic (p_num, p_fullName, q_bno) values (#{p_num}, #{p_fullName}, #{q_bno})
+</insert>
+
+<delete id="deleteAttach">
+delete from tab_pic where q_bno=#{q_bno} and p_fullName = #{p_fileName}
+</delete>
+
+<delete id="deleteAllAttach">
+delete from tab_pic where q_bno=#{q_bno}
+</delete>
+
+
+
+
+	<select id="list" resultType="kr.co.domain.QnaVO">
+		select * from tab_qna order by q_bno desc
+		
+	</select>
+
+
+	<select id="createBno" resultType="Integer">
+		select max(q_bno) from tab_qna
+	</select>
+
+
+	<insert id="insert">
+		insert into tab_qna (q_bno, q_title, q_content, u_id,
+		q_lock) values (#{q_bno},
+		#{q_title}, #{q_content}, #{u_id}, #{q_lock})
+	</insert>
+
+	<select id="selectByBno" resultType="kr.co.domain.QnaVO">
+		select * from tab_qna
+		where q_bno = #{q_bno}
+
+	</select>
+
+	<select id="updateUI" resultType="kr.co.domain.QnaVO">
+		select * from tab_qna where
+		q_bno = #{q_bno}
+
+	</select>
+
+
+	<update id="update">
+		update tab_qna set q_title=#{q_title},
+		q_content=#{q_content}, u_id=#{u_id},
+		q_updatedate=sysdate where
+		q_bno=#{q_bno}
+	</update>
+
+	<delete id="delete">
+		delete from tab_qna where q_bno=#{q_bno}
+	</delete>
+
+
+	<select id="getAmount" resultType="Integer">
+		select count(q_bno) from tab_qna
+
+	</select>
+
+	<sql id="searchIf">
+		<if test="searchType !=null">
+			<if test="searchType == 'u_id'.toString()">
+				where upper(u_id) like '%'||upper(#{keyword})||'%'
+			</if>
+			<if test="searchType == 'q_title'.toString()">
+				where lower(q_title) like '%'||lower(#{keyword})||'%'
+			</if>
+			<if test="searchType == 'q_content'.toString()">
+				where lower(q_content) like '%'||lower(#{keyword})||'%'
+			</if>
+		</if>
+	</sql>
+
+
+	<select id="search" resultType="kr.co.domain.QnaVO">
+		<![CDATA[
+		select * from tab_qna 
+		]]>
+		<include refid="searchIf"></include> 
+		<!-- 인클루드 태그 시작종료 떨어져있으면 안되더라 크흠.. -->
+		<![CDATA[
+		 order by q_bno desc
+		 ]]>
+		 
+	</select>
+	
+	
+	<select id="getSearchAmount" resultType="Integer">
+	select count(q_bno) from tab_qna
+	<include refid="searchIf"></include>
+	order by q_bno desc
+	</select>
+	
+
+
+
+</mapper>

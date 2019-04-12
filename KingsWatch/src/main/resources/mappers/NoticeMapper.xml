@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
+<mapper namespace="kr.co.mapper.notice">
+
+
+<select id="list" resultType="kr.co.domain.NoticeVO">
+select * from(select * from TAB_NOTICE where n_topMost=1) A
+union all
+select * from (select * from tab_notice order by n_bno desc) B
+	</select>
+	<!-- union all을 통해 셀렉트 쿼리는 2개 동시에 보여줌 위에는 n_topMost로 중요도 지정된 게시글들을, 그 이후 
+		일반적인 n_bno를 통해 정렬한 리스트 -->
+ 
+ 
+<update id="updateViewCnt">
+		update tab_notice set n_viewCnt=n_viewCnt+1 where n_bno=#{n_bno}
+	</update>
+<!-- 조회수 증가 -->
+
+	<select id="getAmount" resultType="Integer">
+		select count(n_bno) from tab_notice
+<!-- 총 게시글 수 구하기 -->
+
+	</select>
+		<select id="createBno" resultType="Integer">
+		select max(n_bno) from tab_notice
+	</select>
+<!-- 게시글 번호 만들어주기 -->
+
+
+	
+	<select id="selectByBno" resultType="kr.co.domain.NoticeVO">
+		select * from tab_notice
+		where n_bno = #{n_bno}
+	</select>
+
+<select id="updateUI" resultType="kr.co.domain.NoticeVO">
+		select * from tab_notice
+		where n_bno = #{n_bno}
+
+	</select>
+
+
+	<update id="update">
+		update tab_notice set n_title=#{n_title},
+		n_content=#{n_content}, u_id=#{u_id},
+		n_updatedate=sysdate, n_topMost=#{n_topMost} where
+		n_bno=#{n_bno}
+	</update>
+
+	<delete id="delete">
+		delete from tab_notice where n_bno=#{n_bno}
+	</delete>
+
+	<insert id="insert">
+		insert into tab_notice (n_bno, n_title, n_content, u_id,
+		n_viewcnt, n_topMost) values (#{n_bno},
+		#{n_title}, #{n_content}, #{u_id}, 0, #{n_topMost})
+	</insert>
+
+
+
+
+
+
+
+<select id ="getAttach" resultType="String">
+select p_fullName from tab_pic where n_bno = #{n_bno}
+</select>
+
+<select id="getId" resultType="Integer">
+select max(p_num) from tab_pic
+</select>
+
+<insert id="addAttach">
+insert into tab_pic (p_num, p_fullName, n_bno) values (#{p_num}, #{p_fullName}, #{n_bno})
+</insert>
+
+<delete id="deleteAttach">
+delete from tab_pic where n_bno=#{n_bno} and p_fullName = #{fileName}
+</delete>
+
+<delete id="deleteAllAttach">
+delete from tab_pic where n_bno=#{n_bno}
+</delete>
+
+
+
+</mapper>

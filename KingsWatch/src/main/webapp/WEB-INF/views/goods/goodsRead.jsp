@@ -125,19 +125,109 @@ table{
                   <p>${goodsRead.g_desc}</p>
               <button class="form-control" id="order" name="order'">구매하기</button>
               <button class="form-control" id="cart" name="cart">카트담기</button>
+      
             </div>
          </div>
 	      <input id="g_id" name="g_id"  value="${goodsRead.g_id}" type="hidden">
-	      <input id="u_id" name="u_id"  value="a" type="hidden">
    </form>
+   
       </div>
    </div>
+   
+   
+   <div class="container">
+   		<div class="row">
+          <button id="reply" class="btn btn-primary">댓글</button>
+			<div id="myCollapsible" class="collapse">
+				<div class="form-group">
+					<label for="u_id">작성자</label> <input class="form-control"
+						id="u_id">
+				</div>
+				
+				<div class="form-group">
+					<label for="r_title">제목</label> <input class="form-control"
+						id="r_title">
+				</div>
+
+
+				<div class="form-group">
+					<label for="r_content">내용</label> <input class="form-control"
+						id="r_content">
+				</div>
+				<div class="form-group">
+					<label for="r_rating">평점 ★ (1에서 5점까지) </label>
+					<input type="radio" name="r_rating" value="1">&nbsp;1&nbsp;
+					<input type="radio" name="r_rating" value="2">&nbsp;2&nbsp;
+					<input type="radio" name="r_rating" value="3">&nbsp;3&nbsp;
+					<input type="radio" name="r_rating" value="4">&nbsp;4&nbsp;
+					<input type="radio" name="r_rating" value="5">&nbsp;5&nbsp; 
+
+				</div>
+				<div class="form-group">
+					<button id="replyInsertBtn" class="btn btn-success">등록</button>
+					<button id="replyResetBtn" class="btn btn-default">초기화</button>
+				</div>
+				
+				</div>
+				</div>
+   
+   
+   	<div class="row">
+		<div id="myModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close">&times;</button>
+					<p id="modal_r_bno"></p>
+				</div>
+				<div class="modal-body">
+					<strong>제목</strong> : <input id="modal_r_title" class="form-control">
+					<strong>내용 </strong>: <input id="modal_r_content" class="form-control">
+					<strong>평점 </strong>: <input type="radio" value="1" name="modal_r_rating" >1
+					<input type="radio" value="2" name="modal_r_rating" >2
+					<input type="radio" value="3" name="modal_r_rating" >3
+					<input type="radio" value="4" name="modal_r_rating" >4
+					<input type="radio" value="5" name="modal_r_rating" >5
+				</div>
+<!-- 				<div class="modal-footer">
+					<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
+					<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
+					<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+   
+   		<div class="row" id="review"></div>
+		<div class="row">
+			<ul class="pagination"></ul>
+		</div>
+   </div>
+   
    
  	<!-- 스크롤버튼 -->
 	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
 	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
 	
 	<a id="footer"></a>
+	
+	<!--  리뷰 불러오기위한 handlebars -->
+		<script id="sourceReview" type="text/x-handlebars-template">
+{{#each.}}
+	<div class="panel panel-info">
+			
+			<div class="panel-heading">
+			<span> <strong>제목 :{{r_title}} </strong> <br>   <strong>작성자</strong>: {{u_id}} <strong>평점 </strong>:{{r_rating}}</span>
+			<span class="pull-right">{{updateDate}}</span>
+			</div>
+			
+			<div class="panel-body">
+			<p>{{r_content}}</p>
+			</div>
+		</div>
+
+{{/each}}
+</script>
+	
 	
    <!-- 이미지 불러오기위한 handlebars -->
    <script id="source" type="text/x-handlebars-template">
@@ -151,6 +241,7 @@ table{
    <script type="text/javascript">
       $(document).ready(function() { 
     	  
+    	 var page = 1;
          var g_id = "${goodsRead.g_id}";
          
          var g_price= ${goodsRead.g_price};
@@ -158,6 +249,8 @@ table{
 
          salePrice();
 
+       
+         
          // 할인가격구하기
 	     function salePrice() {
 	         var g_persent = g_sale/100;
@@ -246,8 +339,83 @@ table{
 					}
 				});
 			});
+         
+         
+         $("#review").on("click", ".callModal", function() {
+
+				var r_bno = $(this).attr("data-r_bno");
+				var r_title = $(this).attr("data-r_title");
+				var r_content = $(this).attr("data-r_content");
+				var r_rating = $(this).attr("data-r_rating");
+
+				$("#modal_r_bno").text(r_bno);
+				$("#modal_r_content").val(r_content);
+				$("#modal_r_title").val(r_title);
+				$("#modal_r_content").val(r_content);
+				$("input:radio[name='modal_r_rating']:checked").val(r_rating);
+				
+				$("#myModal").modal("show");
+			});
+         
+         
+         $("#reply").click(function() {
+				$("#myCollapsible").collapse("toggle");
+			});
+
+			$("#replyInsertBtn").click(
+					function() {
+						var u_id = $("#u_id").val();
+						var r_title = $("#r_title").val();
+						var r_content = $("#r_content").val();
+						var r_rating = $("input:radio[name='r_rating']:checked").val();
+						
+						
+						$.ajax({
+							type : 'post',
+							url : '/review',
+							headers : {
+								"Content-Type" : "application/json",
+								"X-HTTP-Method-Override" : "POST"
+							},
+							data : JSON.stringify({
+								u_id : u_id,
+								r_title : r_title,
+								r_content : r_content,
+								r_rating : r_rating,
+								g_id : g_id
+							}),
+							dataType : "text",
+							success : function(result) {
+								$("#u_id").val("");
+								$("#r_title").val("");
+								$("#r_content").val("");
+								$("#myCollapsible").collapse("toggle");
+								getList(g_id, page);
+
+							},
+							error : function(request, status, error) {
+								alert("code:" + request.status + "\n"
+										+ "msg:" + request.responseText
+										+ "\n" + "error:" + error);
+							},
+							complete : function() {
+
+							}
+						});
+
+					});
+         
+			$(".pagination").on("click", "li a", function(event) {
+				event.preventDefault();
+				page = $(this).attr("href");
+				getList(g_id, page);
+			});
+
+         
+         
 
          goodsReadPicDbGet(g_id);
+			getList(g_id, page);
          
       });
       
@@ -260,8 +428,43 @@ table{
                var data= getFileDetail(this);
                $(".uploadedList").append(template(data));
             });
-         });      
+         }); 
       }
+     
+			
+     function printPaging(pm) {
+				var str = "";
+				if (pm.cri.page > 1) {
+					str += "<li><a href='" + (pm.cri.page - 1)
+							+ "'>&laquo;</a></li>";
+				}
+				for (var i = pm.beginPageNum; i <= pm.stopPageNum; i++) {
+					var strClass = pm.cri.page == i ? 'active' : '';
+					str += "<li class='"+strClass+"'><a href='"+i+"'>" + i
+							+ "</a></li>";
+				}
+				if (pm.cri.page < pm.totalPage) {
+					str += "<li><a href='" + (pm.cri.page + 1)
+							+ "'>&raquo;</a></li>";
+				}
+				$(".pagination").html(str);
+
+			}
+
+			
+     function getList(g_id, page) {
+				$.getJSON("/review/" + g_id + "/" + page, function(data) {
+					var source = $("#sourceReview").html();
+					var template = Handlebars.compile(source);
+					var gab = data.list;
+
+					$("#review").html(template(gab));
+					printPaging(data.pm);
+
+				});
+			}
+     
+     
    </script>
 </body>
 </html>
