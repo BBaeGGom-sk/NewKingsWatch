@@ -42,7 +42,12 @@
 
  
 	<select id="idcheck" resultType="Integer">
-      SELECT COUNT(*) FROM tab_user WHERE u_id = #{u_id}
+      SELECT COUNT(u_id) FROM tab_user WHERE u_id = #{u_id}
 	</select>
+	
+	<select id="emailcheck" resultType="Integer">
+      SELECT COUNT(u_email) FROM tab_user WHERE u_email = #{u_email}
+	</select>
+	
  
 </mapper>

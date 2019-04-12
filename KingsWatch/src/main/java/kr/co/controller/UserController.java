@@ -155,12 +155,24 @@ public String updateui(String id, Model model) {
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	   @ResponseBody
 	   public int idCheck(@RequestBody String u_id) throws Exception{
-		
-		System.out.println("컨트롤러로 받아온 userid값 : "+u_id);
 		int count = service.idCheck(u_id);
 	    return count;
 	   }
-
+	   
+	   
+	 //Controller는 view를 리턴, ResponseBody는 데이터를 리턴
+	   @RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	   @ResponseBody
+	   public int emailCheck(@RequestBody String u_email) throws Exception{
+		
+		System.out.println("컨트롤러로 받아온 useremail값 : "+u_email);
+		int count = service.emailCheck(u_email);
+		System.out.println("컨트롤러로 받아온 useremail값2 : "+u_email);
+		System.out.println("컨트롤러로 받아온 useremailCount : "+count);
+		
+		return count;
+	   }
+	   
 
 	
 }

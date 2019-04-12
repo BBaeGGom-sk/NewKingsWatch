@@ -40,20 +40,24 @@
 									<th scope="row">아이디 <img	src="/resources/img/ico_required.gif" alt="필수" /></th>
 									<td><input id="u_id" name="u_id" class="inputTypeText" placeholder=""
 										value="" type="text" /> 
-										<a id="idCheckBtn" class="btn btn-primary" href="#">중복확인</a>
+										<button id="idCheckBtn" class="btn btn-primary" >중복확인</button>
 										(영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 <img
 										src="/resources/img/ico_required.gif"
 										alt="필수" /></th>
-									<td><input id="u_pw" name="u_pw" autocomplete="off" type="password" /> (영문 대소문자/숫자/특수문자 중
+									<td><input class="pwInput" id="u_pw" name="u_pw" autocomplete="off" type="password" /> (영문 대소문자/숫자/특수문자 중
 										2가지 이상 조합, 10자~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 <img src="/resources/img/ico_required.gif" alt="필수" /></th>
-									<td><input id="user_passwd_confirm"
-										name="user_passwd_confirm" autocomplete="off" type="password" /></td>
+									<td><input class="pwInput" id="u_pw_confirm"
+										name="u_pw_confirm" autocomplete="off" type="password" />
+									<span style="color:blue;" id="alert-success">비밀번호가 일치합니다.</span>
+									<span style="color:red;" id="alert-danger">비밀번호가 일치하지 않습니다.</span>
+										
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 질문 &nbsp;</th>
@@ -440,7 +444,27 @@
 				document.getElementById("u_email").value = email;
 			});
             
-
+			
+			//비밀번호와 비밀번호 확인 문자 서로 비교
+			 $(function(){
+			        $("#alert-success").hide();
+			        $("#alert-danger").hide();
+			        $(".pwInput").keyup(function(){
+			            var pwd1=$("#u_pw").val();
+			            var pwd2=$("#u_pw_confirm").val();
+			            if(pwd1 != "" || pwd2 != ""){
+			                if(pwd1 == pwd2){
+			                    $("#alert-success").show();
+			                    $("#alert-danger").hide();
+			                    $("#submit").removeAttr("disabled");
+			                }else{
+			                    $("#alert-success").hide();
+			                    $("#alert-danger").show();
+			                    $("#submit").attr("disabled", "disabled");
+			                }    
+			            }
+			        });
+			    });
 
 
 
@@ -457,10 +481,9 @@
 
 
 			//아이디 중복 체크
-			$("#idCheckBtn").click(function() {
+			$("#idCheckBtn").click(function(event) {
+				event.preventDefault();//버튼 기본 get이기때문
 		        var u_id=  $("#u_id").val(); 
-		       
-		        
 		        $.ajax({
 		            url : "/user/idCheck",
 		            type : 'POST',
@@ -479,7 +502,6 @@
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
 		                    $("#u_pw").focus();
-		                    //아이디가 중복하지 않으면  idck = 1
 		                    $("#join_submit_btn").prop("disabled", false);
 		                  		                    
 		                } 
@@ -492,6 +514,38 @@
 		    });	//아이디 중복체크
 
 
+		    
+			//이메일 중복 체크
+			$("#emailCheckBtn").click(function(event) {
+				event.preventDefault();		//버튼 기본 get이기때문
+		        var u_email=  $("#u_email").val(); 
+		        
+		        $.ajax({
+		            url : "/user/emailCheck",
+		            type : 'POST',
+		            data : u_email,
+		            contentType : "application/json; charset=utf-8",
+		            dataType : 'text',
+		            async:false,
+		            success : function(data) {
+		               if (data > 0) {	//같은 이메일이 존재할때마다 cnt에 1이 더해진다.
+		                    alert("같은 이메일이 존재합니다. 다른 이메일을 입력해주세요.");
+		                	$("#join_submit_btn").prop("disabled", true);
+		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
+
+		                    $("#u_id").focus();
+
+		                } else {
+		                    $("#join_submit_btn").prop("disabled", false);
+		                    $("#join_submit_btn").focus();   
+		                } 
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });	//이메일 중복체크
 			
 
         });

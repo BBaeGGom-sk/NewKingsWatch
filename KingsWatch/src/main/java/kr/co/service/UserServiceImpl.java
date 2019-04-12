@@ -77,5 +77,11 @@ public class UserServiceImpl implements UserService {
 		return dao.idCheck(u_id);
 	}
 
+	@Override
+	public int emailCheck(String u_email) {
+		// TODO Auto-generated method stub
+		return dao.emailCheck(u_email);
+	}
+
 
 }

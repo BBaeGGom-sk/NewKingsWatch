@@ -80,6 +80,12 @@ public class UserDAOImpl implements UserDAO{
 		return sqlSession.selectOne(NS+".idcheck", u_id);
 	}
 
+	@Override
+	public int emailCheck(String u_email) {
+		System.out.println("여긴 dao imp. email값은 : "+u_email);
+		return sqlSession.selectOne(NS+".emailcheck", u_email);
+	}
+
 
 
 		
