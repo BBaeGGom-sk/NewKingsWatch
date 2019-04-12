@@ -40,7 +40,7 @@
 									<th scope="row">아이디 <img	src="/resources/img/ico_required.gif" alt="필수" /></th>
 									<td><input id="u_id" name="u_id" class="inputTypeText" placeholder=""
 										value="" type="text" /> 
-										<button id="idCheckBtn" class="btn btn-primary">중복확인</button>
+										<a id="idCheckBtn" class="btn btn-primary" href="#">중복확인</a>
 										(영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
@@ -132,9 +132,9 @@
 										src="/resources/img/ico_required.gif"
 										id="icon_sex" alt="필수" /></th>
 									<td>
-									<input id="u_sex" name="u_sex" value="1" type="radio" />
+									<input id="u_sex_man" name="u_sex" value="1" type="radio" />
 									<label	for="u_sex">남자</label>
-									<input id="u_sex" name="u_sex" value="2"	type="radio" />
+									<input id="u_sex_woman" name="u_sex" value="2"	type="radio" />
 									<label for="u_sex">여자</label></td>
 								</tr>
 								<tr class="">
@@ -160,7 +160,9 @@
 											<option value="nate.com">nate.com</option>
 											<option value="yahoo.com">yahoo.com</option>
 											<option value="etc">직접입력</option>
-									</select></td>
+									</select>
+									<button id="emailCheckBtn" class="btn btn-primary">중복확인</button>
+									</td>
 								</tr>
 								
 								<tr class="displaynone">
@@ -392,6 +394,7 @@
 
         $(document).ready(function() {
           
+        	
         	//추가정보 숨기기
         	//[1] 기본값 설정
             $("#extraInfo").hide(); 
@@ -402,7 +405,8 @@
                 $("#extraInfo").show('fast'); //천천히 보이기
                 $(this).hide('fast');//more버튼 숨기기
             });
-            
+
+
             //폰번호 3개 인풋에서 받은거 합치기
             $("#u_phone3").blur(function mergePhone() {
 				var phone1 = document.getElementById("u_phone1").value;
@@ -410,7 +414,9 @@
 				var phone3 = document.getElementById("u_phone3").value;
 				var phone = phone1 + phone2 + phone3;
 				document.getElementById("u_phone").value = phone;
-			})
+			});
+
+
             
 
 			// 이메일 관련
@@ -432,8 +438,13 @@
 				var email2 =  document.getElementById("u_email2").value;
 				var email =  email1 + "@" + email2;
 				document.getElementById("u_email").value = email;
-			})
+			});
             
+
+
+
+
+
 			
 			//나이 계산
 			$("#birth_year").blur(function calAge() {
@@ -442,37 +453,26 @@
 				var age = now_year - birth_year +1;
 				document.getElementById("u_age").value = age;
 				
-			})
-			
+			});
 
-        });
-        
-        
-        
-        //아이디 중복체크
-        var idck = 0;	//아이디 체크를 안했다면 회원가입 불가능하도록 처리하기 위한 변수. 체크하면 1.
-		$(function() {
-		    //idck 버튼을 클릭했을 때 
-		    $("#idCheckBtn").click(function() {
-		        
-		        //userid 를 param.
-		        var userid =  $("#u_id").val(); 
-		        alert(userid);
-		      
 
+			//아이디 중복 체크
+			$("#idCheckBtn").click(function() {
+		        var userid=  $("#u_id").val(); 
+		       
 		        
 		        $.ajax({
-		            async: true,
-		            type : 'POST',
-		            data :  JSON.stringify({
-		                  mb_Id : mb_Id 
-		                  //  컨트롤러에넘어가는애    var mb_Id 임
-		                        }),
 		            url : "/user/idCheck",
-		            dataType : "text",
-		            contentType: "application/json; charset=UTF-8",
+		            type : 'POST',
+		            data : {
+		            	'userid':userid,
+		            },
+		            contentType : "application/json; charset=utf-8",
+		            dataType : 'text',
+		            async:false,
 		            success : function(data) {
-		                if (data.cnt > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
+		            	alert(data);
+		               if (data.cnt > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 		                	$("#join_submit_btn").prop("disabled", true);
 		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
@@ -484,17 +484,24 @@
 		                    $("#u_pw").focus();
 		                    //아이디가 중복하지 않으면  idck = 1
 		                    $("#join_submit_btn").prop("disabled", false);
-		                    idck = 1;
-		                    
-		                }
+		                  		                    
+		                } 
 		            },
 		            error : function(error) {
 		                
 		                alert("error : " + error);
 		            }
 		        });
-		    });
-		});
+		    });	//아이디 중복체크
+
+
+			
+
+        });
+        
+        
+        
+     
 	</script>
 
 

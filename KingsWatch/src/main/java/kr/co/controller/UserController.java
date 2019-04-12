@@ -31,24 +31,26 @@ public class UserController {
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
-		return "user/join2";	//  user/join.jsp로 이동.
+		return "user/join";
 
 	}
 	
 	//  회원가입 처리하고 로그인 화면으로
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserDTO dto) {
+		
+		System.out.println("회워가입 처리");
 		service.join(dto);
 		return "redirect:/user/login";
 	}
 	
-	
 	//로그인 화면
-	@RequestMapping("/login")
-	public String loginui() {
-		return "user/login";	
+		@RequestMapping("/login")
+		public String loginui() {
+			return "user/login";	
 
-	}
+		}
+	
 	
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -162,12 +164,17 @@ public String updateui(String id, Model model) {
 	 * return map; }
 	 */
 	
-	@ResponseBody
+	
+	//Controller는 view를 리턴, ResponseBody는 데이터를 리턴
+
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
-	   public int idCheck(@RequestBody UserDTO dto, Model model) throws Exception{
-	    int count=0;  
-	    System.out.println(count);
-		count = service.idCheck(dto.getU_id());
+	   @ResponseBody
+	   public int idCheck(@RequestBody String userid) throws Exception{
+	    System.out.println("아 왜~~~~~~~~~~~~");
+		int count=0;
+	    System.out.println(userid);
+		count = service.idCheck(userid);
+		System.out.println("서비스 실행하고 count값 : " +count);
 	    return count;
 	   }
 
