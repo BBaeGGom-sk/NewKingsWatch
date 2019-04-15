@@ -381,10 +381,10 @@ element.style {
 		</div>
 	</div>
    
-   		<div class="row" id="review"></div>
+   		<!-- <div class="row" id="review"></div>
 		<div class="row">
 			<ul class="pagination"></ul>
-		</div>
+		</div> -->
    </div>
    
    
@@ -396,23 +396,11 @@ element.style {
 	<div class="cosWrap">
     	<div class="relPro">
         	<h2 class="smallTitle">RELATED PRODUCT</h2>
-        		<div class="bx-wrapper" style="max-width: 100%;">
-        			<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 378px;">
-	        			<ul class="relbxslider watch" style="width: auto; position: relative;">
-	          				<li style="float: none; list-style: none; position: absolute; width: 776px; z-index: 50; display: block;">
-	  
-	                
-	  				        </li>
-	        			</ul>
-        			</div>
-        		<div class="bx-controls bx-has-controls-direction">
-        			<div class="bx-controls-direction">
-	        			<a class="bx-prev disabled" href="">Prev</a>
-	        			<a class="bx-next disabled" href="">Next</a>
-	        		</div>
-        		</div>
-        		</div>
-    	</div>
+			<div class="row" id="review"></div>
+			<div class="row">
+			<ul class="pagination"></ul>
+			</div>
+		</div>
 	</div>
 
 	<!-- 스크롤버튼 -->
