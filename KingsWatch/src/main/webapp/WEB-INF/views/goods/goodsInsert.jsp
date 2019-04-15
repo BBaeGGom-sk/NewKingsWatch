@@ -47,8 +47,12 @@ ${already};
 	  		<form action="/goods/goodsInsert" method="post">
 				<div class="form-group">
 					<label for="g_id">상품번호</label>
-					<input required class="form-control" id="g_id" name="g_id" placeholder="상품아이디 입력 후 꼭 상품확인 버튼을 눌러주세요">
-					<button id="already">상품확인</button>
+					<div class="input-group">
+						<input required class="form-control" id="g_id" name="g_id" placeholder="상품아이디 입력 후 꼭 상품확인 버튼을 눌러주세요">
+						<span class="input-group-btn">
+							<button id="already" class="btn btn-success">상품확인</button>
+						</span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="g_brand">브랜드명</label>
