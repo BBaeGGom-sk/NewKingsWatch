@@ -68,7 +68,7 @@
 
 	<section class="home-slider owl-carousel">
 		<div class="slider-item"
-			style="background-image: url(resources//images/bg_1.jpg);">
+			style="background-image: url(resources/images/bg_1.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div
@@ -93,7 +93,7 @@
 		</div>
 
 		<div class="slider-item"
-			style="background-image: url(resources//images/bg_2.jpg);">
+			style="background-image: url(resources/images/bg_2.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div
@@ -118,7 +118,7 @@
 		</div>
 
 		<div class="slider-item"
-			style="background-image: url(resources//images/bg_3.jpg);">
+			style="background-image: url(resources/images/bg_3.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div
@@ -147,7 +147,7 @@
 
 	<section class="ftco-about d-md-flex">
 		<div class="one-half img"
-			style="background-image: url(resources//images/about.jpg);"></div>
+			style="background-image: url(resources/images/about.jpg);"></div>
 		<div class="one-half ftco-animate">
 			<div class="overlap">
 				<div class="heading-section ftco-animate ">
@@ -191,25 +191,25 @@
 						<div class="col-md-6">
 							<div class="menu-entry">
 								<a href="#" class="img"
-									style="background-image: url(resources//images/menu-1.jpg);"></a>
+									style="background-image: url(resources/images/menu-1.jpg);"></a>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="menu-entry mt-lg-4">
 								<a href="#" class="img"
-									style="background-image: url(resources//images/menu-2.jpg);"></a>
+									style="background-image: url(resources/images/menu-2.jpg);"></a>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="menu-entry">
 								<a href="#" class="img"
-									style="background-image: url(resources//images/menu-3.jpg);"></a>
+									style="background-image: url(resources/images/menu-3.jpg);"></a>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="menu-entry mt-lg-4">
 								<a href="#" class="img"
-									style="background-image: url(resources//images/menu-4.jpg);"></a>
+									style="background-image: url(resources/images/menu-4.jpg);"></a>
 							</div>
 						</div>
 					</div>
@@ -219,7 +219,7 @@
 	</section>
 
 	<section class="ftco-counter ftco-bg-dark img" id="section-counter"
-		style="background-image: url(resources//images/bg_2.jpg);"
+		style="background-image: url(resources/images/bg_2.jpg);"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -293,7 +293,7 @@
 				<div class="col-md-3">
 					<div class="menu-entry">
 						<a href="#" class="img"
-							style="background-image: url(resources//images/menu-1.jpg);"></a>
+							style="background-image: url(resources/images/menu-1.jpg);"></a>
 						<div class="text text-center pt-4">
 							<h3>
 								<a href="#">Coffee Capuccino</a>
@@ -313,7 +313,7 @@
 				<div class="col-md-3">
 					<div class="menu-entry">
 						<a href="#" class="img"
-							style="background-image: url(resources//images/menu-2.jpg);"></a>
+							style="background-image: url(resources/images/menu-2.jpg);"></a>
 						<div class="text text-center pt-4">
 							<h3>
 								<a href="#">Coffee Capuccino</a>
@@ -333,7 +333,7 @@
 				<div class="col-md-3">
 					<div class="menu-entry">
 						<a href="#" class="img"
-							style="background-image: url(resources//images/menu-3.jpg);"></a>
+							style="background-image: url(resources/images/menu-3.jpg);"></a>
 						<div class="text text-center pt-4">
 							<h3>
 								<a href="#">Coffee Capuccino</a>
@@ -353,7 +353,7 @@
 				<div class="col-md-3">
 					<div class="menu-entry">
 						<a href="#" class="img"
-							style="background-image: url(resources//images/menu-4.jpg);"></a>
+							style="background-image: url(resources/images/menu-4.jpg);"></a>
 						<div class="text text-center pt-4">
 							<h3>
 								<a href="#">Coffee Capuccino</a>
@@ -380,7 +380,7 @@
 				<div class="col-md-3 ftco-animate">
 					<a href="gallery.html"
 						class="gallery img d-flex align-items-center"
-						style="background-image: url(resources//images/gallery-1.jpg);">
+						style="background-image: url(resources/images/gallery-1.jpg);">
 						<div
 							class="icon mb-4 d-flex align-items-center justify-content-center">
 							<span class="icon-search"></span>
@@ -390,7 +390,7 @@
 				<div class="col-md-3 ftco-animate">
 					<a href="gallery.html"
 						class="gallery img d-flex align-items-center"
-						style="background-image: url(resources//images/gallery-2.jpg);">
+						style="background-image: url(resources/images/gallery-2.jpg);">
 						<div
 							class="icon mb-4 d-flex align-items-center justify-content-center">
 							<span class="icon-search"></span>
@@ -400,7 +400,7 @@
 				<div class="col-md-3 ftco-animate">
 					<a href="gallery.html"
 						class="gallery img d-flex align-items-center"
-						style="background-image: url(resources//images/gallery-3.jpg);">
+						style="background-image: url(resources/images/gallery-3.jpg);">
 						<div
 							class="icon mb-4 d-flex align-items-center justify-content-center">
 							<span class="icon-search"></span>
@@ -410,7 +410,7 @@
 				<div class="col-md-3 ftco-animate">
 					<a href="gallery.html"
 						class="gallery img d-flex align-items-center"
-						style="background-image: url(resources//images/gallery-4.jpg);">
+						style="background-image: url(resources/images/gallery-4.jpg);">
 						<div
 							class="icon mb-4 d-flex align-items-center justify-content-center">
 							<span class="icon-search"></span>
