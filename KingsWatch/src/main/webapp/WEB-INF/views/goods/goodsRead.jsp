@@ -80,7 +80,7 @@ nav#nav ul li {
 	<%
 		session.getAttribute("login");
 	 %>
-
+ 
    <div class="container">
       <div class="center">
 
