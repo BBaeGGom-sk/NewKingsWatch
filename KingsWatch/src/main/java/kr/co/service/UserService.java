@@ -11,6 +11,7 @@ public interface UserService {
 
 	public void join(UserDTO dto);
 	public UserDTO getUser(UserDTO dto) throws Exception;
+	public String getUserPw(String id) throws Exception;
 	public void logout(HttpSession session);
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);
