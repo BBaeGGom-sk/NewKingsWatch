@@ -45,6 +45,9 @@
         <exclude-mapping path="/resources/**"/>
         <exclude-mapping path="/user/login"/>
         <exclude-mapping path="/user/join"/>
+        <exclude-mapping path="/user/idCheck"/>
+        <exclude-mapping path="/user/emailCheck"/>
+        
         <beans:ref bean="AuthLoginInterceptor"/>
     </interceptor>
 </interceptors>

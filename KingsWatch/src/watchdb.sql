@@ -22,6 +22,7 @@ select * from tab_user
 alter table tab_user add (u_addetail varchar2(200)) 
 update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
 
+SELECT COUNT(u_id) FROM tab_user WHERE u_name = '페이커'
 
 insert into tab_user values ('bbaeggom', '1026', '오승기', '01130339681',1,25,'03300', '서울시 은평구 북한산로2' ,'어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com',null, 0, 1,'(진관동, 은평뉴타운구파발)')
 delete from tab_user where u_id = 'bbaeggom'
@@ -90,6 +91,7 @@ create table tab_coupon(
 	cp_exp varchar2(40)
 )
 drop table tab_coupon
+
 
 
 create table tab_notice(

@@ -18,7 +18,8 @@ public interface UserDAO {
 	public UserDTO update(UserDTO dto, HttpSession session);
 	public UserDTO updatePw(Map map, HttpSession session);
 	public void delete(String id);
-	public int idCheck(String userid);
+	public int idCheck(String u_id);
+	public int emailCheck(String u_email);
 
 
 	
