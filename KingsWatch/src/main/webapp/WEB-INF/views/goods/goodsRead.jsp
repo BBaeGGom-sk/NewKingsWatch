@@ -14,10 +14,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
 <script src="../../resources/js/uploaddetail.js"></script>
-<link href="../../resources/css/jquery.bxslider.css"  rel="stylesheet" type="text/css" /> 
-
-
- 
 <style type="text/css">
 .uploadedList {
    list-style: none;
@@ -205,7 +201,7 @@ element.style {
     font-size: 1.5em;
     font-weight: 300;
 }
-
+  
 /* 스크롤버튼  */
   .ScrollButton {
   position: fixed;   /* 버튼의 위치 고정 */
@@ -238,122 +234,13 @@ element.style {
 					<div class="squareLeft">
 						<ul class="uploadedList clearfix squareSlide" style="width: auto; position: relative;">
 						</ul>
-				</div>
+					</div>
 					<div class="form-group squareRight">
 						<div class="infoBox">
 							<c:if test="${login.u_id eq 'admin'}">
 								<button name="goodsUpdate" id="goodsUpdate" class="btn btn-primary">수정</button>
 							</c:if>
-
-<<<<<<< HEAD
-	   <form>
-         <div id="container_box" class="form-group">
-            <div style="float: left;">
-               <ul class="uploadedList clearfix">
-                     <!-- 상품이미지업로드 -->
-               </ul>
-            </div>
-            <div style="float: left; padding-top: 5%;" class="form-group">
-               <label for="g_name">이름</label>
-                  <p>${goodsRead.g_name}</p>
-               <label for="g_price">가격</label>
-                  <p>&#8361;<fmt:formatNumber value="${goodsRead.g_price}" type="number" /></p>
-               <label for="g_price">할인가격</label>
-                  <p id="priceSale"></p>
-               <label for="o_quantity">수량</label>
-               <p>
-                  <button type="button" class="plus">+</button>
-                     <input name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly">
-                   <button type="button" class="minus">-</button>
-                </p>
-               <label for="g_desc">설명</label>
-                  <p>${goodsRead.g_desc}</p>
-              <button class="form-control" id="order" name="order'">구매하기</button>
-              <button class="form-control" id="cart" name="cart">카트담기</button>
-      
-            </div>
-         </div>
-	      <input id="g_id" name="g_id"  value="${goodsRead.g_id}" type="hidden">
-   </form>
-   
-      </div>
-   </div>
-   
-     
-   <div class="container">
-   		<div class="row">
-          <button id="reply" class="btn btn-primary">댓글</button>
-			<div id="myCollapsible" class="collapse">
-				<div class="form-group">
-					<label for="u_id">작성자</label> <input class="form-control"
-						id="u_id">
-				</div>
-				
-				<div class="form-group">
-					<label for="r_title">제목</label> <input class="form-control"
-						id="r_title">
-				</div>
-
-
-				<div class="form-group">
-					<label for="r_content">내용</label> <input class="form-control"
-						id="r_content">
-				</div>
-				<div class="form-group">
-					<label for="r_rating">평점 ★ (1에서 5점까지) </label>
-					<input type="radio" name="r_rating" value="1">&nbsp;1&nbsp;
-					<input type="radio" name="r_rating" value="2">&nbsp;2&nbsp;
-					<input type="radio" name="r_rating" value="3">&nbsp;3&nbsp;
-					<input type="radio" name="r_rating" value="4">&nbsp;4&nbsp;
-					<input type="radio" name="r_rating" value="5">&nbsp;5&nbsp; 
-
-				</div>
-				<div class="form-group">
-					<button id="replyInsertBtn" class="btn btn-success">등록</button>
-					<button id="replyResetBtn" class="btn btn-default">초기화</button>
-				</div>
-				
-				</div>
-				</div>
-   
-   
-   	<div class="row">
-		<div id="myModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close">&times;</button>
-					<p id="modal_r_bno"></p>
-				</div>
-				<div class="modal-body">
-					<strong>제목</strong> : <input id="modal_r_title" class="form-control">
-					<strong>내용 </strong>: <input id="modal_r_content" class="form-control">
-					<strong>평점 </strong>: <input type="radio" value="1" name="modal_r_rating" >1
-					<input type="radio" value="2" name="modal_r_rating" >2
-					<input type="radio" value="3" name="modal_r_rating" >3
-					<input type="radio" value="4" name="modal_r_rating" >4
-					<input type="radio" value="5" name="modal_r_rating" >5
-				</div>
-<!-- 				<div class="modal-footer">
-					<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
-					<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
-					<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
-				</div> -->
-			</div>
-		</div>
-	</div>
-   
-   		<div class="row" id="review"></div>
-		<div class="row">
-			<ul class="pagination"></ul>
-		</div>
-   </div>
-   
-   
- 	<!-- 스크롤버튼 -->
-	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
-	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
-=======
-							<h2 class="cosTitle">${goodsRead.g_name}</h2>
+        					<h2 class="cosTitle">${goodsRead.g_name}</h2>
 							<div class="price">
 								<c:if test="${goodsRead.g_sale == 0}">
 									<h2 class="cosTitle">
@@ -429,20 +316,104 @@ element.style {
 			<input id="g_id" name="g_id" value="${goodsRead.g_id}" type="hidden">
 			<input id="u_id" name="u_id" value="${login.u_id}" type="hidden">
 		</form>
+      </div>
+   
+     
+   <div class="container">
+   		<div class="row">
+          <button id="reply" class="btn btn-primary">댓글</button>
+			<div id="myCollapsible" class="collapse">
+				<div class="form-group">
+					<label for="u_id">작성자</label> <input class="form-control"
+						id="u_id">
+				</div>
+				
+				<div class="form-group">
+					<label for="r_title">제목</label> <input class="form-control"
+						id="r_title">
+				</div>
+
+
+				<div class="form-group">
+					<label for="r_content">내용</label> <input class="form-control"
+						id="r_content">
+				</div>
+				<div class="form-group">
+					<label for="r_rating">평점 ★ (1에서 5점까지) </label>
+					<input type="radio" name="r_rating" value="1">&nbsp;1&nbsp;
+					<input type="radio" name="r_rating" value="2">&nbsp;2&nbsp;
+					<input type="radio" name="r_rating" value="3">&nbsp;3&nbsp;
+					<input type="radio" name="r_rating" value="4">&nbsp;4&nbsp;
+					<input type="radio" name="r_rating" value="5">&nbsp;5&nbsp; 
+
+				</div>
+				<div class="form-group">
+					<button id="replyInsertBtn" class="btn btn-success">등록</button>
+					<button id="replyResetBtn" class="btn btn-default">초기화</button>
+				</div>
+				
+				</div>
+				</div>
+   
+   
+   	<div class="row">
+		<div id="myModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close">&times;</button>
+					<p id="modal_r_bno"></p>
+				</div>
+				<div class="modal-body">
+					<strong>제목</strong> : <input id="modal_r_title" class="form-control">
+					<strong>내용 </strong>: <input id="modal_r_content" class="form-control">
+					<strong>평점 </strong>: <input type="radio" value="1" name="modal_r_rating" >1
+					<input type="radio" value="2" name="modal_r_rating" >2
+					<input type="radio" value="3" name="modal_r_rating" >3
+					<input type="radio" value="4" name="modal_r_rating" >4
+					<input type="radio" value="5" name="modal_r_rating" >5
+				</div>
+<!-- 				<div class="modal-footer">
+					<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
+					<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
+					<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
+				</div> -->
+			</div>
+		</div>
 	</div>
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
+   
+   		<div class="row" id="review"></div>
+		<div class="row">
+			<ul class="pagination"></ul>
+		</div>
+   </div>
+   
+   
+ 	<!-- 스크롤버튼 -->
+	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
+	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
+
 	
 	<div class="cosWrap">
-    <div class="relPro">
-        <h2 class="smallTitle">RELATED PRODUCT</h2>
-        <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 378px;"><ul class="relbxslider watch" style="width: auto; position: relative;">
-          <li style="float: none; list-style: none; position: absolute; width: 776px; z-index: 50; display: block;">
-  
-                
-          </li>
-        </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev disabled" href="">Prev</a><a class="bx-next disabled" href="">Next</a></div></div></div>
-    </div>
-</div>
+    	<div class="relPro">
+        	<h2 class="smallTitle">RELATED PRODUCT</h2>
+        		<div class="bx-wrapper" style="max-width: 100%;">
+        			<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 378px;">
+	        			<ul class="relbxslider watch" style="width: auto; position: relative;">
+	          				<li style="float: none; list-style: none; position: absolute; width: 776px; z-index: 50; display: block;">
+	  
+	                
+	  				        </li>
+	        			</ul>
+        			</div>
+        		<div class="bx-controls bx-has-controls-direction">
+        			<div class="bx-controls-direction">
+	        			<a class="bx-prev disabled" href="">Prev</a>
+	        			<a class="bx-next disabled" href="">Next</a>
+	        		</div>
+        		</div>
+        		</div>
+    	</div>
+	</div>
 
 	<!-- 스크롤버튼 -->
 	<a id="TopButton" class="ScrollButton"><img
@@ -451,7 +422,6 @@ element.style {
 		src="../resources/img/bottom.png"></a>
 
 	<a id="footer"></a>
-<<<<<<< HEAD
 	
 	<!--  리뷰 불러오기위한 handlebars -->
 		<script id="sourceReview" type="text/x-handlebars-template">
@@ -474,15 +444,6 @@ element.style {
 	
    <!-- 이미지 불러오기위한 handlebars -->
    <script id="source" type="text/x-handlebars-template">
-      <li class="col-xs-3 pull-left" >
-         <span>
-            <img src="{{imgsrc}}">
-         </span>
-      </li>
-=======
-
-	<!-- 이미지 불러오기위한 handlebars -->
-	<script id="source" type="text/x-handlebars-template">
 		<div class="bx-wrapper" style="max-width: 100%;">
 			<div style="width: 100%; overflow: hidden; position: relative; height: 536px;"><ul class="squareSlide" style="width: auto; position: relative;">
 				<li class="col-xs-3 pull-left" style="float: none; list-style: none; position: absolute; width: 489px; z-index: 50; display: block;" >	
@@ -490,216 +451,212 @@ element.style {
 				</li>
 			</div>
 		</div>
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
-   </script>
-   
-   <script type="text/javascript">
-<<<<<<< HEAD
-      $(document).ready(function() { 
-    	  
-    	 var page = 1;
-         var g_id = "${goodsRead.g_id}";
-         
-         var g_price= ${goodsRead.g_price};
-         var g_sale= ${goodsRead.g_sale};
-=======
-				$(document).ready(
-						function() {
-							var g_id = "${goodsRead.g_id}";
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
+ 	</script>
 
-							var g_price = ${goodsRead.g_price};
-							var g_sale = ${goodsRead.g_sale};
 
-<<<<<<< HEAD
-       
-         
-         // 할인가격구하기
-	     function salePrice() {
-	         var g_persent = g_sale/100;
-	         var g_salePrice= g_price-(g_price*g_persent);
-	         $("#priceSale").text("₩"+g_salePrice.toLocaleString());
-	     } 
-=======
-							salePrice();
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
+	<script type="text/javascript">	
+			$(document).ready(function() {
+				
+				alert("ㅠㅠㅠ");
+				
+				var page = 1;
+				var g_id = "${goodsRead.g_id}";
+				var g_price = ${goodsRead.g_price};
+				var g_sale = ${goodsRead.g_sale};
 
-							// 할인가격구하기
-							function salePrice() {
-								var g_persent = g_sale / 100;
-								var g_salePrice = g_price - (g_price * g_persent);
-								$("#priceSale").text("₩" + g_salePrice.toLocaleString());
-							}
+				salePrice();
 
-							// 스크롤버튼
-							$(function() {
-								$(window).scroll(function() {
-									if ($(this).scrollTop() > 100) {
-										$('.ScrollButton').fadeIn();
-									} else {
-										$('.ScrollButton').fadeOut();
-									}
-								});
+				// 할인가격구하기
+				function salePrice() {
+					var g_persent = g_sale / 100;
+					var g_salePrice = g_price - (g_price * g_persent);
+						$("#priceSale").text("₩" + g_salePrice.toLocaleString());
+				}
 
-								$("#TopButton").click(function() {
-									$('html, body').animate({scrollTop : 0}, 800);
-									return false;
-								});
-
-								$("#BottomButton").click(function() {
-									$('html, body').animate({scrollTop : ($('#footer').offset().top)}, 800);
-									return false;
-								});
-							});
-
-							// 상품수정버튼
-							$("#goodsUpdate").click(function() {
-								$("form").attr("action", "goodsUpdate");
-								$("form").attr("method", "get");
-								$("form").submit();
-							});
-
-							// 수량증가버튼
-							$(".plus").click(function() {
-								var num = $(".numBox").val();
-								var plusNum = Number(num) + 1;
-								$(".numBox").val(plusNum);
-							});
-
-							// 수량감소버튼
-							$(".minus").click(function() {
-								var num = $(".numBox").val();
-								var minusNum = Number(num) - 1;
-
-								if (minusNum <= 0) {
-									$(".numBox").val(num);
-								} else {
-									$(".numBox").val(minusNum);
-								}
-							});
-
-							// 주문페이지 이동
-							$("#order").click(function() {
-								$("form").attr("action", "/order/orderPage");
-								$("form").attr("method", "get");
-								$("form").submit();
-							});
-
-							// 장바구니 담기
-							$("#cart").click(function(event) {
-								event.preventDefault();
-								
-<<<<<<< HEAD
+				// 스크롤버튼
+				$(function() {
+					$(window).scroll(function() {
+						if($(this).scrollTop() > 100) {
+								$('.ScrollButton').fadeIn();
+						} else {
+								$('.ScrollButton').fadeOut();
 					}
 				});
-			});
-         
-         
-         $("#review").on("click", ".callModal", function() {
 
-				var r_bno = $(this).attr("data-r_bno");
-				var r_title = $(this).attr("data-r_title");
-				var r_content = $(this).attr("data-r_content");
-				var r_rating = $(this).attr("data-r_rating");
-
-				$("#modal_r_bno").text(r_bno);
-				$("#modal_r_content").val(r_content);
-				$("#modal_r_title").val(r_title);
-				$("#modal_r_content").val(r_content);
-				$("input:radio[name='modal_r_rating']:checked").val(r_rating);
-				
-				$("#myModal").modal("show");
-			});
-         
-         
-         $("#reply").click(function() {
-				$("#myCollapsible").collapse("toggle");
-			});
-
-			$("#replyInsertBtn").click(
-					function() {
-						var u_id = $("#u_id").val();
-						var r_title = $("#r_title").val();
-						var r_content = $("#r_content").val();
-						var r_rating = $("input:radio[name='r_rating']:checked").val();
-						
-						
-						$.ajax({
-							type : 'post',
-							url : '/review',
-							headers : {
-								"Content-Type" : "application/json",
-								"X-HTTP-Method-Override" : "POST"
-							},
-							data : JSON.stringify({
-								u_id : u_id,
-								r_title : r_title,
-								r_content : r_content,
-								r_rating : r_rating,
-								g_id : g_id
-							}),
-							dataType : "text",
-							success : function(result) {
-								$("#u_id").val("");
-								$("#r_title").val("");
-								$("#r_content").val("");
-								$("#myCollapsible").collapse("toggle");
-								getList(g_id, page);
-
-							},
-							error : function(request, status, error) {
-								alert("code:" + request.status + "\n"
-										+ "msg:" + request.responseText
-										+ "\n" + "error:" + error);
-							},
-							complete : function() {
-
-							}
+						$("#TopButton").click(function() {
+							$('html, body').animate({scrollTop : 0}, 800);
+									return false;
 						});
-
+	
+						$("#BottomButton").click(function() {
+							$('html, body').animate({scrollTop : ($('#footer').offset().top)}, 800);
+									return false;
+						});
 					});
-         
-			$(".pagination").on("click", "li a", function(event) {
-				event.preventDefault();
-				page = $(this).attr("href");
-				getList(g_id, page);
-			});
+				
+
+					// 상품수정버튼
+					$("#goodsUpdate").click(function() {
+						$("form").attr("action", "goodsUpdate");
+						$("form").attr("method", "get");
+						$("form").submit();
+					});
+
+					// 수량증가버튼
+					$(".plus").click(function() {
+						var num = $(".numBox").val();
+						var plusNum = Number(num) + 1;
+						$(".numBox").val(plusNum);
+					});
+
+					// 수량감소버튼
+					$(".minus").click(function() {
+						var num = $(".numBox").val();
+						var minusNum = Number(num) - 1;
+							if (minusNum <= 0) {
+									$(".numBox").val(num);
+							} else {
+									$(".numBox").val(minusNum);
+							}
+					});
 
          
+         // 주문페이지 이동
+         $("#order").click(function() {
+            $("form").attr("action","/order/orderPage");
+            $("form").attr("method","get");
+            $("form").submit();
+         });
          
-=======
-								var u_id = "${login.u_id}";
-								var o_quantity = $("#o_quantity").val();
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
-
-<<<<<<< HEAD
-         goodsReadPicDbGet(g_id);
-			getList(g_id, page);
-         
-      });
-      
-=======
+         // 장바구니 담기
+         $("#cart").click(function(event) {
+			event.preventDefault();
+			var u_id = ${login.u_id}; // 후에변경하기
+			var o_quantity = $("#o_quantity").val();
+						
+				$.ajax({
+					type : 'post',
+					url : '/order/addCart',
+					data: {
+						g_id : g_id,
+						u_id : u_id,
+						o_quantity : o_quantity
+					},
+					dataType : "text",
+					success : function(result) {
+						if(result=="INSERT_SUCCESS"){
+							alert("장바구니에 추가되었습니다^^!");									
+						} else {
+							alert("장바구니에 추가되지 않았습니다ㅠㅜ");
+						}
+					},
+					error : function(request, status, error) {
+					
+					}
 								
-								$.ajax({
-									type : 'post',
-									url : '/order/addCart',
-									data : {
-										g_id : g_id,
-										u_id : u_id,
-										o_quantity : o_quantity
-									},
-									dataType : "text",
-									success : function(result) {
-										if (result == "INSERT_SUCCESS") {
-											alert("장바구니에 추가되었습니다^^!");
-										} else {
-											alert("장바구니에 추가되지 않았습니다ㅠㅜ");
-										}
-									},
-									error : function(request, status, error) {
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
+				});
+			});
+				
+         		goodsReadPicDbGet(g_id);
 
-<<<<<<< HEAD
+                $("#review").on("click", ".callModal", function() {
+
+    				var r_bno = $(this).attr("data-r_bno");
+    				var r_title = $(this).attr("data-r_title");
+    				var r_content = $(this).attr("data-r_content");
+    				var r_rating = $(this).attr("data-r_rating");
+
+    				$("#modal_r_bno").text(r_bno);
+    				$("#modal_r_content").val(r_content);
+    				$("#modal_r_title").val(r_title);
+    				$("#modal_r_content").val(r_content);
+    				$("input:radio[name='modal_r_rating']:checked").val(r_rating);
+    				
+    				$("#myModal").modal("show");
+    			});
+             
+             
+             $("#reply").click(function() {
+    				$("#myCollapsible").collapse("toggle");
+    			});
+
+    			$("#replyInsertBtn").click(
+    					function() {
+    						var u_id = $("#u_id").val();
+    						var r_title = $("#r_title").val();
+    						var r_content = $("#r_content").val();
+    						var r_rating = $("input:radio[name='r_rating']:checked").val();
+    						
+    						
+    					        if(u_id.length == 0){
+    					              alert("아이디를 입력하세요"); 
+    					              $("#u_id").focus();
+    					              return false;
+    					         }
+    					        if(r_title.length == 0){
+    					              alert("제목 입력해 주세요"); 
+    					              $("#r_title").focus();
+    					              return false;
+    					         }
+    					        if(r_content.length == 0){
+    					              alert("내용을 입력해 주세요"); 
+    					              $("#r_content").focus();
+    					              return false;
+    					         }
+    					        
+    					        if(r_rating== null){
+    					              alert("평점을 선택하세요"); 
+    					              return false;
+    					         }
+    	
+    						
+    						$.ajax({
+    							type : 'post',
+    							url : '/review',
+    							headers : {
+    								"Content-Type" : "application/json",
+    								"X-HTTP-Method-Override" : "POST"
+    							},
+    							data : JSON.stringify({
+    								u_id : u_id,
+    								r_title : r_title,
+    								r_content : r_content,
+    								r_rating : r_rating,
+    								g_id : g_id
+    							}),
+    							dataType : "text",
+    							success : function(result) {
+    								$("#r_title").val("");
+    								$("#r_content").val("");
+    								$("#myCollapsible").collapse("toggle");
+    								getList(g_id, page);
+
+    							},
+    							error : function(request, status, error) {
+    								alert("code:" + request.status + "\n"
+    										+ "msg:" + request.responseText
+    										+ "\n" + "error:" + error);
+    							},
+    							complete : function() {
+
+    							}
+    						});
+
+    					});
+             
+    			$(".pagination").on("click", "li a", function(event) {
+    				event.preventDefault();
+    				page = $(this).attr("href");
+    				getList(g_id, page);
+    			});
+
+       
+				 getList(g_id, page);
+         
+      })
+      
+	
+
      function goodsReadPicDbGet(g_id) {
          $.getJSON("/goods/goodsReadPicDbGet/"+g_id, function(result) {
             var source= $("#source").html();
@@ -742,30 +699,9 @@ element.style {
 					printPaging(data.pm);
 
 				});
-			}
+		}
      
      
    </script>
-=======
-									}
-								});
-							});
-
-							goodsReadPicDbGet(g_id);
-
-						});
-
-				function goodsReadPicDbGet(g_id) {
-					$.getJSON("/goods/goodsReadPicDbGet/" + g_id, function(result) {
-						var source = $("#source").html();
-						var template = Handlebars.compile(source);
-						$(result).each(function() {
-							var data = getFileDetail(this);
-							$(".uploadedList").append(template(data));
-						});
-					});
-				}
-			</script>
->>>>>>> branch 'master' of https://github.com/BBaeGGom-sk/NewKingsWatch.git
 </body>
 </html>
