@@ -231,7 +231,7 @@ ${already};
 						}
 					});
 				});
-				
+				 
 				
 				$(".fileDrop").on("dragenter dragover", function(event) {
 					event.preventDefault();
