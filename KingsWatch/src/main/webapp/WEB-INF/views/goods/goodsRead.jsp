@@ -55,19 +55,6 @@ nav#nav {
 nav#nav ul li {
    display: inline-block; /* margin-left:10px;  */
 }
-
-div#container_box {
-   float: right;
-   width: calc(100% - 200px - 20px);
-}
-
-img {
-   align-items: center;
-}
-
-table{
-   align-content: center;
-}
   
 /* 스크롤버튼  */
   .ScrollButton {
@@ -90,25 +77,29 @@ table{
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		session.getAttribute("login");
+	 %>
 
    <div class="container">
-      <div class="row">
+      <div class="center">
 
          <div class="row">
-            <nav id="nav">
+         <c:if test="${login.u_id eq 'admin'}">
                <button name="goodsUpdate" id="goodsUpdate" class="btn btn-primary">수정</button>
+         </c:if>
+            <nav id="nav">
             </nav>
          </div>
 
-
 	   <form>
-         <div id="container_box" class="form-group">
+         <div class="form-group">
             <div style="float: left;">
                <ul class="uploadedList clearfix">
                      <!-- 상품이미지업로드 -->
                </ul>
             </div>
-            <div style="float: left; padding-top: 5%;" class="form-group">
+            <div style="padding-top: 5%; display: inline-block;" class="form-group" >
                <label for="g_name">이름</label>
                   <p>${goodsRead.g_name}</p>
                <label for="g_price">가격</label>
