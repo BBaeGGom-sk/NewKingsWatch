@@ -12,7 +12,7 @@
   
   
     <select id="getUser" resultType="kr.co.domain.UserDTO">
-  	select u_id,u_pw from tab_user where u_id=#{u_id}
+  	select * from tab_user where u_id=#{u_id}
   	</select>
   
   <select id="getUserPw" resultType="String">

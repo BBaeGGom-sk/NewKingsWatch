@@ -64,6 +64,7 @@ public class UserController {
 		}
 
 		UserDTO dto = service.getUser(userDTO);	//암호화된 비번 가지고있는놈 dto에 저장.
+		System.out.println(dto);
 		if(dto!=null) {
 			
 			boolean passmatch = passwordEncoder.matches(userDTO.getU_pw(), dto.getU_pw()); // 유저입력 비번과 암호화된 비번 매칭
@@ -87,6 +88,7 @@ public class UserController {
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		System.out.println("로그아웃합니다.");
 		session.invalidate();
 		return "redirect:/";	
 	}
