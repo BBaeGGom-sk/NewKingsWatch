@@ -32,6 +32,7 @@ update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은�
 insert into tab_user (u_id, u_pw, u_name,u_adDetail)values ('babo123123','babo','바보', ' ')
 delete from tab_user where u_id = 'bbaeggom'
 
+insert into tab_user (u_id, u_pw, u_name)values ('brown','dddd','김요우')
 
 create table tab_address(
 	u_id varchar2(30) references tab_user(u_id),
@@ -95,52 +96,75 @@ drop table tab_coupon
 
 
 create table tab_notice(
-	n_bno number(6) primary key,
-	n_title varchar2(40),
-	n_content varchar2(1000),
+	n_bno number primary key,
+	n_title varchar2(60),
+	n_content varchar2(3000),
 	u_id varchar2(30) references tab_user(u_id),
-	n_regdate varchar2(40) default sysdate,
-	n_updatedate varchar2(40),
-	n_topmost number(1)
+	n_regdate date default sysdate,
+	n_updatedate date default sysdate,
+	n_topmost number(1),
+	n_viewcnt number default 0
 )
 drop table tab_notice
 
 create table tab_qna(
-	q_bno number(6) primary key,
+	q_bno number primary key,
 	g_id varchar2(30) references tab_goods(g_id),
-	q_title varchar2(40),
-	q_content varchar2(1000),
+	q_title varchar2(60),
+	q_content varchar2(3000),
 	u_id varchar2(30) references tab_user(u_id),
-	q_regdate varchar2(40) default sysdate,
-	q_updatedate varchar2(40),
-	q_lock number(1),
-	q_topmost number(1)
+	q_regdate date default sysdate,
+	q_updateDate date default sysdate,
+	q_lock number(1),	
+	q_topmost number(1),
+	q_viewcnt number default 0,
+	q_replycnt number default 0
 )
+
 drop table tab_qna
 
 
+create table tab_qna_reply(
+q_rno number primary key,
+q_bno number references tab_qna(q_bno),
+qr_text varchar2(3000),
+replyer varchar2(30) references tab_user(u_id),
+qr_regdate date default sysdate,
+qr_updateDate date default sysdate
+)
+
+drop table tab_qna_reply
+
+
+
+
+
+
 create table tab_review(
-	r_bno number(6) primary key,
-	n_bno number(6) references tab_notice(n_bno),
-	r_title varchar2(40),
-	r_content varchar2(1000),
+	r_bno number primary key,
+	g_id varchar2(30) references tab_goods(g_id),
+	r_title varchar2(60),
+	r_content varchar2(3000),
 	u_id varchar2(30) references tab_user(u_id),
-	r_regdate varchar2(40) default sysdate,
-	r_updatedate varchar2(40),
+	r_regdate date default sysdate,
+	r_updatedate date default sysdate,
 	r_rating number(2)
 )
 drop table tab_review
+select * from tab_review
 
 
 create table tab_pic(
-p_num number(8) not null,
+p_num number not null,
 p_fullName varchar2(150),
 g_id varchar2(30) references tab_goods(g_id),
-r_bno number(6) references tab_review(r_bno),
-p_regDate varchar2(40) default sysdate
+r_bno number references tab_review(r_bno),
+q_bno number references tab_qna(q_bno),
+n_bno number references tab_notice(n_bno),
+p_regDate date default sysdate
 )
 drop table tab_pic
 
-
+select * from tab_pic
 
 commit

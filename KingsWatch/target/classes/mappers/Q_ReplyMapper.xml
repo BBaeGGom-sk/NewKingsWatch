@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
+<mapper namespace="kr.co.mapper.q_reply">
+
+
+	<insert id="insert">
+		insert into tab_qna_reply (q_rno, q_bno, qr_text, replyer)
+		values (#{q_rno}, #{q_bno}, #{qr_Text}, #{replyer})
+	</insert>
+
+	<select id="createRno" resultType="Integer">
+		select max(q_rno) from tab_qna_reply
+	</select>
+
+	<select id="list" resultType="Q_ReplyVO">
+		select * from tab_qna_reply where q_bno= #{q_bno} order by q_rno desc
+	</select>
+
+	<update id="update">
+		update tab_qna_reply set qr_Text = #{qr_Text}, qr_updateDate=sysdate where q_rno= #{q_rno}
+	</update>
+
+	<delete id="delete">
+		delete from tab_qna_reply where q_rno = #{q_rno}
+	</delete>
+
+	<select id="getAmount" resultType="Integer">
+		select count(q_rno) from tab_qna_reply where q_bno=#{q_bno}
+	</select>
+
+	<delete id="deleteByBno">
+		delete from tab_qna_reply where q_bno=#{q_bno}
+	</delete>
+
+</mapper>
