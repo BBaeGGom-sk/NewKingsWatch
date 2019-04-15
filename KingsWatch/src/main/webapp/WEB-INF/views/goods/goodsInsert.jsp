@@ -61,7 +61,7 @@
 				</div>
 				<div class="form-group">
 					<label for="g_sale">할인율</label>
-					<input required class="form-control" id="g_sale" name="g_sale">
+					<input required class="form-control" id="g_sale" name="g_sale" placeholder="숫자만 넣어주세요. ex)50% -> 50 / 할인상품 아닐시 0">
 				</div>
 				<div class="form-group">
 					<label for="g_desc">상세설명</label>
@@ -75,14 +75,17 @@
 						<option value="1">여성</option>
 						<option value="2">남성</option>
 					</select>
-	
 				</div>
 				<div class="form-group">
 					<label for="g_is_selling">판매여부</label>
-					<input required class="form-control" id="g_is_selling" name="g_is_selling" value="0" readonly="readonly">
+					<select required class="form-control" id="g_is_selling" name="g_is_selling" >
+							<option disabled>판매여부선택</option>
+							<option id="yes_selling" value="0" selected="selected">판매</option>
+							<option id="no_selling" value="1">판매종료</option>
+						</select>
 				</div>
 			</form>
-			
+
 			<div class="form-group">
 				<label>업로드할  파일을 드랍</label>
 				<div class="fileDrop"></div>
