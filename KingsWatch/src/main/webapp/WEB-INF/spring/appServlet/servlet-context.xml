@@ -47,7 +47,7 @@
         <exclude-mapping path="/user/join"/>
         <exclude-mapping path="/user/idCheck"/>
         <exclude-mapping path="/user/emailCheck"/>
-        
+        <exclude-mapping path="/order/addCart"/>
         <beans:ref bean="AuthLoginInterceptor"/>
     </interceptor>
 </interceptors>
