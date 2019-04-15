@@ -32,20 +32,19 @@ margin-bottom : 50px;
 <body>
 
 
-
 	<div class="container">
 		<div class="row">
-
+<h3 align="left">${vo.q_title}</h3>
+<hr>
+</div>
 			<div class="form-group">
-				<label for="q_title">제목</label> <input class="form-control" readonly
-					name="q_title" id="q_title" value=${vo.q_title}>
+				<label for="u_id">작성자</label>&nbsp; ${vo.u_id}&nbsp;&nbsp;
+			<label
+				for="q_updateDate">작성일</label>&nbsp;&nbsp;${vo.q_updateDate}&nbsp;&nbsp;
+			<label for="q_viewCnt">조회</label>&nbsp;${vo.q_viewCnt}
+			<c:if test="${vo.q_lock==1}">&nbsp;<span class="glyphicon glyphicon-lock"></span></c:if>
+			<hr>
 			</div>
-
-			<div class="form-group">
-				<label for="u_id">작성자</label> <input class="form-control" readonly
-					name="u_id" id="u_id" value=${vo.u_id}>
-			</div>
-
 			<div class="form-group">
 				<label for="q_content">내용</label>
 				<textarea class="form-control" readonly name="q_content" id="q_content">${vo.q_content}</textarea>
@@ -67,8 +66,10 @@ margin-bottom : 50px;
 
 
 			<div class="form-group">
+			<c:when test="${vo.u_id == login.u_id}">
 				<button id="update" class="btn btn-warning">수정</button>
 				<button id="delete" class="btn btn-danger">삭제</button>
+				</c:when>
 				<button id="list" class="btn btn-info">목록</button>
 				<button id="reply" class="btn btn-primary">댓글</button>
 			</div>

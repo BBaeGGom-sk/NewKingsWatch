@@ -42,8 +42,8 @@
 			<form action="/board/update" method="post">
 
 				<div class="form-group">
-					<label for="n_bno">글번호</label> <input readonly class="form-control"
-						id="n_bno" name="n_bno" value="${vo.n_bno}">
+				<input readonly class="form-control"
+						id="n_bno" name="n_bno" value="${vo.n_bno}" type="hidden">
 				</div>
 
 
@@ -54,9 +54,9 @@
 				</div>
 
 				<div class="form-group">
-					<label for="u_id">작성자</label> <input required
+					<label for="u_id">작성자</label> <input readonly
 						class="form-control" id="u_id" name="u_id"
-						value="${vo.u_id}">
+						value="${login.u_id}">
 				</div>
 
 				<div class="form-group">
@@ -178,6 +178,28 @@
 			
 			$("button[type='submit']").click(function(event) {
 				/* $("form").submit(); */
+				
+				var n_title = $("#n_title").val();
+				var u_id = $("#u_id").val();
+				var n_content = $("#n_content").val();
+				
+				
+			        if(n_title.length == 0){
+			              alert("제목을 입력하세요"); 
+			              $("#n_title").focus();
+			              return false;
+			         }
+			        if(u_id.length == 0){
+			              alert("아이디를 입력해 주세요"); 
+			              $("#n_title").focus();
+			              return false;
+			         }
+			        if(n_content.length == 0){
+			              alert("내용을 입력해 주세요"); 
+			              $("#n_content").focus();
+			              return false;
+			         }
+				
 				
 				var $form = $("form");
 				var str = "";

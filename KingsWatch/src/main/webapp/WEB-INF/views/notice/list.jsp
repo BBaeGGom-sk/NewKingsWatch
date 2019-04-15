@@ -108,8 +108,6 @@
 	
 			<a class="btn btn-info pull-right" href="/notice/insertui">글쓰기</a>
 
-
-
 		</div>
 	<div class="row">
 

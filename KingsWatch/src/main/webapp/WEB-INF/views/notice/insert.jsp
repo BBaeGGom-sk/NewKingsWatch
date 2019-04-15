@@ -49,18 +49,18 @@
 			<form action="/notice/insert" method="post">
 
 				<div class="form-group">
-					<label for="n_title">제목</label> <input required class="form-control"
+					<label for="n_title">제목</label> <input class="form-control"
 						id="n_title" name="n_title">
 				</div>
 
 				<div class="form-group">
-					<label for="u_id">작성자</label> <input required
-						class="u_id" id="u_id" name="u_id">
+					<label for="u_id">작성자</label> <input 
+						class="u_id" id="u_id" name="u_id" value="${login.u_id}" readonly>
 				</div>
 
 				<div class="form-group">
 					<label for="n_content">내용</label>
-					<textarea required class="form-control" id="n_content" name="n_content"
+					<textarea class="form-control" id="n_content" name="n_content"
 						rows="3"></textarea>
 				</div>
 				<div class="form-group">
@@ -111,6 +111,8 @@
 		var source = $("#source").html();
 		var template = Handlebars.compile(source);
 
+		
+		
 		$(".uploadedList").on("click", ".delbtn", function(event){
 			event.preventDefault();
 			var $delBtn = $(this);
@@ -166,6 +168,31 @@
 			$("button[type='submit']").click(function(event) {
 			/* 	$("form").submit(); */
 			
+			
+			var n_title = $("#n_title").val();
+			var u_id = $("#u_id").val();
+			var n_content = $("#n_content").val();
+			
+			
+		        if(n_title.length == 0){
+		              alert("제목을 입력하세요"); 
+		              $("#n_title").focus();
+		              return false;
+		         }
+		        if(u_id.length == 0){
+		              alert("아이디를 입력해 주세요"); 
+		              $("#n_title").focus();
+		              return false;
+		         }
+		        if(n_content.length == 0){
+		              alert("내용을 입력해 주세요"); 
+		              $("#n_content").focus();
+		              return false;
+		         }
+			
+			
+			
+			
 			event.preventDefault();
 			var $form=$("form");
 			var str = "";
@@ -174,7 +201,6 @@
 				str+="<input name='files["+index+"]' value='"+$(this).attr("href")+"' type='hidden'/>";
 			});
 			
-			alert(str);
 			
 			$form.append(str);
 			$form.get(0).submit();

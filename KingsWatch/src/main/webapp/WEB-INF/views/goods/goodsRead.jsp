@@ -137,11 +137,12 @@ table{
      
    <div class="container">
    		<div class="row">
-          <button id="reply" class="btn btn-primary">댓글</button>
+          <button id="reply" class="btn btn-primary">댓글 작성</button>
+<hr>
 			<div id="myCollapsible" class="collapse">
 				<div class="form-group">
 					<label for="u_id">작성자</label> <input class="form-control"
-						id="u_id">
+						id="u_id" value="${login.u_id}" readonly>
 				</div>
 				
 				<div class="form-group">
@@ -370,6 +371,28 @@ table{
 						var r_rating = $("input:radio[name='r_rating']:checked").val();
 						
 						
+					        if(u_id.length == 0){
+					              alert("아이디를 입력하세요"); 
+					              $("#u_id").focus();
+					              return false;
+					         }
+					        if(r_title.length == 0){
+					              alert("제목 입력해 주세요"); 
+					              $("#r_title").focus();
+					              return false;
+					         }
+					        if(r_content.length == 0){
+					              alert("내용을 입력해 주세요"); 
+					              $("#r_content").focus();
+					              return false;
+					         }
+					        
+					        if(r_rating== null){
+					              alert("평점을 선택하세요"); 
+					              return false;
+					         }
+	
+						
 						$.ajax({
 							type : 'post',
 							url : '/review',
@@ -386,7 +409,6 @@ table{
 							}),
 							dataType : "text",
 							success : function(result) {
-								$("#u_id").val("");
 								$("#r_title").val("");
 								$("#r_content").val("");
 								$("#myCollapsible").collapse("toggle");
