@@ -24,6 +24,7 @@ import kr.co.domain.Criteria;
 import kr.co.domain.GoodsVO;
 import kr.co.domain.PageMaker;
 import kr.co.domain.SearchCriteria;
+import kr.co.domain.UserDTO;
 import kr.co.service.GoodsService;
 import kr.co.utils.MediaUtils;
 
@@ -331,9 +332,29 @@ public class GoodsController {
 	
 	// 상품올리기
 	@RequestMapping(value="/goodsInsert", method=RequestMethod.POST)
-	public String insert(GoodsVO vo) {
-		service.goodsInsert(vo);
-		return "redirect:/goods/goodsList";
+	public String insert(GoodsVO vo, Model model) {
+			service.goodsInsert(vo);	
+			return "redirect:/goods/goodsList";
+	}
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/already", method = RequestMethod.POST)
+	public ResponseEntity<String> alreadyGoods(String g_id) {
+		ResponseEntity<String> entity = null;
+		try {
+			GoodsVO vo= service.goodsRead(g_id);
+			if(vo!=null) {
+				entity = new ResponseEntity<String>("already", HttpStatus.OK);
+			} else {
+				entity = new ResponseEntity<String>("newGoods", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
 	}
 	
 	// id에 따른 상품 상세보기

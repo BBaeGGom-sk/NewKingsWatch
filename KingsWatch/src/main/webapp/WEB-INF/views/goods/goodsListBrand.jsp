@@ -85,7 +85,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
  	opacity:0.4;
  }
  
- .ScrollButton {
+.ScrollButton {
   position: fixed;   /* 버튼의 위치 고정 */
   right: 10px;       /* x 위치 입력 */
   cursor: pointer;   /* 호버링 했을 때 커서 모양 변경 */
@@ -99,10 +99,34 @@ ul.goodsMenu>li ul.submenu>li:hover {
 #BottomButton {
   bottom: 75px;
 }
+
+.pagination > li > a,
+.pagination > li > a:focus,
+.pagination > li > a:hover {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+.active a{
+    color: white !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+hr { 
+	background-color: white; 
+	height: 1px; 
+	border: 0; 
+}
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+
+	<%
+		session.getAttribute("login");
+	 %>
   
 	<div class="container">
 	  <div class="row">
@@ -135,6 +159,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
+	  	<c:if test="${login.u_id eq 'admin'}">
 	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
 	  		<ul class="row submenu">
 	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
@@ -142,6 +167,7 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
 	  		</ul>
 	  	</li>
+	  	</c:if>
 	  </ul>
 	  </nav>
 	  
@@ -149,7 +175,8 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	<section id="content">
 
 	  	<label for="goodsListBrand">리스트입니다.</label>
-		<div class="row">
+		<div cl
+		ass="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>
 	 <hr>

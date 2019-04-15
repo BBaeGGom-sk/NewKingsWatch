@@ -45,7 +45,7 @@
     
         // 회원가입 버튼 클릭시 회원가입 화면으로 이동
         function goJoinForm() {
-            location.href="join";
+            location.href="/user/join";
         }    
     </script>
 

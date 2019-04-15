@@ -100,11 +100,34 @@ ul.goodsMenu>li ul.submenu>li:hover {
   bottom: 75px;
 }
 
+.pagination > li > a,
+.pagination > li > a:focus,
+.pagination > li > a:hover {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+.active a{
+    color: white !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+hr { 
+	background-color: white; 
+	height: 1px; 
+	border: 0; 
+}
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-  
+
+	<%
+		session.getAttribute("login");
+	 %>
+	  
 	<div class="container">
 	  <div class="row">
 	  
@@ -136,13 +159,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
 	  		</ul>
 	  	</li>
-	  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
-	  		<ul class="row submenu">
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
-	  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
-	  		</ul>
-	  	</li>
+	  	<c:if test="${login.u_id eq 'admin'}">
+		  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
+		  		<ul class="row submenu">
+		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
+		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
+		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
+		  		</ul>
+		  	</li>
+		 </c:if>
 	  </ul>
 	  </nav>
 	  
@@ -150,17 +175,20 @@ ul.goodsMenu>li ul.submenu>li:hover {
 	<section id="content">
 
 	  	<label for="goodsList">리스트입니다.</label>
+	  	<c:if test="${login.u_id eq 'admin'}">
 		<div class="row">
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>		
-	 <hr>
-	 <div id="container_box">
+	  	</c:if>
+	<hr>
 		 <div>
 		 	<a href="/goods/goodsList">최신순</a>
 		 	<a href="/goods/rowPriceGoods">낮은가격순</a>
 		 	<a href="/goods/highPriceGoods">높은가격순</a>
 		 </div>
-		 <ul>
+	<hr>
+	 <div>
+		 <ul id="goods">
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">

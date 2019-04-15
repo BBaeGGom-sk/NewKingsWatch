@@ -106,8 +106,6 @@ ul.goodsMenu>li ul.submenu>li:hover {
 <title>Insert title here</title>
 </head>
 <body>
-
-	alert("${pm.cri}");
 	<div class="container">
 	  <div class="row">
 	  

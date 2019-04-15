@@ -31,7 +31,7 @@ public class UserController {
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
-		return "user/join2";	//  user/join.jsp로 이동.
+		return "user/join2";
 
 	}
 	
@@ -42,13 +42,13 @@ public class UserController {
 		return "redirect:/user/login";
 	}
 	
-	
 	//로그인 화면
-	@RequestMapping("/login")
-	public String loginui() {
-		return "user/login";	
+		@RequestMapping("/login")
+		public String loginui() {
+			return "user/login";	
 
-	}
+		}
+	
 	
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -71,9 +71,6 @@ public class UserController {
         }
           
         return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
-		
-		
-
 	}
 	
 	
@@ -82,7 +79,6 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";	
-
 	}
 
 	
@@ -150,27 +146,29 @@ public String updateui(String id, Model model) {
 	}
 
 	
-	/*
-	 * @RequestMapping("/idcheck.do")
-	 * 
-	 * @ResponseBody public Map<Object, Object> idcheck(@RequestBody String userid)
-	 * { System.out.println("userid : " +userid); int count = 0; Map<Object, Object>
-	 * map = new HashMap<Object, Object>();
-	 * 
-	 * count = service.idcheck(userid); map.put("cnt", count);
-	 * 
-	 * return map; }
-	 */
 	
-	@ResponseBody
+	//Controller는 view를 리턴, ResponseBody는 데이터를 리턴
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
-	   public int idCheck(@RequestBody UserDTO dto, Model model) throws Exception{
-	    int count=0;  
-	    System.out.println(count);
-		count = service.idCheck(dto.getU_id());
+	   @ResponseBody
+	   public int idCheck(@RequestBody String u_id) throws Exception{
+		int count = service.idCheck(u_id);
 	    return count;
 	   }
-
+	   
+	   
+	 //Controller는 view를 리턴, ResponseBody는 데이터를 리턴
+	   @RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	   @ResponseBody
+	   public int emailCheck(@RequestBody String u_email) throws Exception{
+		
+		System.out.println("컨트롤러로 받아온 useremail값 : "+u_email);
+		int count = service.emailCheck(u_email);
+		System.out.println("컨트롤러로 받아온 useremail값2 : "+u_email);
+		System.out.println("컨트롤러로 받아온 useremailCount : "+count);
+		
+		return count;
+	   }
+	   
 
 	
 }

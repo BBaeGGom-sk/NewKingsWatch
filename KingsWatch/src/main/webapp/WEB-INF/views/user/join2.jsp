@@ -22,7 +22,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<title>회원가입</title>
+<title> 회원가입 </title>
 </head>
 
 <body>
@@ -40,20 +40,24 @@
 									<th scope="row">아이디 <img	src="/resources/img/ico_required.gif" alt="필수" /></th>
 									<td><input id="u_id" name="u_id" class="inputTypeText" placeholder=""
 										value="" type="text" /> 
-										<button id="idCheckBtn" class="btn btn-primary">중복확인</button>
+										<button id="idCheckBtn" class="btn btn-primary" >중복확인</button>
 										(영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 <img
 										src="/resources/img/ico_required.gif"
 										alt="필수" /></th>
-									<td><input id="u_pw" name="u_pw" autocomplete="off" type="password" /> (영문 대소문자/숫자/특수문자 중
+									<td><input class="pwInput" id="u_pw" name="u_pw" autocomplete="off" type="password" /> (영문 대소문자/숫자/특수문자 중
 										2가지 이상 조합, 10자~16자)</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 <img src="/resources/img/ico_required.gif" alt="필수" /></th>
-									<td><input id="user_passwd_confirm"
-										name="user_passwd_confirm" autocomplete="off" type="password" /></td>
+									<td><input class="pwInput" id="u_pw_confirm"
+										name="u_pw_confirm" autocomplete="off" type="password" />
+									<span style="color:blue;" id="alert-success">비밀번호가 일치합니다.</span>
+									<span style="color:red;" id="alert-danger">비밀번호가 일치하지 않습니다.</span>
+										
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 질문 &nbsp;</th>
@@ -132,9 +136,9 @@
 										src="/resources/img/ico_required.gif"
 										id="icon_sex" alt="필수" /></th>
 									<td>
-									<input id="u_sex" name="u_sex" value="1" type="radio" />
+									<input id="u_sex_man" name="u_sex" value="1" type="radio" />
 									<label	for="u_sex">남자</label>
-									<input id="u_sex" name="u_sex" value="2"	type="radio" />
+									<input id="u_sex_woman" name="u_sex" value="2"	type="radio" />
 									<label for="u_sex">여자</label></td>
 								</tr>
 								<tr class="">
@@ -160,7 +164,9 @@
 											<option value="nate.com">nate.com</option>
 											<option value="yahoo.com">yahoo.com</option>
 											<option value="etc">직접입력</option>
-									</select></td>
+									</select>
+									<button id="emailCheckBtn" class="btn btn-primary">중복확인</button>
+									</td>
 								</tr>
 								
 								<tr class="displaynone">
@@ -392,6 +398,7 @@
 
         $(document).ready(function() {
           
+        	
         	//추가정보 숨기기
         	//[1] 기본값 설정
             $("#extraInfo").hide(); 
@@ -402,7 +409,8 @@
                 $("#extraInfo").show('fast'); //천천히 보이기
                 $(this).hide('fast');//more버튼 숨기기
             });
-            
+
+
             //폰번호 3개 인풋에서 받은거 합치기
             $("#u_phone3").blur(function mergePhone() {
 				var phone1 = document.getElementById("u_phone1").value;
@@ -410,7 +418,9 @@
 				var phone3 = document.getElementById("u_phone3").value;
 				var phone = phone1 + phone2 + phone3;
 				document.getElementById("u_phone").value = phone;
-			})
+			});
+
+
             
 
 			// 이메일 관련
@@ -432,8 +442,33 @@
 				var email2 =  document.getElementById("u_email2").value;
 				var email =  email1 + "@" + email2;
 				document.getElementById("u_email").value = email;
-			})
+			});
             
+			
+			//비밀번호와 비밀번호 확인 문자 서로 비교
+			 $(function(){
+			        $("#alert-success").hide();
+			        $("#alert-danger").hide();
+			        $(".pwInput").keyup(function(){
+			            var pwd1=$("#u_pw").val();
+			            var pwd2=$("#u_pw_confirm").val();
+			            if(pwd1 != "" || pwd2 != ""){
+			                if(pwd1 == pwd2){
+			                    $("#alert-success").show();
+			                    $("#alert-danger").hide();
+			                    $("#submit").removeAttr("disabled");
+			                }else{
+			                    $("#alert-success").hide();
+			                    $("#alert-danger").show();
+			                    $("#submit").attr("disabled", "disabled");
+			                }    
+			            }
+			        });
+			    });
+
+
+
+
 			
 			//나이 계산
 			$("#birth_year").blur(function calAge() {
@@ -442,37 +477,22 @@
 				var age = now_year - birth_year +1;
 				document.getElementById("u_age").value = age;
 				
-			})
-			
+			});
 
-        });
-        
-        
-        
-        //아이디 중복체크
-        var idck = 0;	//아이디 체크를 안했다면 회원가입 불가능하도록 처리하기 위한 변수. 체크하면 1.
-		$(function() {
-		    //idck 버튼을 클릭했을 때 
-		    $("#idCheckBtn").click(function() {
-		        
-		        //userid 를 param.
-		        var userid =  $("#u_id").val(); 
-		        alert(userid);
-		      
 
-		        
+			//아이디 중복 체크
+			$("#idCheckBtn").click(function(event) {
+				event.preventDefault();//버튼 기본 get이기때문
+		        var u_id=  $("#u_id").val(); 
 		        $.ajax({
-		            async: true,
-		            type : 'POST',
-		            data :  JSON.stringify({
-		                  mb_Id : mb_Id 
-		                  //  컨트롤러에넘어가는애    var mb_Id 임
-		                        }),
 		            url : "/user/idCheck",
-		            dataType : "text",
-		            contentType: "application/json; charset=UTF-8",
+		            type : 'POST',
+		            data : u_id,
+		            contentType : "application/json; charset=utf-8",
+		            dataType : 'text',
+		            async:false,
 		            success : function(data) {
-		                if (data.cnt > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
+		               if (data > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
 		                	$("#join_submit_btn").prop("disabled", true);
 		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
@@ -482,19 +502,57 @@
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
 		                    $("#u_pw").focus();
-		                    //아이디가 중복하지 않으면  idck = 1
 		                    $("#join_submit_btn").prop("disabled", false);
-		                    idck = 1;
-		                    
-		                }
+		                  		                    
+		                } 
 		            },
 		            error : function(error) {
 		                
 		                alert("error : " + error);
 		            }
 		        });
-		    });
-		});
+		    });	//아이디 중복체크
+
+
+		    
+			//이메일 중복 체크
+			$("#emailCheckBtn").click(function(event) {
+				event.preventDefault();		//버튼 기본 get이기때문
+		        var u_email=  $("#u_email").val(); 
+		        
+		        $.ajax({
+		            url : "/user/emailCheck",
+		            type : 'POST',
+		            data : u_email,
+		            contentType : "application/json; charset=utf-8",
+		            dataType : 'text',
+		            async:false,
+		            success : function(data) {
+		               if (data > 0) {	//같은 이메일이 존재할때마다 cnt에 1이 더해진다.
+		                    alert("같은 이메일이 존재합니다. 다른 이메일을 입력해주세요.");
+		                	$("#join_submit_btn").prop("disabled", true);
+		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
+
+		                    $("#u_id").focus();
+
+		                } else {
+		                    $("#join_submit_btn").prop("disabled", false);
+		                    $("#join_submit_btn").focus();   
+		                } 
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });	//이메일 중복체크
+			
+
+        });
+        
+        
+        
+     
 	</script>
 
 

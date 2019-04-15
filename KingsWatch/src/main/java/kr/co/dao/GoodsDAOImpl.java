@@ -102,7 +102,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		// 카테고리+브랜드별 상품 전체갯수 구하기
 		return session.selectOne(NS+".getCategoryAmount", cri);
 	}
-	
+	  
 	@Override
 	public List<GoodsVO> search(SearchCriteria cri) {
 		// 판매중인 상품 검색에 따른 페이징
