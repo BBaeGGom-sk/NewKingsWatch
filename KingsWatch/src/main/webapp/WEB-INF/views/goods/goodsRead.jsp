@@ -321,11 +321,12 @@ element.style {
      
    <div class="container">
    		<div class="row">
-          <button id="reply" class="btn btn-primary">댓글</button>
+          <button id="reply" class="btn btn-primary">댓글 작성</button>
+<hr>
 			<div id="myCollapsible" class="collapse">
 				<div class="form-group">
 					<label for="u_id">작성자</label> <input class="form-control"
-						id="u_id">
+						id="u_id" value="${login.u_id}" readonly>
 				</div>
 				
 				<div class="form-group">
@@ -354,6 +355,7 @@ element.style {
 				
 				</div>
 				</div>
+   
    
    
    	<div class="row">
@@ -547,96 +549,97 @@ element.style {
 				
          		goodsReadPicDbGet(g_id);
 
-                $("#review").on("click", ".callModal", function() {
+         		 $("#review").on("click", ".callModal", function() {
 
-    				var r_bno = $(this).attr("data-r_bno");
-    				var r_title = $(this).attr("data-r_title");
-    				var r_content = $(this).attr("data-r_content");
-    				var r_rating = $(this).attr("data-r_rating");
+     				var r_bno = $(this).attr("data-r_bno");
+     				var r_title = $(this).attr("data-r_title");
+     				var r_content = $(this).attr("data-r_content");
+     				var r_rating = $(this).attr("data-r_rating");
 
-    				$("#modal_r_bno").text(r_bno);
-    				$("#modal_r_content").val(r_content);
-    				$("#modal_r_title").val(r_title);
-    				$("#modal_r_content").val(r_content);
-    				$("input:radio[name='modal_r_rating']:checked").val(r_rating);
-    				
-    				$("#myModal").modal("show");
-    			});
-             
-             
-             $("#reply").click(function() {
-    				$("#myCollapsible").collapse("toggle");
-    			});
+     				$("#modal_r_bno").text(r_bno);
+     				$("#modal_r_content").val(r_content);
+     				$("#modal_r_title").val(r_title);
+     				$("#modal_r_content").val(r_content);
+     				$("input:radio[name='modal_r_rating']:checked").val(r_rating);
+     				
+     				$("#myModal").modal("show");
+     			});
+              
+              
+              $("#reply").click(function() {
+     				$("#myCollapsible").collapse("toggle");
+     			});
 
-    			$("#replyInsertBtn").click(
-    					function() {
-    						var u_id = $("#u_id").val();
-    						var r_title = $("#r_title").val();
-    						var r_content = $("#r_content").val();
-    						var r_rating = $("input:radio[name='r_rating']:checked").val();
-    						
-    						
-    					        if(u_id.length == 0){
-    					              alert("아이디를 입력하세요"); 
-    					              $("#u_id").focus();
-    					              return false;
-    					         }
-    					        if(r_title.length == 0){
-    					              alert("제목 입력해 주세요"); 
-    					              $("#r_title").focus();
-    					              return false;
-    					         }
-    					        if(r_content.length == 0){
-    					              alert("내용을 입력해 주세요"); 
-    					              $("#r_content").focus();
-    					              return false;
-    					         }
-    					        
-    					        if(r_rating== null){
-    					              alert("평점을 선택하세요"); 
-    					              return false;
-    					         }
-    	
-    						
-    						$.ajax({
-    							type : 'post',
-    							url : '/review',
-    							headers : {
-    								"Content-Type" : "application/json",
-    								"X-HTTP-Method-Override" : "POST"
-    							},
-    							data : JSON.stringify({
-    								u_id : u_id,
-    								r_title : r_title,
-    								r_content : r_content,
-    								r_rating : r_rating,
-    								g_id : g_id
-    							}),
-    							dataType : "text",
-    							success : function(result) {
-    								$("#r_title").val("");
-    								$("#r_content").val("");
-    								$("#myCollapsible").collapse("toggle");
-    								getList(g_id, page);
+     			$("#replyInsertBtn").click(
+     					function() {
+     						var u_id = $("#u_id").val();
+     						var r_title = $("#r_title").val();
+     						var r_content = $("#r_content").val();
+     						var r_rating = $("input:radio[name='r_rating']:checked").val();
+     						
+     						
+     					        if(u_id.length == 0){
+     					              alert("아이디를 입력하세요"); 
+     					              $("#u_id").focus();
+     					              return false;
+     					         }
+     					        if(r_title.length == 0){
+     					              alert("제목 입력해 주세요"); 
+     					              $("#r_title").focus();
+     					              return false;
+     					         }
+     					        if(r_content.length == 0){
+     					              alert("내용을 입력해 주세요"); 
+     					              $("#r_content").focus();
+     					              return false;
+     					         }
+     					        
+     					        if(r_rating== null){
+     					              alert("평점을 선택하세요"); 
+     					              return false;
+     					         }
+     	
+     						
+     						$.ajax({
+     							type : 'post',
+     							url : '/review',
+     							headers : {
+     								"Content-Type" : "application/json",
+     								"X-HTTP-Method-Override" : "POST"
+     							},
+     							data : JSON.stringify({
+     								u_id : u_id,
+     								r_title : r_title,
+     								r_content : r_content,
+     								r_rating : r_rating,
+     								g_id : g_id
+     							}),
+     							dataType : "text",
+     							success : function(result) {
+     								$("#r_title").val("");
+     								$("#r_content").val("");
+     								$("#myCollapsible").collapse("toggle");
+     								getList(g_id, page);
 
-    							},
-    							error : function(request, status, error) {
-    								alert("code:" + request.status + "\n"
-    										+ "msg:" + request.responseText
-    										+ "\n" + "error:" + error);
-    							},
-    							complete : function() {
+     							},
+     							error : function(request, status, error) {
+     								alert("code:" + request.status + "\n"
+     										+ "msg:" + request.responseText
+     										+ "\n" + "error:" + error);
+     							},
+     							complete : function() {
 
-    							}
-    						});
+     							}
+     						});
 
-    					});
-             
-    			$(".pagination").on("click", "li a", function(event) {
-    				event.preventDefault();
-    				page = $(this).attr("href");
-    				getList(g_id, page);
-    			});
+     					});
+              
+     			$(".pagination").on("click", "li a", function(event) {
+     				event.preventDefault();
+     				page = $(this).attr("href");
+     				getList(g_id, page);
+     			});
+
 
        
 				 getList(g_id, page);

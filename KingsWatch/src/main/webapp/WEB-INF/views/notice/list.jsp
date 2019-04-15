@@ -105,11 +105,9 @@
 				</c:if>
 				
 			</ul>
-	
+	<c:if test="${login.u_id=='admin'}">
 			<a class="btn btn-info pull-right" href="/notice/insertui">글쓰기</a>
-
-
-
+</c:if>
 		</div>
 	<div class="row">
 
