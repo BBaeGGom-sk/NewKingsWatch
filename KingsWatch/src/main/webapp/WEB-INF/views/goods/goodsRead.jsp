@@ -17,7 +17,7 @@
 <link href="../../resources/css/jquery.bxslider.css"  rel="stylesheet" type="text/css" /> 
 
 
-
+ 
 <style type="text/css">
 .uploadedList {
    list-style: none;
