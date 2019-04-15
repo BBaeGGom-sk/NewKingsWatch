@@ -462,6 +462,7 @@
                  }
             	
             	//preventDefault한것 없애기
+            	alert("회원가입 성공!");
     			$(this).unbind('submit').submit();
 			});
            
