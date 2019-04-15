@@ -90,6 +90,7 @@ table{
 <title>Insert title here</title>
 </head>
 <body>
+
    <div class="container">
       <div class="row">
 
@@ -98,6 +99,7 @@ table{
                <button name="goodsUpdate" id="goodsUpdate" class="btn btn-primary">수정</button>
             </nav>
          </div>
+
 
 	   <form>
          <div id="container_box" class="form-group">
@@ -147,7 +149,7 @@ table{
    </script>
 
    <script type="text/javascript">
-      $(document).ready(function() {
+      $(document).ready(function() { 
     	  
          var g_id = "${goodsRead.g_id}";
          
@@ -161,7 +163,7 @@ table{
 	         var g_persent = g_sale/100;
 	         var g_salePrice= g_price-(g_price*g_persent);
 	         $("#priceSale").text("₩"+g_salePrice.toLocaleString());
-	     }
+	     } 
 
  		// 스크롤버튼
  		$(function() {
@@ -220,14 +222,16 @@ table{
          // 장바구니 담기
          $("#cart").click(function(event) {
 			event.preventDefault();
-			var u_id = "a"; // 후에변경하기
+			var u_id = "bbaeggom"; // 후에변경하기
+			var o_quantity = $("#o_quantity").val();
 						
 				$.ajax({
 					type : 'post',
 					url : '/order/addCart',
 					data: {
 						g_id : g_id,
-						u_id : u_id
+						u_id : u_id,
+						o_quantity : o_quantity
 					},
 					dataType : "text",
 					success : function(result) {

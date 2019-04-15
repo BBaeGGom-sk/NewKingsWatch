@@ -3,33 +3,46 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
-<mapper namespace="mapper.user">
+<mapper namespace="mapper.user">	<!-- UserDAOImpl의 NS -->
 
-  <insert id="insert">
-  insert into tab_user (u_id, u_pw, u_name) values (#{u_id}, #{u_pw}, #{u_name} ) 
+  <insert id="join">
+   insert into tab_user (u_id, u_pw, u_name, u_phone, u_postnum, u_admain, u_adsub, u_addetail, u_sex, u_age ,u_email) values (#{u_id},#{u_pw},#{u_name}, #{u_phone}, #{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}, #{u_sex}, #{u_age}, #{u_email})
+   <!-- insert into tab_user (u_id, u_pw, u_name, u_phone, u_sex, u_postNum, u_admain, u_adsub, u_adDetail, u_email) values (#{u_id}, #{u_pw}, #{u_name}, #{u_phone}, #{u_sex}, #{u_postNum}, #{u_adMain}, #{u_adSub}, #{u_adDetail}, #{u_email}) --> 
   </insert>
+  
+  
+  <select id="loginCheck" resultType="kr.co.domain.UserDTO">
+  	select * from tab_user where u_id=#{u_id} and u_pw=#{u_pw}
+  </select>
   
   <select id="list" resultType="kr.co.domain.UserDTO">
   select * from tab_user
   </select>
   
-  <select id="selectById" resultType="kr.co.domain.UserDTO">
+  <select id="viewDetail" resultType="kr.co.domain.UserDTO">
   select * from tab_user where u_id = #{u_id}
   </select>
     
   
   <update id="update">
- update tab_user set u_id=#{u_id}, u_name = #{u_name} where u_pw=#{u_pw}
-  </update>
+<!--  update tab_user set u_name=#{u_name} where u_id=#{u_id} -->
+  update tab_user set u_name=#{u_name}, u_phone=#{u_phone}, u_sex=#{u_sex}, u_email=#{u_email} where u_id=#{u_id}
+   </update>
+   
+   <update id="updatePw">
+<!--  update tab_user set u_name=#{u_name} where u_id=#{u_id} -->
+  update tab_user set u_pw=#{newPw} where u_id=#{u_id} and u_pw=#{oldPw}
+   </update>
   
-  <select id="updateui" resultType="kr.co.domain.UserDTO">
-  select * from tab_user where u_id=#{u_id}
-  </select>
   
   <delete id="delete">
 delete from tab_user where u_id=#{u_id}
   
   </delete>
   
+ 
+	<select id="idcheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM tab_user WHERE u_id = #{userid}
+	</select>
  
 </mapper>
