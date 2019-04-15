@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="org.mybatis.example.BlogMapper"> -->
+<mapper namespace="kr.co.mapper.review">
+
+	<insert id="insert">
+		insert into tab_review (r_bno, g_id, r_title ,r_content, u_id, r_rating)
+		values (#{r_bno}, #{g_id}, #{r_title},#{r_content}, #{u_id}, #{r_rating})
+	</insert>
+
+	<select id="createRno" resultType="Integer">
+		select max(r_bno) from tab_review
+	</select>
+
+	<select id="list" resultType="kr.co.domain.ReviewVO">
+		select * from tab_review where g_id= #{g_id} order by r_bno desc
+	</select>
+
+	<update id="update">
+		update tab_review set r_title= #{r_title}, r_content = #{r_content}, r_rating = #{r_rating}, r_updateDate=sysdate where r_bno = #{r_bno}
+	</update>
+
+	<delete id="delete">
+		delete from tab_review where r_bno = #{r_bno} 
+	</delete>
+
+	<select id="getAmount" resultType="Integer">
+		select count(r_bno) from tab_review where g_id=#{g_id}
+	</select>
+
+	<delete id="deleteByBno">
+		delete from tab_review where g_id=#{g_id}
+	</delete>
+
+</mapper>
