@@ -4,34 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
-<html>
-
+<html lang="ecu-kr">
 <head>
+<title> 회원가입 </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-<title> 회원가입 </title>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 </head>
 
+
 <body>
+
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <div class="pager" id="wrap" >
 	<form class="" id="container" method="post" action="/user/join">
 		<div id="contents">
-			<div class="titleArea">	<h2>회원가입</h2></div>
-			
-					<h3>기본정보</h3>
+			<div class="titleArea">
+			<br><br><br><br>
+			<h2>회원가입</h2></div>
+				<h3>기본정보</h3>
 					<div align="center">
 						<table  border="1" summary="">
 							<caption>회원 기본정보</caption>
@@ -600,12 +591,9 @@
 			
 
         });
-        
-        
-        
-     
-	</script>
 
+	</script>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 </body>
-
+</html>
