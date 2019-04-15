@@ -30,4 +30,12 @@ public class HomeController {
 
 	}
 	
+	@RequestMapping(value = "/example", method = RequestMethod.GET)
+	public String example(Locale locale, Model model) {
+		logger.info("예제 화면", locale);
+
+		return "example"; 
+
+	}
+	
 }

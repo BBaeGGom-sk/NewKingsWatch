@@ -4,34 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
-<html>
-
+<html lang="ecu-kr">
 <head>
+<title> 회원가입 </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-<title> 회원가입 </title>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 </head>
 
+
 <body>
+
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <div class="pager" id="wrap" >
 	<form class="" id="container" method="post" action="/user/join">
 		<div id="contents">
-			<div class="titleArea">	<h2>회원가입</h2></div>
-			
-					<h3>기본정보</h3>
+			<div class="titleArea">
+			<br><br><br><br>
+			<h2>회원가입</h2></div>
+				<h3>기본정보</h3>
 					<div align="center">
 						<table  border="1" summary="">
 							<caption>회원 기본정보</caption>
@@ -396,19 +387,76 @@
 		
 		
 
+		
         $(document).ready(function() {
-          
-        	
-        	//추가정보 숨기기
-        	//[1] 기본값 설정
+                  	
+        	//처음엔 추가정보 숨기기
             $("#extraInfo").hide(); 
 
-            //[2] more...클릭시 보이기 및 숨기기
+            //more...클릭시 보이기 및 숨기기
             $("#more").click(function() {
                 //3000 : 3초, 'slow', 'normal', 'fast'
                 $("#extraInfo").show('fast'); //천천히 보이기
                 $(this).hide('fast');//more버튼 숨기기
             });
+
+            
+            
+            //가입완료 버튼 눌렸을때.
+            //하나라도 빠진것 있으면 채우라고 알려주기
+            $("form").submit(function(event) {
+            	event.preventDefault();
+            	if($("#u_id").val()==""){
+                 	alert("아이디를 입력해주세요.");
+                    $("#u_id").focus();
+                    return false;
+                 }
+            	else if($("#u_pw").val()==""){
+                 	alert("비밀번호를 입력해주세요.");
+                 	$("#u_pw").focus();
+                 	return false;
+                 }
+            	else if($("#u_pw_confirm").val()==""){
+                 	alert("비밀번호 확인을 해주세요.");
+                 	$("#u_pw_confirm").focus();
+                 	return false;
+                 }
+            	else if($("#u_name").val()==""){
+                 	alert("이름을 입력해주세요.");
+                 	$("#u_name").focus();
+                 	return false;
+                 }
+            	else if($("#u_phone").val()==""){
+                 	alert("휴대폰 번호를 입력해주세요.");
+                 	$("#u_phone").focus();
+                 	return false;
+                 }
+            	else if($("#u_address").val()==""){
+                 	alert("주소를 입력해주세요.");
+                 	$("#u_address").focus();
+                 	return false;
+                 }
+            	else if($("#u_sex").val()==""){
+                 	alert("성별을 입력해주세요.");
+                 	$("#u_sex").focus();
+                 	return false;
+                 }
+            	else if($("#birth_year").val()==""){
+                 	alert("태어난 년도를 입력해주세요.");
+                 	$("#birth_year").focus();
+                 	return false;
+                 }
+            	else if($("#u_email").val()==""){
+                 	alert("이메일을 입력해주세요.");
+                 	$("#u_email").focus();
+                 	return false;
+                 }
+            	
+            	//preventDefault한것 없애기
+            	alert("회원가입 성공!");
+    			$(this).unbind('submit').submit();
+			});
+           
 
 
             //폰번호 3개 인풋에서 받은거 합치기
@@ -420,8 +468,6 @@
 				document.getElementById("u_phone").value = phone;
 			});
 
-
-            
 
 			// 이메일 관련
 			//셀렉트 변경시 값 바로 적용 및 직접입력 선택시 초기화 및 readonly 해제
@@ -467,8 +513,6 @@
 			    });
 
 
-
-
 			
 			//나이 계산
 			$("#birth_year").blur(function calAge() {
@@ -478,7 +522,8 @@
 				document.getElementById("u_age").value = age;
 				
 			});
-
+			
+			
 
 			//아이디 중복 체크
 			$("#idCheckBtn").click(function(event) {
@@ -494,16 +539,11 @@
 		            success : function(data) {
 		               if (data > 0) {	//아이디가 존재할때마다 cnt에 1이 더해진다.
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-		                	$("#join_submit_btn").prop("disabled", true);
-		                	$("#join_submit_btn").css("background-color", "#aaaaaa");
-
 		                    $("#u_id").focus();
 
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
 		                    $("#u_pw").focus();
-		                    $("#join_submit_btn").prop("disabled", false);
-		                  		                    
 		                } 
 		            },
 		            error : function(error) {
@@ -536,8 +576,10 @@
 		                    $("#u_id").focus();
 
 		                } else {
+		                	 alert("해당 이메일로 회원가입이 가능합니다.");
 		                    $("#join_submit_btn").prop("disabled", false);
-		                    $("#join_submit_btn").focus();   
+		                    $("#join_submit_btn").css("background-color", "#337AB7");
+		                    $("#join_submit_btn").focus();
 		                } 
 		            },
 		            error : function(error) {
@@ -549,12 +591,9 @@
 			
 
         });
-        
-        
-        
-     
-	</script>
 
+	</script>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 </body>
-
+</html>
