@@ -1,6 +1,9 @@
 package kr.co.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +18,8 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao;
 
 	@Override
-	public void insert(UserDTO dto) {
-		dao.insert(dto);
-
+	public void join(UserDTO dto) {
+		dao.join(dto);
 	}
 
 	@Override
@@ -27,26 +29,53 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO selectById(int id) {
-		return dao.selectById(id);
+	public UserDTO viewDetail(String id) {
+		return dao.viewDetail(id);
 	}
 
 	@Override
-	public UserDTO updateui(int id) {
+	public UserDTO updateui(String id) {
 		return dao.updateui(id);
 	}
 
 	@Override
-	public void update(UserDTO dto) {
-
-		dao.update(dto);
-
+	public UserDTO update(UserDTO userDTO, HttpSession session) {
+		return dao.update(userDTO, session);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(String id) {
  
 		dao.delete(id);
 	}
+
+
+
+	@Override
+	public void logout(HttpSession session) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	@Override
+	public UserDTO getUser(UserDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("<Service> : " + dto);
+		return dao.getUser(dto);
+	}
+
+	@Override
+	public UserDTO updatePw(Map map, HttpSession session) {
+		// TODO Auto-generated method stub
+		return dao.updatePw(map, session);
+	}
+
+	@Override
+	public int idCheck(String userid) {
+		// TODO Auto-generated method stub
+		return dao.idCheck(userid);
+	}
+
 
 }
