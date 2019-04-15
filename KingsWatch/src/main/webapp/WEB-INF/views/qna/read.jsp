@@ -46,7 +46,7 @@ margin-bottom : 50px;
 			<label
 				for="q_updateDate">작성일</label>&nbsp;&nbsp;${vo.q_updateDate}&nbsp;&nbsp;
 			<label for="q_viewCnt">조회</label>&nbsp;${vo.q_viewCnt}
-			<c:if test="${vo.q_lock==1}">&nbsp;<span class="glyphicon glyphicon-lock"></span></c:if>
+			<c:if test="${vo.q_lock==1}">&nbsp;<img src="../../../resources/img/icon_secret.gif"></c:if>
 			<hr>
 			</div>
 			<div class="form-group">

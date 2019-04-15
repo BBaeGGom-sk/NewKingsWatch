@@ -41,8 +41,6 @@ private Criteria cri;
 			stopPageNum = totalPage;
 		}
 		
-		System.out.println("토탈토탈"+ totalPage);
-		System.out.println("스톱스톱"+stopPageNum);
 		
 		
 	}
