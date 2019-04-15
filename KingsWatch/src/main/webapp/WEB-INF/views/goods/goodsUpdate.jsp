@@ -35,7 +35,8 @@
 	  		<form action="/goods/goodsUpdate" method="post">
 				<div class="form-group">
 					<label for="g_id">상품번호</label>
-					<input required class="form-control" id="g_id" name="g_id" value="${goodsRead.g_id}">
+					<input required class="form-control" id="g_id" name="g_id" value="${goodsRead.g_id}" placeholder="상품아이디 입력 후 꼭 상품확인 버튼을 눌러주세요">
+					<button id="already">상품확인</button>
 				</div>
 				<div class="form-group">
 					<label for="g_brand">브랜드명</label>
@@ -51,7 +52,7 @@
 				</div>
 				<div class="form-group">
 					<label for="g_sale">할인율</label>
-					<input required class="form-control" id="g_sale" name="g_sale" value="${goodsRead.g_sale}">
+					<input required class="form-control" id="g_sale" name="g_sale" value="${goodsRead.g_sale}" placeholder="숫자만 넣어주세요. ex)50% -> 50 / 할인상품 아닐시 0">
 				</div>
 				<div class="form-group">
 					<label for="g_desc">상세설명</label>
@@ -211,6 +212,36 @@
 					
 					$form.append(str); // form태그 안에 input 태그 추가. 오로지 파일명만 있음.
 					$form.get(0).submit();
+				});
+				
+				// 상품아이디 이미 있는지 여부 확인
+				$("#already").click(function(event) {
+					event.preventDefault();
+				
+					var g_id = $("#g_id").val();
+					
+					if($("#g_id").val()==""){
+						alert("상품 아이디를 입력해주세요");
+						return false;
+					}
+
+					$.ajax({
+						type : 'post',
+						url : '/goods/already',
+						data: {
+							g_id : g_id,
+						},
+						dataType : "text",
+						success : function(result) {
+							if(result=="already"){
+								alert("이미 있는 상품입니다.");									
+							} else if(result=="newGoods") {
+								alert("새로운 상품입니다.");
+							}
+						},
+						error : function(request, status, error) {
+						}
+					});
 				});
 				
 				$(".fileDrop").on("dragenter dragover", function(event) {
