@@ -100,6 +100,25 @@ ul.goodsMenu>li ul.submenu>li:hover {
   bottom: 75px;
 }
 
+.pagination > li > a,
+.pagination > li > a:focus,
+.pagination > li > a:hover {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+.active a{
+    color: white !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+hr { 
+	background-color: white; 
+	height: 1px; 
+	border: 0; 
+}
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -161,14 +180,15 @@ ul.goodsMenu>li ul.submenu>li:hover {
 			<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 		</div>		
 	  	</c:if>
-	 <hr>
-	 <div id="container_box">
+	<hr>
 		 <div>
 		 	<a href="/goods/goodsList">최신순</a>
 		 	<a href="/goods/rowPriceGoods">낮은가격순</a>
 		 	<a href="/goods/highPriceGoods">높은가격순</a>
 		 </div>
-		 <ul>
+	<hr>
+	 <div>
+		 <ul id="goods">
 		 	<c:forEach items="${goodsList}" var="list"  varStatus="status">
 			 	<li>
 		    		<div class="goodsThumb">

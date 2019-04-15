@@ -40,12 +40,15 @@
 </head>
 <body>
 
+${already};
+
 	<div class="container">
 	  <div class="row">
 	  		<form action="/goods/goodsInsert" method="post">
 				<div class="form-group">
 					<label for="g_id">상품번호</label>
-					<input required class="form-control" id="g_id" name="g_id">
+					<input required class="form-control" id="g_id" name="g_id" placeholder="상품아이디 입력 후 꼭 상품확인 버튼을 눌러주세요">
+					<button id="already">상품확인</button>
 				</div>
 				<div class="form-group">
 					<label for="g_brand">브랜드명</label>
@@ -117,7 +120,7 @@
 	<script type="text/javascript">	
 		var source= $("#source").html();
 		var template= Handlebars.compile(source);
-		
+
 		$(document).ready(function() {
 
 			// 이벤트, 이벤트실행할id or class, function(event)
@@ -194,10 +197,41 @@
 			              $("#g_desc").focus();
 			              return false;
 			         }
-
+			       
 					$form.append(str); // form태그 안에 input 태그 추가. 오로지 파일명만 있음.
 					$form.get(0).submit();
 				});
+				
+				// 상품아이디 이미 있는지 여부 확인
+				$("#already").click(function(event) {
+					event.preventDefault();
+				
+					var g_id = $("#g_id").val();
+					
+					if($("#g_id").val()==""){
+						alert("상품 아이디를 입력해주세요");
+						return false;
+					}
+
+					$.ajax({
+						type : 'post',
+						url : '/goods/already',
+						data: {
+							g_id : g_id,
+						},
+						dataType : "text",
+						success : function(result) {
+							if(result=="already"){
+								alert("이미 있는 상품입니다.");									
+							} else if(result=="newGoods") {
+								alert("새로운 상품입니다.");
+							}
+						},
+						error : function(request, status, error) {
+						}
+					});
+				});
+				
 				
 				$(".fileDrop").on("dragenter dragover", function(event) {
 					event.preventDefault();
