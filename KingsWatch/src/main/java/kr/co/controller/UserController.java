@@ -36,6 +36,7 @@ public class UserController {
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
+		System.out.println("회원가입화면으로 가라");
 		return "user/join2";
 
 	}
@@ -43,6 +44,7 @@ public class UserController {
 	//  회원가입 처리하고 로그인 화면으로
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserDTO dto) {
+		System.out.println("회원가입 처리명령 받음");
 		service.join(dto);
 		return "redirect:/user/login";
 	}
