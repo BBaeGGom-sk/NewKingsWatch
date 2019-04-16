@@ -208,7 +208,8 @@
 		<include refid="categoryIf"></include> 
 		
 		<![CDATA[
-		 order by g_price asc
+		and g_is_selling=0
+		order by g_price asc
 		 ]]>
 	</select>
 
@@ -220,7 +221,8 @@
 		<include refid="categoryIf"></include> 
 		
 		<![CDATA[
-		 order by g_price desc
+		and g_is_selling=0
+		order by g_price desc
 		 ]]>
 	</select>
 
