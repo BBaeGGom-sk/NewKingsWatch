@@ -31,21 +31,24 @@ margin-bottom : 50px;
 </head>
 <body>
 
-
+<%
+	session.getAttribute("login");
+	
+%>
 
 	<div class="container">
 		<div class="row">
-
+<h3 align="left">${vo.q_title}</h3>
+<hr>
+</div>
 			<div class="form-group">
-				<label for="q_title">제목</label> <input class="form-control" readonly
-					name="q_title" id="q_title" value=${vo.q_title}>
+				<label for="u_id">작성자</label>&nbsp; ${vo.u_id}&nbsp;&nbsp;
+			<label
+				for="q_updateDate">작성일</label>&nbsp;&nbsp;${vo.q_updateDate}&nbsp;&nbsp;
+			<label for="q_viewCnt">조회</label>&nbsp;${vo.q_viewCnt}
+			<c:if test="${vo.q_lock==1}">&nbsp;<img src="../../../resources/img/icon_secret.gif"></c:if>
+			<hr>
 			</div>
-
-			<div class="form-group">
-				<label for="u_id">작성자</label> <input class="form-control" readonly
-					name="u_id" id="u_id" value=${vo.u_id}>
-			</div>
-
 			<div class="form-group">
 				<label for="q_content">내용</label>
 				<textarea class="form-control" readonly name="q_content" id="q_content">${vo.q_content}</textarea>
@@ -67,20 +70,24 @@ margin-bottom : 50px;
 
 
 			<div class="form-group">
+			<c:choose>
+			<c:when test="${vo.u_id == login.u_id}">
 				<button id="update" class="btn btn-warning">수정</button>
 				<button id="delete" class="btn btn-danger">삭제</button>
+				</c:when>
+				</c:choose>
 				<button id="list" class="btn btn-info">목록</button>
 				<button id="reply" class="btn btn-primary">댓글</button>
 			</div>
 		</div>
 
 
-
+<div class="container">
 		<div class="row">
 			<div id="myCollapsible" class="collapse">
 				<div class="form-group">
 					<label for="replyer">작성자</label> <input class="form-control"
-						id="replyer">
+						id="replyer" readonly value="${login.u_id}">
 				</div>
 
 				<div class="form-group">
@@ -104,7 +111,6 @@ margin-bottom : 50px;
 		</div>
 
 
-	</div>
 
 	<div class="row">
 		<div id="myModal" class="modal fade">
@@ -117,6 +123,7 @@ margin-bottom : 50px;
 					<input id="modal_qr_Text" class="form-control">
 				</div>
 				<div class="modal-footer">
+	
 					<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
 					<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
 					<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
@@ -130,7 +137,8 @@ margin-bottom : 50px;
 	<!-- 클래스 컨테이너 div 엔드태그 -->
 
 	<form>
-		<input value="${vo.q_bno}" name="q_bno"  type="hidden"> <input
+		<input value="${vo.q_bno}" name="q_bno"  type="hidden"> 
+		<input
 			value="${cri.page}" name="page" type="hidden"> <input
 			value="${cri.perPage}" name="perpage" type="hidden">
 	</form>
@@ -160,7 +168,7 @@ margin-bottom : 50px;
 			
 			<div class="panel-body">
 			<p>{{qr_Text}}</p>
-			<button data-qr_Text="{{qr_Text}}" data-q_rno="{{q_rno}}"class="callModal btn btn-sm btn-success">수정/삭제</button>
+			<button data-replyer="{{replyer}}" data-qr_Text="{{qr_Text}}" data-q_rno="{{q_rno}}"class="callModal btn btn-sm btn-success">수정/삭제</button>
 			</div>
 		</div>
 
@@ -174,7 +182,9 @@ margin-bottom : 50px;
 
 					var page = 1;
 					var q_bno = ${vo.q_bno};
-
+					var id= "${login.u_id}";
+				
+					
 					$(".pagination").on("click", "li a", function(event) {
 						event.preventDefault();
 						page = $(this).attr("href");
@@ -183,9 +193,18 @@ margin-bottom : 50px;
 
 					$("#q_replies").on("click", ".callModal", function() {
 
+					
 						var q_rno = $(this).attr("data-q_rno");
 						var qr_Text = $(this).attr("data-qr_Text");
-					
+						var replyer = $(this).attr("data-replyer");
+
+						
+						if(replyer!=id){
+							alert("자기글만 수정할 수 있습니다!");
+							return false;
+						}
+						
+						
 						$("#modal_q_rno").text(q_rno);
 						$("#modal_qr_Text").val(qr_Text);
 						$("#myModal").modal("show");
@@ -195,6 +214,8 @@ margin-bottom : 50px;
 							function() {
 								var q_rno = $("#modal_q_rno").text();
 								var qr_Text = $("#modal_qr_Text").val();
+						
+								
 								$.ajax({
 									type : "put",
 									url : "/q_replies/" + q_rno,

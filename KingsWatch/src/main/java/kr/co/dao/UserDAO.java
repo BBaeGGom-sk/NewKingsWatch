@@ -11,7 +11,8 @@ public interface UserDAO {
 
 	
 	public void join(UserDTO dto);	//회원가입
-	public UserDTO getUser(UserDTO dto) throws Exception;	//로그인. 유저정보 가져옴
+	public UserDTO getUser(UserDTO dto);	//로그인
+	public String getUserPw(String id) throws Exception;	//암호화된 비번 가져옴
 	public List<UserDTO> select();
 	public UserDTO viewDetail(String id);
 	public UserDTO updateui(String id);
@@ -20,6 +21,7 @@ public interface UserDAO {
 	public void delete(String id);
 	public int idCheck(String u_id);
 	public int emailCheck(String u_email);
+
 
 
 	

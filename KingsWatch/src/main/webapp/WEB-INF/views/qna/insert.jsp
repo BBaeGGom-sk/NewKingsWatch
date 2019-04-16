@@ -55,7 +55,7 @@
 
 				<div class="form-group">
 					<label for="u_id">작성자</label> <input  class="form-control"
-						id="u_id" name="u_id">
+						id="u_id" name="u_id" value="${login.u_id}" readonly>
 				</div>
 
 				<div class="form-group">
@@ -172,6 +172,30 @@
 							function(event) {
 								/* 	$("form").submit(); */
 
+								
+								var q_title = $("#q_title").val();
+								var u_id = $("#u_id").val();
+								var q_content = $("#q_content").val();
+								
+								
+							        if(q_title.length == 0){
+							              alert("제목을 입력하세요"); 
+							              $("#q_title").focus();
+							              return false;
+							         }
+							        if(u_id.length == 0){
+							              alert("아이디를 입력해 주세요"); 
+							              $("#n_title").focus();
+							              return false;
+							         }
+							        if(q_content.length == 0){
+							              alert("내용을 입력해 주세요"); 
+							              $("#q_content").focus();
+							              return false;
+							         }
+								
+								
+								
 								event.preventDefault();
 								var $form = $("form");
 								var str = "";

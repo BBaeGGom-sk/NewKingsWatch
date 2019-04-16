@@ -47,12 +47,23 @@
 					<c:forEach var="vo" items="${list}">
 						<tr>
 							<td>${vo.q_bno}</td>
-							<td><a
-								href="/qna/sread${pm.makeQuery(pm.cri.page)}&q_bno=${vo.q_bno}">
-									<c:choose>
-										<c:when test="${vo.q_lock!=0}">*** 비밀글 입니다. ***</c:when>
-										<c:otherwise>${vo.q_title}</c:otherwise>
+							<td>
+							
+					<c:choose>
+							<c:when test="${login.u_id=='admin'}">
+							<a href="/qna/read${pm.makeQuery(pm.cri.page)}&q_bno=${vo.q_bno}">${vo.q_title}<c:if test="${vo.q_lock==1}">&nbsp;
+							</span></a><img src="../../../resources/img/icon_secret.gif"></c:if>
+							</c:when>
+							<c:when test="${vo.u_id==login.u_id}">
+							<a href="/qna/read${pm.makeQuery(pm.cri.page)}&q_bno=${vo.q_bno}">${vo.q_title}<c:if test="${vo.q_lock==1}">&nbsp;
+							</span></a><img src="../../../resources/img/icon_secret.gif"></c:if></c:when>
+										<c:when test="${vo.q_lock!=0}"><a href="" onclick="idchk()">************ 비밀글 입니다. ************ &nbsp;</a>
+										<img src="../../../resources/img/icon_secret.gif"></c:when>
+										<c:otherwise><a href="/qna/read${pm.makeQuery(pm.cri.page)}&q_bno=${vo.q_bno}">${vo.q_title}</a></c:otherwise>
 									</c:choose>
+									
+									
+									
 									<c:if test="${vo.q_replyCnt!=0}">&nbsp;<span
 											style="color: blue">[${vo.q_replyCnt}]</span>
 									</c:if>

@@ -42,8 +42,8 @@
 			<form action="/qna/update" method="post">
 
 				<div class="form-group">
-					<label for="q_bno">글번호</label> <input readonly class="form-control"
-						id="q_bno" name="q_bno" value="${vo.q_bno}">
+					 <input readonly class="form-control"
+						id="q_bno" name="q_bno" value="${vo.q_bno}" type="hidden">
 				</div>
 
 
@@ -64,6 +64,14 @@
 					<textarea required class="form-control" id="q_content" name="q_content"
 						rows="3">${vo.q_content}</textarea>
 				</div>
+				<div class="form-group">
+				<hr>
+					글을 비공개로 하시겠습니까? <input type="radio" name="q_lock" value="1">
+					예 <input type="radio" name="q_lock" value="0" checked="checked"> 아니오
+					<hr>
+				</div>
+				
+				
 				<input value="${cri.page}" name="page" type="hidden"> <input
 					value="${cri.perPage}" name="perpage" type="hidden"> 
 					<input value="${cri.keyword}" name="keyword" type="hidden"> <input
@@ -177,6 +185,28 @@
 				
 				var $form = $("form");
 				var str = "";
+				
+				
+				var q_title = $("#q_title").val();
+				var u_id = $("#u_id").val();
+				var q_content = $("#q_content").val();
+				
+				
+			        if(q_title.length == 0){
+			              alert("제목을 입력하세요"); 
+			              $("#q_title").focus();
+			              return false;
+			         }
+			        if(u_id.length == 0){
+			              alert("아이디를 입력해 주세요"); 
+			              $("#n_title").focus();
+			              return false;
+			         }
+			        if(q_content.length == 0){
+			              alert("내용을 입력해 주세요"); 
+			              $("#q_content").focus();
+			              return false;
+			         }
 				
 				
 				$(".delbtn").each(function(index){

@@ -66,8 +66,12 @@
 
 
 			<div class="form-group">
+			<c:choose>
+			<c:when test="${vo.u_id == login.u_id}">
 				<button id="update" class="btn btn-info">수정</button>
 				<button id="delete" class="btn btn-danger">삭제</button>
+				</c:when>
+				</c:choose>
 				<button id="list" class="btn btn-info">목록</button>
 			</div>
 		</div>

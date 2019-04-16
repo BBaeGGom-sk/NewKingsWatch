@@ -11,8 +11,12 @@
   </insert>
   
   
-  <select id="loginCheck" resultType="kr.co.domain.UserDTO">
-  	select * from tab_user where u_id=#{u_id} and u_pw=#{u_pw}
+    <select id="getUser" resultType="kr.co.domain.UserDTO">
+  	select * from tab_user where u_id=#{u_id}
+  	</select>
+  
+  <select id="getUserPw" resultType="String">
+  	select u_pw from tab_user where u_id=#{u_id}
   </select>
   
   <select id="list" resultType="kr.co.domain.UserDTO">

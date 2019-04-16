@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.dao.UserDAO;
@@ -16,9 +18,14 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO dao;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public void join(UserDTO dto) {
+		String encryptPassword = passwordEncoder.encode(dto.getU_pw());
+		dto.setU_pw(encryptPassword);
 		dao.join(dto);
 	}
 
@@ -50,19 +57,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-
 	@Override
 	public void logout(HttpSession session) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	
 	@Override
 	public UserDTO getUser(UserDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("<Service> : " + dto);
 		return dao.getUser(dto);
+	}
+	
+	@Override
+	public String getUserPw(String id) throws Exception {
+		return dao.getUserPw(id);
 	}
 
 	@Override
@@ -82,6 +89,8 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return dao.emailCheck(u_email);
 	}
+
+
 
 
 }
