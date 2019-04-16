@@ -21,24 +21,23 @@
     <link rel="stylesheet" href="/resources/css/icomoon.css">
     <link rel="stylesheet" href="/resources/css/style.css">
     
-    <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 다음 주소 -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<!-- 부트스크립트 css -->
+<link rel="stylesheet"	href="/resources/css/bootstrap.css">
 
 <!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- 부트스크립트 script -->
+<script src="/resources/js/bootstrap.js"></script>
     
 	
 	<script src="/resources/js/jquery.min.js"></script>
 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery.waypoints.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
