@@ -23,6 +23,8 @@
     
     <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <!-- jQuery library -->
 <script
