@@ -8144,8 +8144,11 @@ h1, h2, h3, h4, h5,
 .billing-form .form-group {
   position: relative; }
 
+/* 라벨 색깔, 크기 */
 .billing-form label {
-  color: #fff; }
+  color: #fff;
+  font-size: 18px;
+  }
 
 .billing-form .icon {
   position: absolute;
@@ -8190,8 +8193,10 @@ h1, h2, h3, h4, h5,
   .billing-form .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(255, 255, 255, 0.4); }
-  .billing-form .form-control:focus, .billing-form .form-control:active {
+    
+  .billing-form .form-control:focus, .billing-form .form-control:active { /* 포커스되면 테두리 색깔 변경으로 */
     border-color: #c49b63 !important; }
+    
 
 .billing-form textarea.form-control {
   height: inherit !important; }
