@@ -1,7 +1,6 @@
 package kr.co.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -11,17 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.domain.UserDTO;
 import kr.co.service.UserService;
-import kr.co.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -29,7 +24,7 @@ public class UserController {
 
 	@Inject
 	private UserService service;
-	
+	 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
