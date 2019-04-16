@@ -317,88 +317,86 @@ element.style {
 			<input id="u_id" name="u_id" value="${login.u_id}" type="hidden">
 		</form>
       </div>
-   
-     
-   <div class="container">
-   		<div class="row">
-          <button id="reply" class="btn btn-primary">댓글</button>
+
+
+	<div class="container">
+		<div class="contain1">
+			<button id="reply" class="btn btn-primary">댓글</button>
 			<div id="myCollapsible" class="collapse">
 				<div class="form-group">
-					<label for="u_id">작성자</label> <input class="form-control"
-						id="u_id">
+					<label for="u_id">작성자</label> <input class="form-control" id="u_id">
 				</div>
-				
 				<div class="form-group">
 					<label for="r_title">제목</label> <input class="form-control"
 						id="r_title">
 				</div>
-
-
 				<div class="form-group">
 					<label for="r_content">내용</label> <input class="form-control"
 						id="r_content">
 				</div>
 				<div class="form-group">
-					<label for="r_rating">평점 ★ (1에서 5점까지) </label>
-					<input type="radio" name="r_rating" value="1">&nbsp;1&nbsp;
-					<input type="radio" name="r_rating" value="2">&nbsp;2&nbsp;
-					<input type="radio" name="r_rating" value="3">&nbsp;3&nbsp;
-					<input type="radio" name="r_rating" value="4">&nbsp;4&nbsp;
-					<input type="radio" name="r_rating" value="5">&nbsp;5&nbsp; 
-
+					<label for="r_rating">평점 ★ (1에서 5점까지) </label> <input type="radio"
+						name="r_rating" value="1">&nbsp;1&nbsp; <input
+						type="radio" name="r_rating" value="2">&nbsp;2&nbsp; <input
+						type="radio" name="r_rating" value="3">&nbsp;3&nbsp; <input
+						type="radio" name="r_rating" value="4">&nbsp;4&nbsp; <input
+						type="radio" name="r_rating" value="5">&nbsp;5&nbsp;
 				</div>
 				<div class="form-group">
 					<button id="replyInsertBtn" class="btn btn-success">등록</button>
 					<button id="replyResetBtn" class="btn btn-default">초기화</button>
 				</div>
-				
-				</div>
-				</div>
-   
-   
-   	<div class="row">
-		<div id="myModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close">&times;</button>
-					<p id="modal_r_bno"></p>
-				</div>
-				<div class="modal-body">
-					<strong>제목</strong> : <input id="modal_r_title" class="form-control">
-					<strong>내용 </strong>: <input id="modal_r_content" class="form-control">
-					<strong>평점 </strong>: <input type="radio" value="1" name="modal_r_rating" >1
-					<input type="radio" value="2" name="modal_r_rating" >2
-					<input type="radio" value="3" name="modal_r_rating" >3
-					<input type="radio" value="4" name="modal_r_rating" >4
-					<input type="radio" value="5" name="modal_r_rating" >5
-				</div>
-<!-- 				<div class="modal-footer">
+
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close">&times;</button>
+						<p id="modal_r_bno"></p>
+					</div>
+					<div class="modal-body">
+						<strong>제목</strong> : <input id="modal_r_title"
+							class="form-control"> <strong>내용 </strong>: <input
+							id="modal_r_content" class="form-control"> <strong>평점
+						</strong>: <input type="radio" value="1" name="modal_r_rating">1 <input
+							type="radio" value="2" name="modal_r_rating">2 <input
+							type="radio" value="3" name="modal_r_rating">3 <input
+							type="radio" value="4" name="modal_r_rating">4 <input
+							type="radio" value="5" name="modal_r_rating">5
+					</div>
+					<!-- 				<div class="modal-footer">
 					<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
 					<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
 					<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
 				</div> -->
+				</div>
 			</div>
 		</div>
-	</div>
-   
-   		<!-- <div class="row" id="review"></div>
+
+		<!-- <div class="row" id="review"></div>
 		<div class="row">
 			<ul class="pagination"></ul>
 		</div> -->
-   </div>
-   
-   
- 	<!-- 스크롤버튼 -->
-	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
-	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
+	</div>
 
-	
+
+	<!-- 스크롤버튼 -->
+	<a id="TopButton" class="ScrollButton"><img
+		src="../resources/img/top.png"></a>
+	<a id="BottomButton" class="ScrollButton"><img
+		src="../resources/img/bottom.png"></a>
+
+
 	<div class="cosWrap">
-    	<div class="relPro">
-        	<h2 class="smallTitle">RELATED PRODUCT</h2>
+		<div class="relPro">
+			<h2 class="smallTitle">RELATED PRODUCT</h2>
 			<div class="row" id="review"></div>
 			<div class="row">
-			<ul class="pagination"></ul>
+				<ul class="pagination"></ul>
 			</div>
 		</div>
 	</div>
@@ -410,7 +408,7 @@ element.style {
 		src="../resources/img/bottom.png"></a>
 
 	<a id="footer"></a>
-	
+
 	<!--  리뷰 불러오기위한 handlebars -->
 		<script id="sourceReview" type="text/x-handlebars-template">
 {{#each.}}
@@ -444,8 +442,6 @@ element.style {
 
 	<script type="text/javascript">	
 			$(document).ready(function() {
-				
-				alert("ㅠㅠㅠ");
 				
 				var page = 1;
 				var g_id = "${goodsRead.g_id}";
