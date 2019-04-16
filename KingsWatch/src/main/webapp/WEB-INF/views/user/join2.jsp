@@ -10,19 +10,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
+<style type="text/css">
+option {
+   background-color: black !important;
+   }
+</style>
 </head>
 
 
 <body>
 
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<div class="pager" id="wrap" >
+<br><br><br><br>
+	<div class="pager" id="wrap"  style="text-align: center">
+		<div><h2 style="color:#C49B63">회원가입</h2></div>
+		<div><h4 style="color:#C49B63">-기본정보-</h4></div>
+	</div>
 	<form class="" id="container" method="post" action="/user/join">
 		<div id="contents">
 			<div class="titleArea">
-			<br><br><br><br>
-			<h2>회원가입</h2></div>
-				<h3>기본정보</h3>
 					<div align="center">
 						<table  border="1" summary="">
 							<caption>회원 기본정보</caption>
@@ -52,7 +58,7 @@
 								</tr>
 								<tr>
 									<th scope="row">비밀번호 확인 질문 &nbsp;</th>
-									<td><select id="hint" name="hint" fw-filter="isFill"	fw-label="hint" >
+									<td><select id="hint" name="hint" fw-filter="isFill"	fw-label="hint" class="form-control">
 											<option value="hint_01">기억에 남는 추억의 장소는?</option>
 											<option value="hint_02">자신의 인생 좌우명은?</option>
 											<option value="hint_03">자신의 보물 제1호는?</option>
@@ -84,7 +90,7 @@
 									<th scope="row">휴대폰 번호 <img src="/resources/img/ico_required.gif"	alt="필수" /></th>
 									<td> 
 										<input id="u_phone" name="u_phone" type="text" autocomplete="off" hidden=""/>
-										<select id="u_phone1" name="u_phone1">
+										<select id="u_phone1" name="u_phone1" class="form-control">
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -147,7 +153,7 @@
 									<input id="u_email" name="u_email" type="text" autocomplete="off" hidden=""/>
 									<input id="u_email1" name="u_email1" class="mailId" value="" type="text" />
 									@<input id="u_email2" name="u_email2"	class="mailAddress" readonly="readonly" value="" type="text" />
-									<select	id="u_emailSelect" >
+									<select	id="u_emailSelect" class="form-control">
 											<option value="" selected="selected">- 이메일 선택 -</option>
 											<option value="gmail.com">gmail.com</option>
 											<option value="naver.com">naver.com</option>
@@ -206,7 +212,7 @@
 												name="bank_account_owner"  class="inputTypeText" placeholder=""
 												autocomplete="off" value="" type="text" /></li>
 											<li><strong>은행명</strong> <select id="refund_bank_code"
-												name="refund_bank_code" >
+												name="refund_bank_code"  class="form-control">
 													<option value="" selected="selected">- 은행선택 -</option>
 													<option value="bank_02">산업은행</option>
 													<option value="bank_03">기업은행</option>

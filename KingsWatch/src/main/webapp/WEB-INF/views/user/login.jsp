@@ -4,41 +4,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-<title>로그인 화면</title>
-
-
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
+<title>로그인</title>
 </head>
 
-<body>
-	<div id="wrap">
-		<form name="loginInfo" method="post" action="login">
 
-			===로그인입니다.===
+<body>
+
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<br><br><br><br>
+	<div class="pager"  id="wrap"  style="text-align: center">
+		<div><h2 style="color:#C49B63">로그인</h2></div>
+		<div>
+		<form name="loginInfo" method="post" action="login" style="margin: 0 auto;">
 			<br>
 
-			<table>
+			<table style="margin: auto;">
 				<tr>
-					<td bgcolor="skyblue">아이디</td>
+					<td bgcolor="#C49B63">아이디</td>
 					<td><input id="input_id" type="text" name="u_id" maxlength="50"></td>
 				</tr>
 				<tr>
-					<td bgcolor="skyblue">비밀번호</td>
+					<td bgcolor="#C49B63">비밀번호</td>
 					<td><input id="input_pw" type="password" name="u_pw" maxlength="50"></td>
 				</tr>
 			</table>
@@ -46,6 +33,7 @@
 			<input type="submit" id="btn_login" value="로그인" />
 			<input type="button" id="btn_join" value="회원가입" />
 		</form>
+		</div>
 
 	</div>
 
