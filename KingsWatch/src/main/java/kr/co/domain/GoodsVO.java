@@ -1,6 +1,7 @@
 package kr.co.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class GoodsVO implements Serializable{
 
@@ -17,13 +18,14 @@ public class GoodsVO implements Serializable{
 	private int g_category; // 상품카테고리 (여자:1,남자:2,공용:0)
 	private int g_is_selling; // 상품이 팔렸는지 여부 (팔림:1,안팔림:0)
 	private String g_date; // 상품게시일자
+	private String[] files; // 상품사진리스트
 	
 	public GoodsVO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public GoodsVO(String g_id, String g_name, String g_brand, int g_price, int g_sale, String g_desc, int g_category,
-			int g_is_selling, String g_date) {
+			int g_is_selling, String g_date, String[] files) {
 		super();
 		this.g_id = g_id;
 		this.g_name = g_name;
@@ -34,6 +36,7 @@ public class GoodsVO implements Serializable{
 		this.g_category = g_category;
 		this.g_is_selling = g_is_selling;
 		this.g_date = g_date;
+		this.files = files;
 	}
 
 	public String getG_id() {
@@ -108,14 +111,23 @@ public class GoodsVO implements Serializable{
 		this.g_date = g_date;
 	}
 
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "GoodsVO [g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price + ", g_sale=" + g_sale
-				+ ", g_desc=" + g_desc + ", g_category=" + g_category + ", g_date=" + g_date + "]";
+		return "GoodsVO [g_id=" + g_id + ", g_name=" + g_name + ", g_brand=" + g_brand + ", g_price=" + g_price
+				+ ", g_sale=" + g_sale + ", g_desc=" + g_desc + ", g_category=" + g_category + ", g_is_selling="
+				+ g_is_selling + ", g_date=" + g_date + ", files=" + Arrays.toString(files) + "]";
 	}
 
 	@Override

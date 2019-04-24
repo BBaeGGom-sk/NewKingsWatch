@@ -1,7 +1,7 @@
 
 create table tab_user(
 	u_id varchar2(30) primary key,
-	u_pw varchar2(30) not null,
+	u_pw varchar2(70) not null,
 	u_name varchar2(40) not null,
 	u_phone varchar2(30),
 	u_sex number(1),
@@ -16,14 +16,24 @@ create table tab_user(
 	u_level number(1) default 0
 )
 
-
-select * from tab_user
-update tab_user set u_pw=('1234') where u_id=('faker') and u_pw=('0070')
 drop table tab_user
+select * from tab_user
+
+alter table tab_user add (u_addetail varchar2(200)) 
+update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
+
+SELECT COUNT(u_id) FROM tab_user WHERE u_name = '페이커'
+select * from tab_user where u_id='test' and u_pw = '$2a$10$8zcfWzUUU8leYBjaW9U2n.wzjnp3BM6.cU9BjC84bR5bpMXBYVeqa'
+select * from tab_user where u_id='faker' and u_pw = '$2a$10$Ah215Zz0iuDGkcUhy5zhc.3zjtX16TPfe7DjozGljyS/dQqU5R8N2'
+
+insert into tab_user values ('bbaeggom', '1026', '오승기', '01130339681',1,25,'03300', '서울시 은평구 북한산로2' ,'어울림아파트 1028동 607호', 'dhtmdrl2004@naver.com',null, 0, 1,'(진관동, 은평뉴타운구파발)')
+delete from tab_user where u_id = 'bbaeggom'
+
 
 update tab_user set u_addetail = '1028동 607호' , u_adsub = '(진관동, 은평뉴타운구파발)' where u_id = 'bbaeggom'
 insert into tab_user (u_id, u_pw, u_name,u_adDetail)values ('babo123123','babo','바보', ' ')
 delete from tab_user where u_id = 'bbaeggom'
+
 
 create table tab_address(
 	u_id varchar2(30) references tab_user(u_id),
@@ -49,14 +59,19 @@ create table tab_goods(
 select * from tab_goods
 drop table tab_goods
 
+
 create table tab_basket(
 	u_id varchar2(30) references tab_user(u_id),
-	b_cart varchar2(30),
-	b_wishlist varchar2(40),
+	b_id varchar2(30) references tab_goods(g_id),
+	b_quantity number(5),
 	b_cartedtime varchar2(40) default sysdate
 )
+alter table tab_basket add (b_quantity number(5))
 drop table tab_basket
 
+insert into TAB_BASKET (u_id,b_id) values ('bbaeggom','3');
+delete from tab_basket
+select * from tab_basket
 
 create table tab_order(
 	o_num number(8) primary key,
@@ -79,6 +94,7 @@ create table tab_coupon(
 	cp_exp varchar2(40)
 )
 drop table tab_coupon
+
 
 
 create table tab_notice(

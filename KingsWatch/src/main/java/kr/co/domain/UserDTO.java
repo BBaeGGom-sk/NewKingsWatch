@@ -29,8 +29,7 @@ public class UserDTO implements Serializable {
 	}
 
 	public UserDTO(String u_id, String u_pw, String u_name, String u_phone, int u_sex, int u_age, String u_postNum,
-			String u_adMain, String u_adSub, String u_adDetail, String u_email, String u_regDate, int u_point,
-			int u_level) {
+			String u_adMain, String u_adSub, String u_adDetail, String u_email, String u_regDate, int u_point,	int u_level) {
 		super();
 		this.u_id = u_id;
 		this.u_pw = u_pw;
@@ -136,6 +135,7 @@ public class UserDTO implements Serializable {
 		this.u_email = u_email;
 	}
 
+
 	public String getU_regDate() {
 		return u_regDate;
 	}
@@ -202,9 +202,5 @@ public class UserDTO implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-	
-	
 	
 }

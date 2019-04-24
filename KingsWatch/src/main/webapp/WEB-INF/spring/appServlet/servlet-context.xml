@@ -19,6 +19,8 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8"/>
+
 	</beans:bean>
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -29,6 +31,12 @@
 		<beans:constructor-arg value="C:\\supload"></beans:constructor-arg>
 	</beans:bean>
 	
+
+	<beans:bean class="java.lang.String" id="uploadPathDetail">
+		<beans:constructor-arg value="C:\\suploaddetail"></beans:constructor-arg>
+	</beans:bean>
+	
+
 <!-- 인터셉터 객체 생성 -->
 <beans:bean id="AuthLoginInterceptor" class="kr.co.interceptor.AuthLoginInterceptor">
 </beans:bean>
@@ -39,6 +47,9 @@
         <exclude-mapping path="/resources/**"/>
         <exclude-mapping path="/user/login"/>
         <exclude-mapping path="/user/join"/>
+        <exclude-mapping path="/user/idCheck"/>
+        <exclude-mapping path="/user/emailCheck"/>
+        
         <beans:ref bean="AuthLoginInterceptor"/>
     </interceptor>
 </interceptors>

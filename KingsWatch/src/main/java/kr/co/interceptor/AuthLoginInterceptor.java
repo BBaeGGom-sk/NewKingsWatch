@@ -18,8 +18,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
      HttpSession session = request.getSession();
      // login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
      Object obj = session.getAttribute("login");
-     System.out.println("인터셉터 pre핸들러 안.");
-       
+     
      if ( obj == null ){
          // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
          response.sendRedirect("/user/login");

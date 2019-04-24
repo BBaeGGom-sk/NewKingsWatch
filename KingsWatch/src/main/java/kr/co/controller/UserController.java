@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,11 +29,14 @@ public class UserController {
 
 	@Inject
 	private UserService service;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	//회원가입 화면
 	@RequestMapping("/join")
 	public String joinui() {
-		return "user/join2";	//  user/join.jsp로 이동.
+		return "user/join2";
 
 	}
 	
@@ -42,47 +47,50 @@ public class UserController {
 		return "redirect:/user/login";
 	}
 	
-	
 	//로그인 화면
-	@RequestMapping("/login")
-	public String loginui() {
-		return "user/login";	
-
-	}
+		@RequestMapping("/login")
+		public String loginui() {
+			return "user/login";	
+		}
+	
 	
 	//로그인 처리
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {	//요파라미터들이 어디서 온거지?
+	public String loginCheck(UserDTO userDTO, HttpSession session) throws Exception {	
 		String returnURL = "";
 		if(session.getAttribute("login")!=null) {	//기존에 login이란 세션값이 존재한다면
 			System.out.println("기존의 세션값을 제거합니다.");
 			session.removeAttribute("login");		//기존값 제거 하고봄.
 		}
-		
-		// 로그인이 성공하면 UsersVO 객체를 반환함.
-        UserDTO dto = service.getUser(userDTO);	
-        if ( dto != null ){ // 로그인 성공
-            session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.
-        	System.out.println("<컨트롤러> 로그인 성공 세션값 = "+session.getAttribute("login"));
-            returnURL = "redirect:/"; // 로그인 성공시 메인페이지로 이동하고
-        }else { // 로그인에 실패한 경우
-        	System.out.println("로그인 실패");
-            returnURL = "redirect:/user/login"; // 로그인 폼으로 다시 가도록 함
-        }
-          
-        return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
-		
-		
 
+		UserDTO dto = service.getUser(userDTO);	//암호화된 비번 가지고있는놈 dto에 저장.
+		System.out.println(dto);
+		if(dto!=null) {
+			
+			boolean passmatch = passwordEncoder.matches(userDTO.getU_pw(), dto.getU_pw()); // 유저입력 비번과 암호화된 비번 매칭
+
+			if (passmatch) {
+				session.setAttribute("login", dto); // 세션에 login인이란 이름으로 UsersDTO 객체를 저장해 놈.
+				System.out.println("<컨트롤러> 로그인 성공 세션값 = " + session.getAttribute("login"));
+				returnURL = "redirect:/"; // 로그인 성공시 메인페이지로 이동하고
+			} else {
+				System.out.println("로그인 실패");
+				returnURL = "user/login"; // 로그인 폼으로 다시 가도록 함
+			}
+		} else {
+			System.out.println("로그인 실패");
+			returnURL = "user/login"; // 로그인 폼으로 다시 가도록 함
+		}
+		return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
 	}
 	
 	
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		System.out.println("로그아웃합니다.");
 		session.invalidate();
 		return "redirect:/";	
-
 	}
 
 	
@@ -150,27 +158,29 @@ public String updateui(String id, Model model) {
 	}
 
 	
-	/*
-	 * @RequestMapping("/idcheck.do")
-	 * 
-	 * @ResponseBody public Map<Object, Object> idcheck(@RequestBody String userid)
-	 * { System.out.println("userid : " +userid); int count = 0; Map<Object, Object>
-	 * map = new HashMap<Object, Object>();
-	 * 
-	 * count = service.idcheck(userid); map.put("cnt", count);
-	 * 
-	 * return map; }
-	 */
 	
-	@ResponseBody
+	//Controller는 view를 리턴, ResponseBody는 데이터를 리턴
 	   @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
-	   public int idCheck(@RequestBody UserDTO dto, Model model) throws Exception{
-	    int count=0;  
-	    System.out.println(count);
-		count = service.idCheck(dto.getU_id());
+	   @ResponseBody
+	   public int idCheck(@RequestBody String u_id) throws Exception{
+		int count = service.idCheck(u_id);
 	    return count;
 	   }
-
+	   
+	   
+	 //Controller는 view를 리턴, ResponseBody는 데이터를 리턴
+	   @RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	   @ResponseBody
+	   public int emailCheck(@RequestBody String u_email) throws Exception{
+		
+		System.out.println("컨트롤러로 받아온 useremail값 : "+u_email);
+		int count = service.emailCheck(u_email);
+		System.out.println("컨트롤러로 받아온 useremail값2 : "+u_email);
+		System.out.println("컨트롤러로 받아온 useremailCount : "+count);
+		
+		return count;
+	   }
+	   
 
 	
 }

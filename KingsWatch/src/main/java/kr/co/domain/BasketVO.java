@@ -2,27 +2,24 @@ package kr.co.domain;
 
 import java.io.Serializable;
 
-public class BasketVO implements Serializable{
+public class BasketVO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String u_id;
-	private String b_cart;
-	private String b_wishList;
+	private String b_id;
 	private String b_cartedTime;
-	
-	//dddddd
+
 	public BasketVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BasketVO(String u_id, String b_cart, String b_wishList, String b_cartedTime) {
+	public BasketVO(String u_id, String b_id, String b_cartedTime) {
 		super();
 		this.u_id = u_id;
-		this.b_cart = b_cart;
-		this.b_wishList = b_wishList;
+		this.b_id = b_id;
 		this.b_cartedTime = b_cartedTime;
 	}
 
@@ -34,20 +31,12 @@ public class BasketVO implements Serializable{
 		this.u_id = u_id;
 	}
 
-	public String getB_cart() {
-		return b_cart;
+	public String getB_id() {
+		return b_id;
 	}
 
-	public void setB_cart(String b_cart) {
-		this.b_cart = b_cart;
-	}
-
-	public String getB_wishList() {
-		return b_wishList;
-	}
-
-	public void setB_wishList(String b_wishList) {
-		this.b_wishList = b_wishList;
+	public void setB_id(String b_id) {
+		this.b_id = b_id;
 	}
 
 	public String getB_cartedTime() {
@@ -64,17 +53,15 @@ public class BasketVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BasketVO [u_id=" + u_id + ", b_cart=" + b_cart + ", b_wishList=" + b_wishList + ", b_cartedTime="
-				+ b_cartedTime + "]";
+		return "BasketVO [u_id=" + u_id + ", b_id=" + b_id + ", b_cartedTime=" + b_cartedTime + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((b_cart == null) ? 0 : b_cart.hashCode());
 		result = prime * result + ((b_cartedTime == null) ? 0 : b_cartedTime.hashCode());
-		result = prime * result + ((b_wishList == null) ? 0 : b_wishList.hashCode());
+		result = prime * result + ((b_id == null) ? 0 : b_id.hashCode());
 		result = prime * result + ((u_id == null) ? 0 : u_id.hashCode());
 		return result;
 	}
@@ -88,20 +75,15 @@ public class BasketVO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		BasketVO other = (BasketVO) obj;
-		if (b_cart == null) {
-			if (other.b_cart != null)
-				return false;
-		} else if (!b_cart.equals(other.b_cart))
-			return false;
 		if (b_cartedTime == null) {
 			if (other.b_cartedTime != null)
 				return false;
 		} else if (!b_cartedTime.equals(other.b_cartedTime))
 			return false;
-		if (b_wishList == null) {
-			if (other.b_wishList != null)
+		if (b_id == null) {
+			if (other.b_id != null)
 				return false;
-		} else if (!b_wishList.equals(other.b_wishList))
+		} else if (!b_id.equals(other.b_id))
 			return false;
 		if (u_id == null) {
 			if (other.u_id != null)
@@ -110,6 +92,5 @@ public class BasketVO implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

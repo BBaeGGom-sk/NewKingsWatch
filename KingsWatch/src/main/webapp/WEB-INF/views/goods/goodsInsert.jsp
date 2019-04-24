@@ -24,6 +24,17 @@
 	.uploadedList li{
 		list-style-type: none;	
 	}
+	.fileDrop2 {
+		width: 100%;
+		height: 100px;
+		border: 1px dotted red;
+		background-color: lightslategray;
+		margin: auto;
+	}
+	
+	.uploadedList2 li{
+		list-style-type: none;	
+	}
 </style>
 <title>Insert title here</title>
 </head>
@@ -58,7 +69,13 @@
 				</div>
 				<div class="form-group">
 					<label for="g_category">카테고리</label>
-					<input required class="form-control" id="g_category" name="g_category">
+					<select required class="form-control" id="g_category" name="g_category" >
+						<option disabled>카테고리선택</option>
+						<option value="0">공용</option>
+						<option value="1">여성</option>
+						<option value="2">남성</option>
+					</select>
+	
 				</div>
 				<div class="form-group">
 					<label for="g_is_selling">판매여부</label>
@@ -67,7 +84,7 @@
 			</form>
 			
 			<div class="form-group">
-				<label>업로드할 파일을 드랍</label>
+				<label>업로드할  파일을 드랍</label>
 				<div class="fileDrop"></div>
 			</div>
 			
@@ -80,7 +97,8 @@
 			</div>
 	  </div>
 	</div>
-	
+
+	<!-- 기존업로드핸들바스 -->	
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3"> 
 			<span>
@@ -92,7 +110,7 @@
 			</div>
 		</li>
 	</script>
-	
+
 	<script type="text/javascript">	
 		var source= $("#source").html();
 		var template= Handlebars.compile(source);
@@ -109,26 +127,71 @@
 						url: "/deletefile",
 						type: "post",
 						data: {
-						fileName:$delbtn.attr("href") // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌 
+							fileName:$delbtn.attr("href") // fileName에 fullname을 갖고있는 delbtn버튼의 href를 속성으로 넣어줌 
 						},
 						dataType: "text",
 						success: function(result){
 						$delList.remove(); // 삭제하고 썸네일에서 지우기. 위에 만들어놓은 delList의 값들 remove
 						}
 					});
+				
 				});
 							
-				$("button[type='submit']").click(function (evnet){
+				$("button[type='submit']").click(function (event){
 					event.preventDefault();
 					var $form=$("form");
 					var str=""; // DB에 들어갈 파일명.
-				
+					
+					// 빈칸감지
+		            var g_id = $("#g_id").val();
+		            var g_brand = $("#g_brand").val();
+		            var g_name = $("#g_name").val();
+		            var g_price = $("#g_price").val();
+		            var g_sale = $("#g_sale").val();
+		            var g_desc = $("#g_desc").val();
+
 				$(".delbtn").each(function(index) { //파일이 여러개일경우 delbtn이 여러개=배열형태로 값 가져와야하니까 index값으로 불러옴
 					// value: 자기자신의(=delbtn) href에있는 속성값(attr)=fullName 갖고오기
 					// name: files는 배열이기때문에 index를 넣어줌. 변수를 넣어야하니까 + 로 묶어줌.
 					str+="<input type='hidden' value='"+$(this).attr("href")+"' name='files["+index+"]'/>"; 
 					});
-					
+				
+			         if(g_id.length == 0){
+			              alert("상품아이디를 입력해 주세요"); 
+			              $("#g_id").focus();
+			              return false;
+			         }
+				
+			         if(g_brand.length == 0){
+			              alert("브랜드를 입력해 주세요"); 
+			              $("#g_brand").focus();
+			              return false;
+			         }
+				
+			         if(g_name.length == 0){
+			              alert("상품명을 입력해 주세요"); 
+			              $("#g_name").focus();
+			              return false;
+			         }
+				
+			         if(g_price.length == 0){
+			              alert("상품 가격을 입력해 주세요"); 
+			              $("#g_price").focus();
+			              return false;
+			         }
+				
+			         if(g_sale.length == 0){
+			              alert("할인율을 입력해 주세요"); 
+			              $("#g_sale").focus();
+			              return false;
+			         }
+				
+			         if(g_desc.length == 0){
+			              alert("상품 상세설명을 입력해 주세요"); 
+			              $("#g_desc").focus();
+			              return false;
+			         }
+
 					$form.append(str); // form태그 안에 input 태그 추가. 오로지 파일명만 있음.
 					$form.get(0).submit();
 				});
@@ -160,7 +223,6 @@
 				});
 				
 			});
-
 	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package kr.co.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,15 +32,19 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
+	public UserDTO getUser(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NS+".getUser", dto);
+	}
+	
+	@Override
 	public UserDTO viewDetail(String id) {
-		System.out.println("DAOImple viewDetail메서드");
-		System.out.println("지금 id값은 : "+ id);
-		return sqlSession.selectOne(NS+".viewDetail", id);	}
+		return sqlSession.selectOne(NS+".viewDetail", id);
+	}
 
 	@Override
 	public UserDTO updateui(String id) {
 		// TODO Auto-generated method stub
-		System.out.println("DAOImple updateui메서드");
 		return sqlSession.selectOne(NS+".updateui", id);
 	}
 
@@ -53,17 +58,15 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		System.out.println("DAOImple delete메서드");
 		sqlSession.delete(NS+".delete", id);
 	}
 
 	
 
 	@Override
-	public UserDTO getUser(UserDTO dto) {
+	public String getUserPw(String id) {
 		// TODO Auto-generated method stub
-		System.out.println("DAO임플의 dto입니다."+dto);
-		return sqlSession.selectOne(NS+".loginCheck", dto);
+		return sqlSession.selectOne(NS+".getUserPw", id);
 	}
 
 	@Override
@@ -74,9 +77,18 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public int idCheck(String userid) {
-		return sqlSession.update(NS+".idcheck", userid);
+	public int idCheck(String u_id) {
+		System.out.println("여긴 dao imp. userid값은 : "+u_id);
+		return sqlSession.selectOne(NS+".idcheck", u_id);
 	}
+
+	@Override
+	public int emailCheck(String u_email) {
+		System.out.println("여긴 dao imp. email값은 : "+u_email);
+		return sqlSession.selectOne(NS+".emailcheck", u_email);
+	}
+
+
 
 
 
