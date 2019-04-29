@@ -9,30 +9,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <title>마이 페이지</title>
 </head>
 
 <body>
-	<h1>마이 페이지(회원정보 상세보기)</h1>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<br><br><br><br>
+		<div class="pager" id="wrap"  style="text-align: center">
+		<div><h2 style="color:#C49B63">마이페이지</h2></div>
+		<div><h4 style="color:#C49B63">회원정보 상세보기</h4></div>
+	</div>
 	<div class="pager" id="wrap">
 		<form id="userform" id="container" method="post" action="/user/update">
 			<div id="contents">
-				<div class="titleArea">
-					<h2 id="title">회원정보 상세보기</h2>
-				</div>
 
 				<div align="center">
 					<table border="1" summary="">
@@ -189,10 +181,11 @@
 
 	<!-- end of container -->
 	<!-- end of wrap -->
-
-	<button id="revise">회원정보 변경</button>
-	<button type="submit" id="revise_complete">변경 완료</button>
-	<button id="cancle_membership">회원탈퇴</button>
+	<div style="text-align: center">
+		<button class="btn btn-primary" id="revise">회원정보 변경</button>
+		<button type="submit" id="revise_complete">변경 완료</button>
+		<button class="btn btn-primary" id="cancle_membership">회원탈퇴</button>
+	</div>
 
 
 

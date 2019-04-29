@@ -36,12 +36,7 @@ delete from tab_user where u_id = 'bbaeggom'
 
 insert into tab_user (u_id, u_pw, u_name)values ('brown','dddd','김요우')
 
-create table tab_address(
-	u_id varchar2(30) references tab_user(u_id),
-	a_postnum number(5),
-	a_admain varchar2(200),
-	a_adsub varchar2(200)
-)
+x
 select * from tab_address
 drop table tab_address
 
@@ -58,15 +53,10 @@ create table tab_goods(
 	g_brand varchar2(40)
 )
 select * from tab_goods
-drop table tab_goods
+drop table tab_goods  cascade constraints
 
 
-create table tab_basket(
-	u_id varchar2(30) references tab_user(u_id),
-	b_id varchar2(30) references tab_goods(g_id),
-	b_quantity number(5),
-	b_cartedtime varchar2(40) default sysdate
-)
+x
 alter table tab_basket add (b_quantity number(5))
 drop table tab_basket
 

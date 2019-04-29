@@ -283,7 +283,7 @@ option {
 					</table>
 				</div> <!-- end of 추가정보 -->
 			<br>
-		<button class="btn btn-primary" type="submit" id="join_submit_btn">가입완료</button>
+		<button class="btn btn-primary" type="submit" id="join_submit_btn" style="margin: auto">가입완료</button>
 	</form> 	<!-- end of container -->
 
 
