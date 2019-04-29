@@ -7,22 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
+<title>비밀번호 변경</title>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<br><br><br><br>
+		<div class="pager" id="wrap"  style="text-align: center">
+		<div><h2 style="color:#C49B63">비밀번호 변경</h2></div>
+	</div>
 	<div class="container">
 		<div class="row">
-			<h3>비밀번호 변경 화면</h3>
-			id : ${login.u_id} , pw : ${login.u_pw}
+<%-- 			id : ${login.u_id} , pw : ${login.u_pw} --%>
 			<form action="updatePw" method="post">
 				<table border="1" class="table">
 					<tbody>
