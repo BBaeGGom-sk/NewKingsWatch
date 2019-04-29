@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
 <script src="../../resources/js/uploaddetail.js"></script>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 <style type="text/css">
 .uploadedList {
    list-style: none;
@@ -24,36 +25,7 @@ body {
    font-family: '맑은 고딕', verdana;
    padding: 0;
    margin: 0;
-}
-
-ul {
-   padding: 0;
-   margin: 0;
-   list-style: none;
-}
-
-div#root {
-   width: 90%;
-   margin: 0 auto;
-}
-
-header#header {
-   font-size: 60px;
-   padding: 20px 0;
-}
-
-header#header h1 a {
-   color: #000;
-   font-weight: bold;
-}
-
-nav#nav {
-   padding: 10px;
-   text-align: right;
-}
-
-nav#nav ul li {
-   display: inline-block; /* margin-left:10px;  */
+   color: white;
 }
 
 .contain1 {
@@ -65,13 +37,17 @@ nav#nav ul li {
     font-size: 2rem;
     font-weight: normal;
     text-transform: capitalize;
+    color: white;
+}
+
+.price {
+color: #B48C83;
 }
 
 .price .cosTitle {
     display: inline-block;
     font-family: serif;
     font-size: 14px;
-    color: #B48C83;
 }
 
 .conP, .wrapper, .lineWrapper {
@@ -84,7 +60,7 @@ nav#nav ul li {
 
 .sNewsP, .smallTitle {
     padding: 25px 0 40px;
-    color: #666;
+    color: white;
     font-size: 16px;
     box-sizing: border-box;
     word-break: keep-all;
@@ -177,6 +153,10 @@ nav#nav ul li {
     border: 1px solid #eee;
 }
 
+.btn_bouche {
+	color: #B48C83 !important;
+}
+
 element.style {
     margin-right: 10px;
 }
@@ -223,6 +203,7 @@ element.style {
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/goodsHeader.jsp"></jsp:include>
 	<%
 		session.getAttribute("login");
 	%>
@@ -243,17 +224,17 @@ element.style {
         					<h2 class="cosTitle">${goodsRead.g_name}</h2>
 							<div class="price">
 								<c:if test="${goodsRead.g_sale == 0}">
-									<h2 class="cosTitle">
+									<h2 class="price">
 										&#8361;
 										<fmt:formatNumber value="${goodsRead.g_price}" type="number" />
 									</h2>
 								</c:if>
 								<c:if test="${goodsRead.g_sale != 0}">
-									<p class="cosTitle">
+									<p class="price">
 										<s>&#8361;<fmt:formatNumber value="${goodsRead.g_price}" type="number" /></s>
 									</p>
 									<br>
-									<p class="cosTitle" id="priceSale"></p>
+									<h2 class="price" id="priceSale"></h2>
 								</c:if>
 							</div>
 							<dl class="accordion">
@@ -275,9 +256,9 @@ element.style {
 										<tbody>
 											<tr>
 												<p>
-													<button type="button" class="plus">+</button>
-													<input name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly">
-													<button type="button" class="minus">-</button>
+													<button type="button" class="plus" style="color: #B48C83;">+</button>
+													<input style="color: #B48C83;" name="o_quantity" id="o_quantity" type="number" class="numBox" min="1" value="1" readonly="readonly">
+													<button type="button" class="minus" style="color: #B48C83;">-</button>
 												</p>
 											</tr>
 										</tbody>
@@ -332,7 +313,6 @@ element.style {
 				<div class="form-group">
 					<label for="u_id">작성자</label> <input class="form-control"
 						id="u_id" value="${login.u_id}" readonly>
-					<label for="u_id">작성자</label> <input class="form-control" id="u_id">
 				</div>
 				<div class="form-group">
 					<label for="r_title">제목</label> <input class="form-control"
@@ -446,14 +426,12 @@ element.style {
 		<script id="sourceReview" type="text/x-handlebars-template">
 {{#each.}}
 	<div class="panel panel-info">
-			
 			<div class="panel-heading">
 			<span> <strong>제목 :{{r_title}} </strong> <br>   <strong>작성자</strong>: {{u_id}} <strong>평점 </strong>:{{r_rating}}</span>
 			<span class="pull-right">{{updateDate}}</span>
-			</div>
-			
+			</div>	
 			<div class="panel-body">
-			<p>{{r_content}}</p>
+			<p style="color: #B48C83;" >{{r_content}}</p>
 			</div>
 		</div>
 
@@ -548,7 +526,7 @@ element.style {
          // 장바구니 담기
          $("#cart").click(function(event) {
 			event.preventDefault();
-			var u_id = ${login.u_id}; // 후에변경하기
+			var u_id = "${login.u_id}"; // 후에변경하기
 			var o_quantity = $("#o_quantity").val();
 						
 				$.ajax({

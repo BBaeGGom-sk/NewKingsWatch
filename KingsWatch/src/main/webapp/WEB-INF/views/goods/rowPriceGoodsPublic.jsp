@@ -17,19 +17,17 @@
 <link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/plugin/mobile/component.css' />
 <!--css-->
 <link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/font/ff.css'>
-<link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/css/reset.css'>
+<!-- <link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/css/reset.css'> -->
 <link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/css/style.css'>
 <link rel='stylesheet' type='text/css' href='https://rosemont.co.kr/css/responsive.css'>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="http://unitage.co.kr/ind-script/optimizer.php?filename=tdTBbsMgDADQe7PrvsNqt4_YbziOQ1gAR9hI7d-XtDmsmiZNKT3Gws_EgGGSyHA8ZViyuIwRMquUTAykCmOWZEASo6S3GniH_6xnOqiEYl7SoZfzzsRitrdowAvnfamGfeAfqUxdUc4K07fKx-kIS-mDp26yGEAH7gZW7xLo7NPnzYwylMBrvaGQQeRUFqQZXVM2eLUkOWJoqd7FBZ1Pbrdbuy_FoEf1dCvy6_486d0D7bx6_vWDD8W3N00kmF_awxOHF6jbRXhBH556V3-ydRW1Vx-H1o5XhXlm28IBTdppCVOJ7TiTpRv9mYcWU2TrpzJmmr4Yh4ch_DRraBzEyTi2-_9eSiJ-xS5TQ3T16kk1FKnu0km-rOQV&type=css&k=90a9a5ce5e641a6d9335ff94029fdf99fc61579e&t=1545356289" />
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../../resources/js/upload.js"></script>
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 <style type="text/css">
 .m_container {
     overflow-y: auto;
@@ -46,6 +44,7 @@
     overflow: hidden;
     font-size: 0;
     margin: 0 0 -40px;
+    margin-top: 50px;
 }
 
 ol, ul {
@@ -92,7 +91,7 @@ a {
 }
 .pdName {
     font-size: 24px;
-    color: #333;
+    color: white;
     text-transform: capitalize;
     margin-bottom: 15px;
 }
@@ -273,11 +272,15 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
     background-color: black !important;
     border-color: black !important;
 }
+.contain1 {
+    padding-top: 110px;
+    overflow: hidden;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/goodsHeader.jsp"></jsp:include>
 	<%
 		session.getAttribute("login");
 	 %>
@@ -285,72 +288,28 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 	<div class="m_container">
 	  <div class="row">
 
-
-<div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-	          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="room.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-              </div>
-            </li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cart"><a href="cart.html" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a></li>
-	        </ul>
-	      </div>
-	  
-	  <nav id="nav">
-	  	
-
-	  <ul class="goodsMenu">
-	  	<li class="menu0"><a href="/goods/goodsList">메인으로</a>
-	  	</li>
-	  	<li class="menu1"><a href="/goods/goodsListBrand?g_brand=로즈몽">로즈몽</a>
-	  		<ul class="row submenu">
-	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=로즈몽">여성</a></li>
-	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=로즈몽">공용</a></li>
-	  		</ul>
-	  	</li>
-	  	<li class="menu2"><a href="/goods/goodsListBrand?g_brand=세이코">세이코</a>
-	  		<ul class="row submenu">
-	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=세이코">여성</a></li>
-	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=세이코">남성</a></li>
-	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=세이코">공용</a></li>
-	  		</ul>
-	  	</li>
-	  	<li class="menu3"><a href="/goods/goodsListBrand?g_brand=아르마니">아르마니</a>
-	  		<ul class="row submenu">
-	  			<li><a href="/goods/goodsListWoman?g_category=1&g_brand=아르마니">여성</a></li>
-	  			<li><a href="/goods/goodsListMan?g_category=2&g_brand=아르마니">남성</a></li>
-	  			<li><a href="/goods/goodsListPublic?g_category=0&g_brand=아르마니">공용</a></li>
-	  		</ul>
-	  	</li>
-	  	<c:if test="${login.u_id eq 'admin'}">
-		  	<li class="menu4"><a href="/goods/goodsNoSelling">판매종료</a>
-		  		<ul class="row submenu">
-		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=로즈몽">로즈몽</a></li>
-		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=세이코">세이코</a></li>
-		  			<li><a href="/goods/goodsListBrandNoSelling?g_brand=아르마니">아르마니</a></li>
-		  		</ul>
-		  	</li>
-		 </c:if>
-	  </ul>
-	  </nav>
-
 	<div class="conP mContain">
         <ul class="bbList watch watch3Layout">
 	        	<div style="display: inline-block;">
 	        	<c:if test="${login.u_id eq 'admin'}">
 	 	       		<a class="btn btn-info" href="/goods/goodsInsert">상품올리기</a>
 	        	</c:if>
+	        	<div style="clear:both; float: right;">
+				 <form method="get" action="/goods/goodsSearch">
+					<div class="col-xs-3 col-sm-2" >
+						<select class="form-control" id="ssel" name="searchType" style="width: 100px; height: 35px !important;">
+							<option disabled>검색 기준</option>
+							<option value="g_name">상품명</option>
+						</select>
+					</div>
+					<div class="input-group col-xs-1 col-sm-1">
+						<input class="form-control" id="keyword" name="keyword" size="20px" style="text-align:center; width:200px; border-color: white; width: 200px !important; height: 35px !important; margin-left: 50px; "> 
+						<span class="input-group-btn">
+							<button class="btn" style="color: black;">SEARCH</button>
+						</span>
+					</div>
+				</form>
+				</div>
 	        	</div>
 	        	<div style="display: inline-block; float: right; margin-bottom: auto;">
 					<a href="/goods/goodsListPublic" class="href_tag"><span class="spanAlign">NEW</span></a>
@@ -358,7 +317,7 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 					<a href="/goods/highPriceGoodsPublic"	class="href_tag"><span class="spanAlign">HIGH PRICE</span></a>
 		        </div>
 			<hr>
-		<c:if test="${rowPriceGoodsPublic ne null}">
+		<c:if test="${empty rowPriceGoodsPublic}">
 				<div style="clear: both; margin:auto; padding-left: 180px;">
 					<img src="../../resources/img/noitems.png">
 				</div>
@@ -387,8 +346,8 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 	 </div> <!-- row 끝 -->
 	 
 	 <!-- 페이징!! -->
-	 <div class="row text-center">
-		<ul class="pagination">
+	 <div class="row text-center" style="margin:0px auto 0 !important">
+		<ul class="pagination" style="margin:0px auto 0 !important">
 			<c:if test="${pm.cri.page>1}">
 				<li><a href="/goods/rowPriceGoodsPublic${pm.makeCategory(pm.cri.page-1)}">&laquo;</a></li>
 			</c:if>
@@ -404,24 +363,7 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 		</div>
 	 
 	</div> <!-- container 끝!! -->
-	
-	<div class="form-group" style="display: inline-block; position: absolute;" >
-		 <form method="get" action="/goods/goodsSearch">
-			<div class="col-xs-3 col-sm-2" >
-				<select class="form-control" id="ssel" name="searchType">
-					<option disabled>검색 기준</option>
-					<option value="g_name">상품명</option>
-				</select>
-			</div>
-			<div class="input-group col-xs-1 col-sm-1">
-				<input class="form-control" id="keyword" name="keyword" size="20px" style="text-align:center; width:200px;"> 
-				<span class="input-group-btn">
-					<button class="btn btn-success">검색</button>
-				</span>
-			</div>
-		</form>
-	</div>
-	
+
 	<a id="TopButton" class="ScrollButton"><img src="../resources/img/top.png"></a>
 	<a id="BottomButton" class="ScrollButton"><img src="../resources/img/bottom.png"></a>
 	
