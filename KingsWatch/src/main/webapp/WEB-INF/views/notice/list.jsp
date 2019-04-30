@@ -8,19 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-
-
+<jsp:include page="/WEB-INF/views/headlink.jsp"></jsp:include>
 <title>공지 사항</title>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<br><br><br><br>
 	<div class="container">
 
 <h1 align="center"><a href="/notice/list">공지사항</a></h1>
@@ -106,8 +99,10 @@
 				
 			</ul>
 	<c:if test="${login.u_id=='admin'}">
+		<div style="text-align: right;">
 			<a class="btn btn-info pull-right" href="/notice/insertui">글쓰기</a>
-</c:if>
+		</div>
+	</c:if>
 		</div>
 	<div class="row">
 

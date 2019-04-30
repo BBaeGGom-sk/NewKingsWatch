@@ -98,7 +98,8 @@ create table tab_notice(
 	n_topmost number(1),
 	n_viewcnt number default 0
 )
-drop table tab_notice
+select * from tab_notice
+DROP TABLE tab_notice cascade constraints
 
 create table tab_qna(
 	q_bno number primary key,
@@ -114,7 +115,7 @@ create table tab_qna(
 	q_replycnt number default 0
 )
 
-drop table tab_qna
+DROP TABLE tab_qna cascade constraints
 
 
 create table tab_qna_reply(
@@ -125,13 +126,7 @@ replyer varchar2(30) references tab_user(u_id),
 qr_regdate date default sysdate,
 qr_updateDate date default sysdate
 )
-
-drop table tab_qna_reply
-
-
-
-
-
+DROP TABLE tab_qna_reply cascade constraints
 
 create table tab_review(
 	r_bno number primary key,
@@ -143,7 +138,7 @@ create table tab_review(
 	r_updatedate date default sysdate,
 	r_rating number(2)
 )
-drop table tab_review
+DROP TABLE tab_review cascade constraints
 select * from tab_review
 
 
